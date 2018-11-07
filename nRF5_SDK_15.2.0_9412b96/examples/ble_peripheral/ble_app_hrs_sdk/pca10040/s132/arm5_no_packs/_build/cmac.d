@@ -1,0 +1,10 @@
+.\_build\cmac.o: ..\..\..\sdk\cypto\cmac.c
+.\_build\cmac.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\_build\cmac.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\_build\cmac.o: ..\..\..\sdk\cypto\cipher_export.h
+.\_build\cmac.o: ..\..\..\sdk\cypto\config.h
+.\_build\cmac.o: ..\..\..\sdk\public\util_int.h
+.\_build\cmac.o: ..\..\..\sdk\cypto\cmac.h
+.\_build\cmac.o: ..\..\..\sdk\public\printf.h
+.\_build\cmac.o: ..\..\..\sdk\public\queue.h
+.\_build\cmac.o: ..\..\..\sdk\public\stdin.h

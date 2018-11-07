@@ -56,6 +56,7 @@
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\log\src\nrf_log_internal.h
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\log\nrf_log_instance.h
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\log\nrf_log_types.h
+.\_build\main.o: ..\..\..\sdk\app\digital_key_api.h
 .\_build\main.o: ..\..\..\..\..\..\components\ble\ble_services\ble_dis\ble_dis.h
 .\_build\main.o: ..\..\..\..\..\..\components\ble\common\ble_conn_params.h
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\sensorsim\sensorsim.h
@@ -102,3 +103,4 @@
 .\_build\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\balloc\nrf_balloc.h
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\log\nrf_log_default_backends.h
+.\_build\main.o: ..\..\..\ikcmd\inc\ikcmdif.h

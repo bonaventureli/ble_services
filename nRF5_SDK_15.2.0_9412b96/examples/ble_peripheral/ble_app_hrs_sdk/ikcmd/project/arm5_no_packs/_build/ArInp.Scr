@@ -1,0 +1,3 @@
+--create .\_build\ikcmd.lib
+.\_build\ikcmdhandle.o
+.\_build\ikcmdif.o

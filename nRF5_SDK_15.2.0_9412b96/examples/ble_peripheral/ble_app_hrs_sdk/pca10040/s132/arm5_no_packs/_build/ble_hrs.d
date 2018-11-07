@@ -46,3 +46,4 @@
 .\_build\ble_hrs.o: ..\..\..\..\..\..\components\libraries\log\src\nrf_log_internal.h
 .\_build\ble_hrs.o: ..\..\..\..\..\..\components\libraries\log\nrf_log_instance.h
 .\_build\ble_hrs.o: ..\..\..\..\..\..\components\libraries\log\nrf_log_types.h
+.\_build\ble_hrs.o: ..\..\..\sdk\app\digital_key_api.h

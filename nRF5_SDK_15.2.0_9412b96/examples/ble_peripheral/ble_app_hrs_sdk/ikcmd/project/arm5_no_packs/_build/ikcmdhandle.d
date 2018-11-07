@@ -1,0 +1,9 @@
+.\_build\ikcmdhandle.o: ..\..\src\ikcmdhandle.c
+.\_build\ikcmdhandle.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\_build\ikcmdhandle.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\_build\ikcmdhandle.o: ..\..\src\ikcmdhandle.h
+.\_build\ikcmdhandle.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\_build\ikcmdhandle.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\_build\ikcmdhandle.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\_build\ikcmdhandle.o: ..\..\inc\ikcmdif.h
+.\_build\ikcmdhandle.o: ..\..\..\ikif\inc\ikif.h
