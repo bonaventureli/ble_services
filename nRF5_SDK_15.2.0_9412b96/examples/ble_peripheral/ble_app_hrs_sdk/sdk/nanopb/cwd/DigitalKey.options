@@ -1,0 +1,53 @@
+# This file defines the nanopb-specific options for the messages defined
+# in fileproto.proto.
+#
+# If you come from high-level programming background, the hardcoded
+# maximum lengths may disgust you. However, if your microcontroller only
+# has a few kB of ram to begin with, setting reasonable limits for
+# filenames is ok.
+#
+# On the other hand, using the callback interface, it is not necessary
+# to set a limit on the number of files in the response.
+
+#ingeek.EncryptedData.cipher	max_size:16
+
+ingeek.EncryptedDataNew.cipher max_size:16
+
+ingeek.DK_AuthX.crealm  max_size:20
+ingeek.DK_AuthX.cname   max_size:20
+ingeek.DK_AuthX.caddr   max_size:6
+ingeek.DK_AuthG.df      max_size:32
+ingeek.DK_AuthG.eDF     max_size:80
+ingeek.DK_AuthG.s_cmac  max_size:16
+
+ingeek.DK_SessionX.crealm	max_size:20
+ingeek.DK_SessionX.cname 	max_size:20
+ingeek.DK_SessionX.seq_number	max_size:16
+
+ingeek.DK_SessionG.TRnd    max_size:8
+ingeek.DK_SessionG.SEID    max_size:16
+ingeek.DK_SessionG.CRnD    max_size:8
+ingeek.DK_SessionG.TEEID   max_size:16
+ingeek.DK_SessionG.KICC    max_size:32
+ingeek.DK_SessionG.KIFD    max_size:32
+ingeek.DK_SessionG.KPRE    max_size:6
+
+ingeek.DK_Cmd.sparam	  max_size:20
+
+ingeek.DK_InfoW.VIN       max_size:17
+ingeek.DK_InfoW.TRnd      max_size:8
+ingeek.DK_InfoW.SEID      max_size:16
+ingeek.DK_InfoW.KEY       max_size:48
+ingeek.DK_InfoW.PUB_KEY   max_size:64
+ingeek.DK_InfoW.sign      max_size:16
+
+
+ingeek.DK_InfoR.VIN       max_size:17
+ingeek.DK_InfoR.TRnd      max_size:8
+ingeek.DK_InfoR.SEID      max_size:16
+
+ingeek.DK_Msg.sparam	  max_size:21
+ingeek.DK_RTC.sign        max_size:16
+ingeek.DK_RTC.VIN         max_size:17
+
+

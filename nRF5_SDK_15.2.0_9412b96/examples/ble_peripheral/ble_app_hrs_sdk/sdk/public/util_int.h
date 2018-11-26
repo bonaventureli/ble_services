@@ -1,13 +1,13 @@
 #ifndef UTIL_H
 #define UTIL_H
-
+#include <stdint.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /* 7.18.1.1 Exact-width integer types */
 
-    typedef    char   int8_t ;
+    //typedef    char   int8_t ;
     typedef unsigned char  uint8_t;
     typedef          short  int16_t;
     typedef unsigned short uint16_t;
@@ -18,7 +18,7 @@ extern "C" {
     
     /* 7.18.1.2 Minimum-width integer types */
 
-    typedef  int8_t   int_least8_t;
+    //typedef  int8_t   int_least8_t;
     typedef uint8_t  uint_least8_t;
 
     typedef  int16_t  int_least16_t;

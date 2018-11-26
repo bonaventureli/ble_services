@@ -1,3 +1,10 @@
 .\_build\ecp.o: ..\..\..\sdk\cypto\ecp.c
 .\_build\ecp.o: ..\..\..\sdk\cypto\config.h
 .\_build\ecp.o: ..\..\..\sdk\public\util_int.h
+.\_build\ecp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\_build\ecp.o: ..\..\..\sdk\cypto\ecp.h
+.\_build\ecp.o: ..\..\..\sdk\cypto\bignum.h
+.\_build\ecp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\_build\ecp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\_build\ecp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\_build\ecp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

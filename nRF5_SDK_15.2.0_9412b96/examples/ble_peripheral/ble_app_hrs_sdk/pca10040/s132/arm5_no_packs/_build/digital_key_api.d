@@ -4,6 +4,7 @@
 .\_build\digital_key_api.o: ..\..\..\sdk\nanopb\pb.h
 .\_build\digital_key_api.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\_build\digital_key_api.o: ..\..\..\sdk\public\util_int.h
+.\_build\digital_key_api.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\_build\digital_key_api.o: ..\..\..\sdk\nanopb\pb_encode.h
 .\_build\digital_key_api.o: ..\..\..\sdk\nanopb\pb_decode.h
 .\_build\digital_key_api.o: ..\..\..\sdk\cypto\cmac.h

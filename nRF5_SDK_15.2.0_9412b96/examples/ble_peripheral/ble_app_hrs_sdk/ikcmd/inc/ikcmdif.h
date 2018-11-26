@@ -71,7 +71,7 @@ extern int  ikcmdStart(void);
  */
  
 extern void ikcmdSendUart(uint8_t cmd);
-
+extern void Receive_Task(const uint8_t * data);
 
 #ifdef __cplusplus
 }

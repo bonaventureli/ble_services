@@ -42,6 +42,8 @@
 #define CARCMD_TYPE 0x01
 #define CARCMD_CMD_CARBINDING 0x00
 #define CARCMD_CMD_CENTRAL_CONTROLLOCK 0x01
+#define CARCMD_CMD_WINDOW_CONTROL 0x02
+#define CARCMD_CMD_AIR_CONDITION 0x13
 #define CARCMD_CMD_HATCHBACK_CONTROL 0x09
 #define CARCMD_CMD_REQUSE 0xF0
 #define CARCMD_CMD_POSION 0xF1
@@ -129,13 +131,13 @@ typedef struct{
 }T_Monitor_Data;
 
 typedef struct{
-	uint8_t Header;
+	//uint8_t Header;
 	uint8_t Type;
 	uint8_t Cmd;
 	uint8_t Index;
 	uint8_t Length;
 	uint8_t Param;
-	uint8_t End;
+	//uint8_t End;
 }T_CarCMD;
 
 typedef struct{

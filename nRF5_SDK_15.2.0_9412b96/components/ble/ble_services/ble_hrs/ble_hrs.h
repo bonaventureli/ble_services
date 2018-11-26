@@ -145,8 +145,8 @@ typedef enum
     BLE_DIGITAKKEY_EVT_SESSION,      /**< Data received. */
     BLE_DIGITAKKEY_EVT_CMD,      /**< Data received. */
 	  BLE_DIGITAKKEY_EVT_RSSI,      /**< Data received. */
-	  BLE_DIGITAKKEY_EVT_VERSION,      /**< Data received. */
-  	BLE_NUS_EVT_TX_RDY,       /**< Service is ready to accept new data to be transmitted. */
+	  //BLE_DIGITAKKEY_EVT_VERSION,      /**< Data received. */
+//  	BLE_NUS_EVT_TX_RDY,       /**< Service is ready to accept new data to be transmitted. */
     BLE_HRS_EVT_NOTIFICATION_ENABLED,   /**< Heart Rate value notification enabled event. */
     BLE_HRS_EVT_NOTIFICATION_DISABLED   /**< Heart Rate value notification disabled event. */
 } ble_hrs_evt_type_t;
@@ -313,6 +313,7 @@ void ble_hrs_sensor_contact_detected_update(ble_hrs_t * p_hrs, bool is_sensor_co
  */
 uint32_t ble_hrs_body_sensor_location_set(ble_hrs_t * p_hrs, uint8_t body_sensor_location);
 
+uint8_t ikble_set_se_status(uint8_t st);
 
 #ifdef __cplusplus
 }

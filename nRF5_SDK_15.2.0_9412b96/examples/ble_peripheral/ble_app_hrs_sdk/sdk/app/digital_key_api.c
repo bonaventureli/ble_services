@@ -149,10 +149,11 @@ static int Handle_write_Info(ingeek_DK_InfoW* info_message)
 {
 	int ret=0;
 	unsigned int keylen=0;
-    	unsigned char key[LENGTH_16]={0};
+    	//unsigned char key[LENGTH_16]={0};
 	
 	memset(statem.vin,0x00,sizeof(statem.vin));
 	memcpy(statem.vin,info_message->VIN,VIN_LEN);
+	#if 1
 	ret=g_writecb(info_message->KEY.bytes, info_message->KEY.size, 64);
 	if(ret != 0)
 	{
@@ -164,11 +165,14 @@ static int Handle_write_Info(ingeek_DK_InfoW* info_message)
 	{	
 		return INGEEK_FAILED_WRITECB;
 	}
-	
-	memcpy(key,info_message->VIN,LENGTH_16);
+	#endif
+	//memcpy(key,info_message->VIN,LENGTH_16);
 	memset(statem.Keyinfo.SSC,0x00,LENGTH_16);
-	ret=ingeek_cipher_aes_cbc(key,statem.Keyinfo.SSC,info_message->KEY.bytes,
+//	ret=ingeek_cipher_aes_cbc(key,statem.Keyinfo.SSC,info_message->KEY.bytes,
+//					info_message->KEY.size,statem.Keyinfo.CMPK,&keylen,INGEEK_DECRYPT);
+	ret=ingeek_cipher_aes_cbc((unsigned char *)info_message->VIN,statem.Keyinfo.SSC,info_message->KEY.bytes,
 					info_message->KEY.size,statem.Keyinfo.CMPK,&keylen,INGEEK_DECRYPT);
+					
 	if(ret != 0 || keylen != LENGTH_32)
 	{
 		return INGEEK_FAILED_DECRYPT;

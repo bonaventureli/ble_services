@@ -1,0 +1,128 @@
+// [START declaration]
+syntax = "proto2";
+package ingeek;
+// [END declaration]
+
+// [START java_declaration]
+option java_package = "com.ingeek.digitalkey";
+option java_outer_classname = "DKProtol";
+// [END java_declaration]
+
+message DK_Time
+{
+	required int32 seconds = 1;
+}
+
+// 
+message EncryptedDataNew
+{
+	required int32 etype = 1;
+	optional int32 kvno  = 2;
+	required bytes cipher = 3;
+}
+
+
+// Auth特征值的PB结构
+message DK_AuthX
+{
+	required int32  flags = 1;
+	required EncryptedDataNew keys = 2;
+	required string crealm = 3;
+	required string cname = 4;
+	required DK_Time authtime = 5;
+	optional DK_Time starttime = 6;
+	required DK_Time endtime = 7;
+	optional DK_Time renew_till = 8;
+	optional bytes caddr = 9;
+	required int32 auth_data = 10;
+}
+
+// Auth特征值的PB结构_Gemalto
+message DK_AuthG
+{
+	required int32 flags = 1;
+	required bytes df = 2;
+	optional bytes eDF = 3; //长度73左右不会超过80
+	required bytes s_cmac = 4;
+}
+
+// Session特征值的PB结构
+message DK_SessionX
+{
+	required int32 avno = 1;
+	required string crealm = 2;
+	required string cname = 3;
+	required DK_Time ctime = 4;
+	optional int32 cusec = 5;
+	optional int32 EncryptionKey = 6;
+	required bytes seq_number = 7;
+	required int32 auth_data = 8;
+}
+
+// Session特征值的PB结构_Gemalto
+message DK_SessionG
+{
+	required int32 avno = 1;
+	required bytes TRnd = 2;
+	required bytes SEID = 3;
+	required bytes CRnD = 4;
+	required bytes TEEID = 5;
+	optional bytes KICC = 6;
+	optional bytes KIFD = 7;
+	optional bytes KPRE = 8;
+	optional DK_Time STARTTIME = 9;
+	optional DK_Time ENDTIME = 10;
+}
+
+
+// Command特征值的PB结构
+message DK_Cmd
+{
+   required int32 command = 1;
+   required int32 result = 2;
+   optional int32 index = 3;
+   optional int32 permission = 4;
+   optional bytes sparam = 5;
+}
+
+
+// Info特征值写操作的PB结构
+message DK_InfoW
+{
+   required int32 etype = 1;
+   // 标识加密及签名的参数
+   optional string VIN = 2;
+   required bytes TRnd = 3;
+   optional bytes SEID = 4; //16字节
+   optional bytes KEY = 5;
+   optional bytes PUB_KEY = 6; //64字节
+   optional int32 index = 7;
+   optional bytes sign = 8;
+}
+
+// Info特征值读操作的PB结构
+message DK_InfoR
+{
+   required int32 etype = 1;
+   optional string VIN = 2;
+   required bytes TRnd = 3;
+   optional bytes SEID = 4;
+}
+
+//add by yx on 4/16
+message DK_Msg
+{
+	required int32 message = 1;
+	optional int32 result = 2;
+	optional int32 index = 3;
+	optional int32 permission = 4;
+	optional bytes sparam = 5;
+}
+
+message DK_RTC
+{
+	required int32 etype = 1;
+	required string VIN = 2;
+	required DK_Time rtc_time = 3;
+	optional bytes sign = 4;
+}

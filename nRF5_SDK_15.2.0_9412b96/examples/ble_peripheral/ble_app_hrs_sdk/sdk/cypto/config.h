@@ -1,7 +1,7 @@
 #ifndef INGEEK_CONFIG_H
 #define INGEEK_CONFIG_H
 
-#define INGEEK_SMALL_CIPHER_C    //2640上开启这个宏，RH850上关闭这个宏
+//#define INGEEK_SMALL_CIPHER_C    //2640上开启这个宏，RH850上关闭这个宏
 #include "util_int.h"
 //#define INGEEK_UNUSED_FUN
 //#define INGEEK_AES_ROM_TABLES

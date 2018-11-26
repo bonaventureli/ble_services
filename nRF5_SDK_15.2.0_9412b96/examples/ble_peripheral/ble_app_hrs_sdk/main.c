@@ -83,8 +83,11 @@
 
 #include "digital_key_api.h"
 #include "ikcmdif.h"
+#include "nrf_drv_rng.h"
+//#include "fstorage_data.h"
 
-#define DEVICE_NAME                         "xxx"                            /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                         "GACVK" 
+//#define DEVICE_NAME                         "xxx"                            /**< Name of device. Will be included in the advertising data. */
 //#define DEVICE_NAME                         "Nordic_HRM"                            /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                   "NordicSemiconductor"                   /**< Manufacturer. Will be passed to Device Information Service. */
 
@@ -127,7 +130,7 @@
 
 #define SEC_PARAM_BOND                      1                                       /**< Perform bonding. */
 #define SEC_PARAM_MITM                      0                                       /**< Man In The Middle protection not required. */
-#define SEC_PARAM_LESC                      1                                       /**< LE Secure Connections enabled. */
+#define SEC_PARAM_LESC                      0                                       /**< LE Secure Connections enabled. */
 #define SEC_PARAM_KEYPRESS                  0                                       /**< Keypress notifications not enabled. */
 #define SEC_PARAM_IO_CAPABILITIES           BLE_GAP_IO_CAPS_NONE                    /**< No I/O capabilities. */
 #define SEC_PARAM_OOB                       0                                       /**< Out Of Band data not available. */
@@ -164,6 +167,11 @@ static ble_uuid_t m_adv_uuids[] =                                   /**< Univers
     {BLE_UUID_DEVICE_INFORMATION_SERVICE,   BLE_UUID_TYPE_BLE},
 		//{SDK_UUID_SERVICE, NUS_SERVICE_UUID_TYPE},//add lifei 2018/11/2
 };
+
+uint8_t gActive;
+uint8_t gReturnInfo[29];
+unsigned int gReturnInfoLen;
+
 uint8_t Callback_data[96];
 uint8_t FlashRead_data[32];
 uint8_t FlashWrite_data[32]={
@@ -175,6 +183,7 @@ uint8_t FlashWrite_data[32]={
 
 int int_ingeek[10];
 uint8_t Rand_data[32]={
+//0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 0xB1,0xB1,0xB3,0xB4,0xB5,0xB6,0xB7,0xB8,0xB9,0xBF,
 0xB1,0xB1,0xB3,0xB4,0xB5,0xB6,0xB7,0xB8,0xB9,0xBF,
 0xB1,0xB1,0xB3,0xB4,0xB5,0xB6,0xB7,0xB8,0xB9,0xBF,
@@ -183,6 +192,8 @@ uint8_t Rand_data[32]={
 
 int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 {
+	//NRF_LOG_INFO("\nread_CB1\n");
+	//NRF_LOG_HEXDUMP_INFO(out, rlen);	
 	unsigned char temp[256];
 	#if USE_DATA_FLASH
 	SdkRead(out,rlen,offset);
@@ -206,6 +217,8 @@ int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 * change time£º2018/8/31
 */
 int write_CB1(unsigned char *in, unsigned int wlen, unsigned int offset){
+	//NRF_LOG_INFO("\nwrite_CB1\n");
+	//NRF_LOG_HEXDUMP_INFO(in, wlen);	
 	#if USE_DATA_FLASH
 		SdkWrite(in,wlen,offset);
 	#else
@@ -228,6 +241,8 @@ int Rand_CB1(void *p_rng, unsigned char *rand, unsigned int randlen){
 	
 	if(p_rng == 0){
 	}
+	//NRF_LOG_INFO("\nRand_CB1\n");
+	//NRF_LOG_HEXDUMP_INFO(rand, randlen);
 	if(randlen == 8){
 		memcpy(rand,Rand_data,8);
 		return 0;
@@ -244,6 +259,26 @@ void g_printcb(const char *fmt, int len)
 //	unsigned char len_t;
 //	len_t = (unsigned char)len;
 //	Uart3Sent(fmt,len_t);
+}
+
+/** @brief Function for getting vector of random numbers.
+ *
+ * @param[out] p_buff                               Pointer to unit8_t buffer for storing the bytes.
+ * @param[in]  length                               Number of bytes to take from pool and place in p_buff.
+ *
+ * @retval     Number of bytes actually placed in p_buff.
+ */ 
+static int ikif_random_vector_generate(void * seed ,unsigned char * p_buff, uint32_t size)
+{
+    uint8_t available;
+    uint32_t err_code;
+    //err_code = nrf_drv_rng_bytes_available(&available);
+		nrf_drv_rng_bytes_available(&available);
+    //APP_ERROR_CHECK(err_code);
+    uint8_t length = (size<available) ? size : available;
+    err_code = nrf_drv_rng_rand(p_buff,length);
+    //APP_ERROR_CHECK(err_code);
+    return 0;
 }
 
 /**@brief Callback function for asserts in the SoftDevice.
@@ -274,10 +309,19 @@ static void delete_bonds(void)
     err_code = pm_peers_delete();
     APP_ERROR_CHECK(err_code);
 }
-
+uint32_t ble_send_notify(uint16_t uuid, uint8_t * data, uint16_t length)
+{
+      ble_send(&m_hrs, uuid, data, length);
+      return 1;
+}
 
 /**@brief Function for starting advertising.
  */
+#if 0
+static uint8_t  initial_info[29]={0x0A,0x11,0x4B,0x4D,0x4C,0x38,0x46,0x30,0x30,0x39,0x31,0x43,0x43,0x32,0x34,0x46,0x44,0x41,0x31,0x12,0x08,0xB1,0xB1,0xB3,0xB4,0xB5,0xB6,0xB7,0xB8};
+unsigned int initial_infoLen=29;
+#endif
+
 void advertising_start(bool erase_bonds)
 {
     if (erase_bonds == true)
@@ -292,6 +336,15 @@ void advertising_start(bool erase_bonds)
         err_code = ble_advertising_start(&m_advertising, BLE_ADV_MODE_FAST);
         APP_ERROR_CHECK(err_code);
     }
+		#if 0
+			//if (gActive == 1){
+			uint8_t status = 0;
+			ble_send_notify(BLE_UUID_DIGITALKET_STATUS_CHAR, &status, 1);
+		  ble_send_notify(BLE_UUID_DIGITALKET_SESSION_CHAR, initial_info, initial_infoLen);
+		  NRF_LOG_HEXDUMP_INFO(initial_info, initial_infoLen);
+				//gActive = 0;
+			//}
+		#endif
 }
 
 
@@ -319,6 +372,7 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
 /**@brief Function for performing battery measurement and updating the Battery Level characteristic
  *        in Battery Service.
  */
+#if 1
 static void battery_level_update(void)
 {
     ret_code_t err_code;
@@ -351,7 +405,7 @@ static void battery_level_meas_timeout_handler(void * p_context)
     UNUSED_PARAMETER(p_context);
     battery_level_update();
 }
-
+#endif
 
 /**@brief Function for handling the Heart rate measurement timer timeout.
  *
@@ -434,6 +488,7 @@ static void rr_interval_timeout_handler(void * p_context)
  * @param[in] p_context  Pointer used for passing some arbitrary information (context) from the
  *                       app_start_timer() call to the timeout handler.
  */
+#if 1
 static void sensor_contact_detected_timeout_handler(void * p_context)
 {
     static bool sensor_contact_detected = false;
@@ -443,7 +498,7 @@ static void sensor_contact_detected_timeout_handler(void * p_context)
     sensor_contact_detected = !sensor_contact_detected;
     ble_hrs_sensor_contact_detected_update(&m_hrs, sensor_contact_detected);
 }
-
+#endif
 
 /**@brief Function for the Timer initialization.
  *
@@ -458,10 +513,12 @@ static void timers_init(void)
     APP_ERROR_CHECK(err_code);
 
     // Create timers.
+	#if 1
     err_code = app_timer_create(&m_battery_timer_id,
                                 APP_TIMER_MODE_REPEATED,
                                 battery_level_meas_timeout_handler);
     APP_ERROR_CHECK(err_code);
+	#endif
 
     err_code = app_timer_create(&m_heart_rate_timer_id,
                                 APP_TIMER_MODE_REPEATED,
@@ -472,11 +529,12 @@ static void timers_init(void)
                                 APP_TIMER_MODE_REPEATED,
                                 rr_interval_timeout_handler);
     APP_ERROR_CHECK(err_code);
-
+#if 1
     err_code = app_timer_create(&m_sensor_contact_timer_id,
                                 APP_TIMER_MODE_REPEATED,
                                 sensor_contact_detected_timeout_handler);
     APP_ERROR_CHECK(err_code);
+#endif
 }
 
 
@@ -550,76 +608,147 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
 }
 
 
+uint8_t ble_set_info(ble_hrs_t * p_hrs, uint8_t * data, uint16_t length)
+{
+    ret_code_t         err_code = NRF_SUCCESS;
+	  ble_gatts_value_t  gatts_value;
+        // Initialize value struct.
+        memset(&gatts_value, 0, sizeof(gatts_value));
+
+        gatts_value.len     = length;
+        gatts_value.offset  = 0;
+        gatts_value.p_value = data;
+
+	NRF_LOG_DEBUG("This is ble_set_info function\n");
+        // Update database.
+        err_code = sd_ble_gatts_value_set(BLE_CONN_HANDLE_INVALID,
+                                          p_hrs->info_handles.value_handle,
+                                          &gatts_value);
+        if (err_code == NRF_SUCCESS)
+        {
+            //NRF_LOG_INFO("Battery level has been updated: %d%%", battery_level)
+
+            // Save new battery value.
+            //p_bas->battery_level_last = battery_level;
+        }
+        else
+        {
+            NRF_LOG_DEBUG("Error ikble_set_se_info: 0x%08X", err_code)
+
+            return err_code;
+        }
+	
+	  return 0;
+}
+
+uint32_t ikble_set_se_info(uint8_t * data, uint16_t length)
+{
+      ble_set_info(&m_hrs, data, length);
+      return 1;
+}
 
 void Handle_info(uint8_t *data, uint32_t data_len)
 {
-//	T_UartSendInfo Framedatainfo;
-	
-	
 	unsigned int outlen;
 	uint8_t *preply_data;
 	uint8_t tmpdata[150];
 	uint32_t ret;
 	preply_data = tmpdata;
-	
+	uint8_t status;
+	uint8_t i=20;
+	#if 0
 	NRF_LOG_INFO("\nHandle_info_function:[Before] ingeek_push_info:status:ingeek_get_sec_status is %x.if 0xFF, it is right\n",ingeek_get_sec_status());
-	NRF_LOG_INFO("\nreturn:ingeek_push_info(data, data_len) status is %x.if 0,it is right\n",ingeek_push_info(data, data_len));
-	NRF_LOG_INFO("\nHandle_info_function:[After] ingeek_push_info:status:ingeek_get_sec_status is %x.if 0,it is right\n",ingeek_get_sec_status());
+	#endif
 	
 	#if 1
-	if(ingeek_push_info(data, data_len) != SUCCESS){
-		NRF_LOG_INFO("error:ingeek_push_info Not Success.");
-		return ;
-	  }
-	  else{
-		  if(ingeek_get_sec_status() == CARINFO_VALID){
-				NRF_LOG_INFO("ingeek_get_sec_status is CARINFO_VALID.");
-			if(ingeek_pull_info(preply_data, &outlen) != SUCCESS){
-				NRF_LOG_INFO("error:ingeek_pull_info Not Success.");
-				return;
+	//while(i--);
+	//NRF_LOG_HEXDUMP_INFO(data, data_len);
+	//NRF_LOG_INFO("\n ========================Start:ingeek_push_info function=====================\n \n");
+	if(ingeek_push_info(data, data_len) == 0){
+	NRF_LOG_INFO("\n push info success! \n");
+	//NRF_LOG_INFO("\n ========================End:ingeek_push_info function=======================\n \n");
+	}
+	#endif
+	
+		#if 0
+		uint8_t ActiveData[72]={
+0x08,0xE2,0x0F,0x12,0x11,0x4B,0x4D,0x4C,0x38,0x46,0x30,0x30,0x39,0x31,0x43,0x43,0x32,0x34,0x46,0x44,0x41,0x31,0x1A,0x30,\
+0x4F,0x2E,0x1C,0xE9,0x99,0x6F,0xE5,0x09,0x42,0x9C,0x92,0x3F,0x67,0xEB,0xC4,0xAF,0x16,0x37,0x09,0x9A,0xEF,0x1B,0xEC,0xA5,\
+0xCE,0x69,0x4C,0xD6,0xE2,0xBC,0x47,0x0C,0xE2,0x3A,0x17,0x5D,0x6E,0x61,0x16,0xE7,0xF1,0x45,0x51,0x19,0x60,0xE2,0x44,0xD4,
+		};
+	int ActiveData_len =72;
+	if(ingeek_push_info(ActiveData, ActiveData_len) == 0){
+	NRF_LOG_INFO("\n push info success! \n");
+	
+	}
+	#endif
+	
+	#if 0
+	NRF_LOG_INFO("\nreturn:ingeek_push_info(data, data_len) status is %x.if 0,it is right\n",ingeek_push_info(data, data_len));
+	#endif
+
+	#if 0
+	NRF_LOG_INFO("\nHandle_info_function:[After] ingeek_push_info:status:ingeek_get_sec_status is %x.if 0,it is right\n",ingeek_get_sec_status());
+	#endif 
+	
+	#if 1
+	status = ingeek_get_sec_status();
+	ble_send_notify(BLE_UUID_DIGITALKET_STATUS_CHAR, &status, 1);
+  if(status == 0){
+	gActive = 1;
+	NRF_LOG_INFO("gActive is ok! \n");
+	}
+	#endif
+	
+	#if 0
+	NRF_LOG_INFO("\nreturn:ingeek_pull_info(preply_data, &outlen) status is %x.if 0,it is right\n",ingeek_pull_info(preply_data, &outlen));
+	#endif
+	
+	#if 1
+	if(ingeek_pull_info(preply_data, &outlen) == 0){
+	//NRF_LOG_INFO("\n pull info error \n");
+		NRF_LOG_INFO("\n pull info success! \n");
+		memcpy(gReturnInfo,preply_data,outlen);
+	  gReturnInfoLen = outlen;
+	}
+	#endif
+	
+	#if 0
+	NRF_LOG_INFO("\nHandle_info_function:[After] ingeek_pull_info:status:ingeek_get_sec_status is %x.if 1,it is right\n",ingeek_get_sec_status());
+	#endif
+	
+	#if 0
+	//ikble_set_se_info(preply_data, outlen);
+	//NRF_LOG_HEXDUMP_INFO(preply_data, outlen);
+	NRF_LOG_HEXDUMP_INFO(gReturnInfo, gReturnInfoLen);
+	//ble_send_notify(BLE_UUID_DIGITALKET_SESSION_CHAR, gReturnInfo, gReturnInfoLen);
+	#endif
+	
+	#if 0
+	//status = 0;//1;//ingeek_get_sec_status();
+	ble_send_notify(BLE_UUID_DIGITALKET_STATUS_CHAR, &status, 1);
+	#endif
+	
+	if (gActive == 1){
+			//ble_send_notify(BLE_UUID_DIGITALKET_SESSION_CHAR, gReturnInfo, gReturnInfoLen);
+		  //NRF_LOG_HEXDUMP_INFO(gReturnInfo, gReturnInfoLen);
+				//gActive = 0;
 			}
-			else{
-				if((outlen != 29) ){
-					NRF_LOG_INFO("error:outlen != 29.");
-					return;
-				}
-			}
-		}
-		if(ingeek_get_sec_status() != READ_INFO){
-			return;
-		}
-		else{
-			NRF_LOG_INFO("info is ok ,ingeek_pull_info,preply_data:\n");
-			NRF_LOG_HEXDUMP_INFO(preply_data, outlen);
-		}
-	  }
-		#endif
 }
 void Handle_auth(uint8_t *data, uint32_t data_len)
 {
+	uint8_t status;
+	
+	#if 0
 	NRF_LOG_INFO("\nHandle_auth_function:[Before] ingeek_push_auth:status:ingeek_get_sec_status is %x. if 1,it is right\n",ingeek_get_sec_status());
 	NRF_LOG_INFO("\nHandle_auth_function,return:ingeek_push_auth %x, if 0,it is right\n",ingeek_push_auth(data, data_len, (unsigned char*)1, (unsigned int*)1));
 	NRF_LOG_INFO("\nHandle_auth_function:[After] ingeek_push_auth:status:ingeek_get_sec_status is %x. if 2,it is right\n",ingeek_get_sec_status());
+	#endif
+	NRF_LOG_HEXDUMP_INFO(data, data_len);
+	ingeek_push_auth(data, data_len, (unsigned char*)1, (unsigned int*)1);
 	
-	
-	//T_UartSendAuth Framedataauth;
-//	if(ingeek_get_sec_status() == READ_INFO){
-//		if(ingeek_push_auth(data, data_len, (unsigned char*)1, (unsigned int*)1) != 0x0000){
-//		return;
-//		}	
-//		else{
-////		Framedataauth.Header = 0x7E;
-////		Framedataauth.Address = 0x10;
-////		Framedataauth.Operate = 0x0210;
-////		Framedataauth.UUID = 0xF1FF;
-////		Framedataauth.Datalength = 0x01;
-////		Framedataauth.dataload[0] = 0x02;
-////		Framedataauth.FCS0 = 0xFF;	
-////		Framedataauth.FCS1 = 0xFF;
-////		Uart3Sent(&Framedataauth,(Framedataauth.Datalength)+9);
-//			NRF_LOG_INFO("auth is ok ,ingeek_push_auth");
-//		}
-//	}
+	status = ingeek_get_sec_status();
+	ble_send_notify(BLE_UUID_DIGITALKET_STATUS_CHAR, &status, 1);
 }
 
 void Handle_session(uint8_t *data, uint32_t data_len)
@@ -627,37 +756,20 @@ void Handle_session(uint8_t *data, uint32_t data_len)
 	//T_UartSendSession FramedataSession;
 	unsigned int outlen;
 	uint8_t *preply_data;
+	uint8_t status;
 	//preply_data = gDataload;
+	#if 0
 	NRF_LOG_INFO("\nHandle_session_function:[Before] ingeek_push_auth:status:ingeek_get_sec_status is %x. if 2,it is right\n",ingeek_get_sec_status());
 	NRF_LOG_INFO("\nHandle_session_function,return:ingeek_push_auth %x, if 0,it is right\n",ingeek_push_session(data, data_len, preply_data, &outlen));
 	NRF_LOG_INFO("\nHandle_session_function:[After] ingeek_push_auth:status:ingeek_get_sec_status is %x. if 3,it is right\n",ingeek_get_sec_status());
 	
 	NRF_LOG_INFO("\nHandle_session is ok ,ingeek_push_session,preply_data:\n");
-	NRF_LOG_HEXDUMP_INFO(preply_data, outlen);
+	#endif
 	
-//	if(ingeek_get_sec_status() == WRITE_AUTH){
-//	ingeek_push_session(data, data_len, preply_data, &outlen);
-//	if(ingeek_get_sec_status() != WRITE_SESSION){
-//	 return;
-//	 }
-//	 else{
-//		 if(outlen != 112){
-//			 return;
-//		 }
-//		 else{
-////			 FramedataSession.Header = 0x7E;
-////			 FramedataSession.Address = 0x10;
-////			 FramedataSession.Operate = 0x0210;
-////			 FramedataSession.UUID = 0xF4FF;
-////			 FramedataSession.Datalength = (uint8_t)outlen+1;
-////			 FramedataSession.dataload[0] = WRITE_SESSION;
-////			 memcpy(&(FramedataSession.dataload[1]),preply_data,outlen);
-////			 FramedataSession.FCS0 = 0xFF;
-////			 FramedataSession.FCS1 = 0xFF;
-////			 Uart3Sent(&FramedataSession,FramedataSession.Datalength+9);
-//		 }
-//	 }
-//	}
+	ingeek_push_session(data, data_len, preply_data, &outlen);
+	NRF_LOG_HEXDUMP_INFO(preply_data, outlen);
+	ble_send_notify(BLE_UUID_DIGITALKET_SESSION_CHAR, preply_data, outlen);
+	ble_send_notify(BLE_UUID_DIGITALKET_STATUS_CHAR, &status, 1);
 }
 	 
 void Handle_cmd(uint8_t *data, uint32_t data_len)
@@ -671,79 +783,87 @@ void Handle_cmd(uint8_t *data, uint32_t data_len)
 	uint8_t cmd;
 
 //	preply_data = gDataload;
+	#if 0
 	NRF_LOG_INFO("\nHandle_cmd_function:[Before] ingeek_command_input_action:status:ingeek_get_sec_status is %x. if 3,it is right\n",ingeek_get_sec_status());
 	NRF_LOG_INFO("\nHandle_cmd_function,return:ingeek_command_input_action %x, if 0,it is right\n",ingeek_command_input_action(data, data_len, &struct_cmd));
 	NRF_LOG_INFO("\nHandle_cmd_function:[After] ingeek_command_input_action:status:ingeek_get_sec_status is %x. if 3,it is right\n",ingeek_get_sec_status());
 	NRF_LOG_INFO("\nHandle_cmd_function: %x \n",(uint8_t)(struct_cmd.command));
+	#endif
+	ingeek_command_input_action(data, data_len, &struct_cmd);
+	
+	#if 0
 	NRF_LOG_INFO("\nHandle_cmd_function,return:ingeek_command_output_action %x, if 0,it is right\n",ingeek_command_output_action(&struct_cmd,preply_data, &outlen));
 	NRF_LOG_INFO("\nHandle_cmd is ok ,ingeek_command_input_action,preply_data:\n");
+	#endif
+	
+	ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
 	//NRF_LOG_HEXDUMP_INFO(preply_data, outlen);
 	NRF_LOG_HEXDUMP_INFO(preply_data, outlen);
-	
-	
-//	if(ingeek_command_input_action(data, data_len, &struct_cmd) == 0x0000){
-////	cmd = (uint8_t)(struct_cmd.command);
-////	Uart3Sent(&cmd,1);  
-////	MslCANSentFromSDK(cmd);	
-//	
-//	if(ingeek_command_output_action(&struct_cmd,preply_data, &outlen) != SUCCESS){
-//		return;
-//	}
-//	else{
-//		if(outlen != 16){
-//			return;
-//		}
-//		else{
-////			FramedataCmd.Header = 0x7E;
-////			FramedataCmd.Address = 0x10;
-////			FramedataCmd.Operate = 0x0210;
-////			FramedataCmd.UUID = 0xF5FF;
-////			FramedataCmd.Datalength = outlen;
-////			FramedataCmd.FCS0 = 0xFF;
-////			FramedataCmd.FCS1 = 0xFF;
-////			memcpy(FramedataCmd.dataload,preply_data,outlen);
-////			Uart3Sent(&FramedataCmd,FramedataCmd.Datalength+9); 
-//		}
-//	}			
-//}
+	ble_send_notify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
+
 }
+#define SESSIONMAXBIT 112
+#define INFOCHARMAXBIT 29
+#define DK_REPLAY_MAXBIT 128
 void ble_hrs_evt_handler (ble_hrs_t * p_hrs, ble_hrs_evt_t * p_evt){
+
+	uint8_t status = 0;
+	
 	switch(p_evt->evt_type)
 	{
+		case BLE_HRS_EVT_NOTIFICATION_ENABLED:
+		{
+			NRF_LOG_INFO("BLE_EVT_NOTIFICATION_ENABLED");
+			if (gActive == 1){
+			//ble_send_notify(BLE_UUID_DIGITALKET_SESSION_CHAR, gReturnInfo, gReturnInfoLen);
+		  //NRF_LOG_HEXDUMP_INFO(gReturnInfo, gReturnInfoLen);
+				//gActive = 0;
+			}
+			break;
+		}
+		case BLE_HRS_EVT_NOTIFICATION_DISABLED:
+		{
+			NRF_LOG_INFO("BLE_EVT_NOTIFICATION_DISABLED");
+				if(status == 1){
+	gActive = 1;
+		NRF_LOG_INFO("\n gActive is ok!\n");
+	}
+			break;
+		}
 		case BLE_DIGITAKKEY_EVT_INFO:
 		{
-//			for(uint16_t i=0;i<p_evt->params.rx_data.length;i++){
-//			NRF_LOG_INFO("p_evt->params.rx_data.p_data %x",p_evt->params.rx_data.p_data[i]);
-//			}
-
-			NRF_LOG_INFO("This is BLE_DIGITAKKEY_EVT_INFO function add lifei 2018/11/2 17:52.");
-			NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
+			//NRF_LOG_INFO("This is BLE_DIGITAKKEY_EVT_INFO function add lifei 2018/11/2 17:52.");
+			//NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
+			#if 0
 			Handle_info((uint8_t *)p_evt->params.rx_data.p_data, (uint32_t) p_evt->params.rx_data.length);
-			ikcmdSendUart(*p_evt->params.rx_data.p_data);
-
+			#endif
+			//ikcmdSendUart(*p_evt->params.rx_data.p_data);
 			break;
 		}
 		case BLE_DIGITAKKEY_EVT_AUTH:
 		{
-			NRF_LOG_INFO("This is BLE_DIGITAKKEY_EVT_AUTH function add lifei 2018/11/2 17:52.");
-			NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
+			//NRF_LOG_INFO("This is BLE_DIGITAKKEY_EVT_AUTH function add lifei 2018/11/2 17:52.");
+			//NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
 			Handle_auth((uint8_t *)p_evt->params.rx_data.p_data, (uint32_t) p_evt->params.rx_data.length);
 			break;
 		}
 		case BLE_DIGITAKKEY_EVT_SESSION:
 		{
-			NRF_LOG_INFO("This is BLE_DIGITAKKEY_EVT_SESSION function add lifei 2018/11/2 17:52.");
-			NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
+			//NRF_LOG_INFO("This is BLE_DIGITAKKEY_EVT_SESSION function add lifei 2018/11/2 17:52.");
+			//NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
 			Handle_session((uint8_t *)p_evt->params.rx_data.p_data, (uint32_t) p_evt->params.rx_data.length);
 			break;
 		}
 		case BLE_DIGITAKKEY_EVT_CMD:
 		{
-			NRF_LOG_INFO("This is BLE_DIGITAKKEY_EVT_CMD function add lifei 2018/11/2 17:52.");
-			NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
 			Handle_cmd((uint8_t *)p_evt->params.rx_data.p_data, (uint32_t) p_evt->params.rx_data.length);
+			NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
+			NRF_LOG_INFO("This is BLE_DIGITAKKEY_EVT_CMD function add lifei 2018/11/2 17:52.");
+			
+			
 			break;
 		}
+		
 		case BLE_DIGITAKKEY_EVT_RSSI:
 		{
 			NRF_LOG_INFO("This is BLE_DIGITAKKEY_EVT_RSSI function add lifei 2018/11/2 17:52.");
@@ -751,6 +871,7 @@ void ble_hrs_evt_handler (ble_hrs_t * p_hrs, ble_hrs_evt_t * p_evt){
 			//Handle_cmd((uint8_t *)p_evt->params.rx_data.p_data, (uint32_t) p_evt->params.rx_data.length);
 			break;
 		}
+		#if 0
 		case BLE_DIGITAKKEY_EVT_VERSION:
 		{
 			NRF_LOG_INFO("This is BLE_DIGITAKKEY_EVT_VERSION function add lifei 2018/11/2 17:52.");
@@ -758,9 +879,11 @@ void ble_hrs_evt_handler (ble_hrs_t * p_hrs, ble_hrs_evt_t * p_evt){
 			//Handle_cmd((uint8_t *)p_evt->params.rx_data.p_data, (uint32_t) p_evt->params.rx_data.length);
 			break;
 		}
+		
 		default:
 			NRF_LOG_INFO("This is ble_hrs_evt_handler function add lifei 2018/11/2 17:18.");
 			break;
+		#endif
 	}
 	
 }
@@ -801,6 +924,7 @@ static void services_init(void)
     err_code = ble_hrs_init(&m_hrs, &hrs_init);
     APP_ERROR_CHECK(err_code);
 
+		#if 1
     // Initialize Battery Service.
     memset(&bas_init, 0, sizeof(bas_init));
 
@@ -817,6 +941,7 @@ static void services_init(void)
     err_code = ble_bas_init(&m_bas, &bas_init);
     APP_ERROR_CHECK(err_code);
 
+		#endif
     // Initialize Device Information Service.
     memset(&dis_init, 0, sizeof(dis_init));
 
@@ -826,6 +951,7 @@ static void services_init(void)
 
     err_code = ble_dis_init(&dis_init);
     APP_ERROR_CHECK(err_code);
+		
 }
 
 
@@ -871,9 +997,10 @@ static void application_timers_start(void)
 
     err_code = app_timer_start(m_rr_interval_timer_id, RR_INTERVAL_INTERVAL, NULL);
     APP_ERROR_CHECK(err_code);
-
+#if 1
     err_code = app_timer_start(m_sensor_contact_timer_id, SENSOR_CONTACT_DETECTED_INTERVAL, NULL);
     APP_ERROR_CHECK(err_code);
+#endif
 }
 
 
@@ -981,14 +1108,13 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
 }
 void Handle_active()
 {
-//	T_UartSendInfo FramedataActive;
-	
+	#if 0
 	uint8_t *preply_data;
 	unsigned int outlen;
 //	preply_data = gDataload;
 	
 	ingeek_se_final();
-	ingeek_se_init();
+	//ingeek_se_init();
 	
 	if(ingeek_pull_info(preply_data, &outlen) != SUCCESS){
 		NRF_LOG_INFO("Handle_active:ingeek_pull_info Not Success");
@@ -1000,19 +1126,10 @@ void Handle_active()
 			return;
 		}
 		else{
-//			FramedataActive.Header = 0x7E;
-//			FramedataActive.Address = 0x10;
-//			FramedataActive.Operate = 0x0210;
-//			FramedataActive.UUID = 0xF2FF;
-//			FramedataActive.Datalength = (uint8_t)outlen+1;
-//			FramedataActive.dataload[0] = 0x00;
-//			memcpy(&(FramedataActive.dataload[1]),preply_data,outlen);
-//			FramedataActive.FCS0 = 0xFF;
-//			FramedataActive.FCS1 = 0xFF;
-//			Uart3Sent(&FramedataActive,(FramedataActive.Datalength)+9);
 			NRF_LOG_INFO("Handle_active:ingeek_pull_info Success");
 		}
 	}
+	#endif
 }
 
 void Handle_broadcast()
@@ -1025,7 +1142,7 @@ void Handle_broadcast()
 	}
 	if(((ret > 0)&&(ret < 0x00FF))||(ret == 0)){
 		NRF_LOG_INFO("Handle_broadcast:status:ingeek_get_sec_status %x",ret);
-		Handle_active();
+		//Handle_active();
 	}
 }
 void Handle_disconnect()
@@ -1034,12 +1151,6 @@ void Handle_disconnect()
 	NRF_LOG_INFO("\ningeek_se_final:return status is %x. if 0,it is right\n",ingeek_se_final());
 	//ingeek_se_final();
 	NRF_LOG_INFO("\nHandle_disconnect:[After] ingeek_se_final:status:ingeek_get_sec_status is %x. if 0,it is right\n\n\n",ingeek_get_sec_status());
-	
-	NRF_LOG_INFO("\nHandle_disconnect:[Before] ingeek_se_init:status:ingeek_get_sec_status is %x. if 0,it is right\n",ingeek_get_sec_status());
-	NRF_LOG_INFO("\ningeek_se_init:return status is %x. if 0,it is right\n",ingeek_se_init());
-	//ingeek_se_init();
-	NRF_LOG_INFO("\nHandle_disconnect:[After] ingeek_se_init:status:ingeek_get_sec_status is %x. if 0,it is right\n",ingeek_get_sec_status());
-	
 	return;
 }
 
@@ -1313,8 +1424,119 @@ static void idle_state_handle(void)
         nrf_pwr_mgmt_run();
     }
 }
+#if 0
+/*!
+ * typedef int (*pfnReadPortCB_t)(eDKPORT port,uint8_t *outBuf, uint32_t size,uint32_t offset)
+ * read content from flash/uart
+ * @param [out] outBuf: read flash or uart content and write to outBuf
+ * @param [in] size: outBuf size .
+ * @param [in] offset:  read flash offset position
+ * @return 	actual read size from port.
+ * Example usage:
+ * @verbatim
+ * @endverbatim
+ */
+typedef int (*pfnReadPortCB_t)(uint8_t *outBuf, uint32_t size,uint32_t offset);
+/*!
+ * typedef int (*pfnWritePortCB_t)(const uint8_t *inBuf, uint32_t size,uint32_t offset)
+ * write content to flash or uart
+ * @param [in] inBuf: content will be writed to flash or uart.
+ * @param [in] size: inBuf size .
+ * @param [in] offset:  write to flash offset position
+ * @return actual write size to port.
+ * Example usage:
+ * @verbatim
+ * @endverbatim
+ */
+typedef int (*pfnWritePortCB_t)(const uint8_t *inBuf, uint32_t size,uint32_t offset);
+/*!
+ *  \struct dkIOs_t
+ *  \brief 
+ */
+typedef struct
+{
+   pfnWritePortCB_t     uartTxCallback; //write uart callback funtion point
+   pfnReadPortCB_t      flashRCallback; //read flash callback funtion point
+   pfnWritePortCB_t     flashWCallback; //write flash callback funtion point
+} dkIOs_t;
+#define SESSION_MAX 1
+dkIOs_t IKTK_SessionContain[SESSION_MAX] ={0};
+pfnWritePortCB_t   g_uartTxCB = 0;
+int ikcmdInitialize(pfnWritePortCB_t inUartTx)
+{
+    g_uartTxCB = inUartTx;
+	  return 0;
+}
+uint32_t DKCreateSRV(dkIOs_t * pSession)
+{
+    static uint32_t session_id = 0;
+  if (pSession && session_id < SESSION_MAX) {
+      ++session_id;
+      //ikbleInitialize();
+      IKTK_SessionContain[session_id - 1] = *pSession;
+      ikcmdInitialize(pSession->uartTxCallback);
+      //ingeek_set_callback(pSession->flashRCallback,pSession->flashWCallback,ikif_random_vector_generate);
+	  //ikSecuritySetRunningStatus(DK_SYS_INIT);
+      return session_id;
+  } else {
+    return 0;
+  }
+}
+static dkIOs_t g_ios = {0,0,0};
 
+static int storageReadData(uint8_t *outBuf, uint32_t word_count, uint32_t offset)
+{
+    uint32_t err_code;
+    if (NULL == outBuf)
+        return 0;
 
+    if ((offset >= 1024) || (word_count + offset > 1024))
+        return 0;
+        
+    err_code = fstorage_data_read(offset, outBuf, word_count);
+    if (NRF_SUCCESS != err_code)
+    {
+        return 0;
+    }
+
+    return 0;
+}
+
+static int storageWriteData(const uint8_t *inBuf, uint32_t word_count,uint32_t offset)
+{
+    uint32_t err_code;
+    
+    if (NULL == inBuf)
+        return 0;
+
+    if ((offset >= 1024) || (word_count + offset > 1024))
+        return 0;
+        
+    err_code = fstorage_data_write(offset, inBuf, word_count);
+    if (NRF_SUCCESS != err_code)
+    {
+        return 0;
+    }
+
+    return 0;
+}
+#endif
+
+#if 0
+static int ikif_uart_txcb( const uint8_t *msg, uint32_t wlen, uint32_t offset )
+{
+    int ret;
+    //NRF_LOG_INFO("ikif_uart_txcb tx %d bytes", wlen);
+    
+    ret = m2m_if_UartSendData((uint8_t *)msg, (uint16_t)wlen);
+    if (wlen != ret)
+    {
+        NRF_LOG_WARNING("m2m_if_UartSendData send Failed, req=%d, sended=%d", wlen, ret);
+    }
+    
+    return ret;
+}
+#endif
 /**@brief Function for application main entry.
  */
 int main(void)
@@ -1323,6 +1545,7 @@ int main(void)
 
     // Initialize.
 		
+	
     log_init();
     timers_init();
     buttons_leds_init(&erase_bonds);
@@ -1332,8 +1555,9 @@ int main(void)
     gatt_init();
     advertising_init();
     services_init();
-    sensor_simulator_init();
+    //sensor_simulator_init();
     conn_params_init();
+	
     peer_manager_init();
 
     // Start execution.
@@ -1341,9 +1565,24 @@ int main(void)
     application_timers_start();
     advertising_start(erase_bonds);
 		
+//		// Add fstorage data
+//    (void)fstorage_data_init();
+//		// Add ingeek function
+//    g_ios.flashRCallback = storageReadData;
+//    g_ios.flashWCallback = storageWriteData;
+//    //g_ios.uartTxCallback = ikif_uart_txcb;
+//    DKCreateSRV(&g_ios);
+		//NRF_LOG_INFO("\n ========================Start:ingeek_set_callback function=====================\n \n");
 		ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
+		//NRF_LOG_INFO("\n ========================End:ingeek_set_callback function=======================\n \n");
+		//ingeek_set_callback(read_CB1,write_CB1,ikif_random_vector_generate);
 		
-		NRF_LOG_INFO("main:return-ingeek_se_init is %x.",ingeek_se_init());
+		
+		//NRF_LOG_INFO("main:return-ingeek_se_init is %x.",ingeek_se_init());
+		//NRF_LOG_INFO("\n ========================Start:ingeek_se_init function=====================\n \n");
+		ingeek_se_init();
+		//NRF_LOG_INFO("\n ========================End:ingeek_se_init function=======================\n \n");
+		
 		NRF_LOG_INFO("main:return-ingeek_get_sec_status is %x.",ingeek_get_sec_status());
 
     // Enter main loop.

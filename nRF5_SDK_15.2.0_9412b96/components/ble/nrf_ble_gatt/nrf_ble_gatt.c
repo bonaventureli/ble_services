@@ -504,19 +504,23 @@ void nrf_ble_gatt_on_ble_evt(ble_evt_t const * p_ble_evt, void * p_context)
 
         case BLE_GATTC_EVT_EXCHANGE_MTU_RSP:
             on_exchange_mtu_rsp_evt(p_gatt, p_ble_evt);
+				NRF_LOG_DEBUG("BLE_GATTC_EVT_EXCHANGE_MTU_RSP");//add lifei 2018/11/26
             break;
 
         case BLE_GATTS_EVT_EXCHANGE_MTU_REQUEST:
             on_exchange_mtu_request_evt(p_gatt, p_ble_evt);
+				NRF_LOG_DEBUG("BLE_GATTS_EVT_EXCHANGE_MTU_REQUEST");
             break;
 
 #if !defined (S112)
         case BLE_GAP_EVT_DATA_LENGTH_UPDATE:
             on_data_length_update_evt(p_gatt, p_ble_evt);
+				NRF_LOG_DEBUG("BLE_GAP_EVT_DATA_LENGTH_UPDATE");
             break;
 
         case BLE_GAP_EVT_DATA_LENGTH_UPDATE_REQUEST:
             on_data_length_update_request_evt(p_gatt, p_ble_evt);
+				NRF_LOG_DEBUG("BLE_GAP_EVT_DATA_LENGTH_UPDATE_REQUEST");
             break;
 #endif // !defined (S112)
 

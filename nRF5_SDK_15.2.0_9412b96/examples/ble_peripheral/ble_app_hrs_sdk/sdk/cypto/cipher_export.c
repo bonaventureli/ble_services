@@ -740,8 +740,10 @@ int ingeek_cipher_aes_cbc(unsigned char* key,unsigned char*iv,
 							ingeek_operation_t mode)
 {
     int ret = 0;
+	#if defined(INGEEK_SMALL_CIPHER_C)
     unsigned int encrypte_len = 0;
-      unsigned char psout[CIPHER_LEN]={0};
+    unsigned char psout[CIPHER_LEN]={0};
+	#endif
 	if (key == NULL || iv == NULL || in == NULL || ilen == 0){
               return -1;
     }
