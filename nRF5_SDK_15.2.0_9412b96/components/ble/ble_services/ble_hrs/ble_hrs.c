@@ -64,6 +64,9 @@
 
 
 //static uint8_t  encoded_initial_hrm[MAX_HRM_LEN]={0x1E,0x00,0x0A,0x11,0x4B,0x4D,0x4C,0x38,0x46,0x30,0x30,0x39,0x31,0x43,0x43,0x32,0x34,0x46,0x44,0x41,0x31,0x12,0x08,0xB1,0xB1,0xB3,0xB4,0xB5,0xB6,0xB7,0xB8};
+static uint8_t  initial_info[128]={0};
+static uint8_t  initial_auth[55]={0};
+static uint8_t  initial_session[131]={0};
 //static uint8_t  initial_info[128]={0x0A,0x11,0x4B,0x4D,0x4C,0x38,0x46,0x30,0x30,0x39,0x31,0x43,0x43,0x32,0x34,0x46,0x44,0x41,0x31,0x12,0x08,0xB1,0xB1,0xB3,0xB4,0xB5,0xB6,0xB7,0xB8};
 uint8_t  initial_status[1]={0xFF};
 
@@ -117,7 +120,114 @@ static void on_hrm_cccd_write(ble_hrs_t * p_hrs, ble_gatts_evt_write_t const * p
         }
     }
 }
+/**@brief Function for handling write events to the Status characteristic.
+ *
+ * @param[in]   p_hrs         Heart Rate Service structure.
+ * @param[in]   p_evt_write   Write event received from the BLE stack.
+ */
+static void on_Status_cccd_write(ble_hrs_t * p_hrs, ble_gatts_evt_write_t const * p_evt_write)
+{
+    if (p_evt_write->len == 2)
+    {
+        // CCCD written, update notification state
+        if (p_hrs->evt_handler != NULL)
+        {
+            ble_hrs_evt_t evt;
 
+            if (ble_srv_is_notification_enabled(p_evt_write->data))
+            {
+                evt.evt_type = BLE_STATUS_EVT_NOTIFICATION_ENABLED;
+            }
+            else
+            {
+                evt.evt_type = BLE_STATUS_EVT_NOTIFICATION_DISABLED;
+            }
+
+            p_hrs->evt_handler(p_hrs, &evt);
+        }
+    }
+}
+/**@brief Function for handling write events to the Info characteristic.
+ *
+ * @param[in]   p_hrs         Heart Rate Service structure.
+ * @param[in]   p_evt_write   Write event received from the BLE stack.
+ */
+static void on_Info_cccd_write(ble_hrs_t * p_hrs, ble_gatts_evt_write_t const * p_evt_write)
+{
+    if (p_evt_write->len == 2)
+    {
+        // CCCD written, update notification state
+        if (p_hrs->evt_handler != NULL)
+        {
+            ble_hrs_evt_t evt;
+
+            if (ble_srv_is_notification_enabled(p_evt_write->data))
+            {
+                evt.evt_type = BLE_INFO_EVT_NOTIFICATION_ENABLED;
+            }
+            else
+            {
+                evt.evt_type = BLE_INFO_EVT_NOTIFICATION_DISABLED;
+            }
+
+            p_hrs->evt_handler(p_hrs, &evt);
+        }
+    }
+}
+/**@brief Function for handling write events to the Session characteristic.
+ *
+ * @param[in]   p_hrs         Heart Rate Service structure.
+ * @param[in]   p_evt_write   Write event received from the BLE stack.
+ */
+static void on_Session_cccd_write(ble_hrs_t * p_hrs, ble_gatts_evt_write_t const * p_evt_write)
+{
+    if (p_evt_write->len == 2)
+    {
+        // CCCD written, update notification state
+        if (p_hrs->evt_handler != NULL)
+        {
+            ble_hrs_evt_t evt;
+
+            if (ble_srv_is_notification_enabled(p_evt_write->data))
+            {
+                evt.evt_type = BLE_SESSION_EVT_NOTIFICATION_ENABLED;
+            }
+            else
+            {
+                evt.evt_type = BLE_SESSION_EVT_NOTIFICATION_DISABLED;
+            }
+
+            p_hrs->evt_handler(p_hrs, &evt);
+        }
+    }
+}
+/**@brief Function for handling write events to the Cmd characteristic.
+ *
+ * @param[in]   p_hrs         Heart Rate Service structure.
+ * @param[in]   p_evt_write   Write event received from the BLE stack.
+ */
+static void on_Cmd_cccd_write(ble_hrs_t * p_hrs, ble_gatts_evt_write_t const * p_evt_write)
+{
+    if (p_evt_write->len == 2)
+    {
+        // CCCD written, update notification state
+        if (p_hrs->evt_handler != NULL)
+        {
+            ble_hrs_evt_t evt;
+
+            if (ble_srv_is_notification_enabled(p_evt_write->data))
+            {
+                evt.evt_type = BLE_CMD_EVT_NOTIFICATION_ENABLED;
+            }
+            else
+            {
+                evt.evt_type = BLE_CMD_EVT_NOTIFICATION_DISABLED;
+            }
+
+            p_hrs->evt_handler(p_hrs, &evt);
+        }
+    }
+}
 
 /**@brief Function for handling the Write event.
  *
@@ -132,87 +242,95 @@ static void on_write(ble_hrs_t * p_hrs, ble_evt_t const * p_ble_evt)
 		ble_hrs_evt_t                 evt;
 
 		NRF_LOG_INFO("This is on_write function.");
-	  
+
 	#if 0
     if (p_evt_write->handle == p_hrs->hrm_handles.cccd_handle)
     {
+			NRF_LOG_INFO("p_hrs->hrm_handles.cccd_handle");
         on_hrm_cccd_write(p_hrs, p_evt_write);
     }
 	#endif
-	
 
-	 if (p_evt_write->handle == p_hrs->status_handles.cccd_handle)
+	  if (p_evt_write->handle == p_hrs->status_handles.cccd_handle)
     {
-        on_hrm_cccd_write(p_hrs, p_evt_write);
+			NRF_LOG_INFO("p_hrs->status_handles.cccd_handle");
+        on_Status_cccd_write(p_hrs, p_evt_write);
     }
-		else if (p_evt_write->handle == p_hrs->info_handles.cccd_handle)
+		else if (p_evt_write->handle == p_hrs->info_handles.cccd_handle)//notify button
     {
-			NRF_LOG_DEBUG("p_hrs->info_handles.cccd_handle");
-        on_hrm_cccd_write(p_hrs, p_evt_write);
+			NRF_LOG_INFO("p_hrs->info_handles.cccd_handle");
+        on_Info_cccd_write(p_hrs, p_evt_write);
     }	
+		#if 0
 		else if (p_evt_write->handle == p_hrs->auth_handles.cccd_handle)
     {
-        on_hrm_cccd_write(p_hrs, p_evt_write);
+			NRF_LOG_INFO("p_hrs->auth_handles.cccd_handle");
+        on_Session_cccd_write(p_hrs, p_evt_write);
     }	
+		#endif
     else if (p_evt_write->handle == p_hrs->session_handles.cccd_handle)
     {
-        on_hrm_cccd_write(p_hrs, p_evt_write);
+			NRF_LOG_INFO("p_hrs->session_handles.cccd_handle");
+        on_Session_cccd_write(p_hrs, p_evt_write);
     }
     else if (p_evt_write->handle == p_hrs->cmd_handles.cccd_handle)
     {
-        on_hrm_cccd_write(p_hrs, p_evt_write);
+			NRF_LOG_INFO("p_hrs->cmd_handles.cccd_handle");
+        on_Cmd_cccd_write(p_hrs, p_evt_write);
     }		
-		
 		else if ((p_evt_write->handle == p_hrs->info_handles.value_handle) &&
-             (p_hrs->evt_handler != NULL))
+             (p_hrs->evt_handler != NULL))//write button
     {
-			NRF_LOG_DEBUG("p_hrs->info_handles.value_handle");
+			  NRF_LOG_INFO("p_hrs->info_handles.value_handle==========");
         evt.evt_type                  = BLE_DIGITAKKEY_EVT_INFO;
         evt.params.rx_data.p_data = p_evt_write->data;
         evt.params.rx_data.length = p_evt_write->len;
 
         p_hrs->evt_handler(p_hrs, &evt);
-			  NRF_LOG_HEXDUMP_INFO(p_evt_write->data, p_evt_write->len);	//add lifei 2018/11/26
-			//NRF_LOG_INFO("This is info_handles .");
     }
 		else if ((p_evt_write->handle == p_hrs->auth_handles.value_handle) &&
              (p_hrs->evt_handler != NULL))
     {
+				NRF_LOG_INFO("This is auth_handles .");
         evt.evt_type                  = BLE_DIGITAKKEY_EVT_AUTH;
         evt.params.rx_data.p_data = p_evt_write->data;
         evt.params.rx_data.length = p_evt_write->len;
 
         p_hrs->evt_handler(p_hrs, &evt);
-			//NRF_LOG_INFO("This is auth_handles .");
+			  
     }
 		else if ((p_evt_write->handle == p_hrs->session_handles.value_handle) &&
              (p_hrs->evt_handler != NULL))
     {
+			NRF_LOG_INFO("This is session_handles .");
         evt.evt_type                  = BLE_DIGITAKKEY_EVT_SESSION;
         evt.params.rx_data.p_data = p_evt_write->data;
         evt.params.rx_data.length = p_evt_write->len;
 
         p_hrs->evt_handler(p_hrs, &evt);
-			//NRF_LOG_INFO("This is session_handles .");
+			  
     }
 		else if ((p_evt_write->handle == p_hrs->cmd_handles.value_handle) &&
              (p_hrs->evt_handler != NULL))
     {
+			NRF_LOG_INFO("This is cmd_handles .");
         evt.evt_type                  = BLE_DIGITAKKEY_EVT_CMD;
         evt.params.rx_data.p_data = p_evt_write->data;
         evt.params.rx_data.length = p_evt_write->len;
-				//NRF_LOG_INFO("This is cmd_handles .");
+				
         p_hrs->evt_handler(p_hrs, &evt);
     }
+		
 		else if ((p_evt_write->handle == p_hrs->rssi_handles.value_handle) &&
              (p_hrs->evt_handler != NULL))
     {
+			NRF_LOG_INFO("This is rssi_handles .");
         evt.evt_type                  = BLE_DIGITAKKEY_EVT_RSSI;
         evt.params.rx_data.p_data = p_evt_write->data;
         evt.params.rx_data.length = p_evt_write->len;
 
         p_hrs->evt_handler(p_hrs, &evt);
-			//NRF_LOG_INFO("This is rssi_handles .");
+			  
     }		
 		#if 0
 		else if ((p_evt_write->handle == p_hrs->version_handles.value_handle) &&
@@ -424,7 +542,7 @@ uint32_t ble_hrs_init(ble_hrs_t * p_hrs, const ble_hrs_init_t * p_hrs_init)
 		//add_char_params.uuid_type         = p_hrs->sdk_uuid_type; //add lifei 2018/11/2
     add_char_params.max_len           = 128;//MAX_HRM_LEN;
     add_char_params.init_len          = 29;//hrm_encode(p_hrs, INITIAL_VALUE_HRM, encoded_initial_hrm);
-//    add_char_params.p_init_value      = initial_info;
+    add_char_params.p_init_value      = initial_info;
     add_char_params.is_var_len        = true;
     add_char_params.char_props.write         = 1;
     add_char_params.char_props.write_wo_resp = 1;
@@ -445,9 +563,9 @@ uint32_t ble_hrs_init(ble_hrs_t * p_hrs, const ble_hrs_init_t * p_hrs_init)
     memset(&add_char_params, 0, sizeof(add_char_params));
 
     add_char_params.uuid              = BLE_UUID_DIGITALKET_AUTH_CHAR;
-    add_char_params.max_len           = MAX_HRM_LEN;
-    add_char_params.init_len          = 55;//hrm_encode(p_hrs, INITIAL_VALUE_HRM, encoded_initial_hrm);
-    //add_char_params.p_init_value      = encoded_initial_hrm;
+    add_char_params.max_len           = 128;//MAX_HRM_LEN;
+    add_char_params.init_len          = 55;//hrm_encode(p_hrs, INITIAL_VALUE_HRM, encoded_initial_hrm);//55
+    add_char_params.p_init_value      = initial_auth;
     add_char_params.is_var_len        = true;
     add_char_params.char_props.write         = 1;
     add_char_params.char_props.write_wo_resp = 1;
@@ -463,9 +581,9 @@ uint32_t ble_hrs_init(ble_hrs_t * p_hrs, const ble_hrs_init_t * p_hrs_init)
     memset(&add_char_params, 0, sizeof(add_char_params));
 
     add_char_params.uuid              = BLE_UUID_DIGITALKET_SESSION_CHAR;
-    add_char_params.max_len           = MAX_HRM_LEN;
+    add_char_params.max_len           = 131;//MAX_HRM_LEN;
     add_char_params.init_len          = 112;//hrm_encode(p_hrs, INITIAL_VALUE_HRM, encoded_initial_hrm);
-    //add_char_params.p_init_value      = encoded_initial_hrm;
+    add_char_params.p_init_value      = initial_session;//encoded_initial_hrm;
     add_char_params.is_var_len        = true;
     add_char_params.char_props.write         = 1;
     add_char_params.char_props.write_wo_resp = 1;
@@ -483,9 +601,9 @@ uint32_t ble_hrs_init(ble_hrs_t * p_hrs, const ble_hrs_init_t * p_hrs_init)
     memset(&add_char_params, 0, sizeof(add_char_params));
 
     add_char_params.uuid              = BLE_UUID_DIGITALKET_CMD_CHAR;
-    add_char_params.max_len           = MAX_HRM_LEN;
+    add_char_params.max_len           = 16;//MAX_HRM_LEN;
     add_char_params.init_len          = 16;//hrm_encode(p_hrs, INITIAL_VALUE_HRM, encoded_initial_hrm);
-    //add_char_params.p_init_value      = encoded_initial_hrm;
+    add_char_params.p_init_value      = encoded_initial_hrm;
     add_char_params.is_var_len        = true;
     add_char_params.char_props.write         = 1;
     add_char_params.char_props.write_wo_resp = 1;		
@@ -503,9 +621,9 @@ uint32_t ble_hrs_init(ble_hrs_t * p_hrs, const ble_hrs_init_t * p_hrs_init)
     memset(&add_char_params, 0, sizeof(add_char_params));
 
     add_char_params.uuid              = BLE_UUID_DIGITALKET_RSSI_CHAR;
-    add_char_params.max_len           = MAX_HRM_LEN;
-    add_char_params.init_len          = 16;//hrm_encode(p_hrs, INITIAL_VALUE_HRM, encoded_initial_hrm);
-    //add_char_params.p_init_value      = encoded_initial_hrm;
+    add_char_params.max_len           = 1;//MAX_HRM_LEN;
+    add_char_params.init_len          = 1;//hrm_encode(p_hrs, INITIAL_VALUE_HRM, encoded_initial_hrm);
+    add_char_params.p_init_value      = encoded_initial_hrm;
     add_char_params.is_var_len        = true;
     add_char_params.char_props.write         = 1;
     add_char_params.char_props.write_wo_resp = 1;
@@ -579,11 +697,11 @@ uint32_t ble_hrs_heart_rate_measurement_send(ble_hrs_t * p_hrs, uint16_t heart_r
     return err_code;
 }
 
-uint8_t ikble_set_se_status(uint8_t st)
-{
-      initial_status[0] = st;
-	  return st;
-}
+//uint8_t ikble_set_se_status(uint8_t st)
+//{
+//      initial_status[0] = st;
+//	  return st;
+//}
 uint32_t ble_send(ble_hrs_t * p_hrs, uint16_t uuid, uint8_t * data, uint16_t length)
 {
     uint32_t err_code;
@@ -604,11 +722,14 @@ uint32_t ble_send(ble_hrs_t * p_hrs, uint16_t uuid, uint8_t * data, uint16_t len
 					
 					case BLE_UUID_DIGITALKET_STATUS_CHAR:{
 							hvx_params.handle = p_hrs->status_handles.value_handle;
-						NRF_LOG_INFO("status is :");
-						NRF_LOG_HEXDUMP_INFO(initial_status, 1);
+						NRF_LOG_INFO("BLE_UUID_DIGITALKET_STATUS_CHAR");
 					break;
 					}
-					
+					case BLE_UUID_DIGITALKET_INFO_CHAR:{
+							hvx_params.handle = p_hrs->info_handles.value_handle;						
+						  NRF_LOG_INFO("BLE_UUID_DIGITALKET_INFO_CHAR");
+					break;
+					}
 					case BLE_UUID_DIGITALKET_AUTH_CHAR:{
 							hvx_params.handle = p_hrs->auth_handles.value_handle;						
 						  NRF_LOG_INFO("BLE_UUID_DIGITALKET_AUTH_CHAR");
@@ -632,6 +753,7 @@ uint32_t ble_send(ble_hrs_t * p_hrs, uint16_t uuid, uint8_t * data, uint16_t len
         hvx_params.offset = 0;
         hvx_params.p_len  = &length;
         hvx_params.p_data = data;
+				NRF_LOG_HEXDUMP_INFO(hvx_params.p_data, length);
 
         err_code = sd_ble_gatts_hvx(p_hrs->conn_handle, &hvx_params);
         if ((err_code == NRF_SUCCESS) && (hvx_len != len))

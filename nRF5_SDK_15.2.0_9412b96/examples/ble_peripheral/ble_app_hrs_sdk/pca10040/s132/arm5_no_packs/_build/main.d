@@ -107,3 +107,6 @@
 .\_build\main.o: ..\..\..\..\..\..\integration\nrfx\legacy\nrf_drv_rng.h
 .\_build\main.o: ..\..\..\..\..\..\modules\nrfx\drivers\include\nrfx_rng.h
 .\_build\main.o: ..\..\..\..\..\..\modules\nrfx\hal/nrf_rng.h
+.\_build\main.o: ..\..\..\sdk\cypto\cipher_export.h
+.\_build\main.o: ..\..\..\sdk\cypto\config.h
+.\_build\main.o: ..\..\..\sdk\public\util_int.h

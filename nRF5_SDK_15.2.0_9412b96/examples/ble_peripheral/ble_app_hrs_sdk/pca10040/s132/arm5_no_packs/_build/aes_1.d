@@ -4,4 +4,3 @@
 .\_build\aes_1.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\_build\aes_1.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\_build\aes_1.o: ..\..\..\sdk\cypto\aes.h
-.\_build\aes_1.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
