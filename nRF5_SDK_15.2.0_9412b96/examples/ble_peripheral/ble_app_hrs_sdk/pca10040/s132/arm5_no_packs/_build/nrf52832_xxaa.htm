@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\_build\nrf52832_xxaa.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\_build\nrf52832_xxaa.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Dec 04 15:07:05 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Dec 04 16:10:52 2018
 <BR><P>
 <H3>Maximum Stack Usage =       1776 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -668,11 +668,11 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[186]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;service_data_encode
 <LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manuf_specific_data_encode
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
-<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_auth
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
+<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_auth
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_pull_info
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
+<LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
+<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_cipher_aes_cbc
 <LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_CB1
 <LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_CB1
@@ -725,7 +725,7 @@ Global Symbols
 <LI><a href="#[2ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_init
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pb_ostream_from_buffer
 <LI><a href="#[1dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;combine_data_SS
-<LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_write_Info
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_write_Info
 <LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Calculate_SK
 </UL>
 
@@ -766,13 +766,13 @@ Global Symbols
 
 <P><STRONG><a name="[fc]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pm_peers_delete
-<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_se_final
-<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_session
-<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_info
-<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_auth
+<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_se_final
+<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_session
+<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_info
+<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_auth
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_pull_info
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
+<LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
+<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_cipher_aes_cbc
 <LI><a href="#[1b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_hrs_init
 <LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_advertising_start
@@ -808,7 +808,7 @@ Global Symbols
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_AesCmacVerify
 <LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_check_info
 <LI><a href="#[1dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;combine_data_SS
-<LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_write_Info
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_write_Info
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_Character_Session_G
 <LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Calculate_VCK
 <LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Calculate_SK
@@ -1149,24 +1149,23 @@ Global Symbols
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_get_sec_status
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_send_notify
 </UL>
-<BR>[Called By]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_broadcast
+<BR>[Called By]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_broadcast
 </UL>
 
-<P><STRONG><a name="[117]"></a>Handle_auth</STRONG> (Thumb, 106 bytes, Stack size 24 bytes, main.o(i.Handle_auth))
-<BR><BR>[Stack]<UL><LI>Max Depth = 432<LI>Call Chain = Handle_auth &rArr; ingeek_push_auth &rArr; PBDecode_client_data &rArr; pb_decode &rArr; pb_decode_noinit &rArr; decode_field &rArr; decode_static_field &rArr; pb_message_set_to_defaults &rArr; pb_field_set_to_default &rArr;  pb_message_set_to_defaults (Cycle)
+<P><STRONG><a name="[117]"></a>Handle_auth</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, main.o(i.Handle_auth))
+<BR><BR>[Stack]<UL><LI>Max Depth = 416<LI>Call Chain = Handle_auth &rArr; ingeek_push_auth &rArr; PBDecode_client_data &rArr; pb_decode &rArr; pb_decode_noinit &rArr; decode_field &rArr; decode_static_field &rArr; pb_message_set_to_defaults &rArr; pb_field_set_to_default &rArr;  pb_message_set_to_defaults (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
-<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_auth
+<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_auth
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_get_sec_status
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_send_notify
 </UL>
 <BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_hrs_evt_handler
 </UL>
 
-<P><STRONG><a name="[11a]"></a>Handle_broadcast</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, main.o(i.Handle_broadcast))
+<P><STRONG><a name="[119]"></a>Handle_broadcast</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, main.o(i.Handle_broadcast))
 <BR><BR>[Stack]<UL><LI>Max Depth = 296<LI>Call Chain = Handle_broadcast &rArr; Handle_active &rArr; ingeek_pull_info &rArr; PBEncode_local_data &rArr; pb_encode &rArr; encode_field &rArr; encode_basic_field &rArr; encode_array &rArr; pb_encode_varint &rArr; pb_write
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_get_sec_status
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_active
@@ -1174,37 +1173,33 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_evt_handler
 </UL>
 
-<P><STRONG><a name="[11b]"></a>Handle_cmd</STRONG> (Thumb, 248 bytes, Stack size 88 bytes, main.o(i.Handle_cmd))
-<BR><BR>[Stack]<UL><LI>Max Depth = 528<LI>Call Chain = Handle_cmd &rArr; ingeek_command_input_action &rArr; PBDecode_client_data &rArr; pb_decode &rArr; pb_decode_noinit &rArr; decode_field &rArr; decode_static_field &rArr; pb_message_set_to_defaults &rArr; pb_field_set_to_default &rArr;  pb_message_set_to_defaults (Cycle)
+<P><STRONG><a name="[11b]"></a>Handle_cmd</STRONG> (Thumb, 90 bytes, Stack size 80 bytes, main.o(i.Handle_cmd))
+<BR><BR>[Stack]<UL><LI>Max Depth = 520<LI>Call Chain = Handle_cmd &rArr; ingeek_command_input_action &rArr; PBDecode_client_data &rArr; pb_decode &rArr; pb_decode_noinit &rArr; decode_field &rArr; decode_static_field &rArr; pb_message_set_to_defaults &rArr; pb_field_set_to_default &rArr;  pb_message_set_to_defaults (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
-<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
-<LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_get_sec_status
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
-<LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ikcmdSendUart
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
+<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
+<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ikcmdSendUart
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_send_notify
 </UL>
 <BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_hrs_evt_handler
 </UL>
 
-<P><STRONG><a name="[120]"></a>Handle_disconnect</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, main.o(i.Handle_disconnect))
+<P><STRONG><a name="[11f]"></a>Handle_disconnect</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, main.o(i.Handle_disconnect))
 <BR><BR>[Stack]<UL><LI>Max Depth = 220<LI>Call Chain = Handle_disconnect &rArr; nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
-<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_se_final
+<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_se_final
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_get_sec_status
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_evt_handler
 </UL>
 
-<P><STRONG><a name="[122]"></a>Handle_info</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, main.o(i.Handle_info))
+<P><STRONG><a name="[121]"></a>Handle_info</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, main.o(i.Handle_info))
 <BR><BR>[Stack]<UL><LI>Max Depth = 448<LI>Call Chain = Handle_info &rArr; ingeek_push_info &rArr; PBDecode_client_data &rArr; pb_decode &rArr; pb_decode_noinit &rArr; decode_field &rArr; decode_static_field &rArr; pb_message_set_to_defaults &rArr; pb_field_set_to_default &rArr;  pb_message_set_to_defaults (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
-<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_info
+<BR>[Calls]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_info
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_pull_info
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_get_sec_status
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_send_notify
@@ -1212,30 +1207,30 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_hrs_evt_handler
 </UL>
 
-<P><STRONG><a name="[124]"></a>Handle_session</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, main.o(i.Handle_session))
+<P><STRONG><a name="[123]"></a>Handle_session</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, main.o(i.Handle_session))
 <BR><BR>[Stack]<UL><LI>Max Depth = 456<LI>Call Chain = Handle_session &rArr; ingeek_push_session &rArr; combine_data_SS &rArr; ingeek_cipher_aes_cbc &rArr; AES_CBC_decrypt_buffer &rArr; InvCipher &rArr; InvMixColumns
 </UL>
-<BR>[Calls]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_session
+<BR>[Calls]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_session
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_get_sec_status
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_send_notify
 </UL>
 <BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_hrs_evt_handler
 </UL>
 
-<P><STRONG><a name="[12b]"></a>MslCarcmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, ikcmdhandle.o(i.MslCarcmd))
+<P><STRONG><a name="[12a]"></a>MslCarcmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, ikcmdhandle.o(i.MslCarcmd))
 <BR><BR>[Stack]<UL><LI>Max Depth = 204<LI>Call Chain = MslCarcmd &rArr; MslUartTx &rArr; nrf_log_frontend_hexdump &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MslUartTx
+<BR>[Calls]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MslUartTx
 </UL>
-<BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ikcmdSendUart
+<BR>[Called By]<UL><LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ikcmdSendUart
 </UL>
 
-<P><STRONG><a name="[12c]"></a>MslUartTx</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, ikcmdhandle.o(i.MslUartTx))
+<P><STRONG><a name="[12b]"></a>MslUartTx</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, ikcmdhandle.o(i.MslUartTx))
 <BR><BR>[Stack]<UL><LI>Max Depth = 204<LI>Call Chain = MslUartTx &rArr; nrf_log_frontend_hexdump &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
+<BR>[Calls]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 </UL>
-<BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MslCarcmd
+<BR>[Called By]<UL><LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MslCarcmd
 </UL>
 
 <P><STRONG><a name="[c]"></a>POWER_CLOCK_IRQHandler</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, nrfx_clock.o(i.POWER_CLOCK_IRQHandler))
@@ -1262,7 +1257,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 220<LI>Call Chain = Rand_CB1 &rArr; nrf_log_frontend_std_0 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
@@ -1505,7 +1500,7 @@ Global Symbols
 <LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;blacklisted_peers_state_update
 <LI><a href="#[15b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_timer_stop
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
 <LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_timer_start
 <LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
@@ -1774,13 +1769,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[51]"></a>ble_hrs_evt_handler</STRONG> (Thumb, 254 bytes, Stack size 16 bytes, main.o(i.ble_hrs_evt_handler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 544<LI>Call Chain = ble_hrs_evt_handler &rArr; Handle_cmd &rArr; ingeek_command_input_action &rArr; PBDecode_client_data &rArr; pb_decode &rArr; pb_decode_noinit &rArr; decode_field &rArr; decode_static_field &rArr; pb_message_set_to_defaults &rArr; pb_field_set_to_default &rArr;  pb_message_set_to_defaults (Cycle)
+<BR><BR>[Stack]<UL><LI>Max Depth = 536<LI>Call Chain = ble_hrs_evt_handler &rArr; Handle_cmd &rArr; ingeek_command_input_action &rArr; PBDecode_client_data &rArr; pb_decode &rArr; pb_decode_noinit &rArr; decode_field &rArr; decode_static_field &rArr; pb_message_set_to_defaults &rArr; pb_field_set_to_default &rArr;  pb_message_set_to_defaults (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_send_notify
-<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_session
-<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
+<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_session
+<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_cmd
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_auth
 </UL>
@@ -1830,7 +1825,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 260<LI>Call Chain = ble_send &rArr; nrf_log_frontend_std_0 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 </UL>
 <BR>[Called By]<UL><LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_send_notify
 </UL>
@@ -1841,8 +1836,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[1b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_send
 </UL>
 <BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_hrs_evt_handler
-<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_session
-<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
+<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_session
+<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_cmd
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_auth
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_active
@@ -2154,7 +2149,7 @@ Global Symbols
 <P><STRONG><a name="[1b0]"></a>gcm_ble_evt_handler</STRONG> (Thumb, 240 bytes, Stack size 48 bytes, gatt_cache_manager.o(i.gcm_ble_evt_handler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 516<LI>Call Chain = gcm_ble_evt_handler &rArr; gscm_db_change_notification_done &rArr; pds_peer_data_store &rArr; fds_record_write &rArr; write_enqueue &rArr; queue_start &rArr; queue_process &rArr; gc_execute &rArr; gc_next_page &rArr; gc_record_find_next &rArr; gc_record_copy &rArr; nrf_fstorage_write &rArr; nrf_log_frontend_std_3 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;im_peer_id_get_by_conn_handle
 <LI><a href="#[232]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gscm_db_change_notification_done
 <LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_car_value
@@ -2219,7 +2214,7 @@ Global Symbols
 <P><STRONG><a name="[241]"></a>gscm_local_db_cache_apply</STRONG> (Thumb, 130 bytes, Stack size 32 bytes, gatts_cache_manager.o(i.gscm_local_db_cache_apply))
 <BR><BR>[Stack]<UL><LI>Max Depth = 244<LI>Call Chain = gscm_local_db_cache_apply &rArr; nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[23a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pdb_peer_data_ptr_get
 <LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;im_peer_id_get_by_conn_handle
 </UL>
@@ -2259,15 +2254,15 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 236<LI>Call Chain = gscm_service_changed_ind_send &rArr; nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 </UL>
 <BR>[Called By]<UL><LI><a href="#[36a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;service_changed_send_in_evt
 </UL>
 
-<P><STRONG><a name="[11e]"></a>ikcmdSendUart</STRONG> (Thumb, 98 bytes, Stack size 0 bytes, ikcmdif.o(i.ikcmdSendUart))
+<P><STRONG><a name="[11d]"></a>ikcmdSendUart</STRONG> (Thumb, 98 bytes, Stack size 0 bytes, ikcmdif.o(i.ikcmdSendUart))
 <BR><BR>[Stack]<UL><LI>Max Depth = 204<LI>Call Chain = ikcmdSendUart &rArr; MslCarcmd &rArr; MslUartTx &rArr; nrf_log_frontend_hexdump &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MslCarcmd
+<BR>[Calls]<UL><LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MslCarcmd
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_cmd
 </UL>
@@ -2437,16 +2432,16 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
+<BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
+<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_check_info
 <LI><a href="#[1dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;combine_data_SS
-<LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_write_Info
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_write_Info
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_Character_Session_G
 </UL>
 
-<P><STRONG><a name="[11d]"></a>ingeek_command_input_action</STRONG> (Thumb, 164 bytes, Stack size 112 bytes, digital_key_api.o(i.ingeek_command_input_action))
+<P><STRONG><a name="[11c]"></a>ingeek_command_input_action</STRONG> (Thumb, 164 bytes, Stack size 112 bytes, digital_key_api.o(i.ingeek_command_input_action))
 <BR><BR>[Stack]<UL><LI>Max Depth = 440<LI>Call Chain = ingeek_command_input_action &rArr; PBDecode_client_data &rArr; pb_decode &rArr; pb_decode_noinit &rArr; decode_field &rArr; decode_static_field &rArr; pb_message_set_to_defaults &rArr; pb_field_set_to_default &rArr;  pb_message_set_to_defaults (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_cipher_aes_cbc
@@ -2457,7 +2452,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_cmd
 </UL>
 
-<P><STRONG><a name="[11f]"></a>ingeek_command_output_action</STRONG> (Thumb, 218 bytes, Stack size 120 bytes, digital_key_api.o(i.ingeek_command_output_action))
+<P><STRONG><a name="[11e]"></a>ingeek_command_output_action</STRONG> (Thumb, 218 bytes, Stack size 120 bytes, digital_key_api.o(i.ingeek_command_output_action))
 <BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = ingeek_command_output_action &rArr; ingeek_cipher_aes_cbc &rArr; AES_CBC_decrypt_buffer &rArr; InvCipher &rArr; InvMixColumns
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_cipher_aes_cbc
@@ -2470,11 +2465,10 @@ Global Symbols
 
 <P><STRONG><a name="[114]"></a>ingeek_get_sec_status</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, digital_key_api.o(i.ingeek_get_sec_status))
 <BR><BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_session
-<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_disconnect
-<LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_cmd
-<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_broadcast
+<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_session
+<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_disconnect
+<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_broadcast
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_auth
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_active
 </UL>
@@ -2548,11 +2542,11 @@ Global Symbols
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
+<BR>[Called By]<UL><LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_active
 </UL>
 
-<P><STRONG><a name="[119]"></a>ingeek_push_auth</STRONG> (Thumb, 152 bytes, Stack size 80 bytes, digital_key_api.o(i.ingeek_push_auth))
+<P><STRONG><a name="[118]"></a>ingeek_push_auth</STRONG> (Thumb, 152 bytes, Stack size 80 bytes, digital_key_api.o(i.ingeek_push_auth))
 <BR><BR>[Stack]<UL><LI>Max Depth = 408<LI>Call Chain = ingeek_push_auth &rArr; PBDecode_client_data &rArr; pb_decode &rArr; pb_decode_noinit &rArr; decode_field &rArr; decode_static_field &rArr; pb_message_set_to_defaults &rArr; pb_field_set_to_default &rArr;  pb_message_set_to_defaults (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[260]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_set_seid
@@ -2563,17 +2557,17 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_auth
 </UL>
 
-<P><STRONG><a name="[123]"></a>ingeek_push_info</STRONG> (Thumb, 108 bytes, Stack size 112 bytes, digital_key_api.o(i.ingeek_push_info))
+<P><STRONG><a name="[122]"></a>ingeek_push_info</STRONG> (Thumb, 108 bytes, Stack size 112 bytes, digital_key_api.o(i.ingeek_push_info))
 <BR><BR>[Stack]<UL><LI>Max Depth = 440<LI>Call Chain = ingeek_push_info &rArr; PBDecode_client_data &rArr; pb_decode &rArr; pb_decode_noinit &rArr; decode_field &rArr; decode_static_field &rArr; pb_message_set_to_defaults &rArr; pb_field_set_to_default &rArr;  pb_message_set_to_defaults (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PBDecode_client_data
-<LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_write_Info
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_write_Info
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
+<BR>[Called By]<UL><LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
 </UL>
 
-<P><STRONG><a name="[125]"></a>ingeek_push_session</STRONG> (Thumb, 140 bytes, Stack size 24 bytes, digital_key_api.o(i.ingeek_push_session))
+<P><STRONG><a name="[124]"></a>ingeek_push_session</STRONG> (Thumb, 140 bytes, Stack size 24 bytes, digital_key_api.o(i.ingeek_push_session))
 <BR><BR>[Stack]<UL><LI>Max Depth = 448<LI>Call Chain = ingeek_push_session &rArr; combine_data_SS &rArr; ingeek_cipher_aes_cbc &rArr; AES_CBC_decrypt_buffer &rArr; InvCipher &rArr; InvMixColumns
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;combine_data_SS
@@ -2581,15 +2575,15 @@ Global Symbols
 <LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Calculate_SK
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_session
+<BR>[Called By]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_session
 </UL>
 
-<P><STRONG><a name="[121]"></a>ingeek_se_final</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, digital_key_api.o(i.ingeek_se_final))
+<P><STRONG><a name="[120]"></a>ingeek_se_final</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, digital_key_api.o(i.ingeek_se_final))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ingeek_se_final
 </UL>
 <BR>[Calls]<UL><LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_disconnect
+<BR>[Called By]<UL><LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_disconnect
 </UL>
 
 <P><STRONG><a name="[261]"></a>ingeek_se_init</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, digital_key_api.o(i.ingeek_se_init))
@@ -2609,7 +2603,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_auth
+<BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_auth
 </UL>
 
 <P><STRONG><a name="[262]"></a>ingeek_sha256</STRONG> (Thumb, 54 bytes, Stack size 128 bytes, sha256.o(i.ingeek_sha256))
@@ -2682,8 +2676,8 @@ Global Symbols
 <LI><a href="#[28c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_pwr_mgmt_run
 <LI><a href="#[282]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_pwr_mgmt_init
 <LI><a href="#[27f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_init
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 <LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_dequeue
 <LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_default_backends_init
 <LI><a href="#[28b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_lesc_request_handler
@@ -3076,7 +3070,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 380<LI>Call Chain = nrf_ble_gatt_on_ble_evt &rArr; on_connected_evt &rArr; data_length_update &rArr; nrf_log_frontend_std_2 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[2af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_exchange_mtu_request_evt
 <LI><a href="#[2ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_connected_evt
 <LI><a href="#[2ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;link_init
@@ -3088,7 +3082,7 @@ Global Symbols
 <P><STRONG><a name="[2b0]"></a>nrf_ble_lesc_init</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, nrf_ble_lesc.o(i.nrf_ble_lesc_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 244<LI>Call Chain = nrf_ble_lesc_init &rArr; nrf_ble_lesc_keypair_generate &rArr; nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[2b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_init
 <LI><a href="#[2b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_lesc_keypair_generate
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
@@ -3099,7 +3093,7 @@ Global Symbols
 <P><STRONG><a name="[2b2]"></a>nrf_ble_lesc_keypair_generate</STRONG> (Thumb, 136 bytes, Stack size 24 bytes, nrf_ble_lesc.o(i.nrf_ble_lesc_keypair_generate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 236<LI>Call Chain = nrf_ble_lesc_keypair_generate &rArr; nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[2b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_ecc_public_key_to_raw
 <LI><a href="#[2b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_ecc_key_pair_generate
 <LI><a href="#[1e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_ecc_byte_order_invert
@@ -3622,13 +3616,13 @@ Global Symbols
 <LI><a href="#[2f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffer_is_empty
 <LI><a href="#[27d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;invalid_packets_omit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
+<BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_error_fault_handler
 <LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std_n
 </UL>
 
-<P><STRONG><a name="[11c]"></a>nrf_log_frontend_hexdump</STRONG> (Thumb, 164 bytes, Stack size 40 bytes, nrf_log_frontend.o(i.nrf_log_frontend_hexdump))
+<P><STRONG><a name="[12c]"></a>nrf_log_frontend_hexdump</STRONG> (Thumb, 164 bytes, Stack size 40 bytes, nrf_log_frontend.o(i.nrf_log_frontend_hexdump))
 <BR><BR>[Stack]<UL><LI>Max Depth = 204<LI>Call Chain = nrf_log_frontend_hexdump &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_dequeue
@@ -3636,14 +3630,13 @@ Global Symbols
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buf_prealloc
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MslUartTx
+<BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MslUartTx
 <LI><a href="#[1b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_send
 <LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_CB1
 <LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_CB1
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_hrs_evt_handler
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Rand_CB1
-<LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_cmd
 </UL>
 
 <P><STRONG><a name="[113]"></a>nrf_log_frontend_std_0</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, nrf_log_frontend.o(i.nrf_log_frontend_std_0))
@@ -3662,9 +3655,8 @@ Global Symbols
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_hrs_evt_handler
 <LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;advertising_start
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Rand_CB1
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_disconnect
-<LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_cmd
-<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_broadcast
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_disconnect
+<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_broadcast
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_active
 <LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_adv_evt
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_evt_handler
@@ -3675,13 +3667,13 @@ Global Symbols
 <LI><a href="#[35f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pm_handler_pm_evt_log
 <LI><a href="#[361]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;smd_init
 <LI><a href="#[360]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sm_init
+<LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_reseed
 <LI><a href="#[2c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_init
 <LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_write
-<LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_reseed
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_error_fault_handler
 </UL>
 
-<P><STRONG><a name="[118]"></a>nrf_log_frontend_std_1</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, nrf_log_frontend.o(i.nrf_log_frontend_std_1))
+<P><STRONG><a name="[11a]"></a>nrf_log_frontend_std_1</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, nrf_log_frontend.o(i.nrf_log_frontend_std_1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 212<LI>Call Chain = nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std_n
@@ -3693,11 +3685,9 @@ Global Symbols
 <LI><a href="#[284]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_default_cfg_set
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_gatt_on_ble_evt
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_disconnect
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_disconnect
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_cmd
-<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_broadcast
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_auth
+<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_broadcast
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_evt_handler
 <LI><a href="#[2af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_exchange_mtu_request_evt
 <LI><a href="#[2ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_connected_evt
@@ -3962,7 +3952,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 252<LI>Call Chain = nrf_sdh_ble_default_cfg_set &rArr; nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[303]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_app_ram_start_get
 </UL>
 <BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -3973,7 +3963,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
 </UL>
 <BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -4551,7 +4541,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 236<LI>Call Chain = pdb_init &rArr; nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[338]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pm_buffer_init
 <LI><a href="#[337]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_buffer_record_invalidate
 </UL>
@@ -4594,7 +4584,7 @@ Global Symbols
 <P><STRONG><a name="[16e]"></a>pdb_write_buf_get</STRONG> (Thumb, 204 bytes, Stack size 32 bytes, peer_database.o(i.pdb_write_buf_get))
 <BR><BR>[Stack]<UL><LI>Max Depth = 244<LI>Call Chain = pdb_write_buf_get &rArr; nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[340]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pm_buffer_ptr_get
 <LI><a href="#[33f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pm_buffer_block_acquire
 <LI><a href="#[337]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_buffer_record_invalidate
@@ -4631,7 +4621,7 @@ Global Symbols
 <P><STRONG><a name="[344]"></a>pds_init</STRONG> (Thumb, 136 bytes, Stack size 48 bytes, peer_data_storage.o(i.pds_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 468<LI>Call Chain = pds_init &rArr; fds_init &rArr; queue_start &rArr; queue_process &rArr; gc_execute &rArr; gc_next_page &rArr; gc_record_find_next &rArr; gc_record_copy &rArr; nrf_fstorage_write &rArr; nrf_log_frontend_std_3 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[345]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;peer_id_init
 <LI><a href="#[346]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;peer_id_allocate
 <LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fds_register
@@ -4860,7 +4850,7 @@ Global Symbols
 <P><STRONG><a name="[358]"></a>pm_handler_flash_clean</STRONG> (Thumb, 348 bytes, Stack size 32 bytes, peer_manager_handler.o(i.pm_handler_flash_clean))
 <BR><BR>[Stack]<UL><LI>Max Depth = 540<LI>Call Chain = pm_handler_flash_clean &rArr; pm_peer_rank_highest &rArr; pds_peer_data_store &rArr; fds_record_write &rArr; write_enqueue &rArr; queue_start &rArr; queue_process &rArr; gc_execute &rArr; gc_next_page &rArr; gc_record_find_next &rArr; gc_record_copy &rArr; nrf_fstorage_write &rArr; nrf_log_frontend_std_3 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_error_handler_bare
 <LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fds_gc
@@ -4901,7 +4891,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
 <LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_conn_state_role
 <LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_3
@@ -5015,7 +5005,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 220<LI>Call Chain = read_CB1 &rArr; nrf_log_frontend_std_0 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
@@ -5151,7 +5141,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 468<LI>Call Chain = store_car_value &rArr; pds_peer_data_store &rArr; fds_record_write &rArr; write_enqueue &rArr; queue_start &rArr; queue_process &rArr; gc_execute &rArr; gc_next_page &rArr; gc_record_find_next &rArr; gc_record_copy &rArr; nrf_fstorage_write &rArr; nrf_log_frontend_std_3 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[240]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pds_peer_data_store
 <LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;im_peer_id_get_by_conn_handle
 </UL>
@@ -5162,7 +5152,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 220<LI>Call Chain = write_CB1 &rArr; nrf_log_frontend_std_0 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
@@ -5172,7 +5162,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[240]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pds_peer_data_store
 <LI><a href="#[340]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pm_buffer_ptr_get
 <LI><a href="#[341]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;peer_data_point_to_buffer
@@ -5206,13 +5196,13 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = ble_evt_handler &rArr; Handle_broadcast &rArr; Handle_active &rArr; ingeek_pull_info &rArr; PBEncode_local_data &rArr; pb_encode &rArr; encode_field &rArr; encode_basic_field &rArr; encode_array &rArr; pb_encode_varint &rArr; pb_write
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_5
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
 <LI><a href="#[1a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_qwr_conn_handle_assign
 <LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_indication_set
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_error_handler_bare
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_disconnect
-<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_broadcast
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_disconnect
+<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_broadcast
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(sdh_ble_observers3)
 </UL>
@@ -5438,7 +5428,7 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 <LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_timer_cnt_get
 <LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;blacklisted_peers_state_update
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_timer_start
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> auth_status_tracker.o(i.ast_init)
@@ -5653,7 +5643,7 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[241]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gscm_local_db_cache_apply
 <LI><a href="#[27b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_unexpected_error
 <LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;evt_send
@@ -5681,7 +5671,7 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[242]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gscm_local_db_cache_update
 <LI><a href="#[27b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_unexpected_error
 <LI><a href="#[233]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;local_db_update
@@ -5760,7 +5750,7 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_gatt_on_ble_evt
 <LI><a href="#[2ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_connected_evt
@@ -5775,7 +5765,7 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 284<LI>Call Chain = on_connected_evt &rArr; data_length_update &rArr; nrf_log_frontend_std_2 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;data_length_update
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_gatt_on_ble_evt
@@ -5785,7 +5775,7 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 236<LI>Call Chain = on_exchange_mtu_request_evt &rArr; nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_gatt_on_ble_evt
 </UL>
@@ -5793,7 +5783,7 @@ Local Symbols
 <P><STRONG><a name="[1e0]"></a>compute_and_give_dhkey</STRONG> (Thumb, 120 bytes, Stack size 24 bytes, nrf_ble_lesc.o(i.compute_and_give_dhkey))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1440<LI>Call Chain = compute_and_give_dhkey &rArr; nrf_crypto_rng_vector_generate &rArr; generate &rArr; nrf_crypto_rng_backend_vector_generate &rArr; mbedtls_ctr_drbg_random &rArr; mbedtls_ctr_drbg_random_with_add &rArr; mbedtls_ctr_drbg_reseed &rArr; block_cipher_df &rArr; mbedtls_aes_crypt_ecb &rArr; mbedtls_aes_encrypt
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
 <LI><a href="#[1e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_vector_generate
 <LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_ecdh_compute
@@ -5805,7 +5795,7 @@ Local Symbols
 <P><STRONG><a name="[2b6]"></a>on_dhkey_request</STRONG> (Thumb, 120 bytes, Stack size 88 bytes, nrf_ble_lesc.o(i.on_dhkey_request))
 <BR><BR>[Stack]<UL><LI>Max Depth = 300<LI>Call Chain = on_dhkey_request &rArr; nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[2bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_ecc_public_key_from_raw
 <LI><a href="#[1e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_ecc_byte_order_invert
 </UL>
@@ -5980,7 +5970,7 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_error_handler_bare
 <LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pm_conn_secure
 <LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pm_conn_sec_status_get
@@ -6154,7 +6144,7 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 <LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;im_ble_addr_get
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pdb_write_buf_get
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
@@ -6198,7 +6188,7 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;im_peer_id_get_by_conn_handle
 <LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;evt_send
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
@@ -6349,7 +6339,7 @@ Local Symbols
 <P><STRONG><a name="[1b4]"></a>on_write</STRONG> (Thumb, 382 bytes, Stack size 48 bytes, ble_hrs.o(i.on_write))
 <BR><BR>[Stack]<UL><LI>Max Depth = 260<LI>Call Chain = on_write &rArr; nrf_log_frontend_std_1 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_srv_is_notification_enabled
 </UL>
@@ -6359,8 +6349,8 @@ Local Symbols
 <P><STRONG><a name="[23b]"></a>generate</STRONG> (Thumb, 94 bytes, Stack size 24 bytes, nrf_crypto_rng.o(i.generate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1416<LI>Call Chain = generate &rArr; nrf_crypto_rng_backend_vector_generate &rArr; mbedtls_ctr_drbg_random &rArr; mbedtls_ctr_drbg_random_with_add &rArr; mbedtls_ctr_drbg_reseed &rArr; block_cipher_df &rArr; mbedtls_aes_crypt_ecb &rArr; mbedtls_aes_encrypt
 </UL>
-<BR>[Calls]<UL><LI><a href="#[23c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_backend_vector_generate
-<LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_reseed
+<BR>[Calls]<UL><LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_reseed
+<LI><a href="#[23c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_backend_vector_generate
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_vector_generate
 </UL>
@@ -6382,8 +6372,8 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[2c8]"></a>nrf_stack_info_overflowed</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, nrf_crypto_rng.o(i.nrf_stack_info_overflowed))
-<BR><BR>[Called By]<UL><LI><a href="#[2c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_init
-<LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_reseed
+<BR><BR>[Called By]<UL><LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_reseed
+<LI><a href="#[2c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_init
 </UL>
 
 <P><STRONG><a name="[2b9]"></a>oberon_vector_generate</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, oberon_backend_ecc.o(i.oberon_vector_generate))
@@ -7382,7 +7372,7 @@ Local Symbols
 <LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_atomic_u32_add
 <LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;log_skip
 </UL>
-<BR>[Called By]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
+<BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 <LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std_n
 </UL>
 
@@ -7391,7 +7381,7 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_atomic_u32_fetch_store
 </UL>
-<BR>[Called By]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
+<BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 <LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std_n
 </UL>
 
@@ -7427,7 +7417,7 @@ Local Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_5
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
 <LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_3
 <LI><a href="#[2f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_4
@@ -7549,7 +7539,7 @@ Local Symbols
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_session
+<BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_session
 </UL>
 
 <P><STRONG><a name="[100]"></a>Calculate_VCK</STRONG> (Thumb, 70 bytes, Stack size 24 bytes, digital_key_api.o(i.Calculate_VCK))
@@ -7572,17 +7562,17 @@ Local Symbols
 <LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_session
+<BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_session
 </UL>
 
-<P><STRONG><a name="[126]"></a>Handle_write_Info</STRONG> (Thumb, 114 bytes, Stack size 40 bytes, digital_key_api.o(i.Handle_write_Info))
+<P><STRONG><a name="[125]"></a>Handle_write_Info</STRONG> (Thumb, 114 bytes, Stack size 40 bytes, digital_key_api.o(i.Handle_write_Info))
 <BR><BR>[Stack]<UL><LI>Max Depth = 288<LI>Call Chain = Handle_write_Info &rArr; ingeek_cipher_aes_cbc &rArr; AES_CBC_decrypt_buffer &rArr; InvCipher &rArr; InvMixColumns
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_cipher_aes_cbc
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_info
+<BR>[Called By]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_info
 </UL>
 
 <P><STRONG><a name="[110]"></a>PBDecode_client_data</STRONG> (Thumb, 54 bytes, Stack size 32 bytes, digital_key_api.o(i.PBDecode_client_data))
@@ -7592,9 +7582,9 @@ Local Symbols
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pb_decode
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DebugPrintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_info
-<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_auth
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
+<BR>[Called By]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_info
+<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_auth
+<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_Character_Session_G
 </UL>
 
@@ -7606,7 +7596,7 @@ Local Symbols
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DebugPrintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_pull_info
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
+<LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
 <LI><a href="#[1dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;combine_data_SS
 </UL>
 
@@ -7619,7 +7609,7 @@ Local Symbols
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_session
+<BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_push_session
 </UL>
 
 <P><STRONG><a name="[257]"></a>ingeek_check_info</STRONG> (Thumb, 134 bytes, Stack size 48 bytes, digital_key_api.o(i.ingeek_check_info))
@@ -7653,27 +7643,27 @@ Local Symbols
 <P><STRONG><a name="[f6]"></a>InvCipher</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, aes_1.o(i.InvCipher))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = InvCipher &rArr; InvMixColumns
 </UL>
-<BR>[Calls]<UL><LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InvSubBytes
-<LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InvShiftRows
-<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InvMixColumns
+<BR>[Calls]<UL><LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InvSubBytes
+<LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InvShiftRows
+<LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InvMixColumns
 <LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AddRoundKey
 </UL>
 <BR>[Called By]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AES_CBC_decrypt_buffer
 </UL>
 
-<P><STRONG><a name="[129]"></a>InvMixColumns</STRONG> (Thumb, 970 bytes, Stack size 40 bytes, aes_1.o(i.InvMixColumns))
+<P><STRONG><a name="[128]"></a>InvMixColumns</STRONG> (Thumb, 970 bytes, Stack size 40 bytes, aes_1.o(i.InvMixColumns))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = InvMixColumns
 </UL>
-<BR>[Calls]<UL><LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xtime
+<BR>[Calls]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xtime
 </UL>
 <BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InvCipher
 </UL>
 
-<P><STRONG><a name="[127]"></a>InvShiftRows</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, aes_1.o(i.InvShiftRows))
+<P><STRONG><a name="[126]"></a>InvShiftRows</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, aes_1.o(i.InvShiftRows))
 <BR><BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InvCipher
 </UL>
 
-<P><STRONG><a name="[128]"></a>InvSubBytes</STRONG> (Thumb, 40 bytes, Stack size 12 bytes, aes_1.o(i.InvSubBytes))
+<P><STRONG><a name="[127]"></a>InvSubBytes</STRONG> (Thumb, 40 bytes, Stack size 12 bytes, aes_1.o(i.InvSubBytes))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = InvSubBytes
 </UL>
 <BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InvCipher
@@ -7710,8 +7700,8 @@ Local Symbols
 <LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AES_CBC_decrypt_buffer
 </UL>
 
-<P><STRONG><a name="[12a]"></a>xtime</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, aes_1.o(i.xtime))
-<BR><BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InvMixColumns
+<P><STRONG><a name="[129]"></a>xtime</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, aes_1.o(i.xtime))
+<BR><BR>[Called By]<UL><LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InvMixColumns
 </UL>
 
 <P><STRONG><a name="[253]"></a>ForceZero</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, cmac.o(i.ForceZero))

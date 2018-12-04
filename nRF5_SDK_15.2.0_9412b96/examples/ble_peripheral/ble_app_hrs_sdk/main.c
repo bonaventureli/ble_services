@@ -412,7 +412,6 @@ static void battery_level_meas_timeout_handler(void * p_context)
 {
     UNUSED_PARAMETER(p_context);
     battery_level_update();
-		//Receive_Task();
 }
 #endif
 
@@ -671,7 +670,7 @@ void Handle_info(uint8_t *data, uint32_t data_len)
 	
 	//Three,pull info
 	ingeek_pull_info(gReturnInfo, &gReturnInfoLen);
-	NRF_LOG_INFO("Handle_info:[After] ingeek_pull_info:status:ingeek_get_sec_status is %x. if 1,it is right\n",ingeek_get_sec_status());
+	//NRF_LOG_INFO("Handle_info:[After] ingeek_pull_info:status:ingeek_get_sec_status is %x. if 1,it is right\n",ingeek_get_sec_status());
 	//Fore,Notify info
 	ble_send_notify(BLE_UUID_DIGITALKET_INFO_CHAR, gReturnInfo, gReturnInfoLen);
 	//ikble_set_se_info(gReturnInfo,gReturnInfoLen);
@@ -681,16 +680,18 @@ void Handle_auth(uint8_t *data, uint32_t data_len)
 {
 	uint8_t status;
 	
-	#if 1
+	#if 0
 	status = ingeek_get_sec_status();
 	
 	NRF_LOG_INFO("\nHandle_auth_function:[Before] ingeek_push_auth:status:ingeek_get_sec_status is %x. if 1,it is right\n",ingeek_get_sec_status());
 	NRF_LOG_INFO("\nHandle_auth_function,return:ingeek_push_auth %x, if 0,it is right\n",ingeek_push_auth(data, data_len, (unsigned char*)1, (unsigned int*)1));
 	NRF_LOG_INFO("\nHandle_auth_function:[After] ingeek_push_auth:status:ingeek_get_sec_status is %x. if 2,it is right\n",ingeek_get_sec_status());
+	#endif
+	ingeek_push_auth(data, data_len, (unsigned char*)1, (unsigned int*)1);
 	status = ingeek_get_sec_status();
 	if(status == 0x02)
 	ble_send_notify(BLE_UUID_DIGITALKET_STATUS_CHAR, &status, 1);
-	#endif
+	
 	
 	#if 0
 	NRF_LOG_HEXDUMP_INFO(data, data_len);
@@ -709,11 +710,10 @@ void Handle_auth(uint8_t *data, uint32_t data_len)
 
 void Handle_session(uint8_t *data, uint32_t data_len)
 {
-	//T_UartSendSession FramedataSession;
 	unsigned int outlen;
 	uint8_t *preply_data;
 	uint8_t status;
-	//preply_data = gDataload;
+
 	#if 0
 	NRF_LOG_INFO("\nHandle_session_function:[Before] ingeek_push_session:status:ingeek_get_sec_status is %x. if 2,it is right\n",ingeek_get_sec_status());
 	NRF_LOG_INFO("\nHandle_session_function,return:ingeek_push_session %x, if 0,it is right\n",ingeek_push_session(data, data_len, preply_data, &outlen));
@@ -742,7 +742,6 @@ void Handle_session(uint8_t *data, uint32_t data_len)
 extern T_CarCMD CarCMD;
 void Handle_cmd(uint8_t *data, uint32_t data_len)
 {
-//	T_UartSendCmd FramedataCmd;
 	uint8_t *preply_data;
 	unsigned int outlen;
 	
@@ -750,61 +749,32 @@ void Handle_cmd(uint8_t *data, uint32_t data_len)
 	DK_Cmd_Meg struct_cmd;
 	uint8_t cmd;
 
-//	preply_data = gDataload;
-	#if 1
+	#if 0
 	NRF_LOG_HEXDUMP_INFO(data, data_len);
 	NRF_LOG_INFO("\nHandle_cmd_function:[Before] ingeek_command_input_action:status:ingeek_get_sec_status is %x. if 3,it is right\n",ingeek_get_sec_status());
 	NRF_LOG_INFO("\nHandle_cmd_function,return:ingeek_command_input_action %x, if 0,it is right\n",ingeek_command_input_action(data, data_len, &struct_cmd));
 	NRF_LOG_INFO("\nHandle_cmd_function:[After] ingeek_command_input_action:status:ingeek_get_sec_status is %x. if 3,it is right\n",ingeek_get_sec_status());
+	#endif
+	int i ;
+	for(i=0;i<1000;i++);
+	ingeek_command_input_action(data, data_len, &struct_cmd);
+	for(i=0;i<1000;i++);
 	NRF_LOG_INFO("\nHandle_cmd_command: %d \n",(uint8_t)(struct_cmd.command));
-	NRF_LOG_INFO("\nHandle_cmd_index %d \n",(uint8_t)(struct_cmd.index));
-	NRF_LOG_INFO("\nHandle_cmd_result %d \n",(uint8_t)(struct_cmd.result));
-	NRF_LOG_INFO("\nHandle_cmd_permission %d \n",(uint8_t)(struct_cmd.permission));
-	NRF_LOG_INFO("\nHandle_cmd_sparam_size %d \n",(uint8_t)(struct_cmd.sparam_size));
-	NRF_LOG_HEXDUMP_INFO((uint8_t *)struct_cmd.sparam, struct_cmd.sparam_size);
-	NRF_LOG_INFO("\n=========================================");
 	ikcmdSendUart(struct_cmd.command);
-	#if 1
-	if(struct_cmd.command == 1){
-		
-	struct_cmd.result = 1;
-		#if 0
-	struct_cmd.index = 1;
-	struct_cmd.permission = 1;
-	struct_cmd.sparam_size = 5;
-	memcpy(struct_cmd.sparam, (uint8_t*)&CarCMD, sizeof(T_CarCMD));
-	NRF_LOG_HEXDUMP_INFO((uint8_t *)&struct_cmd, sizeof(struct_cmd));
-		#endif
-		NRF_LOG_INFO("\nHandle_cmd_function 1111");
-	}
-	else if(struct_cmd.command == 2){
-	struct_cmd.result = 2;
-		#if 0
-	struct_cmd.index = 2;
-	struct_cmd.permission = 2;
-	struct_cmd.sparam_size = 5;
-	memcpy(struct_cmd.sparam, (uint8_t*)&CarCMD, sizeof(T_CarCMD));
-	NRF_LOG_HEXDUMP_INFO((uint8_t *)&struct_cmd, sizeof(struct_cmd));
-		#endif
-		NRF_LOG_INFO("\nHandle_cmd_function 2222");
-	}
-	#endif
-	#endif
+	
 	
 	#if 0
 	ingeek_command_input_action(data, data_len, &struct_cmd);
 	#endif
 	
-	#if 1
+	#if 0
 	NRF_LOG_INFO("\nHandle_cmd_function,return:ingeek_command_output_action %x, if 0,it is right\n",ingeek_command_output_action(&struct_cmd,preply_data, &outlen));
 	NRF_LOG_INFO("\nHandle_cmd is ok ,ingeek_command_input_action,preply_data:\n");
 	
 	#endif
 	
-	#if 0
+	#if 1
 	ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-	//NRF_LOG_HEXDUMP_INFO(preply_data, outlen);
-	NRF_LOG_HEXDUMP_INFO(preply_data, outlen);
 	#endif
 	
 	ble_send_notify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
