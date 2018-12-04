@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\_build\nrf52832_xxaa.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\_build\nrf52832_xxaa.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Dec 04 16:10:52 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Dec 04 16:16:12 2018
 <BR><P>
-<H3>Maximum Stack Usage =       1776 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =       1640 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 main &rArr; nrf_ble_lesc_request_handler &rArr; compute_and_give_dhkey &rArr; nrf_crypto_rng_vector_generate &rArr; generate &rArr; nrf_crypto_rng_backend_vector_generate &rArr; mbedtls_ctr_drbg_random &rArr; mbedtls_ctr_drbg_random_with_add &rArr; mbedtls_ctr_drbg_reseed &rArr; block_cipher_df &rArr; mbedtls_aes_crypt_ecb &rArr; mbedtls_aes_encrypt
 <P>
@@ -673,7 +673,6 @@ Global Symbols
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_pull_info
 <LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
-<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_cipher_aes_cbc
 <LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_CB1
 <LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_CB1
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Rand_CB1
@@ -690,6 +689,7 @@ Global Symbols
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AES_ECB_encrypt
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AES_CBC_encrypt_buffer
 <LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AES_CBC_decrypt_buffer
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_cipher_aes_cbc
 <LI><a href="#[260]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_set_seid
 <LI><a href="#[1dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;combine_data_SS
 <LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Calculate_SK
@@ -773,7 +773,6 @@ Global Symbols
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_pull_info
 <LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
-<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_cipher_aes_cbc
 <LI><a href="#[1b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_hrs_init
 <LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_advertising_start
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -805,6 +804,7 @@ Global Symbols
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;erase
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_sha256_init
 <LI><a href="#[250]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_AesCmacGenerate
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_cipher_aes_cbc
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_AesCmacVerify
 <LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_check_info
 <LI><a href="#[1dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;combine_data_SS
@@ -1463,8 +1463,8 @@ Global Symbols
 <LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timer_stop_op_schedule
 <LI><a href="#[2ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_balloc_free
 <LI><a href="#[2ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_balloc_alloc
-<LI><a href="#[305]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_disable_request
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buf_prealloc
+<LI><a href="#[305]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_disable_request
 </UL>
 
 <P><STRONG><a name="[159]"></a>app_util_critical_region_exit</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, app_util_platform.o(i.app_util_critical_region_exit))
@@ -1486,8 +1486,8 @@ Global Symbols
 <LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timer_stop_op_schedule
 <LI><a href="#[2ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_balloc_free
 <LI><a href="#[2ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_balloc_alloc
-<LI><a href="#[305]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_disable_request
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buf_prealloc
+<LI><a href="#[305]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_disable_request
 </UL>
 
 <P><STRONG><a name="[165]"></a>ast_auth_error_notify</STRONG> (Thumb, 338 bytes, Stack size 48 bytes, auth_status_tracker.o(i.ast_auth_error_notify))
@@ -2434,7 +2434,6 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_output_action
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_command_input_action
-<LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_check_info
 <LI><a href="#[1dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;combine_data_SS
 <LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_write_Info
@@ -2464,8 +2463,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[114]"></a>ingeek_get_sec_status</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, digital_key_api.o(i.ingeek_get_sec_status))
-<BR><BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_session
+<BR><BR>[Called By]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_session
 <LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_info
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_disconnect
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Handle_broadcast
@@ -2667,8 +2665,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[24a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;im_is_duplicate_bonding_data
 </UL>
 
-<P><STRONG><a name="[31]"></a>main</STRONG> (Thumb, 520 bytes, Stack size 312 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1776<LI>Call Chain = main &rArr; nrf_ble_lesc_request_handler &rArr; compute_and_give_dhkey &rArr; nrf_crypto_rng_vector_generate &rArr; generate &rArr; nrf_crypto_rng_backend_vector_generate &rArr; mbedtls_ctr_drbg_random &rArr; mbedtls_ctr_drbg_random_with_add &rArr; mbedtls_ctr_drbg_reseed &rArr; block_cipher_df &rArr; mbedtls_aes_crypt_ecb &rArr; mbedtls_aes_encrypt
+<P><STRONG><a name="[31]"></a>main</STRONG> (Thumb, 360 bytes, Stack size 176 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 1640<LI>Call Chain = main &rArr; nrf_ble_lesc_request_handler &rArr; compute_and_give_dhkey &rArr; nrf_crypto_rng_vector_generate &rArr; generate &rArr; nrf_crypto_rng_backend_vector_generate &rArr; mbedtls_ctr_drbg_random &rArr; mbedtls_ctr_drbg_random_with_add &rArr; mbedtls_ctr_drbg_reseed &rArr; block_cipher_df &rArr; mbedtls_aes_crypt_ecb &rArr; mbedtls_aes_encrypt
 </UL>
 <BR>[Calls]<UL><LI><a href="#[283]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_enable_request
 <LI><a href="#[285]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_enable
@@ -2677,15 +2675,12 @@ Global Symbols
 <LI><a href="#[282]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_pwr_mgmt_init
 <LI><a href="#[27f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_init
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_1
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 <LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_dequeue
 <LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_default_backends_init
 <LI><a href="#[28b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_lesc_request_handler
 <LI><a href="#[286]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_gatt_init
 <LI><a href="#[28a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_set_callback
 <LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_se_init
-<LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_get_sec_status
-<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ingeek_cipher_aes_cbc
 <LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_init
 <LI><a href="#[1c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_btn_ble_init
 <LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_conn_params_init
@@ -2920,10 +2915,10 @@ Global Symbols
 <LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_conn_state_encrypted
 <LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;user_flag_is_acquired
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;for_each_set_flag
+<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;next_id_get
 <LI><a href="#[351]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;peer_id_is_deleted
 <LI><a href="#[34f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;peer_id_is_allocated
 <LI><a href="#[299]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mutex_lock_status_get
-<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;next_id_get
 </UL>
 
 <P><STRONG><a name="[1a0]"></a>nrf_atflags_set</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, nrf_atflags.o(i.nrf_atflags_set))
@@ -2969,8 +2964,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fds_register
 <LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fds_record_open
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_enqueue
-<LI><a href="#[2e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_memobj_get
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buf_prealloc
+<LI><a href="#[2e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_memobj_get
 </UL>
 
 <P><STRONG><a name="[1ad]"></a>nrf_atomic_u32_and</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, nrf_atomic.o(i.nrf_atomic_u32_and))
@@ -3359,9 +3354,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 1416<LI>Call Chain = nrf_crypto_rng_init &rArr; nrf_crypto_rng_backend_init &rArr; mbedtls_ctr_drbg_seed &rArr; mbedtls_ctr_drbg_seed_entropy_len &rArr; mbedtls_ctr_drbg_reseed &rArr; block_cipher_df &rArr; mbedtls_aes_crypt_ecb &rArr; mbedtls_aes_encrypt
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
+<LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_backend_init
 <LI><a href="#[2c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_stack_info_overflowed
 <LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_is_initializing
-<LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_backend_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_hw_backend_init
 </UL>
@@ -3370,8 +3365,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 1320<LI>Call Chain = nrf_crypto_rng_reseed &rArr; nrf_crypto_rng_backend_reseed &rArr; mbedtls_ctr_drbg_reseed &rArr; block_cipher_df &rArr; mbedtls_aes_crypt_ecb &rArr; mbedtls_aes_encrypt
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_0
-<LI><a href="#[2c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_stack_info_overflowed
 <LI><a href="#[2c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_backend_reseed
+<LI><a href="#[2c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_stack_info_overflowed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[23b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;generate
 </UL>
@@ -3626,15 +3621,14 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 204<LI>Call Chain = nrf_log_frontend_hexdump &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_dequeue
-<LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dropped_sat16_get
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buf_prealloc
+<LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dropped_sat16_get
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MslUartTx
 <LI><a href="#[1b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_send
 <LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_CB1
 <LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_CB1
-<LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_hrs_evt_handler
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Rand_CB1
 </UL>
@@ -4763,8 +4757,8 @@ Global Symbols
 <P><STRONG><a name="[34a]"></a>peer_id_get_next_used</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, peer_id.o(i.peer_id_get_next_used))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = peer_id_get_next_used &rArr; next_id_get
 </UL>
-<BR>[Calls]<UL><LI><a href="#[351]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;peer_id_is_deleted
-<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;next_id_get
+<BR>[Calls]<UL><LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;next_id_get
+<LI><a href="#[351]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;peer_id_is_deleted
 </UL>
 <BR>[Called By]<UL><LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pds_next_peer_id_get
 </UL>
@@ -4790,8 +4784,8 @@ Global Symbols
 <P><STRONG><a name="[33f]"></a>pm_buffer_block_acquire</STRONG> (Thumb, 100 bytes, Stack size 24 bytes, pm_buffer.o(i.pm_buffer_block_acquire))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = pm_buffer_block_acquire &rArr; pm_buffer_release &rArr; nrf_atflags_clear &rArr; nrf_atomic_u32_and
 </UL>
-<BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pm_buffer_release
-<LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_atflags_fetch_set
+<BR>[Calls]<UL><LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_atflags_fetch_set
+<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pm_buffer_release
 </UL>
 <BR>[Called By]<UL><LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pdb_write_buf_get
 </UL>
@@ -6349,8 +6343,8 @@ Local Symbols
 <P><STRONG><a name="[23b]"></a>generate</STRONG> (Thumb, 94 bytes, Stack size 24 bytes, nrf_crypto_rng.o(i.generate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1416<LI>Call Chain = generate &rArr; nrf_crypto_rng_backend_vector_generate &rArr; mbedtls_ctr_drbg_random &rArr; mbedtls_ctr_drbg_random_with_add &rArr; mbedtls_ctr_drbg_reseed &rArr; block_cipher_df &rArr; mbedtls_aes_crypt_ecb &rArr; mbedtls_aes_encrypt
 </UL>
-<BR>[Calls]<UL><LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_reseed
-<LI><a href="#[23c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_backend_vector_generate
+<BR>[Calls]<UL><LI><a href="#[23c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_backend_vector_generate
+<LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_reseed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_vector_generate
 </UL>
@@ -6358,8 +6352,8 @@ Local Symbols
 <P><STRONG><a name="[23e]"></a>generate_in_range</STRONG> (Thumb, 194 bytes, Stack size 32 bytes, nrf_crypto_rng.o(i.generate_in_range))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1424<LI>Call Chain = generate_in_range &rArr; nrf_crypto_rng_backend_vector_generate &rArr; mbedtls_ctr_drbg_random &rArr; mbedtls_ctr_drbg_random_with_add &rArr; mbedtls_ctr_drbg_reseed &rArr; block_cipher_df &rArr; mbedtls_aes_crypt_ecb &rArr; mbedtls_aes_encrypt
 </UL>
-<BR>[Calls]<UL><LI><a href="#[23f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;is_vector_greater_or_equal
-<LI><a href="#[23c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_backend_vector_generate
+<BR>[Calls]<UL><LI><a href="#[23c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_backend_vector_generate
+<LI><a href="#[23f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;is_vector_greater_or_equal
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_crypto_rng_vector_generate_in_range
@@ -7412,8 +7406,8 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 204<LI>Call Chain = std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_dequeue
-<LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dropped_sat16_get
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buf_prealloc
+<LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dropped_sat16_get
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_5
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_std_2

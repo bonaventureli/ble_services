@@ -1579,9 +1579,6 @@ int main(void)
 {
     bool erase_bonds;
 
-    // Initialize.
-		
-	
     log_init();
     timers_init();
     buttons_leds_init(&erase_bonds);
@@ -1600,61 +1597,12 @@ int main(void)
     NRF_LOG_INFO("started %s",DEVICE_NAME);
     application_timers_start();
     advertising_start(erase_bonds);
-		
-//		// Add fstorage data
-//    (void)fstorage_data_init();
-//		// Add ingeek function
-//    g_ios.flashRCallback = storageReadData;
-//    g_ios.flashWCallback = storageWriteData;
-//    //g_ios.uartTxCallback = ikif_uart_txcb;
-//    DKCreateSRV(&g_ios);
-		//NRF_LOG_INFO("\n ========================Start:ingeek_set_callback function=====================\n \n");
-		ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
-		//NRF_LOG_INFO("\n ========================End:ingeek_set_callback function=======================\n \n");
-		//ingeek_set_callback(read_CB1,write_CB1,ikif_random_vector_generate);
-		
-		
-		//NRF_LOG_INFO("main:return-ingeek_se_init is %x.",ingeek_se_init());
-		//NRF_LOG_INFO("\n ========================Start:ingeek_se_init function=====================\n \n");
-		ingeek_se_init();
-		//NRF_LOG_INFO("\n ========================End:ingeek_se_init function=======================\n \n");
-		
-		NRF_LOG_INFO("main:return-ingeek_get_sec_status is %x.",ingeek_get_sec_status());
-#include "cipher_export.h"
-unsigned char vkey[16]={0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0x54};//key
-unsigned char viv[16]={0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78};//vector 
-unsigned char in[16]={0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x12};
-	unsigned int ilen = 16;
-	unsigned char out[32];
-	unsigned int olen;
 
-	unsigned char out2[48]={0};
-	unsigned int olen2;
-	NRF_LOG_HEXDUMP_INFO(in, ilen);
-	ingeek_cipher_aes_cbc(vkey,viv,in,ilen,out,&olen,INGEEK_ENCRYPT);
-	NRF_LOG_HEXDUMP_INFO(out, olen);
-	NRF_LOG_INFO("olen %d.",olen);
-	
-	#if 1
-	ingeek_cipher_aes_cbc(vkey,viv,out,olen,out2,&olen2,INGEEK_DECRYPT);
-	NRF_LOG_HEXDUMP_INFO(out2, olen2);
-	NRF_LOG_INFO("olen2 %d.",olen2);
-	#endif
-	
-	
-	
-	
+		ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
+		ingeek_se_init();
     // Enter main loop.
     for (;;)
-    {
-			#if 0
-			int ingeek_cipher_aes_cbc(unsigned char* key,unsigned char*iv,
-							unsigned char*in,unsigned int ilen,
-							unsigned char*out,unsigned int *olen,
-							ingeek_operation_t mode);
-			#endif
-				  
-							
+    {	
         idle_state_handle();
     }
 }
