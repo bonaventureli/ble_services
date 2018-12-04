@@ -412,6 +412,7 @@ static void battery_level_meas_timeout_handler(void * p_context)
 {
     UNUSED_PARAMETER(p_context);
     battery_level_update();
+		//Receive_Task();
 }
 #endif
 
@@ -738,7 +739,7 @@ void Handle_session(uint8_t *data, uint32_t data_len)
 	#endif
 
 }
-	 
+extern T_CarCMD CarCMD;
 void Handle_cmd(uint8_t *data, uint32_t data_len)
 {
 //	T_UartSendCmd FramedataCmd;
@@ -751,10 +752,43 @@ void Handle_cmd(uint8_t *data, uint32_t data_len)
 
 //	preply_data = gDataload;
 	#if 1
+	NRF_LOG_HEXDUMP_INFO(data, data_len);
 	NRF_LOG_INFO("\nHandle_cmd_function:[Before] ingeek_command_input_action:status:ingeek_get_sec_status is %x. if 3,it is right\n",ingeek_get_sec_status());
 	NRF_LOG_INFO("\nHandle_cmd_function,return:ingeek_command_input_action %x, if 0,it is right\n",ingeek_command_input_action(data, data_len, &struct_cmd));
 	NRF_LOG_INFO("\nHandle_cmd_function:[After] ingeek_command_input_action:status:ingeek_get_sec_status is %x. if 3,it is right\n",ingeek_get_sec_status());
-	NRF_LOG_INFO("\nHandle_cmd_function: %d \n",(uint8_t)(struct_cmd.command));
+	NRF_LOG_INFO("\nHandle_cmd_command: %d \n",(uint8_t)(struct_cmd.command));
+	NRF_LOG_INFO("\nHandle_cmd_index %d \n",(uint8_t)(struct_cmd.index));
+	NRF_LOG_INFO("\nHandle_cmd_result %d \n",(uint8_t)(struct_cmd.result));
+	NRF_LOG_INFO("\nHandle_cmd_permission %d \n",(uint8_t)(struct_cmd.permission));
+	NRF_LOG_INFO("\nHandle_cmd_sparam_size %d \n",(uint8_t)(struct_cmd.sparam_size));
+	NRF_LOG_HEXDUMP_INFO((uint8_t *)struct_cmd.sparam, struct_cmd.sparam_size);
+	NRF_LOG_INFO("\n=========================================");
+	ikcmdSendUart(struct_cmd.command);
+	#if 1
+	if(struct_cmd.command == 1){
+		
+	struct_cmd.result = 1;
+		#if 0
+	struct_cmd.index = 1;
+	struct_cmd.permission = 1;
+	struct_cmd.sparam_size = 5;
+	memcpy(struct_cmd.sparam, (uint8_t*)&CarCMD, sizeof(T_CarCMD));
+	NRF_LOG_HEXDUMP_INFO((uint8_t *)&struct_cmd, sizeof(struct_cmd));
+		#endif
+		NRF_LOG_INFO("\nHandle_cmd_function 1111");
+	}
+	else if(struct_cmd.command == 2){
+	struct_cmd.result = 2;
+		#if 0
+	struct_cmd.index = 2;
+	struct_cmd.permission = 2;
+	struct_cmd.sparam_size = 5;
+	memcpy(struct_cmd.sparam, (uint8_t*)&CarCMD, sizeof(T_CarCMD));
+	NRF_LOG_HEXDUMP_INFO((uint8_t *)&struct_cmd, sizeof(struct_cmd));
+		#endif
+		NRF_LOG_INFO("\nHandle_cmd_function 2222");
+	}
+	#endif
 	#endif
 	
 	#if 0
@@ -764,6 +798,7 @@ void Handle_cmd(uint8_t *data, uint32_t data_len)
 	#if 1
 	NRF_LOG_INFO("\nHandle_cmd_function,return:ingeek_command_output_action %x, if 0,it is right\n",ingeek_command_output_action(&struct_cmd,preply_data, &outlen));
 	NRF_LOG_INFO("\nHandle_cmd is ok ,ingeek_command_input_action,preply_data:\n");
+	
 	#endif
 	
 	#if 0

@@ -24,7 +24,16 @@
 #define IKCMD_HANDLE_H
 
 #define MONITOR_HEADER 0x7E
-#define MONITOR_TYPE   0x00
+#define MONITOR_TYPE   0x02
+#define MONITOR_TYPE_POSION   0x03
+
+#define MONITOR_CMD_CENTRAL_CONTROLLOCK 0x01
+#define MONITOR_CMD_WINDOW_CONTROL 0x02
+#define MONITOR_CMD_SKYLIGHT_CONTROL 0x03
+#define MONITOR_CMD_HATCHBACK_CONTROL 0x09
+#define MONITOR_CMD_ENGINE_CONTROL 0x14
+#define MONITOR_CMD_CAR_POSION 0xFF
+
 
 #define MONITOR_CMD_CARMNTOR_MODE 0xFF
 
@@ -43,6 +52,7 @@
 #define CARCMD_CMD_CARBINDING 0x00
 #define CARCMD_CMD_CENTRAL_CONTROLLOCK 0x01
 #define CARCMD_CMD_WINDOW_CONTROL 0x02
+#define CARCMD_CMD_SKYLIGHT_CONTROL 0x03
 #define CARCMD_CMD_AIR_CONDITION 0x13
 #define CARCMD_CMD_HATCHBACK_CONTROL 0x09
 #define CARCMD_CMD_REQUSE 0xF0
@@ -120,7 +130,13 @@ typedef enum {
     e_Length,//3
 	  e_Data,
 }e_Frame;
-
+typedef enum {
+    ee_Type,
+    ee_Cmd,
+		ee_Index,
+    ee_Length,//3
+	  ee_Param,
+}ee_Frame;
 typedef struct{
 	uint8_t Header;
 	uint8_t Type;
@@ -193,7 +209,7 @@ typedef struct {
 }T_Car_Status;
 #define NULL 0
 
-
+extern T_CarCMD CarCMD;
 void handle_monitor(uint8_t *Data, uint8_t frame_len);
 uint8_t BllGetValueCarOneByte(T_CARDATA *RxData,uint8_t offset,uint8_t Bitstart,uint8_t Bitlen);
 //void Carcmd(uint8_t cmd,uint8_t param);

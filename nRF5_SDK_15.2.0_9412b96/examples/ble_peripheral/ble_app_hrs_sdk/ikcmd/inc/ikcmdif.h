@@ -34,12 +34,17 @@ Includes   <System Includes> , "Project Includes"
 #define IK_CMD_IF_H
 
 //#include "ikif.h"
-
+#include <stdint.h>
+#include <string.h>
+#include "ikcmdhandle.h"
+#include "digital_key_api.h"
+#include "nrf_log.h"
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-
+typedef uint32_t (*BleNotify_CallBack)(uint16_t uuid, uint8_t * data, uint16_t length);
+void NotifyCallBack(BleNotify_CallBack bcb);
 /*!
  * int ikbleInitialize(void)
  * @brief Initialize BLE status

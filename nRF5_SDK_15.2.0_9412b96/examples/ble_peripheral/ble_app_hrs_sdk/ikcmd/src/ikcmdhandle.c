@@ -249,10 +249,11 @@ void MslPeriodTask(uint8_t *Data,uint32_t insize )
 }
 
 //MslCarcmd((uint8_t)CARCMD_CMD_CARBINDING,(uint8_t)CARCMD_PARAM_0);
-
+T_CarCMD CarCMD;
 void MslCarcmd(uint8_t cmd,uint8_t param)
 {
-	T_CarCMD CarCMD;
+	#if 1
+	//T_CarCMD CarCMD;
 	//CarCMD.Header = CARCMD_HEADER;
 	CarCMD.Type = CARCMD_TYPE;
 	CarCMD.Cmd = cmd;
@@ -262,6 +263,18 @@ void MslCarcmd(uint8_t cmd,uint8_t param)
 	//CarCMD.End = CARCMD_END;
 	MslUartTx((uint8_t*)&CarCMD,sizeof(T_CarCMD));
 	//NRF_LOG_INFO("ikif_uart_txcb tx %d bytes", wlen);
+	#endif
+#if 0
+	CarCMD->Type = CARCMD_TYPE;
+	CarCMD->Cmd = cmd;
+	CarCMD->Index = 0x00;
+	CarCMD->Length = 0x01;
+	CarCMD->Param = param;
+	//CarCMD.End = CARCMD_END;
+	MslUartTx((uint8_t*)CarCMD,sizeof(T_CarCMD));
+	//NRF_LOG_INFO("ikif_uart_txcb tx %d bytes", wlen);
+	#endif
+
 }
 
 uint8_t CardcmdResponse(T_CarCMD_Response * CarCMDResponse)

@@ -6,6 +6,8 @@
 .\_build\ikcmdhandle.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\_build\ikcmdhandle.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\_build\ikcmdhandle.o: ..\..\..\ikcmd\inc\ikcmdif.h
+.\_build\ikcmdhandle.o: ..\..\..\ikcmd\src\ikcmdhandle.h
+.\_build\ikcmdhandle.o: ..\..\..\sdk\app\digital_key_api.h
 .\_build\ikcmdhandle.o: ..\..\..\..\..\..\components\libraries\log\nrf_log.h
 .\_build\ikcmdhandle.o: ..\..\..\..\..\..\components\libraries\util\sdk_common.h
 .\_build\ikcmdhandle.o: ..\config\sdk_config.h
