@@ -46,13 +46,15 @@ compiling main.c...
   	uint8_t *preply_data;
 ..\..\..\main.c(1124): warning:  #177-D: variable "outlen"  was declared but never referenced
   	unsigned int outlen;
+..\..\..\main.c(280): warning:  #177-D: function "ikif_random_vector_generate"  was declared but never referenced
+  static int ikif_random_vector_generate(void * seed ,unsigned char * p_buff, uint32_t size)
 ..\..\..\main.c(970): warning:  #177-D: function "sensor_simulator_init"  was declared but never referenced
   static void sensor_simulator_init(void)
-..\..\..\main.c: 10 warnings, 0 errors
+..\..\..\main.c: 11 warnings, 0 errors
 linking...
-Program Size: Code=82556 RO-data=20940 RW-data=820 ZI-data=23460  
+Program Size: Code=82592 RO-data=20936 RW-data=820 ZI-data=23460  
 FromELF: creating hex file...
-".\_build\nrf52832_xxaa.axf" - 0 Error(s), 10 Warning(s).
+".\_build\nrf52832_xxaa.axf" - 0 Error(s), 11 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -81,7 +83,7 @@ Package Vendor: NordicSemiconductor
       Include file:  Device\Include\system_nrf52.h
       Source file:   Device\Source\arm\arm_startup_nrf52.s
       Source file:   Device\Source\system_nrf52.c
-Build Time Elapsed:  00:00:10
+Build Time Elapsed:  00:00:09
 </pre>
 </body>
 </html>

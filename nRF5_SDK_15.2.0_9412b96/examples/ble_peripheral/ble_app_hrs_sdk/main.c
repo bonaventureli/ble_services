@@ -1606,6 +1606,7 @@ int main(void)
 		#if 0
 		ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
 		#else
+		//ingeek_set_callback(storageReadData,storageWriteData,Rand_CB1);
 		ingeek_set_callback(storageReadData,storageWriteData,ikif_random_vector_generate);
 		#endif
 		ingeek_se_init();
