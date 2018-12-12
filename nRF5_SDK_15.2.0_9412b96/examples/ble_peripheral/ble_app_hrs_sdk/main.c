@@ -67,6 +67,7 @@
 #include "nrf_sdh_ble.h"
 #include "nrf_sdh_soc.h"
 #include "app_timer.h"
+#include "app_uart.h"
 #include "bsp_btn_ble.h"
 #include "peer_manager.h"
 #include "peer_manager_handler.h"
@@ -84,7 +85,14 @@
 #include "digital_key_api.h"
 #include "ikcmdif.h"
 #include "nrf_drv_rng.h"
-//#include "fstorage_data.h"
+
+#if defined (UART_PRESENT)
+#include "nrf_uart.h"
+#endif
+#if defined (UARTE_PRESENT)
+#include "nrf_uarte.h"
+#endif
+
 
 #define DEVICE_NAME                         "GACVK" 
 //#define DEVICE_NAME                         "xxx"                            /**< Name of device. Will be included in the advertising data. */
@@ -139,6 +147,9 @@
 
 #define DEAD_BEEF                           0xDEADBEEF                              /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 
+#define UART_TX_BUF_SIZE                256                                         /**< UART TX buffer size. */
+#define UART_RX_BUF_SIZE                256                                         /**< UART RX buffer size. */
+
 
 BLE_HRS_DEF(m_hrs);                                                 /**< Heart rate service instance. */
 BLE_BAS_DEF(m_bas);                                                 /**< Structure used to identify the battery service. */
@@ -174,10 +185,10 @@ unsigned int gReturnInfoLen;
 uint8_t gReturnSession[131];
 unsigned int gReturnSessionLen;
 
+//int ingeek_pull_info(unsigned char *output, unsigned int* olen);
 
 uint8_t VIN_data[17];
 uint8_t CMPK_data[48];
-
 uint8_t VIN_CMPK_data[70];//65
 
 uint8_t Rand_data[32]={
@@ -186,6 +197,44 @@ uint8_t Rand_data[32]={
 0xB1,0xB1,0xB3,0xB4,0xB5,0xB6,0xB7,0xB8,0xB9,0xBF,
 0xB1,0xB1
 };
+
+//#include "nrf_fstorage.h"
+//#include "fds.h"
+#ifdef SOFTDEVICE_PRESENT
+#include "nrf_sdh.h"
+#include "nrf_sdh_ble.h"
+#include "nrf_fstorage_sd.h"
+#else
+#include "nrf_drv_clock.h"
+#include "nrf_fstorage_nvmc.h"
+#endif
+#define FSTORAGE_PAGE_SIZES         (4096)
+#define FSTORAGE_DATA_ADDR_START    (0x79000)
+
+static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt);
+NRF_FSTORAGE_DEF(nrf_fstorage_t fstorage) =
+{
+    /* Set a handler for fstorage events. */
+    .evt_handler = fstorage_evt_handler,
+
+    /* These below are the boundaries of the flash space assigned to this instance of fstorage.
+     * You must set these manually, even at runtime, before nrf_fstorage_init() is called.
+     * The function nrf5_flash_end_addr_get() can be used to retrieve the last address on the
+     * last page of flash available to write data. */
+    //.start_addr = 0x3e000,
+    //.end_addr   = 0x3ffff,
+		.start_addr = FSTORAGE_DATA_ADDR_START,
+    .end_addr   = (FSTORAGE_DATA_ADDR_START + FSTORAGE_PAGE_SIZES - 1),
+};
+#define FSTORAGE_DATA_SIZE_IN_BYTES (256)  
+//#define FSTORAGE_DATA_SIZE_IN_BYTES (192)  
+//#define FSTORAGE_DATA_SIZE_IN_BYTES (128) 
+//#define FSTORAGE_DATA_SIZE_IN_BYTES (64)  
+__ALIGN(4) static uint8_t fstorage_data_write_temp[FSTORAGE_DATA_SIZE_IN_BYTES];
+
+static int storageWriteData( uint8_t *inBuf, uint32_t word_count,uint32_t offset);
+static int storageReadData(uint8_t *outBuf, uint32_t word_count, uint32_t offset);
+void wait_for_flash_ready(nrf_fstorage_t const * p_fstorage);
 
 int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 {
@@ -199,11 +248,19 @@ int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 	#endif
 	if(rlen == 17){
 		NRF_LOG_INFO("VIN");
-		memcpy(out,VIN_data,rlen);
+		//storageReadData(VIN_data,rlen,0);
+		//memcpy(out,VIN_data,rlen);
+	 //nrf_fstorage_read(&fstorage, fstorage.start_addr+offset,out, rlen);
+	 memcpy(out,fstorage_data_write_temp,sizeof(fstorage_data_write_temp));
+	 NRF_LOG_HEXDUMP_INFO(out, sizeof(rlen));
 	}
 	if(rlen == 48){
 		NRF_LOG_INFO("CMPK");
+		//storageReadData(CMPK_data,rlen,0);
 		memcpy(out,CMPK_data,rlen);
+	 //nrf_fstorage_read(&fstorage, fstorage.start_addr+offset,out, rlen);
+	 //memcpy(out,fstorage_data_write_temp,sizeof(fstorage_data_write_temp));
+	 NRF_LOG_HEXDUMP_INFO(out, sizeof(rlen));
 	}
 	return 0;
 }
@@ -223,15 +280,19 @@ int write_CB1(unsigned char *in, unsigned int wlen, unsigned int offset){
 	#else
 		//memcpy(Callback_data+offset,in,wlen);
 	#endif
-
+	#if 1
 	if(wlen == 48){
 	NRF_LOG_INFO("CMPK-48");
+	//storageWriteData(in, wlen,offset);
 	memcpy(CMPK_data,in,wlen);
 	}
 		if(wlen == 17){
 	NRF_LOG_INFO("VIN-17");
 	memcpy(VIN_data,in,wlen);
+	//storageWriteData(VIN_data, wlen,offset);
 	}
+	#endif
+	
 	return 0;
 }
 /*
@@ -286,6 +347,21 @@ static int ikif_random_vector_generate(void * seed ,unsigned char * p_buff, uint
     uint8_t length = (size<available) ? size : available;
     err_code = nrf_drv_rng_rand(p_buff,length);
     //APP_ERROR_CHECK(err_code);
+	
+	seed = 0;
+	
+	if(seed == 0){
+	}
+	
+	if(size == 8){
+		
+		NRF_LOG_INFO("RANDDATA-8");
+	}
+	if(size == 32){
+		
+		NRF_LOG_INFO("RANDDATA-32");
+	}
+	NRF_LOG_HEXDUMP_INFO(p_buff, length);
     return 0;
 }
 
@@ -660,9 +736,22 @@ void Handle_info(uint8_t *data, uint32_t data_len)
 	unsigned int outlen;
 	uint8_t *preply_data;
 	uint8_t status;
+	int ret;
 	
 	// One,push info
-	ingeek_push_info(data, data_len);
+	NRF_LOG_INFO("before:ingeek_push_info");
+	//NRF_LOG_HEXDUMP_INFO(data, data_len);
+	//ingeek_push_info(data, data_len);
+	
+	ret = ingeek_push_info(data, data_len);
+	if (ret != 0x00){
+	NRF_LOG_INFO("error return %d :ingeek_push_info",ret);
+	}
+	
+	NRF_LOG_INFO("after:ingeek_push_info");
+	//NRF_LOG_HEXDUMP_INFO(data, data_len);
+	
+	
 
 	//Two,Notify status
 	status = ingeek_get_sec_status();
@@ -674,6 +763,15 @@ void Handle_info(uint8_t *data, uint32_t data_len)
 	//Fore,Notify info
 	ble_send_notify(BLE_UUID_DIGITALKET_INFO_CHAR, gReturnInfo, gReturnInfoLen);
 	//ikble_set_se_info(gReturnInfo,gReturnInfoLen);
+	
+	
+
+//		nrf_fstorage_read(&fstorage, fstorage.start_addr,fstorage_data_write_temp, sizeof(fstorage_data_write_temp));
+//		nrf_fstorage_erase(&fstorage,fstorage.start_addr,1,NULL);
+//		wait_for_flash_ready(&fstorage);
+//		nrf_fstorage_write(&fstorage,fstorage.start_addr,CMPK_data,sizeof(CMPK_data),NULL);
+		
+		//nrf_fstorage_write(&fstorage,fstorage.start_addr,VIN_data,sizeof(VIN_data),NULL);
 
 }
 void Handle_auth(uint8_t *data, uint32_t data_len)
@@ -714,15 +812,15 @@ void Handle_session(uint8_t *data, uint32_t data_len)
 	uint8_t *preply_data;
 	uint8_t status;
 
-	#if 0
+	#if 1
 	NRF_LOG_INFO("\nHandle_session_function:[Before] ingeek_push_session:status:ingeek_get_sec_status is %x. if 2,it is right\n",ingeek_get_sec_status());
-	NRF_LOG_INFO("\nHandle_session_function,return:ingeek_push_session %x, if 0,it is right\n",ingeek_push_session(data, data_len, preply_data, &outlen));
+	NRF_LOG_INFO("\nHandle_session_function,return:ingeek_push_session %d, if 0,it is right\n",ingeek_push_session(data, data_len, preply_data, &outlen));
 	NRF_LOG_INFO("\nHandle_session_function:[After] ingeek_push_session:status:ingeek_get_sec_status is %x. if 3,it is right\n",ingeek_get_sec_status());
 	
 	NRF_LOG_INFO("\nHandle_session is ok ,ingeek_push_session,preply_data:\n");
 	#endif
 
-	ingeek_push_session(data, data_len, gReturnSession, &gReturnSessionLen);
+	//ingeek_push_session(data, data_len, gReturnSession, &gReturnSessionLen);
 	status = ingeek_get_sec_status();
 	ble_send_notify(BLE_UUID_DIGITALKET_STATUS_CHAR, &status, 1);
 	ble_send_notify(BLE_UUID_DIGITALKET_SESSION_CHAR, gReturnSession, gReturnSessionLen);
@@ -786,7 +884,7 @@ void Handle_cmd(uint8_t *data, uint32_t data_len)
 void ble_hrs_evt_handler (ble_hrs_t * p_hrs, ble_hrs_evt_t * p_evt){
 
 	uint8_t status = 0;
-	NRF_LOG_INFO("ble_hrs_evt_handler function==========");
+	//NRF_LOG_INFO("ble_hrs_evt_handler function==========");
 	switch(p_evt->evt_type)
 	{
 		case BLE_HRS_EVT_NOTIFICATION_ENABLED:
@@ -857,7 +955,7 @@ void ble_hrs_evt_handler (ble_hrs_t * p_hrs, ble_hrs_evt_t * p_evt){
 		case BLE_DIGITAKKEY_EVT_AUTH:
 		{
 			NRF_LOG_INFO("case BLE_DIGITAKKEY_EVT_AUTH");
-			NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
+			//NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
 			Handle_auth((uint8_t *)p_evt->params.rx_data.p_data, (uint32_t) p_evt->params.rx_data.length);
 			break;
 		}
@@ -1115,6 +1213,7 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
             break;
     }
 }
+
 void Handle_active()
 {
 	#if 1
@@ -1156,6 +1255,8 @@ void Handle_broadcast()
 	ret = ingeek_get_sec_status();
 	if(ret == 0xFF){
 		NRF_LOG_INFO("status %x",ret);
+		//Handle_noactive();
+		//NRF_LOG_INFO("status %x",ret);
 		return;
 	}
 	#if 0
@@ -1165,6 +1266,7 @@ void Handle_broadcast()
 	}
 	#endif
 	if((ret == 0) || (ret == 0x01)){
+		NRF_LOG_INFO("status %x",ret);
 		Handle_active();
 	}
 }
@@ -1374,7 +1476,189 @@ static void peer_manager_init(void)
     err_code = pm_register(pm_evt_handler);
     APP_ERROR_CHECK(err_code);
 }
+#if 1
 
+#include "ble_link_ctx_manager.h"
+/* Forward declaration of the ble_nus_t type. */
+typedef struct ble_nus_s ble_nus_t;
+/**@brief Nordic UART Service client context structure.
+ *
+ * @details This structure contains state context related to hosts.
+ */
+typedef struct
+{
+    bool is_notification_enabled; /**< Variable to indicate if the peer has enabled notification of the RX characteristic.*/
+} ble_nus_client_context_t;
+
+#define OPCODE_LENGTH        1
+#define HANDLE_LENGTH        2
+
+/**@brief   Maximum length of data (in bytes) that can be transmitted to the peer by the Nordic UART service module. */
+#if defined(NRF_SDH_BLE_GATT_MAX_MTU_SIZE) && (NRF_SDH_BLE_GATT_MAX_MTU_SIZE != 0)
+    #define BLE_NUS_MAX_DATA_LEN (NRF_SDH_BLE_GATT_MAX_MTU_SIZE - OPCODE_LENGTH - HANDLE_LENGTH)
+#else
+    #define BLE_NUS_MAX_DATA_LEN (BLE_GATT_MTU_SIZE_DEFAULT - OPCODE_LENGTH - HANDLE_LENGTH)
+    #warning NRF_SDH_BLE_GATT_MAX_MTU_SIZE is not defined.
+#endif
+static uint16_t   m_ble_nus_max_data_len = BLE_GATT_ATT_MTU_DEFAULT - 3;            /**< Maximum length of data (in bytes) that can be transmitted to the peer by the Nordic UART service module. */
+
+/**@brief   Macro for defining a ble_nus instance.
+ *
+ * @param     _name            Name of the instance.
+ * @param[in] _nus_max_clients Maximum number of NUS clients connected at a time.
+ * @hideinitializer
+ */
+#define BLE_NUS_DEF(_name, _nus_max_clients)                      \
+    BLE_LINK_CTX_MANAGER_DEF(CONCAT_2(_name, _link_ctx_storage),  \
+                             (_nus_max_clients),                  \
+                             sizeof(ble_nus_client_context_t));   \
+    static ble_nus_t _name =                                      \
+    {                                                             \
+        .p_link_ctx_storage = &CONCAT_2(_name, _link_ctx_storage) \
+    };                                                            \
+    NRF_SDH_BLE_OBSERVER(_name ## _obs,                           \
+                         BLE_NUS_BLE_OBSERVER_PRIO,               \
+                         ble_nus_on_ble_evt,                      \
+                         &_name)
+
+		
+//BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT);                                   /**< BLE NUS service instance. */
+
+uint32_t ble_nus_data_send(ble_nus_t * p_nus,
+                           uint8_t   * p_data,
+                           uint16_t  * p_length,
+                           uint16_t    conn_handle)
+{
+    ret_code_t                 err_code;
+    ble_gatts_hvx_params_t     hvx_params;
+    ble_nus_client_context_t * p_client;
+
+    VERIFY_PARAM_NOT_NULL(p_nus);
+
+    //err_code = blcm_link_ctx_get(p_nus->p_link_ctx_storage, conn_handle, (void *) &p_client);
+    VERIFY_SUCCESS(err_code);
+
+    if ((conn_handle == BLE_CONN_HANDLE_INVALID) || (p_client == NULL))
+    {
+        return NRF_ERROR_NOT_FOUND;
+    }
+
+    if (!p_client->is_notification_enabled)
+    {
+        return NRF_ERROR_INVALID_STATE;
+    }
+
+    if (*p_length > BLE_NUS_MAX_DATA_LEN)
+    {
+        return NRF_ERROR_INVALID_PARAM;
+    }
+
+    memset(&hvx_params, 0, sizeof(hvx_params));
+
+    //hvx_params.handle = p_nus->tx_handles.value_handle;
+    hvx_params.p_data = p_data;
+    hvx_params.p_len  = p_length;
+    hvx_params.type   = BLE_GATT_HVX_NOTIFICATION;
+
+    return sd_ble_gatts_hvx(conn_handle, &hvx_params);
+}
+#endif
+
+/**@brief   Function for handling app_uart events.
+ *
+ * @details This function will receive a single character from the app_uart module and append it to
+ *          a string. The string will be be sent over BLE when the last character received was a
+ *          'new line' '\n' (hex 0x0A) or if the string has reached the maximum data length.
+ */
+/**@snippet [Handling the data received over UART] */
+
+void uart_event_handle(app_uart_evt_t * p_event)
+{
+    static uint8_t data_array[BLE_NUS_MAX_DATA_LEN];
+    static uint8_t index = 0;
+    uint32_t       err_code;
+	
+		NRF_LOG_INFO("uart_event_handle===========================================");
+    switch (p_event->evt_type)
+    {
+        case APP_UART_DATA_READY:
+					NRF_LOG_INFO("APP_UART_DATA_READY===========================================");
+            UNUSED_VARIABLE(app_uart_get(&data_array[index]));
+            index++;
+
+            if ((data_array[index - 1] == '\n') ||
+                (data_array[index - 1] == '\r') ||
+                (index >= m_ble_nus_max_data_len))
+            {
+                if (index > 1)
+                {
+                    NRF_LOG_INFO("Ready to send data over BLE NUS");
+                    NRF_LOG_HEXDUMP_INFO(data_array, index);
+										NRF_LOG_INFO("Ready to send data before do while over %d",index);
+                    do
+                    {
+                        uint16_t length = (uint16_t)index;
+												NRF_LOG_INFO("Ready to send data over %d",index);
+//                        err_code = ble_nus_data_send(&m_nus, data_array, &length, m_conn_handle);
+                        if ((err_code != NRF_ERROR_INVALID_STATE) &&
+                            (err_code != NRF_ERROR_RESOURCES) &&
+                            (err_code != NRF_ERROR_NOT_FOUND))
+                        {
+                            APP_ERROR_CHECK(err_code);
+                        }
+                    } while (err_code == NRF_ERROR_RESOURCES);
+                }
+
+                index = 0;
+            }
+            break;
+
+        case APP_UART_COMMUNICATION_ERROR:
+					NRF_LOG_INFO("APP_UART_COMMUNICATION_ERROR===========================================");
+            APP_ERROR_HANDLER(p_event->data.error_communication);
+            break;
+
+        case APP_UART_FIFO_ERROR:
+					NRF_LOG_INFO("APP_UART_FIFO_ERROR===========================================");
+            APP_ERROR_HANDLER(p_event->data.error_code);
+            break;
+
+        default:
+            break;
+    }
+}
+/**@snippet [Handling the data received over UART] */
+
+/**@brief  Function for initializing the UART module.
+ */
+/**@snippet [UART Initialization] */
+static void uart_init(void)
+{
+    uint32_t                     err_code;
+    app_uart_comm_params_t const comm_params =
+    {
+        .rx_pin_no    = RX_PIN_NUMBER,
+        .tx_pin_no    = TX_PIN_NUMBER,
+        .rts_pin_no   = RTS_PIN_NUMBER,
+        .cts_pin_no   = CTS_PIN_NUMBER,
+        .flow_control = APP_UART_FLOW_CONTROL_DISABLED,
+        .use_parity   = false,
+#if defined (UART_PRESENT)
+        .baud_rate    = NRF_UART_BAUDRATE_115200
+#else
+        .baud_rate    = NRF_UARTE_BAUDRATE_115200
+#endif
+    };
+
+    APP_UART_FIFO_INIT(&comm_params,
+                       UART_RX_BUF_SIZE,
+                       UART_TX_BUF_SIZE,
+                       uart_event_handle,
+                       APP_IRQ_PRIORITY_LOWEST,
+                       err_code);
+    APP_ERROR_CHECK(err_code);
+}
+/**@snippet [UART Initialization] */
 
 /**@brief Function for initializing the Advertising functionality.
  */
@@ -1460,145 +1744,428 @@ static void idle_state_handle(void)
         nrf_pwr_mgmt_run();
     }
 }
-#if 0
-/*!
- * typedef int (*pfnReadPortCB_t)(eDKPORT port,uint8_t *outBuf, uint32_t size,uint32_t offset)
- * read content from flash/uart
- * @param [out] outBuf: read flash or uart content and write to outBuf
- * @param [in] size: outBuf size .
- * @param [in] offset:  read flash offset position
- * @return 	actual read size from port.
- * Example usage:
- * @verbatim
- * @endverbatim
- */
-typedef int (*pfnReadPortCB_t)(uint8_t *outBuf, uint32_t size,uint32_t offset);
-/*!
- * typedef int (*pfnWritePortCB_t)(const uint8_t *inBuf, uint32_t size,uint32_t offset)
- * write content to flash or uart
- * @param [in] inBuf: content will be writed to flash or uart.
- * @param [in] size: inBuf size .
- * @param [in] offset:  write to flash offset position
- * @return actual write size to port.
- * Example usage:
- * @verbatim
- * @endverbatim
- */
-typedef int (*pfnWritePortCB_t)(const uint8_t *inBuf, uint32_t size,uint32_t offset);
-/*!
- *  \struct dkIOs_t
- *  \brief 
- */
-typedef struct
-{
-   pfnWritePortCB_t     uartTxCallback; //write uart callback funtion point
-   pfnReadPortCB_t      flashRCallback; //read flash callback funtion point
-   pfnWritePortCB_t     flashWCallback; //write flash callback funtion point
-} dkIOs_t;
-#define SESSION_MAX 1
-dkIOs_t IKTK_SessionContain[SESSION_MAX] ={0};
-pfnWritePortCB_t   g_uartTxCB = 0;
-int ikcmdInitialize(pfnWritePortCB_t inUartTx)
-{
-    g_uartTxCB = inUartTx;
-	  return 0;
-}
-uint32_t DKCreateSRV(dkIOs_t * pSession)
-{
-    static uint32_t session_id = 0;
-  if (pSession && session_id < SESSION_MAX) {
-      ++session_id;
-      //ikbleInitialize();
-      IKTK_SessionContain[session_id - 1] = *pSession;
-      ikcmdInitialize(pSession->uartTxCallback);
-      //ingeek_set_callback(pSession->flashRCallback,pSession->flashWCallback,ikif_random_vector_generate);
-	  //ikSecuritySetRunningStatus(DK_SYS_INIT);
-      return session_id;
-  } else {
-    return 0;
-  }
-}
-static dkIOs_t g_ios = {0,0,0};
 
+/**@brief Function for application main entry.
+ */
+
+
+
+static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
+{
+    if (p_evt->result != NRF_SUCCESS)
+    {
+        NRF_LOG_INFO("--> Event received: ERROR while executing an fstorage operation.");
+        return;
+    }
+
+    switch (p_evt->id)
+    {
+        case NRF_FSTORAGE_EVT_WRITE_RESULT:
+        {
+            NRF_LOG_INFO("--> Event received: wrote %d bytes at address 0x%x.",
+                         p_evt->len, p_evt->addr);
+        } break;
+
+        case NRF_FSTORAGE_EVT_ERASE_RESULT:
+        {
+            NRF_LOG_INFO("--> Event received: erased %d page from address 0x%x.",
+                         p_evt->len, p_evt->addr);
+        } break;
+
+        default:
+            break;
+    }
+}
+
+
+static void print_flash_info(nrf_fstorage_t * p_fstorage)
+{
+    NRF_LOG_INFO("========| flash info |========");
+    NRF_LOG_INFO("erase unit: \t%d bytes",      p_fstorage->p_flash_info->erase_unit);
+    NRF_LOG_INFO("program unit: \t%d bytes",    p_fstorage->p_flash_info->program_unit);
+    NRF_LOG_INFO("==============================");
+}
+static uint32_t nrf5_flash_end_addr_get()
+{
+    uint32_t const bootloader_addr = NRF_UICR->NRFFW[0];
+    uint32_t const page_sz         = NRF_FICR->CODEPAGESIZE;
+    uint32_t const code_sz         = NRF_FICR->CODESIZE;
+
+    return (bootloader_addr != 0xFFFFFFFF ?
+            bootloader_addr : (code_sz * page_sz));
+}
+void wait_for_flash_ready(nrf_fstorage_t const * p_fstorage)
+{
+    /* While fstorage is busy, sleep and wait for an event. */
+    while (nrf_fstorage_is_busy(p_fstorage))
+    {
+        //power_manage();
+    }
+}
+static uint32_t m_data_receive[30];
+
+
+uint32_t fstorage_data_init(void){
+		ret_code_t rc;
+		nrf_fstorage_api_t * p_fs_api;
+	   
+
+		#ifdef SOFTDEVICE_PRESENT
+    //NRF_LOG_INFO("SoftDevice is present.");
+    //NRF_LOG_INFO("Initializing nrf_fstorage_sd implementation...");
+    /* Initialize an fstorage instance using the nrf_fstorage_sd backend.
+     * nrf_fstorage_sd uses the SoftDevice to write to flash. This implementation can safely be
+     * used whenever there is a SoftDevice, regardless of its status (enabled/disabled). */
+    p_fs_api = &nrf_fstorage_sd;
+#else
+    NRF_LOG_INFO("SoftDevice not present.");
+    NRF_LOG_INFO("Initializing nrf_fstorage_nvmc implementation...");
+    /* Initialize an fstorage instance using the nrf_fstorage_nvmc backend.
+     * nrf_fstorage_nvmc uses the NVMC peripheral. This implementation can be used when the
+     * SoftDevice is disabled or not present.
+     *
+     * Using this implementation when the SoftDevice is enabled results in a hardfault. */
+    p_fs_api = &nrf_fstorage_nvmc;
+#endif
+		rc = nrf_fstorage_init(&fstorage, p_fs_api, NULL);
+    APP_ERROR_CHECK(rc);
+		if (NRF_SUCCESS != rc)
+    {
+        NRF_LOG_INFO("nrf_fstorage_init Failed, 0x%x", rc);
+        return rc;
+    }
+		
+		//print_flash_info(&fstorage);
+/* It is possible to set the start and end addresses of an fstorage instance at runtime.
+     * They can be set multiple times, should it be needed. The helper function below can
+     * be used to determine the last address on the last page of flash memory available to
+     * store data. */
+		NRF_LOG_INFO("nrf5_flash_end_addr=0x%x", nrf5_flash_end_addr_get());
+    //(void) nrf5_flash_end_addr_get();
+		 /* Let's write to flash. */
+		
+		 #if 0
+		//static uint32_t m_data          = 0xBADC0FFE;
+		uint8_t p_src[]={0x01,0x02,0x03,0x04};
+		uint8_t p_dest[4];
+    //m_data = 0xDEADBEEF;
+
+    NRF_LOG_HEXDUMP_INFO(p_src,sizeof(p_src));
+    rc = nrf_fstorage_write(&fstorage, 0x3e100, p_src, sizeof(p_src), NULL);
+    APP_ERROR_CHECK(rc);
+
+    wait_for_flash_ready(&fstorage);
+    NRF_LOG_INFO("Done.");
+		
+		rc = nrf_fstorage_read(&fstorage,0x3e100,p_dest,sizeof(p_dest));
+		APP_ERROR_CHECK(rc);
+		NRF_LOG_HEXDUMP_INFO(p_dest, sizeof(p_dest));	
+		#endif
+}
+
+
+uint32_t fstorage_data_read(uint32_t offset, uint8_t * p_dest, uint32_t len)
+{
+    ret_code_t rc = NRF_SUCCESS;
+    VERIFY_PARAM_NOT_NULL(p_dest);
+    VERIFY_FALSE((len + offset > sizeof(fstorage_data_write_temp)), NRF_ERROR_INVALID_PARAM);
+
+#if 0
+    //fstorage_data_lock();
+
+    // prepare data
+    rc = nrf_fstorage_read(&fstorage, fstorage.start_addr,
+                           fstorage_data_write_temp, sizeof(fstorage_data_write_temp));
+    if (NRF_SUCCESS != rc)
+    {
+        NRF_LOG_INFO("nrf_fstorage_read fstorage init data Failed, 0x%x", rc);
+        goto READ_OUT;
+    }
+
+    memcpy(p_dest, fstorage_data_write_temp + offset, len);
+
+READ_OUT:
+
+    //fstorage_data_unlock();
+#else
+		
+    memcpy(p_dest,(void*) (fstorage.start_addr + offset), len);
+		#if 0
+		NRF_LOG_INFO("fstorage.start_addr is %x",fstorage.start_addr);
+		NRF_LOG_INFO("len is %d",len);
+		NRF_LOG_HEXDUMP_INFO(p_dest, len);
+		#endif
+#endif
+
+    return rc;
+}
+
+uint32_t fstorage_data_write(uint32_t offset, void const * p_src, uint32_t len)
+{
+    ret_code_t rc = NRF_SUCCESS;
+	  
+    //memcpy(fstorage_data_write_temp + offset,p_src,len);
+	  //return rc;
+	
+    VERIFY_PARAM_NOT_NULL(p_src);
+    VERIFY_FALSE((len + offset > sizeof(fstorage_data_write_temp)), NRF_ERROR_INVALID_PARAM);
+
+    //fstorage_data_lock();
+		NRF_LOG_INFO("function:fstorage_data_write");
+		//NRF_LOG_HEXDUMP_INFO(p_src, len);
+	
+    // prepare data
+    rc = nrf_fstorage_read(&fstorage, fstorage.start_addr+offset,
+                           fstorage_data_write_temp, sizeof(fstorage_data_write_temp));
+    if (NRF_SUCCESS != rc)
+    {
+        NRF_LOG_INFO("nrf_fstorage_read fstorage init data Failed, 0x%x", rc);
+        //goto WRITE_OUT;
+    }
+    
+    memcpy(fstorage_data_write_temp + offset, p_src, len);
+		//NRF_LOG_HEXDUMP_INFO(fstorage_data_write_temp + offset, len);
+
+    // erase
+    rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr+offset, 1, NULL);
+    if (NRF_SUCCESS != rc)
+    {
+        NRF_LOG_INFO("nrf_fstorage_erase Failed, rc=0x%x", rc);
+        //goto WRITE_OUT;
+    }
+		
+    //wait_for_flash_ready(&fstorage);
+    
+    // write
+    rc = nrf_fstorage_write(&fstorage, fstorage.start_addr+offset,
+                            fstorage_data_write_temp, sizeof(fstorage_data_write_temp), NULL);
+    if (NRF_SUCCESS != rc)
+    {
+        NRF_LOG_INFO("nrf_fstorage_write Failed, offset=%d, len=%d, rc=0x%x", offset, len, rc);
+        //goto WRITE_OUT;
+    }
+
+    //wait_for_flash_ready(&fstorage);
+
+
+//WRITE_OUT:
+    //fstorage_data_unlock();
+
+    return rc;
+}
+uint32_t fstorage_data_write2(uint32_t offset, void const * p_src, uint32_t len)
+{
+    ret_code_t rc = NRF_SUCCESS;
+	  
+    //memcpy(fstorage_data_write_temp + offset,p_src,len);
+	  //return rc;
+	
+    VERIFY_PARAM_NOT_NULL(p_src);
+    VERIFY_FALSE((len + offset > sizeof(fstorage_data_write_temp)), NRF_ERROR_INVALID_PARAM);
+
+    //fstorage_data_lock();
+		NRF_LOG_INFO("function:fstorage_data_write");
+		//NRF_LOG_HEXDUMP_INFO(p_src, len);
+	#if 0
+    // prepare data
+    rc = nrf_fstorage_read(&fstorage, fstorage.start_addr,
+                           fstorage_data_write_temp, sizeof(fstorage_data_write_temp));
+    if (NRF_SUCCESS != rc)
+    {
+        NRF_LOG_INFO("nrf_fstorage_read fstorage init data Failed, 0x%x", rc);
+        //goto WRITE_OUT;
+    }
+    
+    memcpy(fstorage_data_write_temp + offset, p_src, len);
+		//NRF_LOG_HEXDUMP_INFO(fstorage_data_write_temp + offset, len);
+		//#if 0
+    // erase
+    rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr, 1, NULL);
+    if (NRF_SUCCESS != rc)
+    {
+        NRF_LOG_INFO("nrf_fstorage_erase Failed, rc=0x%x", rc);
+        //goto WRITE_OUT;
+    }
+		#endif
+    //wait_for_flash_ready(&fstorage);
+    
+    // write
+    rc = nrf_fstorage_write(&fstorage, fstorage.start_addr+offset,
+                            fstorage_data_write_temp, sizeof(fstorage_data_write_temp), NULL);
+    if (NRF_SUCCESS != rc)
+    {
+        NRF_LOG_INFO("nrf_fstorage_write Failed, offset=%d, len=%d, rc=0x%x", offset, len, rc);
+        //goto WRITE_OUT;
+    }
+
+    return rc;
+}
 static int storageReadData(uint8_t *outBuf, uint32_t word_count, uint32_t offset)
 {
     uint32_t err_code;
+		NRF_LOG_INFO("storageReadData");
     if (NULL == outBuf)
         return 0;
 
     if ((offset >= 1024) || (word_count + offset > 1024))
         return 0;
-        
-    err_code = fstorage_data_read(offset, outBuf, word_count);
+		
+		if(word_count == 17){
+		NRF_LOG_INFO("VIN-17");
+			err_code = fstorage_data_read(offset, outBuf, word_count);
+			//NRF_LOG_HEXDUMP_INFO(outBuf, word_count);
+		}
+		
+		if(word_count == 48){
+			NRF_LOG_INFO("CMPK-48");
+			err_code = fstorage_data_read(offset, outBuf, word_count);
+			//NRF_LOG_HEXDUMP_INFO(outBuf, word_count);
+		}
+		
     if (NRF_SUCCESS != err_code)
     {
+			NRF_LOG_INFO("error:storageReadData function");
         return 0;
     }
-
+		
     return 0;
 }
 
-static int storageWriteData(const uint8_t *inBuf, uint32_t word_count,uint32_t offset)
+int storageWriteData( unsigned char *inBuf, unsigned int word_count,unsigned int offset)
 {
     uint32_t err_code;
-    
+    NRF_LOG_INFO("storageWriteData");
     if (NULL == inBuf)
         return 0;
 
     if ((offset >= 1024) || (word_count + offset > 1024))
         return 0;
-        
-    err_code = fstorage_data_write(offset, inBuf, word_count);
+		
+		if(word_count == 48){
+		NRF_LOG_INFO("CMPK-48");
+			err_code = fstorage_data_write(offset, inBuf, word_count);
+			//NRF_LOG_HEXDUMP_INFO(inBuf, word_count);
+	}
+		if(word_count == 17){
+		NRF_LOG_INFO("VIN-17");
+			err_code = fstorage_data_write(offset, inBuf, word_count);
+			//NRF_LOG_HEXDUMP_INFO(inBuf, word_count);
+	}
     if (NRF_SUCCESS != err_code)
     {
+			NRF_LOG_INFO("error:storageWriteData function");
         return 0;
     }
 
     return 0;
 }
-#endif
-
-#if 0
-static int ikif_uart_txcb( const uint8_t *msg, uint32_t wlen, uint32_t offset )
+#include "nrf_drv_clock.h"
+static void clock_init(void)
 {
-    int ret;
-    //NRF_LOG_INFO("ikif_uart_txcb tx %d bytes", wlen);
-    
-    ret = m2m_if_UartSendData((uint8_t *)msg, (uint16_t)wlen);
-    if (wlen != ret)
-    {
-        NRF_LOG_WARNING("m2m_if_UartSendData send Failed, req=%d, sended=%d", wlen, ret);
-    }
-    
-    return ret;
+    /* Initialize the clock. */
+    ret_code_t rc = nrf_drv_clock_init();
+    APP_ERROR_CHECK(rc);
+
+    nrf_drv_clock_lfclk_request(NULL);
+
+    // Wait for the clock to be ready.
+    while (!nrf_clock_lf_is_running()) {;}
 }
-#endif
-/**@brief Function for application main entry.
- */
 int main(void)
 {
     bool erase_bonds;
 
+		uart_init();
     log_init();
     timers_init();
+	//#ifndef SOFTDEVICE_PRESENT
+    clock_init();
+	//#endif
+
     buttons_leds_init(&erase_bonds);
     power_management_init();
-    ble_stack_init();
+
+		fstorage_data_init();
+		ble_stack_init();
     gap_params_init();
     gatt_init();
     advertising_init();
     services_init();
     //sensor_simulator_init();
     conn_params_init();
-	
     peer_manager_init();
 
     // Start execution.
     NRF_LOG_INFO("started %s",DEVICE_NAME);
     application_timers_start();
     advertising_start(erase_bonds);
+		
+		#if 0
+		uint8_t VIN_data1[40]={0x00,0x11,0x22,0x33,0x44,0x00,0x11,0x22,0x33,0x55,\
+		0x00,0x11,0x22,0x33,0x44,0x00,0x11,0x22,0x33,0x44,\
+			0x00,0x11,0x22,0x33,0x44,0x00,0x11,0x22,0x33,0x44,\
+			0x00,0x11,0x22,0x33,0x44,0x00,0x11,0x22,0x33,0x44,\
+			//0x00,0x11,0x22,0x33,0x44,0x00,0x11,0x22,0x33,0x44
+		};
+		uint8_t VIN_data2[60];
+		
 
-		ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
+		storageWriteData(VIN_data1, sizeof(VIN_data1),0);
+		NRF_LOG_INFO("main:VIN_data1");
+		NRF_LOG_HEXDUMP_INFO(VIN_data1, sizeof(VIN_data1));
+
+		
+		storageReadData(VIN_data2,sizeof(VIN_data2),0);
+		NRF_LOG_INFO("main:VIN_data2");
+		NRF_LOG_HEXDUMP_INFO(VIN_data2, sizeof(VIN_data2));	
+		
+		
+		NRF_LOG_INFO("test flash end");
+		#endif //test flash 1
+		
+		#if 0
+		uint8_t VIN_data1[10]={0x00,0x11,0x22,0x33,0x44,0x00,0x11,0x22,0x33,0x55};
+		uint8_t VIN_data2[10];
+		fstorage_data_read(0, VIN_data1, 5);
+		NRF_LOG_INFO("main:VIN_data1:");
+		NRF_LOG_HEXDUMP_INFO(VIN_data1, sizeof(VIN_data1));
+		
+    fstorage_data_write(0, VIN_data2, 5);
+		NRF_LOG_INFO("main:VIN_data2:");
+		NRF_LOG_HEXDUMP_INFO(VIN_data2, sizeof(VIN_data2));	
+		#endif  //test flash 2
+		
+		#if 0 //test flash 3
+		
+		//nrf_fstorage_erase(&fstorage,fstorage.start_addr,1,NULL);
+		
+				uint8_t VIN_data1[56]={0x00,0x11,0x22,0x33,0x44,0x00,0x11,0x22,0x33,0x55,\
+		   0x00,0x11,0x22,0x33,0x44,0x00,0x11,0x22,0x33,0x44,\
+			0x00,0x11,0x22,0x33,0x44,0x00,0x11,0x22,0x33,0x44,\
+			0x00,0x11,0x22,0x33,0x44,0x00,0x11,0x22,0x33,0x44,\
+			0x00,0x11,0x22,0x33,0x44,0x00,0x11,0x22,0x33,0x50
+		};
+		//write flash
+
+//		nrf_fstorage_write(&fstorage,fstorage.start_addr,VIN_data1,sizeof(VIN_data1),NULL);
+//		NRF_LOG_HEXDUMP_INFO(VIN_data1, sizeof(VIN_data1));
+		
+		//read flash
+	 nrf_fstorage_read(&fstorage, fstorage.start_addr,fstorage_data_write_temp, sizeof(fstorage_data_write_temp));
+	 uint8_t VIN_data[FSTORAGE_DATA_SIZE_IN_BYTES];
+	 memcpy(VIN_data,fstorage_data_write_temp,sizeof(fstorage_data_write_temp));
+	 NRF_LOG_HEXDUMP_INFO(VIN_data, sizeof(VIN_data));	
+		#endif //test flash 3
+		
+		#if 0
+		//ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
+		ingeek_set_callback(storageReadData,storageWriteData,Rand_CB1);
+		#else
+		ingeek_set_callback(storageReadData,storageWriteData,ikif_random_vector_generate);
+		//ingeek_set_callback(read_CB1,storageWriteData,ikif_random_vector_generate);
+		#endif
+		
+		//NRF_LOG_INFO("after:ingeek_set_callback");
 		ingeek_se_init();
     // Enter main loop.
     for (;;)

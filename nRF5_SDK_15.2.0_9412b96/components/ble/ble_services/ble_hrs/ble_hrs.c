@@ -281,7 +281,7 @@ static void on_write(ble_hrs_t * p_hrs, ble_evt_t const * p_ble_evt)
 		else if ((p_evt_write->handle == p_hrs->info_handles.value_handle) &&
              (p_hrs->evt_handler != NULL))//write button
     {
-			  NRF_LOG_INFO("p_hrs->info_handles.value_handle==========");
+			  //NRF_LOG_INFO("p_hrs->info_handles.value_handle==========");
         evt.evt_type                  = BLE_DIGITAKKEY_EVT_INFO;
         evt.params.rx_data.p_data = p_evt_write->data;
         evt.params.rx_data.length = p_evt_write->len;

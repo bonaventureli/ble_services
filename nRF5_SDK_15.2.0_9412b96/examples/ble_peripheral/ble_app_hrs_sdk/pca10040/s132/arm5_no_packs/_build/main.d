@@ -63,6 +63,9 @@
 .\_build\main.o: ..\..\..\..\..\..\components\softdevice\common\nrf_sdh.h
 .\_build\main.o: ..\..\..\..\..\..\components\softdevice\common\nrf_sdh_soc.h
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\timer\app_timer.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\uart\app_uart.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\util\app_util_platform.h
+.\_build\main.o: ..\..\..\..\..\..\components\softdevice\s132\headers\nrf_nvic.h
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\bsp\bsp_btn_ble.h
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\bsp\bsp.h
 .\_build\main.o: ..\..\..\..\..\..\components\boards\boards.h
@@ -76,8 +79,6 @@
 .\_build\main.o: ..\..\..\..\..\..\integration\nrfx\legacy/apply_old_config.h
 .\_build\main.o: ..\..\..\..\..\..\modules\nrfx\soc/nrfx_irqs.h
 .\_build\main.o: ..\..\..\..\..\..\modules\nrfx\soc/nrfx_irqs_nrf52832.h
-.\_build\main.o: ..\..\..\..\..\..\components\libraries\util\app_util_platform.h
-.\_build\main.o: ..\..\..\..\..\..\components\softdevice\s132\headers\nrf_nvic.h
 .\_build\main.o: ..\..\..\..\..\..\modules\nrfx\soc/nrfx_coredep.h
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\util\sdk_resources.h
 .\_build\main.o: ..\..\..\..\..\..\components\softdevice\s132\headers\nrf_sd_def.h
@@ -108,3 +109,12 @@
 .\_build\main.o: ..\..\..\..\..\..\integration\nrfx\legacy\nrf_drv_rng.h
 .\_build\main.o: ..\..\..\..\..\..\modules\nrfx\drivers\include\nrfx_rng.h
 .\_build\main.o: ..\..\..\..\..\..\modules\nrfx\hal/nrf_rng.h
+.\_build\main.o: ..\..\..\..\..\..\modules\nrfx\hal\nrf_uart.h
+.\_build\main.o: ..\..\..\..\..\..\modules\nrfx\hal\nrf_uarte.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\fstorage\nrf_fstorage_sd.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\fstorage\nrf_fstorage.h
+.\_build\main.o: ..\..\..\..\..\..\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.h
+.\_build\main.o: ..\..\..\..\..\..\integration\nrfx\legacy\nrf_drv_clock.h
+.\_build\main.o: ..\..\..\..\..\..\modules\nrfx\drivers\include\nrfx_clock.h
+.\_build\main.o: ..\..\..\..\..\..\modules\nrfx\hal/nrf_clock.h
+.\_build\main.o: ..\..\..\..\..\..\modules\nrfx\drivers\include\nrfx_power_clock.h
