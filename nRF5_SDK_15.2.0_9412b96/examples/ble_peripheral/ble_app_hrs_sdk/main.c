@@ -2157,9 +2157,9 @@ int main(void)
 	 NRF_LOG_HEXDUMP_INFO(VIN_data, sizeof(VIN_data));	
 		#endif //test flash 3
 		
-		#if 0
-		//ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
-		ingeek_set_callback(storageReadData,storageWriteData,Rand_CB1);
+		#if 1
+		ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
+		//ingeek_set_callback(storageReadData,storageWriteData,Rand_CB1);
 		#else
 		ingeek_set_callback(storageReadData,storageWriteData,ikif_random_vector_generate);
 		//ingeek_set_callback(read_CB1,storageWriteData,ikif_random_vector_generate);
