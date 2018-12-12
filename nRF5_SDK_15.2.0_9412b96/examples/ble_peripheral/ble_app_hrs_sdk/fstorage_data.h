@@ -44,11 +44,13 @@
  *
  * This example showcases fstorage usage.
  */
-
+#include <stdint.h>
 uint32_t fstorage_data_init(void);
 uint32_t fstorage_data_uinit(void);
 uint32_t fstorage_data_write(uint32_t offset, void const * p_src, uint32_t len);
 uint32_t fstorage_data_read(uint32_t offset, uint8_t * p_dest, uint32_t len);
+int storageWriteData( uint8_t *inBuf, uint32_t word_count,uint32_t offset);
+int storageReadData(uint8_t *outBuf, uint32_t word_count, uint32_t offset);
 
 /**
  * @}

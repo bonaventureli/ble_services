@@ -84,6 +84,7 @@
 #include "digital_key_api.h"
 #include "ikcmdif.h"
 #include "nrf_drv_rng.h"
+#include "fstorage_data.h"
 //#include "fstorage_data.h"
 
 #define DEVICE_NAME                         "GACVK" 
@@ -1583,6 +1584,9 @@ int main(void)
     timers_init();
     buttons_leds_init(&erase_bonds);
     power_management_init();
+	
+		fstorage_data_init();
+	
     ble_stack_init();
     gap_params_init();
     gatt_init();
@@ -1598,7 +1602,12 @@ int main(void)
     application_timers_start();
     advertising_start(erase_bonds);
 
+
+		#if 1
 		ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
+		#else
+		ingeek_set_callback(storageReadData,storageWriteData,ikif_random_vector_generate);
+		#endif
 		ingeek_se_init();
     // Enter main loop.
     for (;;)
