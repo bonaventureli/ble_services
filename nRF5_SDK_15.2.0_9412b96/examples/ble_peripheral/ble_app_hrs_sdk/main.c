@@ -1603,7 +1603,7 @@ int main(void)
     advertising_start(erase_bonds);
 
 
-		#if 1
+		#if 0
 		ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
 		#else
 		ingeek_set_callback(storageReadData,storageWriteData,ikif_random_vector_generate);
