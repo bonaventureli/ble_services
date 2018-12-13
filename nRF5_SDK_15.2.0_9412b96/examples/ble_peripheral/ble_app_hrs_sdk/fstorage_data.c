@@ -441,7 +441,8 @@ uint32_t fstorage_data_write(uint32_t offset, void const * p_src, uint32_t len)
 
     // erase
 
-    rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr+offset, 1, NULL);
+    rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr, 1, NULL);
+		//rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr+offset, 1, NULL);
 
     if (NRF_SUCCESS != rc)
 

@@ -3,7 +3,7 @@
 #include "cipher_export.h"
 #include "cmac.h"
 #include "printf.h"
-
+#include "nrf_log.h"//add lifei
 typedef struct{
     unsigned char key[AES_BLOCK_SIZE];
     unsigned char buffer[AES_BLOCK_SIZE]; /* partially stored block */
@@ -227,14 +227,26 @@ int ingeek_AesCmacVerify(const unsigned char* check, int checkSz,
     result = ingeek_AesCmacGenerate(a, &aSz, in, inSz, key, keySz);
     compareRet = ConstantCompare(check, a, AES_BLOCK_SIZE);
     
-    hex_dump("in data is", in, inSz); //add 
-    hex_dump("key data is", key, keySz); //add 
-    hex_dump("aesverify check is", check, AES_BLOCK_SIZE); //add 
-    hex_dump("aesverify a is ", a, AES_BLOCK_SIZE); //add 
+		NRF_LOG_INFO("inSz %d",inSz);
+		NRF_LOG_HEXDUMP_INFO( in, inSz); //add 
+		NRF_LOG_INFO("keySz %d",keySz);
+    NRF_LOG_HEXDUMP_INFO( key, keySz); //add 
+		NRF_LOG_INFO("AES_BLOCK_SIZE %d",AES_BLOCK_SIZE);
+    NRF_LOG_HEXDUMP_INFO( check, AES_BLOCK_SIZE); //add 
+		NRF_LOG_INFO("AES_BLOCK_SIZE %d",AES_BLOCK_SIZE);
+    NRF_LOG_HEXDUMP_INFO( a, AES_BLOCK_SIZE); //add 
+		
+		
+//    hex_dump("in data is", in, inSz); //add 
+//    hex_dump("key data is", key, keySz); //add 
+//    hex_dump("aesverify check is", check, AES_BLOCK_SIZE); //add 
+//    hex_dump("aesverify a is ", a, AES_BLOCK_SIZE); //add 
 
-    if (result == 0)
+    if (result == 0){
         result = compareRet ? 1 : 0;
-
+			
+		}
+		NRF_LOG_INFO("ingeek_AesCmacVerify compareRet %x",result);
     return result;
 }
 

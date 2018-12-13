@@ -13,6 +13,7 @@
 #include "digital_key_api.h"
 //#include "printf.h"
 #include "printf.h"
+#include "nrf_log.h"//add lifei
 /************************************************************************************
  *************************************************************************************
  * Private macros
@@ -309,6 +310,10 @@ static int Handle_Character_Session_G(ingeek_DK_SessionG *session_message_g,unsi
     memset(statem.Keyinfo.SSC,0x00,LENGTH_16);
     memset(uBuff,0x00,uLen);     //add by yx on 6/27
     ret=ingeek_cipher_aes_cbc(statem.Keyinfo.VCK,statem.Keyinfo.SSC,input,ilen,uBuff,(unsigned int *)&uLen,INGEEK_DECRYPT);
+		NRF_LOG_INFO("statem.Keyinfo.VCK:");
+		NRF_LOG_HEXDUMP_INFO(statem.Keyinfo.VCK, sizeof(statem.Keyinfo.VCK));
+		NRF_LOG_INFO("statem.Keyinfo.SSC:");
+		NRF_LOG_HEXDUMP_INFO(statem.Keyinfo.SSC, sizeof(statem.Keyinfo.SSC));
     if(ret != INGEEK_OK)
     {
         return INGEEK_FAILED_DECRYPT;
@@ -318,6 +323,7 @@ static int Handle_Character_Session_G(ingeek_DK_SessionG *session_message_g,unsi
     ret=ingeek_AesCmacVerify(statem.auth_g.s_cmac,LENGTH_16,uBuff,uLen,statem.Keyinfo.VCK, LENGTH_16);
     if(ret != 0)
     {
+				NRF_LOG_INFO("ingeek_AesCmacVerify:error 1");
         return INGEEK_FAILED_CMAC;
     }
 
@@ -326,12 +332,14 @@ static int Handle_Character_Session_G(ingeek_DK_SessionG *session_message_g,unsi
 		session_message_g->CRnD.size != LENGTH_8 || 
 		session_message_g->SEID.size != LENGTH_16)
     {
+			NRF_LOG_INFO("PBDecode_client_data:error 1");
         return INGEEK_FAILED_PBDECODE;
     }
     
     ret=Verify_session_G(session_message_g);
     if(ret != INGEEK_OK)
     {
+			NRF_LOG_INFO("Verify_session_G:error 1");
         return ret;
     }
 
@@ -512,6 +520,7 @@ int ingeek_push_session(unsigned char *input,unsigned int ilen,unsigned char* ou
 	if(ret != INGEEK_OK)
 	{
 		set_sec_status(CARINFO_VALID);
+		NRF_LOG_INFO("ingeek_push_session:error 1");
 		return ret;
 	}
 
@@ -520,6 +529,7 @@ int ingeek_push_session(unsigned char *input,unsigned int ilen,unsigned char* ou
 	if(ret != INGEEK_OK)
 	{
 		set_sec_status(CARINFO_VALID);
+		NRF_LOG_INFO("ingeek_push_session:error 2");
 	  	return ret;
 	}
 	
@@ -527,6 +537,7 @@ int ingeek_push_session(unsigned char *input,unsigned int ilen,unsigned char* ou
 	 if(ret != INGEEK_OK)
 	 {
 		set_sec_status(CARINFO_VALID);
+		 NRF_LOG_INFO("ingeek_push_session:error 3");
 	  	return ret;
 	 }
 	 

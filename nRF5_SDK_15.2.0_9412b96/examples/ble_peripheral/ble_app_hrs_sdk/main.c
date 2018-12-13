@@ -190,9 +190,10 @@ uint8_t Rand_data[32]={
 
 int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 {
+	
 	NRF_LOG_INFO("  read_CB1  ");
-	NRF_LOG_HEXDUMP_INFO(out, rlen);	
-
+	
+	
 	#if USE_DATA_FLASH
 	SdkRead(out,rlen,offset);
 	#else
@@ -201,11 +202,19 @@ int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 	if(rlen == 17){
 		NRF_LOG_INFO("VIN");
 		memcpy(out,VIN_data,rlen);
+		storageReadData(out,rlen,offset);
 	}
 	if(rlen == 48){
 		NRF_LOG_INFO("CMPK");
 		memcpy(out,CMPK_data,rlen);
+		storageReadData(out,rlen,offset);
 	}
+	uint32_t * addr;
+	addr = (uint32_t *)0x79000;
+	NRF_LOG_INFO("  FSTORAGE_DATA_ADDR_START:  %x",addr);
+	NRF_LOG_HEXDUMP_INFO(addr, 128);
+	NRF_LOG_INFO("  read_CB1_flash end ");
+	NRF_LOG_HEXDUMP_INFO(out, rlen);	
 	return 0;
 }
 /*
@@ -217,8 +226,10 @@ int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 * change time£º2018/8/31
 */
 int write_CB1(unsigned char *in, unsigned int wlen, unsigned int offset){
+	
 	NRF_LOG_INFO("  write_CB1  ");
-	NRF_LOG_HEXDUMP_INFO(in, wlen);	
+	
+	
 	#if USE_DATA_FLASH
 		SdkWrite(in,wlen,offset);
 	#else
@@ -228,11 +239,19 @@ int write_CB1(unsigned char *in, unsigned int wlen, unsigned int offset){
 	if(wlen == 48){
 	NRF_LOG_INFO("CMPK-48");
 	memcpy(CMPK_data,in,wlen);
+	storageWriteData(in,wlen,offset);
 	}
 		if(wlen == 17){
 	NRF_LOG_INFO("VIN-17");
 	memcpy(VIN_data,in,wlen);
+	storageWriteData(in,wlen,offset);
 	}
+	uint32_t * addr;
+	addr = (uint32_t *)0x79000;
+	NRF_LOG_INFO("  FSTORAGE_DATA_ADDR_START:  %x",addr);
+	NRF_LOG_HEXDUMP_INFO(addr, 128);	
+	NRF_LOG_INFO("  write_CB1_end  ");
+	NRF_LOG_HEXDUMP_INFO(in, wlen);	
 	return 0;
 }
 /*
@@ -690,8 +709,9 @@ void Handle_auth(uint8_t *data, uint32_t data_len)
 	#endif
 	ingeek_push_auth(data, data_len, (unsigned char*)1, (unsigned int*)1);
 	status = ingeek_get_sec_status();
-	if(status == 0x02)
+	if(status == 0x02){
 	ble_send_notify(BLE_UUID_DIGITALKET_STATUS_CHAR, &status, 1);
+	}
 	
 	
 	#if 0
@@ -723,6 +743,8 @@ void Handle_session(uint8_t *data, uint32_t data_len)
 	NRF_LOG_INFO("\nHandle_session is ok ,ingeek_push_session,preply_data:\n");
 	#endif
 
+	NRF_LOG_HEXDUMP_INFO(data, data_len);
+	NRF_LOG_INFO("above is session data,data_len is %d",data_len);
 	ingeek_push_session(data, data_len, gReturnSession, &gReturnSessionLen);
 	status = ingeek_get_sec_status();
 	ble_send_notify(BLE_UUID_DIGITALKET_STATUS_CHAR, &status, 1);
@@ -829,7 +851,7 @@ void ble_hrs_evt_handler (ble_hrs_t * p_hrs, ble_hrs_evt_t * p_evt){
 		case BLE_SESSION_EVT_NOTIFICATION_ENABLED:
 		{
 			NRF_LOG_INFO("BLE_SESSION_EVT_NOTIFICATION_ENABLED");
-			ble_send_notify(BLE_UUID_DIGITALKET_SESSION_CHAR, gReturnSession, gReturnSessionLen);
+			//ble_send_notify(BLE_UUID_DIGITALKET_SESSION_CHAR, gReturnSession, gReturnSessionLen);
 			break;
 		}
 		case BLE_SESSION_EVT_NOTIFICATION_DISABLED:
@@ -858,7 +880,7 @@ void ble_hrs_evt_handler (ble_hrs_t * p_hrs, ble_hrs_evt_t * p_evt){
 		case BLE_DIGITAKKEY_EVT_AUTH:
 		{
 			NRF_LOG_INFO("case BLE_DIGITAKKEY_EVT_AUTH");
-			NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
+			//NRF_LOG_HEXDUMP_INFO((uint8_t *)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);	
 			Handle_auth((uint8_t *)p_evt->params.rx_data.p_data, (uint32_t) p_evt->params.rx_data.length);
 			break;
 		}
@@ -1609,6 +1631,10 @@ int main(void)
 		ingeek_set_callback(storageReadData,storageWriteData,ikif_random_vector_generate);
 		#endif
 		ingeek_se_init();
+		
+		uint8_t status;
+		status = ingeek_get_sec_status();
+		NRF_LOG_INFO("started %x",status);
     // Enter main loop.
     for (;;)
     {	
