@@ -244,7 +244,7 @@ int write_CB1(unsigned char *in, unsigned int wlen, unsigned int offset){
 		if(wlen == 17){
 	NRF_LOG_INFO("VIN-17");
 	memcpy(VIN_data,in,wlen);
-	storageWriteData(in,wlen,offset);
+	//storageWriteData(in,wlen,offset);
 	}
 	uint32_t * addr;
 	addr = (uint32_t *)0x79000;
@@ -1624,7 +1624,11 @@ int main(void)
     application_timers_start();
     advertising_start(erase_bonds);
 
-
+		
+		#if 1
+		fstorage_data_erase(0);
+		#endif
+		
 		#if 1
 		ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
 		#else

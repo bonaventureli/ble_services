@@ -155,7 +155,8 @@ static int Handle_write_Info(ingeek_DK_InfoW* info_message)
 	memset(statem.vin,0x00,sizeof(statem.vin));
 	memcpy(statem.vin,info_message->VIN,VIN_LEN);
 	#if 1
-	ret=g_writecb(info_message->KEY.bytes, info_message->KEY.size, 64);
+	ret=g_writecb(info_message->KEY.bytes, info_message->KEY.size, 32);
+	//ret=g_writecb(info_message->KEY.bytes, info_message->KEY.size, 64);
 	if(ret != 0)
 	{
 		return INGEEK_FAILED_WRITECB;

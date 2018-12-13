@@ -441,8 +441,8 @@ uint32_t fstorage_data_write(uint32_t offset, void const * p_src, uint32_t len)
 
     // erase
 
-    rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr, 1, NULL);
-		//rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr+offset, 1, NULL);
+    //rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr, 1, NULL);
+		rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr+offset, 1, NULL);
 
     if (NRF_SUCCESS != rc)
 
@@ -489,6 +489,27 @@ uint32_t fstorage_data_write(uint32_t offset, void const * p_src, uint32_t len)
     //fstorage_data_unlock();
 
 
+
+    return rc;
+
+}
+
+uint32_t fstorage_data_erase(uint32_t offset)
+
+{
+    ret_code_t rc = NRF_SUCCESS;
+
+		rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr+offset, 1, NULL);
+
+    if (NRF_SUCCESS != rc)
+
+    {
+
+        NRF_LOG_INFO("nrf_fstorage_erase Failed, rc=0x%x", rc);
+
+        //goto WRITE_OUT;
+
+    }
 
     return rc;
 
