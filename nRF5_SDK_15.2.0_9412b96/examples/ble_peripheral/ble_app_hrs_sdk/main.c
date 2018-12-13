@@ -1625,7 +1625,7 @@ int main(void)
     advertising_start(erase_bonds);
 
 		
-		#if 1
+		#if 0
 		fstorage_data_erase(0);
 		#endif
 		
