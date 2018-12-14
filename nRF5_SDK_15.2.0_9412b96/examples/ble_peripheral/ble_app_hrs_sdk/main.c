@@ -191,7 +191,9 @@ uint8_t Rand_data[32]={
 int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 {
 	
-	NRF_LOG_INFO("  read_CB1  ");
+	//NRF_LOG_INFO("  read_CB1  ");
+	uint32_t * addr;
+	addr = (uint32_t *)0x79000;
 	
 	
 	#if USE_DATA_FLASH
@@ -200,21 +202,22 @@ int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 		//memcpy(out,Callback_data+offset,rlen);
 	#endif
 	if(rlen == 17){
-		NRF_LOG_INFO("VIN");
+		//NRF_LOG_INFO("VIN");
 		memcpy(out,VIN_data,rlen);
 		storageReadData(out,rlen,offset);
+		NRF_LOG_INFO("read_CB1 VIN  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
+		NRF_LOG_HEXDUMP_INFO(out, rlen);	
 	}
 	if(rlen == 48){
-		NRF_LOG_INFO("CMPK");
+		//NRF_LOG_INFO("CMPK");
 		memcpy(out,CMPK_data,rlen);
 		storageReadData(out,rlen,offset);
+		NRF_LOG_INFO("read_CB1 CMPK  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
+		NRF_LOG_HEXDUMP_INFO(out, rlen);	
+		NRF_LOG_INFO("read_CB1 flash  FSTORAGE_DATA_ADDR_START:  0x%x",(addr));
+		NRF_LOG_HEXDUMP_INFO(addr, 128);
 	}
-	uint32_t * addr;
-	addr = (uint32_t *)0x79000;
-	NRF_LOG_INFO("  FSTORAGE_DATA_ADDR_START:  %x",addr);
-	NRF_LOG_HEXDUMP_INFO(addr, 128);
-	NRF_LOG_INFO("  read_CB1_flash end ");
-	NRF_LOG_HEXDUMP_INFO(out, rlen);	
+	//NRF_LOG_INFO("  read_CB1_flash end ");
 	return 0;
 }
 /*
@@ -227,31 +230,35 @@ int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 */
 int write_CB1(unsigned char *in, unsigned int wlen, unsigned int offset){
 	
-	NRF_LOG_INFO("  write_CB1  ");
-	
-	
+	//NRF_LOG_INFO("  write_CB1  ");
+
 	#if USE_DATA_FLASH
 		SdkWrite(in,wlen,offset);
 	#else
 		//memcpy(Callback_data+offset,in,wlen);
 	#endif
-
-	if(wlen == 48){
-	NRF_LOG_INFO("CMPK-48");
-	memcpy(CMPK_data,in,wlen);
-	storageWriteData(in,wlen,offset);
-	}
-		if(wlen == 17){
-	NRF_LOG_INFO("VIN-17");
-	memcpy(VIN_data,in,wlen);
-	//storageWriteData(in,wlen,offset);
-	}
 	uint32_t * addr;
 	addr = (uint32_t *)0x79000;
-	NRF_LOG_INFO("  FSTORAGE_DATA_ADDR_START:  %x",addr);
-	NRF_LOG_HEXDUMP_INFO(addr, 128);	
-	NRF_LOG_INFO("  write_CB1_end  ");
+	
+	
+	if(wlen == 17){
+	//NRF_LOG_INFO("VIN-17");
+	memcpy(VIN_data,in,wlen);
+	storageWriteData(in,wlen,offset);
+	NRF_LOG_INFO("write_CB1 VIN-17  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
 	NRF_LOG_HEXDUMP_INFO(in, wlen);	
+	}
+	
+	if(wlen == 48){
+	//NRF_LOG_INFO("CMPK-48");
+	memcpy(CMPK_data,in,wlen);
+	storageWriteData(in,wlen,offset);
+	NRF_LOG_INFO("write_CB1 CMPK-48  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
+	NRF_LOG_HEXDUMP_INFO(in, wlen);	
+	NRF_LOG_INFO("write_CB1 flash  FSTORAGE_DATA_ADDR_START:  0x%x",(addr));
+	NRF_LOG_HEXDUMP_INFO(addr, 128);
+	}
+	//NRF_LOG_INFO("  write_CB1_end  ");
 	return 0;
 }
 /*

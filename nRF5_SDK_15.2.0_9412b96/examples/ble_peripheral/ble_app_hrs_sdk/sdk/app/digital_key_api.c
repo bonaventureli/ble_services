@@ -155,17 +155,16 @@ static int Handle_write_Info(ingeek_DK_InfoW* info_message)
 	memset(statem.vin,0x00,sizeof(statem.vin));
 	memcpy(statem.vin,info_message->VIN,VIN_LEN);
 	#if 1
-	ret=g_writecb(info_message->KEY.bytes, info_message->KEY.size, 4);
-	//ret=g_writecb(info_message->KEY.bytes, info_message->KEY.size, 32);
-	//ret=g_writecb(info_message->KEY.bytes, info_message->KEY.size, 64);
-	if(ret != 0)
-	{
-		return INGEEK_FAILED_WRITECB;
-	}
-	
 	ret=g_writecb((unsigned char*)info_message->VIN, VIN_LEN, 0);
 	if(ret != 0)
 	{	
+		return INGEEK_FAILED_WRITECB;
+	}
+	//ret=g_writecb(info_message->KEY.bytes, info_message->KEY.size, 12);// real_offset=offset/4*8
+	ret=g_writecb(info_message->KEY.bytes, info_message->KEY.size, 32);
+	//ret=g_writecb(info_message->KEY.bytes, info_message->KEY.size, 64);
+	if(ret != 0)
+	{
 		return INGEEK_FAILED_WRITECB;
 	}
 	#endif
@@ -735,7 +734,9 @@ static int ingeek_check_info(void)
    }
    else
    {
-       ret=g_readcb(uBuff,LENGTH_48,64);//KEY_SNV_ID-yu
+       //ret=g_readcb(uBuff,LENGTH_48,24);//KEY_SNV_ID-yu   (write)12/4*8
+			 //ret=g_readcb(uBuff,LENGTH_48,64);//KEY_SNV_ID-yu   (write)32/4*8
+		   ret=g_readcb(uBuff,LENGTH_48,32);//KEY_SNV_ID-yu
        if(ret != INGEEK_OK)
        {
            set_sec_status(CARINFO_INVALID);

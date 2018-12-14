@@ -37,10 +37,18 @@ compiling digital_key_api.c...
 ..\..\..\sdk\app\digital_key_api.c(105): warning:  #177-D: function "hex_dump"  was declared but never referenced
   static void hex_dump(unsigned char* name, unsigned char* buffer, int len)
 ..\..\..\sdk\app\digital_key_api.c: 4 warnings, 0 errors
+compiling fstorage_data.c...
+..\..\..\fstorage_data.c(317): warning:  #940-D: missing return statement at end of non-void function "fstorage_data_init" 
+  }
+..\..\..\fstorage_data.c(79): warning:  #177-D: function "clock_init"  was declared but never referenced
+  static void clock_init(void)
+..\..\..\fstorage_data.c(157): warning:  #177-D: function "print_flash_info"  was declared but never referenced
+  static void print_flash_info(nrf_fstorage_t * p_fstorage)
+..\..\..\fstorage_data.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=83536 RO-data=20936 RW-data=820 ZI-data=23460  
+Program Size: Code=83684 RO-data=20948 RW-data=820 ZI-data=23460  
 FromELF: creating hex file...
-".\_build\nrf52832_xxaa.axf" - 0 Error(s), 4 Warning(s).
+".\_build\nrf52832_xxaa.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -66,10 +74,10 @@ Package Vendor: NordicSemiconductor
    * Component: ARM::CMSIS:CORE:4.3.0
 
    * Component: NordicSemiconductor::Device:Startup:8.17.0
-      Source file:   Device\Source\system_nrf52.c
       Include file:  Device\Include\system_nrf52.h
       Source file:   Device\Source\arm\arm_startup_nrf52.s
-Build Time Elapsed:  00:00:06
+      Source file:   Device\Source\system_nrf52.c
+Build Time Elapsed:  00:00:09
 </pre>
 </body>
 </html>

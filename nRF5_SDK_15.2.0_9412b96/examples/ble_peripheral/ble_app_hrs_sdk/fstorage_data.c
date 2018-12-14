@@ -386,114 +386,113 @@ READ_OUT:
 }
 
 
-
+#if 1
+uint8_t i=0;
+uint8_t fstorage_data_write_temp2[128];
 uint32_t fstorage_data_write(uint32_t offset, void const * p_src, uint32_t len)
 
 {
-
     ret_code_t rc = NRF_SUCCESS;
-
-	  
-
+		i++;
+		NRF_LOG_INFO("nrf_fstorage_erase couter: %d", i);
     //memcpy(fstorage_data_write_temp + offset,p_src,len);
-
 	  //return rc;
-
-	
-
     VERIFY_PARAM_NOT_NULL(p_src);
-
     VERIFY_FALSE((len + offset > sizeof(fstorage_data_write_temp)), NRF_ERROR_INVALID_PARAM);
-
-
-
     //fstorage_data_lock();
-
-		NRF_LOG_INFO("function:fstorage_data_write");
-
-		//NRF_LOG_HEXDUMP_INFO(p_src, len);
-
-	
-
+		
     // prepare data
-
-    rc = nrf_fstorage_read(&fstorage, fstorage.start_addr+offset,
-
-                           fstorage_data_write_temp, sizeof(fstorage_data_write_temp));
-
+    rc = nrf_fstorage_read(&fstorage, fstorage.start_addr+offset,fstorage_data_write_temp+offset, sizeof(fstorage_data_write_temp));
     if (NRF_SUCCESS != rc)
-
     {
-
         NRF_LOG_INFO("nrf_fstorage_read fstorage init data Failed, 0x%x", rc);
-
-        //goto WRITE_OUT;
-
     }
-
-    
-
     memcpy(fstorage_data_write_temp + offset, p_src, len);
 
-		//NRF_LOG_HEXDUMP_INFO(fstorage_data_write_temp + offset, len);
-
-
+		NRF_LOG_INFO("fstorage_data_write_temp + offset:",(fstorage_data_write_temp + offset));
+		NRF_LOG_HEXDUMP_INFO(fstorage_data_write_temp + offset, len);
+		
+		NRF_LOG_INFO("fstorage_data_write_temp:",(fstorage_data_write_temp));
+		NRF_LOG_HEXDUMP_INFO(fstorage_data_write_temp, len);
 
     // erase
-
-    //rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr, 1, NULL);
-		rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr+offset, 1, NULL);
-
-    if (NRF_SUCCESS != rc)
-
-    {
-
-        NRF_LOG_INFO("nrf_fstorage_erase Failed, rc=0x%x", rc);
-
-        //goto WRITE_OUT;
-
-    }
-
+    
 		
+		
+		//if(i == 1){
+		  rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr, 1, NULL);
+			//rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr+offset, 1, NULL);
+			
+			if (NRF_SUCCESS != rc)
+			{
+					NRF_LOG_INFO("nrf_fstorage_erase Failed, rc=0x%x", rc);
+			}
+		//}
 
     //wait_for_flash_ready(&fstorage);
-
-    
 
     // write
-
-    rc = nrf_fstorage_write(&fstorage, fstorage.start_addr+offset,
-
-                            fstorage_data_write_temp, sizeof(fstorage_data_write_temp), NULL);
-
+		
+		
+		
+    rc = nrf_fstorage_write(&fstorage, fstorage.start_addr,fstorage_data_write_temp, sizeof(fstorage_data_write_temp), NULL);
+			//rc = nrf_fstorage_write(&fstorage, fstorage.start_addr+offset,fstorage_data_write_temp, sizeof(fstorage_data_write_temp), NULL);
     if (NRF_SUCCESS != rc)
-
     {
-
         NRF_LOG_INFO("nrf_fstorage_write Failed, offset=%d, len=%d, rc=0x%x", offset, len, rc);
-
-        //goto WRITE_OUT;
-
     }
+    return rc;
+}
+#endif
+#if 0
+uint32_t fstorage_data_write(uint32_t offset, void const * p_src, uint32_t len)
+{
+    ret_code_t rc = NRF_SUCCESS;
 
+    VERIFY_PARAM_NOT_NULL(p_src);
+    VERIFY_FALSE((len + offset > sizeof(fstorage_data_write_temp)), NRF_ERROR_INVALID_PARAM);
+		
+	
+		memcpy(fstorage_data_write_temp + offset,p_src,len);
+    // prepare data
+    rc = nrf_fstorage_read(&fstorage, fstorage.start_addr+offset,fstorage_data_write_temp+offset, sizeof(fstorage_data_write_temp));
+    if (NRF_SUCCESS != rc)
+    {
+        NRF_LOG_INFO("nrf_fstorage_read fstorage init data Failed, 0x%x", rc);
+    }
+//    memcpy(fstorage_data_write_temp + offset, p_src, len);
 
+    // erase
+    //rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr, 1, NULL);
+	
+//		uint8_t i;
+//		i++;
+		//if(i == 1){
+			//rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr, 1, NULL);
+			rc = nrf_fstorage_erase(&fstorage, fstorage.start_addr+offset, 1, NULL);
+			//NRF_LOG_INFO("nrf_fstorage_erase couter: %d", i);
+			if (NRF_SUCCESS != rc)
+			{
+
+					NRF_LOG_INFO("nrf_fstorage_erase Failed, rc=0x%x", rc);
+			}
+		//}
 
     //wait_for_flash_ready(&fstorage);
 
+    // write
+		NRF_LOG_INFO("fstorage_data_write_temp:",(fstorage_data_write_temp));
+		NRF_LOG_HEXDUMP_INFO(fstorage_data_write_temp, len);
 
-
-
-
-//WRITE_OUT:
-
-    //fstorage_data_unlock();
-
-
-
+    rc = nrf_fstorage_write(&fstorage, fstorage.start_addr,fstorage_data_write_temp, sizeof(fstorage_data_write_temp), NULL);
+		//rc = nrf_fstorage_write(&fstorage, fstorage.start_addr+offset,fstorage_data_write_temp, sizeof(fstorage_data_write_temp), NULL);
+    if (NRF_SUCCESS != rc)
+    {
+        NRF_LOG_INFO("nrf_fstorage_write Failed, offset=%d, len=%d, rc=0x%x", offset, len, rc);
+    }
     return rc;
-
 }
-
+#endif
 uint32_t fstorage_data_erase(uint32_t offset)
 
 {
@@ -520,114 +519,56 @@ int storageReadData(uint8_t *outBuf, uint32_t word_count, uint32_t offset)
 
     uint32_t err_code;
 
-		NRF_LOG_INFO("storageReadData");
-
+		//NRF_LOG_INFO("storageReadData");
     if (NULL == outBuf)
-
         return 0;
-
-
-
     if ((offset >= 1024) || (word_count + offset > 1024))
-
         return 0;
-
-		
-
 		if(word_count == 17){
-
-		NRF_LOG_INFO("VIN-17");
-
+		//NRF_LOG_INFO("VIN-17");
 			err_code = fstorage_data_read(offset, outBuf, word_count);
 
 			//NRF_LOG_HEXDUMP_INFO(outBuf, word_count);
-
 		}
-
-		
-
 		if(word_count == 48){
-
-			NRF_LOG_INFO("CMPK-48");
-
+			//NRF_LOG_INFO("CMPK-48");
 			err_code = fstorage_data_read(offset, outBuf, word_count);
-
 			//NRF_LOG_HEXDUMP_INFO(outBuf, word_count);
 
 		}
-
-		
-
     if (NRF_SUCCESS != err_code)
-
     {
-
 			NRF_LOG_INFO("error:storageReadData function");
-
         return 0;
-
     }
-
-		
-
     return 0;
-
 }
 
 
 
-int storageWriteData( unsigned char *inBuf, unsigned int word_count,unsigned int offset)
-
-{
-
+int storageWriteData( unsigned char *inBuf, unsigned int word_count,unsigned int offset){
     uint32_t err_code;
-
-    NRF_LOG_INFO("storageWriteData");
-
+    //NRF_LOG_INFO("storageWriteData");
     if (NULL == inBuf)
-
         return 0;
-
-
 
     if ((offset >= 1024) || (word_count + offset > 1024))
-
         return 0;
 
-		
-
 		if(word_count == 48){
-
-		NRF_LOG_INFO("CMPK-48");
-
+		  //NRF_LOG_INFO("CMPK-48");
 			err_code = fstorage_data_write(offset, inBuf, word_count);
-
-			//NRF_LOG_HEXDUMP_INFO(inBuf, word_count);
-
 	}
 
 		if(word_count == 17){
-
-		NRF_LOG_INFO("VIN-17");
-
+		  //NRF_LOG_INFO("VIN-17");
 			err_code = fstorage_data_write(offset, inBuf, word_count);
-
-			//NRF_LOG_HEXDUMP_INFO(inBuf, word_count);
-
 	}
 
     if (NRF_SUCCESS != err_code)
-
     {
-
 			NRF_LOG_INFO("error:storageWriteData function");
-
         return 0;
-
     }
-
-
-
     return 0;
-
 }
