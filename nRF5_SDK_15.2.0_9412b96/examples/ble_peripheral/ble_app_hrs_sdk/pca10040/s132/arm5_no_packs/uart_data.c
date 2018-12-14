@@ -26,14 +26,13 @@ void uart_event_handle(app_uart_evt_t * p_event)
     {
         case APP_UART_DATA_READY:
             UNUSED_VARIABLE(app_uart_get(&data_array[index]));
+						printf("%X ",(data_array[index]));
             index++;
-						printf("\r\nAPP_UART_DATA_READY.\r\n");
-						//NRF_LOG_HEXDUMP_DEBUG(data_array, index);
+						
             if ((data_array[index - 1] == '\n') ||
                 (data_array[index - 1] == '\r') ||
                 (index >= m_ble_nus_max_data_len))
             {
-							printf("\r\nNRF_LOG_HEXDUMP_DEBUG.\r\n");
 							NRF_LOG_HEXDUMP_INFO(data_array, index);
 							break;
 //                if (index > 1)

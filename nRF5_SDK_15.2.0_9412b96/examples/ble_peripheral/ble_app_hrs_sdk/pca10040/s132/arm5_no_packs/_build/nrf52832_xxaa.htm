@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\_build\nrf52832_xxaa.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\_build\nrf52832_xxaa.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Dec 14 17:20:00 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Dec 14 17:49:14 2018
 <BR><P>
 <H3>Maximum Stack Usage =       1640 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -178,7 +178,7 @@ Function Pointers
  <LI><a href="#[47]">entropy_callback</a> from nrf_hw_backend_rng_mbedtls.o(i.entropy_callback) referenced from nrf_hw_backend_rng_mbedtls.o(i.nrf_crypto_rng_backend_init)
  <LI><a href="#[7c]">erase</a> from nrf_fstorage_sd.o(i.erase) referenced from nrf_fstorage_sd.o(.constdata)
  <LI><a href="#[50]">fds_evt_handler</a> from peer_data_storage.o(i.fds_evt_handler) referenced from peer_data_storage.o(i.pds_init)
- <LI><a href="#[35]">fputc</a> from retarget.o(i.fputc) referenced from printfb.o(i.__0printf$bare)
+ <LI><a href="#[35]">fputc</a> from retarget.o(i.fputc) referenced from printf5.o(i.__0printf$5)
  <LI><a href="#[2]">fs_event_handler</a> from fds.o(i.fs_event_handler) referenced 2 times from fds.o(fs_data)
  <LI><a href="#[1]">fstorage_evt_handler</a> from fstorage_data.o(i.fstorage_evt_handler) referenced 2 times from fstorage_data.o(fs_data)
  <LI><a href="#[40]">gatt_evt_handler</a> from main.o(i.gatt_evt_handler) referenced from main.o(i.main)
@@ -645,6 +645,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[17e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ast_auth_error_notify
 <LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_led_indication
+<LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 </UL>
 
 <P><STRONG><a name="[ba]"></a>__aeabi_llsl</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, llshl.o(.text))
@@ -1315,14 +1316,16 @@ Global Symbols
 <P><STRONG><a name="[f]"></a>UARTE0_UART0_IRQHandler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, nrfx_prs.o(i.UARTE0_UART0_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> arm_startup_nrf52.o(RESET)
 </UL>
-<P><STRONG><a name="[142]"></a>__0printf$bare</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, printfb.o(i.__0printf$bare), UNUSED)
+<P><STRONG><a name="[142]"></a>__0printf$5</STRONG> (Thumb, 22 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 </UL>
 
-<P><STRONG><a name="[3b4]"></a>__1printf$bare</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, printfb.o(i.__0printf$bare), UNUSED)
+<P><STRONG><a name="[3b4]"></a>__1printf$5</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5), UNUSED)
 
-<P><STRONG><a name="[2a8]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, printfb.o(i.__0printf$bare))
-<BR><BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_event_handle
+<P><STRONG><a name="[2a8]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_event_handle
 <LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -2242,7 +2245,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[172]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_uart_put
 </UL>
-<BR>[Address Reference Count : 1]<UL><LI> printfb.o(i.__0printf$bare)
+<BR>[Address Reference Count : 1]<UL><LI> printf5.o(i.__0printf$5)
 </UL>
 <P><STRONG><a name="[276]"></a>free</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, malloc.o(i.free))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = free
@@ -2836,8 +2839,8 @@ Global Symbols
 <LI><a href="#[2a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;peer_manager_init
 <LI><a href="#[244]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gap_params_init
 <LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;application_timers_start
-<LI><a href="#[2a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[2a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
@@ -5331,7 +5334,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gcm_ble_evt_handler
 </UL>
 
-<P><STRONG><a name="[5b]"></a>uart_event_handle</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, uart_data.o(i.uart_event_handle))
+<P><STRONG><a name="[5b]"></a>uart_event_handle</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, uart_data.o(i.uart_event_handle))
 <BR><BR>[Stack]<UL><LI>Max Depth = 252<LI>Call Chain = uart_event_handle &rArr; app_uart_get &rArr; app_error_handler_bare &rArr; app_error_fault_handler &rArr; nrf_log_frontend_std_0 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_uart_get
@@ -6238,12 +6241,12 @@ Local Symbols
 <LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pdb_write_buf_store
 <LI><a href="#[187]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pdb_write_buf_get
 <LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;im_peer_id_get_by_conn_handle
-<LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pairing_success_evt_send
 <LI><a href="#[192]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;evt_send
 <LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;allow_repairing
 <LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pds_peer_id_allocate
 <LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_unexpected_error
 <LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_config_req
+<LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pairing_success_evt_send
 <LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[38b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;smd_ble_evt_handler
@@ -6275,13 +6278,13 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;im_peer_id_get_by_conn_handle
 </UL>
-<BR>[Called By]<UL><LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pairing_success_evt_send
-<LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conn_sec_failure
+<BR>[Called By]<UL><LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conn_sec_failure
 <LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;auth_status_success_process
 <LI><a href="#[38b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;smd_ble_evt_handler
 <LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_unexpected_error
 <LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_config_req
 <LI><a href="#[385]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sec_proc_start
+<LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pairing_success_evt_send
 </UL>
 
 <P><STRONG><a name="[23a]"></a>flag_id_init</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, security_dispatcher.o(i.flag_id_init))
@@ -8425,8 +8428,10 @@ Local Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;occ_bigint_cswap256
 </UL>
 
-<P><STRONG><a name="[143]"></a>_printf_core</STRONG> (Thumb, 34 bytes, Stack size 24 bytes, printfb.o(i._printf_core), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0printf$bare
+<P><STRONG><a name="[143]"></a>_printf_core</STRONG> (Thumb, 658 bytes, Stack size 104 bytes, printf5.o(i._printf_core), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+</UL>
+<BR>[Called By]<UL><LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0printf$5
 </UL>
 <P>
 <H3>
