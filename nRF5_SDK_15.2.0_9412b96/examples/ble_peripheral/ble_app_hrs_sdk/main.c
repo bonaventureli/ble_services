@@ -1490,119 +1490,140 @@ static void idle_state_handle(void)
         nrf_pwr_mgmt_run();
     }
 }
-#if 0
-/*!
- * typedef int (*pfnReadPortCB_t)(eDKPORT port,uint8_t *outBuf, uint32_t size,uint32_t offset)
- * read content from flash/uart
- * @param [out] outBuf: read flash or uart content and write to outBuf
- * @param [in] size: outBuf size .
- * @param [in] offset:  read flash offset position
- * @return 	actual read size from port.
- * Example usage:
- * @verbatim
- * @endverbatim
- */
-typedef int (*pfnReadPortCB_t)(uint8_t *outBuf, uint32_t size,uint32_t offset);
-/*!
- * typedef int (*pfnWritePortCB_t)(const uint8_t *inBuf, uint32_t size,uint32_t offset)
- * write content to flash or uart
- * @param [in] inBuf: content will be writed to flash or uart.
- * @param [in] size: inBuf size .
- * @param [in] offset:  write to flash offset position
- * @return actual write size to port.
- * Example usage:
- * @verbatim
- * @endverbatim
- */
-typedef int (*pfnWritePortCB_t)(const uint8_t *inBuf, uint32_t size,uint32_t offset);
-/*!
- *  \struct dkIOs_t
- *  \brief 
- */
-typedef struct
-{
-   pfnWritePortCB_t     uartTxCallback; //write uart callback funtion point
-   pfnReadPortCB_t      flashRCallback; //read flash callback funtion point
-   pfnWritePortCB_t     flashWCallback; //write flash callback funtion point
-} dkIOs_t;
-#define SESSION_MAX 1
-dkIOs_t IKTK_SessionContain[SESSION_MAX] ={0};
-pfnWritePortCB_t   g_uartTxCB = 0;
-int ikcmdInitialize(pfnWritePortCB_t inUartTx)
-{
-    g_uartTxCB = inUartTx;
-	  return 0;
-}
-uint32_t DKCreateSRV(dkIOs_t * pSession)
-{
-    static uint32_t session_id = 0;
-  if (pSession && session_id < SESSION_MAX) {
-      ++session_id;
-      //ikbleInitialize();
-      IKTK_SessionContain[session_id - 1] = *pSession;
-      ikcmdInitialize(pSession->uartTxCallback);
-      //ingeek_set_callback(pSession->flashRCallback,pSession->flashWCallback,ikif_random_vector_generate);
-	  //ikSecuritySetRunningStatus(DK_SYS_INIT);
-      return session_id;
-  } else {
-    return 0;
-  }
-}
-static dkIOs_t g_ios = {0,0,0};
 
-static int storageReadData(uint8_t *outBuf, uint32_t word_count, uint32_t offset)
-{
-    uint32_t err_code;
-    if (NULL == outBuf)
-        return 0;
 
-    if ((offset >= 1024) || (word_count + offset > 1024))
-        return 0;
-        
-    err_code = fstorage_data_read(offset, outBuf, word_count);
-    if (NRF_SUCCESS != err_code)
-    {
-        return 0;
-    }
 
-    return 0;
-}
-
-static int storageWriteData(const uint8_t *inBuf, uint32_t word_count,uint32_t offset)
-{
-    uint32_t err_code;
-    
-    if (NULL == inBuf)
-        return 0;
-
-    if ((offset >= 1024) || (word_count + offset > 1024))
-        return 0;
-        
-    err_code = fstorage_data_write(offset, inBuf, word_count);
-    if (NRF_SUCCESS != err_code)
-    {
-        return 0;
-    }
-
-    return 0;
-}
+#include "app_uart.h"
+#if defined (UART_PRESENT)
+#include "nrf_uart.h"
+#endif
+#if defined (UARTE_PRESENT)
+#include "nrf_uarte.h"
 #endif
 
-#if 0
-static int ikif_uart_txcb( const uint8_t *msg, uint32_t wlen, uint32_t offset )
+//#include "app_uart_fifo.h"
+
+//#define ENABLE_LOOPBACK_TEST  /**< if defined, then this example will be a loopback test, which means that TX should be connected to RX to get data loopback. */
+
+#define MAX_TEST_DATA_BYTES     (15U)                /**< max number of test bytes to be used for tx and rx. */
+#define UART_TX_BUF_SIZE 256                         /**< UART TX buffer size. */
+#define UART_RX_BUF_SIZE 256                         /**< UART RX buffer size. */
+
+void uart_error_handle(app_uart_evt_t * p_event)
 {
-    int ret;
-    //NRF_LOG_INFO("ikif_uart_txcb tx %d bytes", wlen);
-    
-    ret = m2m_if_UartSendData((uint8_t *)msg, (uint16_t)wlen);
-    if (wlen != ret)
+    if (p_event->evt_type == APP_UART_COMMUNICATION_ERROR)
     {
-        NRF_LOG_WARNING("m2m_if_UartSendData send Failed, req=%d, sended=%d", wlen, ret);
+        APP_ERROR_HANDLER(p_event->data.error_communication);
     }
-    
-    return ret;
+    else if (p_event->evt_type == APP_UART_FIFO_ERROR)
+    {
+        APP_ERROR_HANDLER(p_event->data.error_code);
+    }
 }
+
+
+#ifdef ENABLE_LOOPBACK_TEST
+/* Use flow control in loopback test. */
+#define UART_HWFC APP_UART_FLOW_CONTROL_ENABLED
+
+/** @brief Function for setting the @ref ERROR_PIN high, and then enter an infinite loop.
+ */
+static void show_error(void)
+{
+
+    bsp_board_leds_on();
+    while (true)
+    {
+        // Do nothing.
+    }
+}
+
+
+/** @brief Function for testing UART loop back.
+ *  @details Transmitts one character at a time to check if the data received from the loopback is same as the transmitted data.
+ *  @note  @ref TX_PIN_NUMBER must be connected to @ref RX_PIN_NUMBER)
+ */
+static void uart_loopback_test()
+{
+    uint8_t * tx_data = (uint8_t *)("\r\nLOOPBACK_TEST\r\n");
+    uint8_t   rx_data;
+
+    // Start sending one byte and see if you get the same
+    for (uint32_t i = 0; i < MAX_TEST_DATA_BYTES; i++)
+    {
+        uint32_t err_code;
+        while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
+
+        nrf_delay_ms(10);
+        err_code = app_uart_get(&rx_data);
+
+        if ((rx_data != tx_data[i]) || (err_code != NRF_SUCCESS))
+        {
+            show_error();
+        }
+    }
+    return;
+}
+#else
+/* When UART is used for communication with the host do not use flow control.*/
+#define UART_HWFC APP_UART_FLOW_CONTROL_DISABLED
 #endif
+
+
+void uart_init(){
+	uint32_t err_code;
+const app_uart_comm_params_t comm_params =
+      {
+          RX_PIN_NUMBER,
+          TX_PIN_NUMBER,
+          RTS_PIN_NUMBER,
+          CTS_PIN_NUMBER,
+          UART_HWFC,
+          false,
+#if defined (UART_PRESENT)
+          NRF_UART_BAUDRATE_115200
+#else
+          NRF_UARTE_BAUDRATE_115200
+#endif
+      };
+
+    APP_UART_FIFO_INIT(&comm_params,
+                         UART_RX_BUF_SIZE,
+                         UART_TX_BUF_SIZE,
+                         uart_error_handle,
+                         APP_IRQ_PRIORITY_LOWEST,
+                         err_code);
+
+    APP_ERROR_CHECK(err_code);
+
+#ifndef ENABLE_LOOPBACK_TEST
+    printf("\r\nUART example started.\r\n");
+
+    while (true)
+    {
+        uint8_t cr;
+        while (app_uart_get(&cr) != NRF_SUCCESS);
+        while (app_uart_put(cr) != NRF_SUCCESS);
+
+        if (cr == 'q' || cr == 'Q')
+        {
+            printf(" \r\nExit!\r\n");
+
+            while (true)
+            {
+                // Do nothing.
+            }
+        }
+    }
+#else
+
+    // This part of the example is just for testing the loopback .
+    while (true)
+    {
+        uart_loopback_test();
+    }
+#endif
+}
 /**@brief Function for application main entry.
  */
 int main(void)
@@ -1636,7 +1657,7 @@ int main(void)
 		fstorage_data_erase(0);
 		#endif
 		
-		#if 1
+		#if 0
 		ingeek_set_callback(read_CB1,write_CB1,Rand_CB1);
 		#else
 		ingeek_set_callback(storageReadData,storageWriteData,ikif_random_vector_generate);
@@ -1646,6 +1667,8 @@ int main(void)
 		uint8_t status;
 		status = ingeek_get_sec_status();
 		NRF_LOG_INFO("started %x",status);
+		
+		uart_init();
     // Enter main loop.
     for (;;)
     {	
