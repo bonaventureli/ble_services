@@ -314,8 +314,11 @@ Section Cross References
     fstorage_data.o(fs_data) refers to fstorage_data.o(i.fstorage_evt_handler) for fstorage_evt_handler
     uart_data.o(i.uart_event_handle) refers to app_error.o(i.app_error_handler_bare) for app_error_handler_bare
     uart_data.o(i.uart_event_handle) refers to app_uart_fifo.o(i.app_uart_get) for app_uart_get
+    uart_data.o(i.uart_event_handle) refers to printfb.o(i.__0printf$bare) for __2printf
+    uart_data.o(i.uart_event_handle) refers to nrf_log_frontend.o(i.nrf_log_frontend_hexdump) for nrf_log_frontend_hexdump
     uart_data.o(i.uart_event_handle) refers to uart_data.o(.bss) for .bss
     uart_data.o(i.uart_event_handle) refers to uart_data.o(.data) for .data
+    uart_data.o(i.uart_event_handle) refers to nrf_log_frontend.o(log_const_data) for m_nrf_log_app_logs_data_const
     uart_data.o(i.uart_init) refers to memmove.o(.text) for __aeabi_memcpy4
     uart_data.o(i.uart_init) refers to app_uart_fifo.o(i.app_uart_init) for app_uart_init
     uart_data.o(i.uart_init) refers to app_error.o(i.app_error_handler_bare) for app_error_handler_bare
@@ -6102,409 +6105,409 @@ Image Symbol Table
     i.tx_done_event                          0x0003a124   Section        0  nrfx_uart.o(i.tx_done_event)
     tx_done_event                            0x0003a125   Thumb Code    26  nrfx_uart.o(i.tx_done_event)
     i.uart_event_handle                      0x0003a140   Section        0  uart_data.o(i.uart_event_handle)
-    i.uart_event_handler                     0x0003a1a8   Section        0  app_uart_fifo.o(i.uart_event_handler)
-    uart_event_handler                       0x0003a1a9   Thumb Code   152  app_uart_fifo.o(i.uart_event_handler)
-    i.uart_evt_handler                       0x0003a248   Section        0  nrf_drv_uart.o(i.uart_evt_handler)
-    uart_evt_handler                         0x0003a249   Thumb Code    42  nrf_drv_uart.o(i.uart_evt_handler)
-    i.uart_init                              0x0003a278   Section        0  uart_data.o(i.uart_init)
-    i.uart_irq_handler                       0x0003a2c0   Section        0  nrfx_uart.o(i.uart_irq_handler)
-    uart_irq_handler                         0x0003a2c1   Thumb Code   296  nrfx_uart.o(i.uart_irq_handler)
-    i.uarte_evt_handler                      0x0003a3e8   Section        0  nrf_drv_uart.o(i.uarte_evt_handler)
-    uarte_evt_handler                        0x0003a3e9   Thumb Code    42  nrf_drv_uart.o(i.uarte_evt_handler)
-    i.uarte_irq_handler                      0x0003a418   Section        0  nrfx_uarte.o(i.uarte_irq_handler)
-    uarte_irq_handler                        0x0003a419   Thumb Code   244  nrfx_uarte.o(i.uarte_irq_handler)
-    i.uint16_encode                          0x0003a50c   Section        0  ble_advdata.o(i.uint16_encode)
-    uint16_encode                            0x0003a50d   Thumb Code    10  ble_advdata.o(i.uint16_encode)
-    i.uninit                                 0x0003a518   Section        0  nrf_fstorage_sd.o(i.uninit)
-    uninit                                   0x0003a519   Thumb Code    22  nrf_fstorage_sd.o(i.uninit)
-    i.unsigned_print                         0x0003a538   Section        0  nrf_fprintf_format.o(i.unsigned_print)
-    unsigned_print                           0x0003a539   Thumb Code   176  nrf_fprintf_format.o(i.unsigned_print)
-    i.update_pending_flags_check             0x0003a5ec   Section        0  gatt_cache_manager.o(i.update_pending_flags_check)
-    update_pending_flags_check               0x0003a5ed   Thumb Code    34  gatt_cache_manager.o(i.update_pending_flags_check)
-    i.update_timeout_handler                 0x0003a61c   Section        0  ble_conn_params.o(i.update_timeout_handler)
-    update_timeout_handler                   0x0003a61d   Thumb Code    98  ble_conn_params.o(i.update_timeout_handler)
-    i.use_whitelist                          0x0003a684   Section        0  ble_advertising.o(i.use_whitelist)
-    use_whitelist                            0x0003a685   Thumb Code    24  ble_advertising.o(i.use_whitelist)
-    i.user_flag_is_acquired                  0x0003a69c   Section        0  ble_conn_state.o(i.user_flag_is_acquired)
-    user_flag_is_acquired                    0x0003a69d   Thumb Code     8  ble_conn_state.o(i.user_flag_is_acquired)
-    i.user_mem_reply                         0x0003a6a8   Section        0  nrf_ble_qwr.o(i.user_mem_reply)
-    user_mem_reply                           0x0003a6a9   Thumb Code    36  nrf_ble_qwr.o(i.user_mem_reply)
-    i.user_op_alloc                          0x0003a6cc   Section        0  app_timer.o(i.user_op_alloc)
-    user_op_alloc                            0x0003a6cd   Thumb Code    42  app_timer.o(i.user_op_alloc)
-    i.uuid_list_encode                       0x0003a6fc   Section        0  ble_advdata.o(i.uuid_list_encode)
-    uuid_list_encode                         0x0003a6fd   Thumb Code    48  ble_advdata.o(i.uuid_list_encode)
-    i.uuid_list_sized_encode                 0x0003a72c   Section        0  ble_advdata.o(i.uuid_list_sized_encode)
-    uuid_list_sized_encode                   0x0003a72d   Thumb Code   158  ble_advdata.o(i.uuid_list_sized_encode)
-    i.wakeup_button_cfg                      0x0003a7ca   Section        0  bsp.o(i.wakeup_button_cfg)
-    wakeup_button_cfg                        0x0003a7cb   Thumb Code    58  bsp.o(i.wakeup_button_cfg)
-    i.wmap                                   0x0003a804   Section        0  nrf_fstorage_sd.o(i.wmap)
-    wmap                                     0x0003a805   Thumb Code     4  nrf_fstorage_sd.o(i.wmap)
-    i.write                                  0x0003a808   Section        0  nrf_fstorage_sd.o(i.write)
-    write                                    0x0003a809   Thumb Code    74  nrf_fstorage_sd.o(i.write)
-    i.write_CB1                              0x0003a858   Section        0  main.o(i.write_CB1)
-    i.write_buf_store                        0x0003a994   Section        0  peer_database.o(i.write_buf_store)
-    i.write_buffer_record_find               0x0003aae0   Section        0  peer_database.o(i.write_buffer_record_find)
-    write_buffer_record_find                 0x0003aae1   Thumb Code    52  peer_database.o(i.write_buffer_record_find)
-    i.write_buffer_record_find_next          0x0003ab14   Section        0  peer_database.o(i.write_buffer_record_find_next)
-    write_buffer_record_find_next            0x0003ab15   Thumb Code    42  peer_database.o(i.write_buffer_record_find_next)
-    i.write_buffer_record_invalidate         0x0003ab44   Section        0  peer_database.o(i.write_buffer_record_invalidate)
-    write_buffer_record_invalidate           0x0003ab45   Thumb Code    28  peer_database.o(i.write_buffer_record_invalidate)
-    i.write_buffer_record_release            0x0003ab60   Section        0  peer_database.o(i.write_buffer_record_release)
-    write_buffer_record_release              0x0003ab61   Thumb Code    38  peer_database.o(i.write_buffer_record_release)
-    i.write_enqueue                          0x0003ab8c   Section        0  fds.o(i.write_enqueue)
-    write_enqueue                            0x0003ab8d   Thumb Code   222  fds.o(i.write_enqueue)
-    i.write_execute                          0x0003ac74   Section        0  fds.o(i.write_execute)
-    write_execute                            0x0003ac75   Thumb Code   230  fds.o(i.write_execute)
-    i.write_space_free                       0x0003ad68   Section        0  fds.o(i.write_space_free)
-    write_space_free                         0x0003ad69   Thumb Code    20  fds.o(i.write_space_free)
-    i.write_space_reserve                    0x0003ad80   Section        0  fds.o(i.write_space_reserve)
-    write_space_reserve                      0x0003ad81   Thumb Code    88  fds.o(i.write_space_reserve)
-    i.xorbuf                                 0x0003addc   Section        0  cmac.o(i.xorbuf)
-    xorbuf                                   0x0003addd   Thumb Code    22  cmac.o(i.xorbuf)
-    i.xtime                                  0x0003adf2   Section        0  aes_1.o(i.xtime)
-    xtime                                    0x0003adf3   Thumb Code    18  aes_1.o(i.xtime)
-    .constdata                               0x0003ae04   Section       16  main.o(.constdata)
-    m_battery_timer_id                       0x0003ae04   Data           4  main.o(.constdata)
-    m_heart_rate_timer_id                    0x0003ae08   Data           4  main.o(.constdata)
-    m_rr_interval_timer_id                   0x0003ae0c   Data           4  main.o(.constdata)
-    m_sensor_contact_timer_id                0x0003ae10   Data           4  main.o(.constdata)
-    .constdata                               0x0003ae14   Section       24  uart_data.o(.constdata)
-    .constdata                               0x0003ae2c   Section        8  boards.o(.constdata)
-    m_board_led_list                         0x0003ae2c   Data           4  boards.o(.constdata)
-    m_board_btn_list                         0x0003ae30   Data           4  boards.o(.constdata)
-    .constdata                               0x0003ae34   Section       44  bsp.o(.constdata)
-    m_bsp_leds_tmr                           0x0003ae34   Data           4  bsp.o(.constdata)
-    m_bsp_alert_tmr                          0x0003ae38   Data           4  bsp.o(.constdata)
-    m_bsp_button_tmr                         0x0003ae3c   Data           4  bsp.o(.constdata)
-    app_buttons                              0x0003ae40   Data          32  bsp.o(.constdata)
-    .constdata                               0x0003ae60   Section        4  auth_status_tracker.o(.constdata)
-    m_pairing_attempt_timer                  0x0003ae60   Data           4  auth_status_tracker.o(.constdata)
-    .constdata                               0x0003ae64   Section      116  gatt_cache_manager.o(.constdata)
-    car_value_true                           0x0003ae68   Data           4  gatt_cache_manager.o(.constdata)
-    car_value_false                          0x0003ae6c   Data           4  gatt_cache_manager.o(.constdata)
-    .constdata                               0x0003aed8   Section        4  gatts_cache_manager.o(.constdata)
-    service_changed_pending                  0x0003aed8   Data           4  gatts_cache_manager.o(.constdata)
-    .constdata                               0x0003aedc   Section       16  gatts_cache_manager.o(.constdata)
-    .constdata                               0x0003aeec   Section        4  gatts_cache_manager.o(.constdata)
-    service_changed_pending                  0x0003aeec   Data           4  gatts_cache_manager.o(.constdata)
-    .constdata                               0x0003aef0   Section        8  id_manager.o(.constdata)
-    m_evt_handlers                           0x0003aef0   Data           8  id_manager.o(.constdata)
-    .constdata                               0x0003aef8   Section       22  nrf_ble_gatt.o(.constdata)
-    .constdata                               0x0003af10   Section       28  peer_data_storage.o(.constdata)
-    m_evt_handlers                           0x0003af10   Data           4  peer_data_storage.o(.constdata)
-    .constdata                               0x0003af2c   Section       16  peer_database.o(.constdata)
-    m_evt_handlers                           0x0003af2c   Data          16  peer_database.o(.constdata)
-    .constdata                               0x0003af3c   Section       44  peer_manager.o(.constdata)
-    __func__                                 0x0003af3c   Data           8  peer_manager.o(.constdata)
-    __func__                                 0x0003af4c   Data          12  peer_manager.o(.constdata)
-    __func__                                 0x0003af58   Data          16  peer_manager.o(.constdata)
-    .constdata                               0x0003af68   Section       24  peer_manager_handler.o(.constdata)
-    .constdata                               0x0003af80   Section      140  security_dispatcher.o(.constdata)
-    m_evt_handlers                           0x0003af80   Data           4  security_dispatcher.o(.constdata)
-    __func__                                 0x0003affc   Data          16  security_dispatcher.o(.constdata)
-    .constdata                               0x0003b00c   Section        4  security_manager.o(.constdata)
-    m_evt_handlers                           0x0003b00c   Data           4  security_manager.o(.constdata)
-    .constdata                               0x0003b010   Section      108  nrf_crypto_ecc.o(.constdata)
-    key_pair_generate_context_size           0x0003b010   Data           6  nrf_crypto_ecc.o(.constdata)
-    public_key_calculate_context_size        0x0003b016   Data           6  nrf_crypto_ecc.o(.constdata)
-    key_pair_generate_impl                   0x0003b01c   Data          12  nrf_crypto_ecc.o(.constdata)
-    public_key_calculate_impl                0x0003b028   Data          12  nrf_crypto_ecc.o(.constdata)
-    private_key_from_raw_impl                0x0003b034   Data          12  nrf_crypto_ecc.o(.constdata)
-    private_key_to_raw_impl                  0x0003b040   Data          12  nrf_crypto_ecc.o(.constdata)
-    public_key_from_raw_impl                 0x0003b04c   Data          12  nrf_crypto_ecc.o(.constdata)
-    public_key_to_raw_impl                   0x0003b058   Data          12  nrf_crypto_ecc.o(.constdata)
-    private_key_free_impl                    0x0003b064   Data          12  nrf_crypto_ecc.o(.constdata)
-    public_key_free_impl                     0x0003b070   Data          12  nrf_crypto_ecc.o(.constdata)
-    .constdata                               0x0003b07c   Section       12  nrf_crypto_ecdh.o(.constdata)
-    compute_impl_context_size                0x0003b07c   Data           4  nrf_crypto_ecdh.o(.constdata)
-    compute_impl                             0x0003b080   Data           8  nrf_crypto_ecdh.o(.constdata)
-    .constdata                               0x0003b088   Section       12  oberon_backend_ecc.o(.constdata)
-    .constdata                               0x0003b094   Section       64  oberon_backend_ecc.o(.constdata)
-    min_value                                0x0003b094   Data          32  oberon_backend_ecc.o(.constdata)
-    max_value                                0x0003b0b4   Data          32  oberon_backend_ecc.o(.constdata)
-    .constdata                               0x0003b0d4   Section        2  nrf_drv_rng.o(.constdata)
-    m_default_config                         0x0003b0d4   Data           2  nrf_drv_rng.o(.constdata)
-    .constdata                               0x0003b0d8   Section        4  nrfx_gpiote.o(.constdata)
-    .constdata                               0x0003b0dc   Section        4  nrfx_uart.o(.constdata)
-    irq_handlers                             0x0003b0dc   Data           4  nrfx_uart.o(.constdata)
-    .constdata                               0x0003b0e0   Section        4  nrfx_uarte.o(.constdata)
-    irq_handlers                             0x0003b0e0   Data           4  nrfx_uarte.o(.constdata)
-    .constdata                               0x0003b0e4   Section       16  nrf_fstorage_sd.o(.constdata)
-    m_fifo                                   0x0003b0e4   Data           4  nrf_fstorage_sd.o(.constdata)
-    m_flash_info                             0x0003b0e8   Data          12  nrf_fstorage_sd.o(.constdata)
-    .constdata                               0x0003b0f4   Section       32  nrf_fstorage_sd.o(.constdata)
-    .constdata                               0x0003b114   Section       94  nrf_fstorage.o(.constdata)
-    __func__                                 0x0003b114   Data          18  nrf_fstorage.o(.constdata)
-    __func__                                 0x0003b126   Data          20  nrf_fstorage.o(.constdata)
-    __func__                                 0x0003b13a   Data          18  nrf_fstorage.o(.constdata)
-    __func__                                 0x0003b14c   Data          19  nrf_fstorage.o(.constdata)
-    __func__                                 0x0003b15f   Data          19  nrf_fstorage.o(.constdata)
-    .constdata                               0x0003b174   Section        8  app_button.o(.constdata)
-    m_detection_delay_timer_id               0x0003b178   Data           4  app_button.o(.constdata)
-    .constdata                               0x0003b17c   Section       32  app_uart_fifo.o(.constdata)
-    .constdata                               0x0003b1a0   Section        6  app_timer.o(.constdata)
-    delay_bytecode                           0x0003b1a0   Data           6  app_timer.o(.constdata)
-    .constdata                               0x0003b1a6   Section       16  nrf_fprintf_format.o(.constdata)
-    _aV2C                                    0x0003b1a6   Data          16  nrf_fprintf_format.o(.constdata)
-    .constdata                               0x0003b1b8   Section       24  nrf_pwr_mgmt.o(.constdata)
-    pwr_mgmt_data_array                      0x0003b1b8   Data          24  nrf_pwr_mgmt.o(.constdata)
-    .constdata                               0x0003b1d0   Section       12  nrf_pwr_mgmt.o(.constdata)
-    pwr_mgmt_data                            0x0003b1d0   Data          12  nrf_pwr_mgmt.o(.constdata)
-    .constdata                               0x0003b1dc   Section      316  nrf_strerror.o(.constdata)
-    m_unknown_str                            0x0003b1dc   Data          19  nrf_strerror.o(.constdata)
-    nrf_strerror_array                       0x0003b1f0   Data         296  nrf_strerror.o(.constdata)
-    .constdata                               0x0003b318   Section       24  fds.o(.constdata)
-    m_queue                                  0x0003b318   Data           4  fds.o(.constdata)
-    dirty_header                             0x0003b31c   Data           4  fds.o(.constdata)
-    page_tag_swap                            0x0003b320   Data           8  fds.o(.constdata)
-    page_tag_data                            0x0003b328   Data           8  fds.o(.constdata)
-    .constdata                               0x0003b330   Section       12  nrf_log_backend_rtt.o(.constdata)
-    .constdata                               0x0003b340   Section        6  nrf_log_backend_rtt.o(.constdata)
-    delay_bytecode                           0x0003b340   Data           6  nrf_log_backend_rtt.o(.constdata)
-    .constdata                               0x0003b348   Section       12  nrf_log_frontend.o(.constdata)
-    m_log_push_ringbuf                       0x0003b348   Data          12  nrf_log_frontend.o(.constdata)
-    .constdata                               0x0003b354   Section       16  nrf_sdh.o(.constdata)
-    sdh_req_observers_array                  0x0003b354   Data          16  nrf_sdh.o(.constdata)
-    .constdata                               0x0003b364   Section       40  nrf_sdh.o(.constdata)
-    sdh_req_observers                        0x0003b368   Data          12  nrf_sdh.o(.constdata)
-    sdh_state_observers                      0x0003b374   Data          12  nrf_sdh.o(.constdata)
-    sdh_stack_observers                      0x0003b380   Data          12  nrf_sdh.o(.constdata)
-    .constdata                               0x0003b38c   Section       16  nrf_sdh.o(.constdata)
-    sdh_state_observers_array                0x0003b38c   Data          16  nrf_sdh.o(.constdata)
-    .constdata                               0x0003b39c   Section       16  nrf_sdh.o(.constdata)
-    sdh_stack_observers_array                0x0003b39c   Data          16  nrf_sdh.o(.constdata)
-    .constdata                               0x0003b3ac   Section       32  nrf_sdh_ble.o(.constdata)
-    sdh_ble_observers_array                  0x0003b3ac   Data          32  nrf_sdh_ble.o(.constdata)
-    .constdata                               0x0003b3cc   Section       16  nrf_sdh_ble.o(.constdata)
-    sdh_ble_observers                        0x0003b3d0   Data          12  nrf_sdh_ble.o(.constdata)
-    .constdata                               0x0003b3dc   Section       16  nrf_sdh_soc.o(.constdata)
-    sdh_soc_observers_array                  0x0003b3dc   Data          16  nrf_sdh_soc.o(.constdata)
-    .constdata                               0x0003b3ec   Section       12  nrf_sdh_soc.o(.constdata)
-    sdh_soc_observers                        0x0003b3ec   Data          12  nrf_sdh_soc.o(.constdata)
-    .constdata                               0x0003b3f8   Section     8744  aes.o(.constdata)
-    FSb                                      0x0003b3f8   Data         256  aes.o(.constdata)
-    FT0                                      0x0003b4f8   Data        1024  aes.o(.constdata)
-    FT1                                      0x0003b8f8   Data        1024  aes.o(.constdata)
-    FT2                                      0x0003bcf8   Data        1024  aes.o(.constdata)
-    FT3                                      0x0003c0f8   Data        1024  aes.o(.constdata)
-    RSb                                      0x0003c4f8   Data         256  aes.o(.constdata)
-    RT0                                      0x0003c5f8   Data        1024  aes.o(.constdata)
-    RT1                                      0x0003c9f8   Data        1024  aes.o(.constdata)
-    RT2                                      0x0003cdf8   Data        1024  aes.o(.constdata)
-    RT3                                      0x0003d1f8   Data        1024  aes.o(.constdata)
-    RCON                                     0x0003d5f8   Data          40  aes.o(.constdata)
-    .constdata                               0x0003d620   Section      523  aes_1.o(.constdata)
-    sbox                                     0x0003d620   Data         256  aes_1.o(.constdata)
-    rsbox                                    0x0003d720   Data         256  aes_1.o(.constdata)
-    Rcon                                     0x0003d820   Data          11  aes_1.o(.constdata)
-    .constdata                               0x0003d82c   Section       40  md_wrap.o(.constdata)
-    .constdata                               0x0003d854   Section       40  md_wrap.o(.constdata)
-    .constdata                               0x0003d87c   Section      320  sha256.o(.constdata)
-    K                                        0x0003d87c   Data         256  sha256.o(.constdata)
-    sha256_padding                           0x0003d97c   Data          64  sha256.o(.constdata)
-    .constdata                               0x0003d9bc   Section       20  digitalkey.pb.o(.constdata)
-    .constdata                               0x0003d9d0   Section       40  digitalkey.pb.o(.constdata)
-    .constdata                               0x0003d9f8   Section      100  digitalkey.pb.o(.constdata)
-    .constdata                               0x0003da5c   Section       60  digitalkey.pb.o(.constdata)
-    .constdata                               0x0003da98   Section       60  digitalkey.pb.o(.constdata)
-    .constdata                               0x0003dad4   Section       30  digitalkey.pb.o(.constdata)
-    .constdata                               0x0003daf4   Section       40  pb_decode.o(.constdata)
-    PB_DECODERS                              0x0003daf4   Data          40  pb_decode.o(.constdata)
-    .constdata                               0x0003db1c   Section       40  pb_encode.o(.constdata)
-    PB_ENCODERS                              0x0003db1c   Data          40  pb_encode.o(.constdata)
-    .constdata                               0x0003db44   Section      129  ctype_o.o(.constdata)
-    .constdata                               0x0003dbc8   Section        4  ctype_o.o(.constdata)
-    table                                    0x0003dbc8   Data           4  ctype_o.o(.constdata)
-    .conststring                             0x0003dbcc   Section       86  main.o(.conststring)
-    .conststring                             0x0003dc24   Section       65  fstorage_data.o(.conststring)
-    .conststring                             0x0003dc68   Section       78  auth_status_tracker.o(.conststring)
-    .conststring                             0x0003dcb8   Section      420  gatt_cache_manager.o(.conststring)
-    .conststring                             0x0003de5c   Section      324  gatts_cache_manager.o(.conststring)
-    .conststring                             0x0003dfa0   Section      162  nrf_ble_gatt.o(.conststring)
-    .conststring                             0x0003e044   Section       66  nrf_ble_lesc.o(.conststring)
-    .conststring                             0x0003e088   Section      232  peer_data_storage.o(.conststring)
-    .conststring                             0x0003e170   Section      384  peer_database.o(.conststring)
-    .conststring                             0x0003e2f0   Section      144  peer_manager.o(.conststring)
-    .conststring                             0x0003e380   Section      714  peer_manager_handler.o(.conststring)
-    .conststring                             0x0003e64c   Section      498  security_dispatcher.o(.conststring)
-    .conststring                             0x0003e840   Section      379  security_manager.o(.conststring)
-    .conststring                             0x0003e9bc   Section       81  ble_hrs.o(.conststring)
-    .conststring                             0x0003ea10   Section       79  nrf_fstorage.o(.conststring)
-    .conststring                             0x0003ea60   Section     1003  nrf_strerror.o(.conststring)
-    .conststring                             0x0003ee4c   Section      102  nrf_log_str_formatter.o(.conststring)
-    .conststring                             0x0003eeb4   Section      463  nrf_sdh_ble.o(.conststring)
-    .conststring                             0x0003f084   Section        8  digital_key_api.o(.conststring)
-    .conststring                             0x0003f08c   Section        7  md_wrap.o(.conststring)
-    .conststring                             0x0003f094   Section        7  md_wrap.o(.conststring)
-    .conststrlit                             0x0003f09c   Section       17  auth_status_tracker.o(.conststrlit)
-    .conststrlit                             0x0003f0b0   Section       17  gatt_cache_manager.o(.conststrlit)
-    .conststrlit                             0x0003f0c4   Section       18  gatts_cache_manager.o(.conststrlit)
-    .conststrlit                             0x0003f0d8   Section       16  id_manager.o(.conststrlit)
-    .conststrlit                             0x0003f0e8   Section       13  nrf_ble_gatt.o(.conststrlit)
-    .conststrlit                             0x0003f0f8   Section       13  nrf_ble_lesc.o(.conststrlit)
-    .conststrlit                             0x0003f108   Section       17  peer_data_storage.o(.conststrlit)
-    .conststrlit                             0x0003f11c   Section       17  peer_database.o(.conststrlit)
-    .conststrlit                             0x0003f130   Section       13  peer_manager.o(.conststrlit)
-    .conststrlit                             0x0003f140   Section       21  peer_manager_handler.o(.conststrlit)
-    .conststrlit                             0x0003f158   Section       17  security_dispatcher.o(.conststrlit)
-    .conststrlit                             0x0003f16c   Section       16  security_manager.o(.conststrlit)
-    .conststrlit                             0x0003f17c   Section        8  ble_bas.o(.conststrlit)
-    .conststrlit                             0x0003f184   Section        6  nrf_drv_clock.o(.conststrlit)
-    .conststrlit                             0x0003f18c   Section        4  nrf_drv_rng.o(.conststrlit)
-    .conststrlit                             0x0003f190   Section        6  nrfx_clock.o(.conststrlit)
-    .conststrlit                             0x0003f198   Section        7  nrfx_gpiote.o(.conststrlit)
-    .conststrlit                             0x0003f1a0   Section        4  nrfx_prs.o(.conststrlit)
-    .conststrlit                             0x0003f1a4   Section        4  nrfx_rng.o(.conststrlit)
-    .conststrlit                             0x0003f1a8   Section        5  nrfx_uart.o(.conststrlit)
-    .conststrlit                             0x0003f1b0   Section        6  nrfx_uarte.o(.conststrlit)
-    .conststrlit                             0x0003f1b8   Section       13  nrf_fstorage.o(.conststrlit)
-    .conststrlit                             0x0003f1c8   Section        9  mem_manager.o(.conststrlit)
-    .conststrlit                             0x0003f1d4   Section        9  nrf_pwr_mgmt.o(.conststrlit)
-    .conststrlit                             0x0003f1e0   Section       16  nrf_log_default_backends.o(.conststrlit)
-    .conststrlit                             0x0003f1f0   Section        4  nrf_log_frontend.o(.conststrlit)
-    .conststrlit                             0x0003f1f4   Section        8  nrf_sdh.o(.conststrlit)
-    .conststrlit                             0x0003f1fc   Section       12  nrf_sdh_ble.o(.conststrlit)
-    .conststrlit                             0x0003f208   Section       12  nrf_sdh_soc.o(.conststrlit)
-    [Anonymous Symbol]                       0x0003f214   Section        0  occ_curve25519.c.obj(.rodata.base)
-    base                                     0x0003f214   Data          32  occ_curve25519.c.obj(.rodata.base)
-    [Anonymous Symbol]                       0x0003f234   Section        0  occ_curve_p256.c.obj(.rodata.base_point)
-    base_point                               0x0003f234   Data          64  occ_curve_p256.c.obj(.rodata.base_point)
-    [Anonymous Symbol]                       0x0003f278   Section        0  occ_sha512.c.obj(.rodata.const_table)
-    const_table                              0x0003f278   Data         640  occ_sha512.c.obj(.rodata.const_table)
-    [Anonymous Symbol]                       0x0003f4f8   Section        0  occ_curve_p256.c.obj(.rodata.cq)
-    cq                                       0x0003f4f8   Data          32  occ_curve_p256.c.obj(.rodata.cq)
-    [Anonymous Symbol]                       0x0003f518   Section        0  occ_sc25519.c.obj(.rodata.m)
-    m                                        0x0003f518   Data          32  occ_sc25519.c.obj(.rodata.m)
-    [Anonymous Symbol]                       0x0003f538   Section        0  occ_ge25519.c.obj(.rodata.occ_ge25519_base_multiples)
-    occ_ge25519_base_multiples               0x0003f538   Data        1600  occ_ge25519.c.obj(.rodata.occ_ge25519_base_multiples)
-    [Anonymous Symbol]                       0x0003fb78   Section        0  occ_ge25519.c.obj(.rodata.occ_ge25519_ec2d)
-    occ_ge25519_ec2d                         0x0003fb78   Data          32  occ_ge25519.c.obj(.rodata.occ_ge25519_ec2d)
-    [Anonymous Symbol]                       0x0003fb98   Section        0  occ_curve_p256.c.obj(.rodata.param_a)
-    param_a                                  0x0003fb98   Data          32  occ_curve_p256.c.obj(.rodata.param_a)
-    [Anonymous Symbol]                       0x0003fbb8   Section        0  occ_curve_p256.c.obj(.rodata.param_b)
-    param_b                                  0x0003fbb8   Data          32  occ_curve_p256.c.obj(.rodata.param_b)
-    [Anonymous Symbol]                       0x0003fbd8   Section        0  occ_sc_p256.c.obj(.rodata.q)
-    q                                        0x0003fbd8   Data          32  occ_sc_p256.c.obj(.rodata.q)
-    [Anonymous Symbol]                       0x0003fbf8   Section        0  occ_curve_p256.c.obj(.rodata.qp1)
-    qp1                                      0x0003fbf8   Data          32  occ_curve_p256.c.obj(.rodata.qp1)
-    crypto_data                              0x0003fc38   Section        8  nrf_hw_backend_init.o(crypto_data)
-    __tagsym$$used                           0x0003fc38   Number         0  nrf_hw_backend_init.o(crypto_data)
-    log_backends                             0x0003fc40   Section       16  nrf_log_default_backends.o(log_backends)
-    __tagsym$$used                           0x0003fc40   Number         0  nrf_log_default_backends.o(log_backends)
-    rtt_log_backend                          0x0003fc40   Data          16  nrf_log_default_backends.o(log_backends)
-    log_const_data                           0x0003fc50   Section        8  auth_status_tracker.o(log_const_data)
-    __tagsym$$used                           0x0003fc50   Number         0  auth_status_tracker.o(log_const_data)
-    log_const_data                           0x0003fc58   Section        8  gatt_cache_manager.o(log_const_data)
-    __tagsym$$used                           0x0003fc58   Number         0  gatt_cache_manager.o(log_const_data)
-    log_const_data                           0x0003fc60   Section        8  gatts_cache_manager.o(log_const_data)
-    __tagsym$$used                           0x0003fc60   Number         0  gatts_cache_manager.o(log_const_data)
-    log_const_data                           0x0003fc68   Section        8  id_manager.o(log_const_data)
-    __tagsym$$used                           0x0003fc68   Number         0  id_manager.o(log_const_data)
-    log_const_data                           0x0003fc70   Section        8  nrf_ble_gatt.o(log_const_data)
-    __tagsym$$used                           0x0003fc70   Number         0  nrf_ble_gatt.o(log_const_data)
-    log_const_data                           0x0003fc78   Section        8  nrf_ble_lesc.o(log_const_data)
-    __tagsym$$used                           0x0003fc78   Number         0  nrf_ble_lesc.o(log_const_data)
-    log_const_data                           0x0003fc80   Section        8  peer_data_storage.o(log_const_data)
-    __tagsym$$used                           0x0003fc80   Number         0  peer_data_storage.o(log_const_data)
-    log_const_data                           0x0003fc88   Section        8  peer_database.o(log_const_data)
-    __tagsym$$used                           0x0003fc88   Number         0  peer_database.o(log_const_data)
-    log_const_data                           0x0003fc90   Section        8  peer_manager.o(log_const_data)
-    __tagsym$$used                           0x0003fc90   Number         0  peer_manager.o(log_const_data)
-    log_const_data                           0x0003fc98   Section        8  peer_manager_handler.o(log_const_data)
-    __tagsym$$used                           0x0003fc98   Number         0  peer_manager_handler.o(log_const_data)
-    log_const_data                           0x0003fca0   Section        8  security_dispatcher.o(log_const_data)
-    __tagsym$$used                           0x0003fca0   Number         0  security_dispatcher.o(log_const_data)
-    log_const_data                           0x0003fca8   Section        8  security_manager.o(log_const_data)
-    __tagsym$$used                           0x0003fca8   Number         0  security_manager.o(log_const_data)
-    log_const_data                           0x0003fcb0   Section        8  ble_bas.o(log_const_data)
-    __tagsym$$used                           0x0003fcb0   Number         0  ble_bas.o(log_const_data)
-    log_const_data                           0x0003fcb8   Section        8  nrf_drv_clock.o(log_const_data)
-    __tagsym$$used                           0x0003fcb8   Number         0  nrf_drv_clock.o(log_const_data)
-    log_const_data                           0x0003fcc0   Section        8  nrf_drv_rng.o(log_const_data)
-    __tagsym$$used                           0x0003fcc0   Number         0  nrf_drv_rng.o(log_const_data)
-    log_const_data                           0x0003fcc8   Section        8  nrfx_clock.o(log_const_data)
-    __tagsym$$used                           0x0003fcc8   Number         0  nrfx_clock.o(log_const_data)
-    log_const_data                           0x0003fcd0   Section        8  nrfx_gpiote.o(log_const_data)
-    __tagsym$$used                           0x0003fcd0   Number         0  nrfx_gpiote.o(log_const_data)
-    log_const_data                           0x0003fcd8   Section        8  nrfx_prs.o(log_const_data)
-    __tagsym$$used                           0x0003fcd8   Number         0  nrfx_prs.o(log_const_data)
-    log_const_data                           0x0003fce0   Section        8  nrfx_rng.o(log_const_data)
-    __tagsym$$used                           0x0003fce0   Number         0  nrfx_rng.o(log_const_data)
-    log_const_data                           0x0003fce8   Section        8  nrfx_uart.o(log_const_data)
-    __tagsym$$used                           0x0003fce8   Number         0  nrfx_uart.o(log_const_data)
-    log_const_data                           0x0003fcf0   Section        8  nrfx_uarte.o(log_const_data)
-    __tagsym$$used                           0x0003fcf0   Number         0  nrfx_uarte.o(log_const_data)
-    log_const_data                           0x0003fcf8   Section        8  nrf_fstorage.o(log_const_data)
-    __tagsym$$used                           0x0003fcf8   Number         0  nrf_fstorage.o(log_const_data)
-    log_const_data                           0x0003fd00   Section        8  mem_manager.o(log_const_data)
-    __tagsym$$used                           0x0003fd00   Number         0  mem_manager.o(log_const_data)
-    log_const_data                           0x0003fd08   Section        8  nrf_pwr_mgmt.o(log_const_data)
-    __tagsym$$used                           0x0003fd08   Number         0  nrf_pwr_mgmt.o(log_const_data)
-    log_const_data                           0x0003fd10   Section        8  nrf_log_frontend.o(log_const_data)
-    __tagsym$$used                           0x0003fd10   Number         0  nrf_log_frontend.o(log_const_data)
-    log_const_data                           0x0003fd18   Section        8  nrf_sdh.o(log_const_data)
-    __tagsym$$used                           0x0003fd18   Number         0  nrf_sdh.o(log_const_data)
-    log_const_data                           0x0003fd20   Section        8  nrf_sdh_ble.o(log_const_data)
-    __tagsym$$used                           0x0003fd20   Number         0  nrf_sdh_ble.o(log_const_data)
-    log_const_data                           0x0003fd28   Section        8  nrf_sdh_soc.o(log_const_data)
-    __tagsym$$used                           0x0003fd28   Number         0  nrf_sdh_soc.o(log_const_data)
-    nrf_balloc                               0x0003fd30   Section       20  nrf_log_frontend.o(nrf_balloc)
-    __tagsym$$used                           0x0003fd30   Number         0  nrf_log_frontend.o(nrf_balloc)
-    nrf_queue                                0x0003fd44   Section       20  nrf_drv_rng.o(nrf_queue)
-    __tagsym$$used                           0x0003fd44   Number         0  nrf_drv_rng.o(nrf_queue)
-    sdh_ble_observers0                       0x0003fd58   Section        8  ble_conn_state.o(sdh_ble_observers0)
-    __tagsym$$used                           0x0003fd58   Number         0  ble_conn_state.o(sdh_ble_observers0)
-    m_ble_evt_observer                       0x0003fd58   Data           8  ble_conn_state.o(sdh_ble_observers0)
-    sdh_ble_observers1                       0x0003fd60   Section       16  main.o(sdh_ble_observers1)
-    __tagsym$$used                           0x0003fd60   Number         0  main.o(sdh_ble_observers1)
-    m_gatt_obs                               0x0003fd60   Data           8  main.o(sdh_ble_observers1)
-    __tagsym$$used                           0x0003fd68   Number         0  main.o(sdh_ble_observers1)
-    m_advertising_ble_obs                    0x0003fd68   Data           8  main.o(sdh_ble_observers1)
-    sdh_ble_observers1                       0x0003fd70   Section        8  bsp_btn_ble.o(sdh_ble_observers1)
-    __tagsym$$used                           0x0003fd70   Number         0  bsp_btn_ble.o(sdh_ble_observers1)
-    m_ble_observer                           0x0003fd70   Data           8  bsp_btn_ble.o(sdh_ble_observers1)
-    sdh_ble_observers1                       0x0003fd78   Section        8  ble_conn_params.o(sdh_ble_observers1)
-    __tagsym$$used                           0x0003fd78   Number         0  ble_conn_params.o(sdh_ble_observers1)
-    m_ble_observer                           0x0003fd78   Data           8  ble_conn_params.o(sdh_ble_observers1)
-    sdh_ble_observers1                       0x0003fd80   Section        8  peer_manager.o(sdh_ble_observers1)
-    __tagsym$$used                           0x0003fd80   Number         0  peer_manager.o(sdh_ble_observers1)
-    m_ble_evt_observer                       0x0003fd80   Data           8  peer_manager.o(sdh_ble_observers1)
-    sdh_ble_observers2                       0x0003fd88   Section       24  main.o(sdh_ble_observers2)
-    __tagsym$$used                           0x0003fd88   Number         0  main.o(sdh_ble_observers2)
-    m_hrs_obs                                0x0003fd88   Data           8  main.o(sdh_ble_observers2)
-    __tagsym$$used                           0x0003fd90   Number         0  main.o(sdh_ble_observers2)
-    m_bas_obs                                0x0003fd90   Data           8  main.o(sdh_ble_observers2)
-    __tagsym$$used                           0x0003fd98   Number         0  main.o(sdh_ble_observers2)
-    m_qwr_obs                                0x0003fd98   Data           8  main.o(sdh_ble_observers2)
-    sdh_ble_observers3                       0x0003fda0   Section        8  main.o(sdh_ble_observers3)
-    __tagsym$$used                           0x0003fda0   Number         0  main.o(sdh_ble_observers3)
-    m_ble_observer                           0x0003fda0   Data           8  main.o(sdh_ble_observers3)
-    sdh_req_observers0                       0x0003fda8   Section        8  nrf_fstorage_sd.o(sdh_req_observers0)
-    __tagsym$$used                           0x0003fda8   Number         0  nrf_fstorage_sd.o(sdh_req_observers0)
-    sdh_soc_observers0                       0x0003fdb0   Section        8  nrf_drv_clock.o(sdh_soc_observers0)
-    __tagsym$$used                           0x0003fdb0   Number         0  nrf_drv_clock.o(sdh_soc_observers0)
-    m_soc_evt_observer                       0x0003fdb0   Data           8  nrf_drv_clock.o(sdh_soc_observers0)
-    sdh_soc_observers0                       0x0003fdb8   Section        8  nrf_fstorage_sd.o(sdh_soc_observers0)
-    __tagsym$$used                           0x0003fdb8   Number         0  nrf_fstorage_sd.o(sdh_soc_observers0)
-    m_sys_obs                                0x0003fdb8   Data           8  nrf_fstorage_sd.o(sdh_soc_observers0)
-    sdh_soc_observers1                       0x0003fdc0   Section        8  main.o(sdh_soc_observers1)
-    __tagsym$$used                           0x0003fdc0   Number         0  main.o(sdh_soc_observers1)
-    m_advertising_soc_obs                    0x0003fdc0   Data           8  main.o(sdh_soc_observers1)
-    sdh_stack_observers0                     0x0003fdc8   Section        8  nrf_sdh_ble.o(sdh_stack_observers0)
-    __tagsym$$used                           0x0003fdc8   Number         0  nrf_sdh_ble.o(sdh_stack_observers0)
-    m_nrf_sdh_ble_evts_poll                  0x0003fdc8   Data           8  nrf_sdh_ble.o(sdh_stack_observers0)
-    sdh_stack_observers0                     0x0003fdd0   Section        8  nrf_sdh_soc.o(sdh_stack_observers0)
-    __tagsym$$used                           0x0003fdd0   Number         0  nrf_sdh_soc.o(sdh_stack_observers0)
-    m_nrf_sdh_soc_evts_poll                  0x0003fdd0   Data           8  nrf_sdh_soc.o(sdh_stack_observers0)
-    sdh_state_observers0                     0x0003fdd8   Section        8  nrf_drv_clock.o(sdh_state_observers0)
-    __tagsym$$used                           0x0003fdd8   Number         0  nrf_drv_clock.o(sdh_state_observers0)
-    m_sd_state_observer                      0x0003fdd8   Data           8  nrf_drv_clock.o(sdh_state_observers0)
-    sdh_state_observers0                     0x0003fde0   Section        8  nrf_drv_rng.o(sdh_state_observers0)
-    __tagsym$$used                           0x0003fde0   Number         0  nrf_drv_rng.o(sdh_state_observers0)
-    m_sd_state_observer                      0x0003fde0   Data           8  nrf_drv_rng.o(sdh_state_observers0)
-    sdh_state_observers0                     0x0003fde8   Section        8  nrf_fstorage_sd.o(sdh_state_observers0)
-    __tagsym$$used                           0x0003fde8   Number         0  nrf_fstorage_sd.o(sdh_state_observers0)
-    m_state_obs                              0x0003fde8   Data           8  nrf_fstorage_sd.o(sdh_state_observers0)
+    i.uart_event_handler                     0x0003a1f0   Section        0  app_uart_fifo.o(i.uart_event_handler)
+    uart_event_handler                       0x0003a1f1   Thumb Code   152  app_uart_fifo.o(i.uart_event_handler)
+    i.uart_evt_handler                       0x0003a290   Section        0  nrf_drv_uart.o(i.uart_evt_handler)
+    uart_evt_handler                         0x0003a291   Thumb Code    42  nrf_drv_uart.o(i.uart_evt_handler)
+    i.uart_init                              0x0003a2c0   Section        0  uart_data.o(i.uart_init)
+    i.uart_irq_handler                       0x0003a308   Section        0  nrfx_uart.o(i.uart_irq_handler)
+    uart_irq_handler                         0x0003a309   Thumb Code   296  nrfx_uart.o(i.uart_irq_handler)
+    i.uarte_evt_handler                      0x0003a430   Section        0  nrf_drv_uart.o(i.uarte_evt_handler)
+    uarte_evt_handler                        0x0003a431   Thumb Code    42  nrf_drv_uart.o(i.uarte_evt_handler)
+    i.uarte_irq_handler                      0x0003a460   Section        0  nrfx_uarte.o(i.uarte_irq_handler)
+    uarte_irq_handler                        0x0003a461   Thumb Code   244  nrfx_uarte.o(i.uarte_irq_handler)
+    i.uint16_encode                          0x0003a554   Section        0  ble_advdata.o(i.uint16_encode)
+    uint16_encode                            0x0003a555   Thumb Code    10  ble_advdata.o(i.uint16_encode)
+    i.uninit                                 0x0003a560   Section        0  nrf_fstorage_sd.o(i.uninit)
+    uninit                                   0x0003a561   Thumb Code    22  nrf_fstorage_sd.o(i.uninit)
+    i.unsigned_print                         0x0003a580   Section        0  nrf_fprintf_format.o(i.unsigned_print)
+    unsigned_print                           0x0003a581   Thumb Code   176  nrf_fprintf_format.o(i.unsigned_print)
+    i.update_pending_flags_check             0x0003a634   Section        0  gatt_cache_manager.o(i.update_pending_flags_check)
+    update_pending_flags_check               0x0003a635   Thumb Code    34  gatt_cache_manager.o(i.update_pending_flags_check)
+    i.update_timeout_handler                 0x0003a664   Section        0  ble_conn_params.o(i.update_timeout_handler)
+    update_timeout_handler                   0x0003a665   Thumb Code    98  ble_conn_params.o(i.update_timeout_handler)
+    i.use_whitelist                          0x0003a6cc   Section        0  ble_advertising.o(i.use_whitelist)
+    use_whitelist                            0x0003a6cd   Thumb Code    24  ble_advertising.o(i.use_whitelist)
+    i.user_flag_is_acquired                  0x0003a6e4   Section        0  ble_conn_state.o(i.user_flag_is_acquired)
+    user_flag_is_acquired                    0x0003a6e5   Thumb Code     8  ble_conn_state.o(i.user_flag_is_acquired)
+    i.user_mem_reply                         0x0003a6f0   Section        0  nrf_ble_qwr.o(i.user_mem_reply)
+    user_mem_reply                           0x0003a6f1   Thumb Code    36  nrf_ble_qwr.o(i.user_mem_reply)
+    i.user_op_alloc                          0x0003a714   Section        0  app_timer.o(i.user_op_alloc)
+    user_op_alloc                            0x0003a715   Thumb Code    42  app_timer.o(i.user_op_alloc)
+    i.uuid_list_encode                       0x0003a744   Section        0  ble_advdata.o(i.uuid_list_encode)
+    uuid_list_encode                         0x0003a745   Thumb Code    48  ble_advdata.o(i.uuid_list_encode)
+    i.uuid_list_sized_encode                 0x0003a774   Section        0  ble_advdata.o(i.uuid_list_sized_encode)
+    uuid_list_sized_encode                   0x0003a775   Thumb Code   158  ble_advdata.o(i.uuid_list_sized_encode)
+    i.wakeup_button_cfg                      0x0003a812   Section        0  bsp.o(i.wakeup_button_cfg)
+    wakeup_button_cfg                        0x0003a813   Thumb Code    58  bsp.o(i.wakeup_button_cfg)
+    i.wmap                                   0x0003a84c   Section        0  nrf_fstorage_sd.o(i.wmap)
+    wmap                                     0x0003a84d   Thumb Code     4  nrf_fstorage_sd.o(i.wmap)
+    i.write                                  0x0003a850   Section        0  nrf_fstorage_sd.o(i.write)
+    write                                    0x0003a851   Thumb Code    74  nrf_fstorage_sd.o(i.write)
+    i.write_CB1                              0x0003a8a0   Section        0  main.o(i.write_CB1)
+    i.write_buf_store                        0x0003a9dc   Section        0  peer_database.o(i.write_buf_store)
+    i.write_buffer_record_find               0x0003ab28   Section        0  peer_database.o(i.write_buffer_record_find)
+    write_buffer_record_find                 0x0003ab29   Thumb Code    52  peer_database.o(i.write_buffer_record_find)
+    i.write_buffer_record_find_next          0x0003ab5c   Section        0  peer_database.o(i.write_buffer_record_find_next)
+    write_buffer_record_find_next            0x0003ab5d   Thumb Code    42  peer_database.o(i.write_buffer_record_find_next)
+    i.write_buffer_record_invalidate         0x0003ab8c   Section        0  peer_database.o(i.write_buffer_record_invalidate)
+    write_buffer_record_invalidate           0x0003ab8d   Thumb Code    28  peer_database.o(i.write_buffer_record_invalidate)
+    i.write_buffer_record_release            0x0003aba8   Section        0  peer_database.o(i.write_buffer_record_release)
+    write_buffer_record_release              0x0003aba9   Thumb Code    38  peer_database.o(i.write_buffer_record_release)
+    i.write_enqueue                          0x0003abd4   Section        0  fds.o(i.write_enqueue)
+    write_enqueue                            0x0003abd5   Thumb Code   222  fds.o(i.write_enqueue)
+    i.write_execute                          0x0003acbc   Section        0  fds.o(i.write_execute)
+    write_execute                            0x0003acbd   Thumb Code   230  fds.o(i.write_execute)
+    i.write_space_free                       0x0003adb0   Section        0  fds.o(i.write_space_free)
+    write_space_free                         0x0003adb1   Thumb Code    20  fds.o(i.write_space_free)
+    i.write_space_reserve                    0x0003adc8   Section        0  fds.o(i.write_space_reserve)
+    write_space_reserve                      0x0003adc9   Thumb Code    88  fds.o(i.write_space_reserve)
+    i.xorbuf                                 0x0003ae24   Section        0  cmac.o(i.xorbuf)
+    xorbuf                                   0x0003ae25   Thumb Code    22  cmac.o(i.xorbuf)
+    i.xtime                                  0x0003ae3a   Section        0  aes_1.o(i.xtime)
+    xtime                                    0x0003ae3b   Thumb Code    18  aes_1.o(i.xtime)
+    .constdata                               0x0003ae4c   Section       16  main.o(.constdata)
+    m_battery_timer_id                       0x0003ae4c   Data           4  main.o(.constdata)
+    m_heart_rate_timer_id                    0x0003ae50   Data           4  main.o(.constdata)
+    m_rr_interval_timer_id                   0x0003ae54   Data           4  main.o(.constdata)
+    m_sensor_contact_timer_id                0x0003ae58   Data           4  main.o(.constdata)
+    .constdata                               0x0003ae5c   Section       24  uart_data.o(.constdata)
+    .constdata                               0x0003ae74   Section        8  boards.o(.constdata)
+    m_board_led_list                         0x0003ae74   Data           4  boards.o(.constdata)
+    m_board_btn_list                         0x0003ae78   Data           4  boards.o(.constdata)
+    .constdata                               0x0003ae7c   Section       44  bsp.o(.constdata)
+    m_bsp_leds_tmr                           0x0003ae7c   Data           4  bsp.o(.constdata)
+    m_bsp_alert_tmr                          0x0003ae80   Data           4  bsp.o(.constdata)
+    m_bsp_button_tmr                         0x0003ae84   Data           4  bsp.o(.constdata)
+    app_buttons                              0x0003ae88   Data          32  bsp.o(.constdata)
+    .constdata                               0x0003aea8   Section        4  auth_status_tracker.o(.constdata)
+    m_pairing_attempt_timer                  0x0003aea8   Data           4  auth_status_tracker.o(.constdata)
+    .constdata                               0x0003aeac   Section      116  gatt_cache_manager.o(.constdata)
+    car_value_true                           0x0003aeb0   Data           4  gatt_cache_manager.o(.constdata)
+    car_value_false                          0x0003aeb4   Data           4  gatt_cache_manager.o(.constdata)
+    .constdata                               0x0003af20   Section        4  gatts_cache_manager.o(.constdata)
+    service_changed_pending                  0x0003af20   Data           4  gatts_cache_manager.o(.constdata)
+    .constdata                               0x0003af24   Section       16  gatts_cache_manager.o(.constdata)
+    .constdata                               0x0003af34   Section        4  gatts_cache_manager.o(.constdata)
+    service_changed_pending                  0x0003af34   Data           4  gatts_cache_manager.o(.constdata)
+    .constdata                               0x0003af38   Section        8  id_manager.o(.constdata)
+    m_evt_handlers                           0x0003af38   Data           8  id_manager.o(.constdata)
+    .constdata                               0x0003af40   Section       22  nrf_ble_gatt.o(.constdata)
+    .constdata                               0x0003af58   Section       28  peer_data_storage.o(.constdata)
+    m_evt_handlers                           0x0003af58   Data           4  peer_data_storage.o(.constdata)
+    .constdata                               0x0003af74   Section       16  peer_database.o(.constdata)
+    m_evt_handlers                           0x0003af74   Data          16  peer_database.o(.constdata)
+    .constdata                               0x0003af84   Section       44  peer_manager.o(.constdata)
+    __func__                                 0x0003af84   Data           8  peer_manager.o(.constdata)
+    __func__                                 0x0003af94   Data          12  peer_manager.o(.constdata)
+    __func__                                 0x0003afa0   Data          16  peer_manager.o(.constdata)
+    .constdata                               0x0003afb0   Section       24  peer_manager_handler.o(.constdata)
+    .constdata                               0x0003afc8   Section      140  security_dispatcher.o(.constdata)
+    m_evt_handlers                           0x0003afc8   Data           4  security_dispatcher.o(.constdata)
+    __func__                                 0x0003b044   Data          16  security_dispatcher.o(.constdata)
+    .constdata                               0x0003b054   Section        4  security_manager.o(.constdata)
+    m_evt_handlers                           0x0003b054   Data           4  security_manager.o(.constdata)
+    .constdata                               0x0003b058   Section      108  nrf_crypto_ecc.o(.constdata)
+    key_pair_generate_context_size           0x0003b058   Data           6  nrf_crypto_ecc.o(.constdata)
+    public_key_calculate_context_size        0x0003b05e   Data           6  nrf_crypto_ecc.o(.constdata)
+    key_pair_generate_impl                   0x0003b064   Data          12  nrf_crypto_ecc.o(.constdata)
+    public_key_calculate_impl                0x0003b070   Data          12  nrf_crypto_ecc.o(.constdata)
+    private_key_from_raw_impl                0x0003b07c   Data          12  nrf_crypto_ecc.o(.constdata)
+    private_key_to_raw_impl                  0x0003b088   Data          12  nrf_crypto_ecc.o(.constdata)
+    public_key_from_raw_impl                 0x0003b094   Data          12  nrf_crypto_ecc.o(.constdata)
+    public_key_to_raw_impl                   0x0003b0a0   Data          12  nrf_crypto_ecc.o(.constdata)
+    private_key_free_impl                    0x0003b0ac   Data          12  nrf_crypto_ecc.o(.constdata)
+    public_key_free_impl                     0x0003b0b8   Data          12  nrf_crypto_ecc.o(.constdata)
+    .constdata                               0x0003b0c4   Section       12  nrf_crypto_ecdh.o(.constdata)
+    compute_impl_context_size                0x0003b0c4   Data           4  nrf_crypto_ecdh.o(.constdata)
+    compute_impl                             0x0003b0c8   Data           8  nrf_crypto_ecdh.o(.constdata)
+    .constdata                               0x0003b0d0   Section       12  oberon_backend_ecc.o(.constdata)
+    .constdata                               0x0003b0dc   Section       64  oberon_backend_ecc.o(.constdata)
+    min_value                                0x0003b0dc   Data          32  oberon_backend_ecc.o(.constdata)
+    max_value                                0x0003b0fc   Data          32  oberon_backend_ecc.o(.constdata)
+    .constdata                               0x0003b11c   Section        2  nrf_drv_rng.o(.constdata)
+    m_default_config                         0x0003b11c   Data           2  nrf_drv_rng.o(.constdata)
+    .constdata                               0x0003b120   Section        4  nrfx_gpiote.o(.constdata)
+    .constdata                               0x0003b124   Section        4  nrfx_uart.o(.constdata)
+    irq_handlers                             0x0003b124   Data           4  nrfx_uart.o(.constdata)
+    .constdata                               0x0003b128   Section        4  nrfx_uarte.o(.constdata)
+    irq_handlers                             0x0003b128   Data           4  nrfx_uarte.o(.constdata)
+    .constdata                               0x0003b12c   Section       16  nrf_fstorage_sd.o(.constdata)
+    m_fifo                                   0x0003b12c   Data           4  nrf_fstorage_sd.o(.constdata)
+    m_flash_info                             0x0003b130   Data          12  nrf_fstorage_sd.o(.constdata)
+    .constdata                               0x0003b13c   Section       32  nrf_fstorage_sd.o(.constdata)
+    .constdata                               0x0003b15c   Section       94  nrf_fstorage.o(.constdata)
+    __func__                                 0x0003b15c   Data          18  nrf_fstorage.o(.constdata)
+    __func__                                 0x0003b16e   Data          20  nrf_fstorage.o(.constdata)
+    __func__                                 0x0003b182   Data          18  nrf_fstorage.o(.constdata)
+    __func__                                 0x0003b194   Data          19  nrf_fstorage.o(.constdata)
+    __func__                                 0x0003b1a7   Data          19  nrf_fstorage.o(.constdata)
+    .constdata                               0x0003b1bc   Section        8  app_button.o(.constdata)
+    m_detection_delay_timer_id               0x0003b1c0   Data           4  app_button.o(.constdata)
+    .constdata                               0x0003b1c4   Section       32  app_uart_fifo.o(.constdata)
+    .constdata                               0x0003b1f0   Section        6  app_timer.o(.constdata)
+    delay_bytecode                           0x0003b1f0   Data           6  app_timer.o(.constdata)
+    .constdata                               0x0003b1f6   Section       16  nrf_fprintf_format.o(.constdata)
+    _aV2C                                    0x0003b1f6   Data          16  nrf_fprintf_format.o(.constdata)
+    .constdata                               0x0003b208   Section       24  nrf_pwr_mgmt.o(.constdata)
+    pwr_mgmt_data_array                      0x0003b208   Data          24  nrf_pwr_mgmt.o(.constdata)
+    .constdata                               0x0003b220   Section       12  nrf_pwr_mgmt.o(.constdata)
+    pwr_mgmt_data                            0x0003b220   Data          12  nrf_pwr_mgmt.o(.constdata)
+    .constdata                               0x0003b22c   Section      316  nrf_strerror.o(.constdata)
+    m_unknown_str                            0x0003b22c   Data          19  nrf_strerror.o(.constdata)
+    nrf_strerror_array                       0x0003b240   Data         296  nrf_strerror.o(.constdata)
+    .constdata                               0x0003b368   Section       24  fds.o(.constdata)
+    m_queue                                  0x0003b368   Data           4  fds.o(.constdata)
+    dirty_header                             0x0003b36c   Data           4  fds.o(.constdata)
+    page_tag_swap                            0x0003b370   Data           8  fds.o(.constdata)
+    page_tag_data                            0x0003b378   Data           8  fds.o(.constdata)
+    .constdata                               0x0003b380   Section       12  nrf_log_backend_rtt.o(.constdata)
+    .constdata                               0x0003b390   Section        6  nrf_log_backend_rtt.o(.constdata)
+    delay_bytecode                           0x0003b390   Data           6  nrf_log_backend_rtt.o(.constdata)
+    .constdata                               0x0003b398   Section       12  nrf_log_frontend.o(.constdata)
+    m_log_push_ringbuf                       0x0003b398   Data          12  nrf_log_frontend.o(.constdata)
+    .constdata                               0x0003b3a4   Section       16  nrf_sdh.o(.constdata)
+    sdh_req_observers_array                  0x0003b3a4   Data          16  nrf_sdh.o(.constdata)
+    .constdata                               0x0003b3b4   Section       40  nrf_sdh.o(.constdata)
+    sdh_req_observers                        0x0003b3b8   Data          12  nrf_sdh.o(.constdata)
+    sdh_state_observers                      0x0003b3c4   Data          12  nrf_sdh.o(.constdata)
+    sdh_stack_observers                      0x0003b3d0   Data          12  nrf_sdh.o(.constdata)
+    .constdata                               0x0003b3dc   Section       16  nrf_sdh.o(.constdata)
+    sdh_state_observers_array                0x0003b3dc   Data          16  nrf_sdh.o(.constdata)
+    .constdata                               0x0003b3ec   Section       16  nrf_sdh.o(.constdata)
+    sdh_stack_observers_array                0x0003b3ec   Data          16  nrf_sdh.o(.constdata)
+    .constdata                               0x0003b3fc   Section       32  nrf_sdh_ble.o(.constdata)
+    sdh_ble_observers_array                  0x0003b3fc   Data          32  nrf_sdh_ble.o(.constdata)
+    .constdata                               0x0003b41c   Section       16  nrf_sdh_ble.o(.constdata)
+    sdh_ble_observers                        0x0003b420   Data          12  nrf_sdh_ble.o(.constdata)
+    .constdata                               0x0003b42c   Section       16  nrf_sdh_soc.o(.constdata)
+    sdh_soc_observers_array                  0x0003b42c   Data          16  nrf_sdh_soc.o(.constdata)
+    .constdata                               0x0003b43c   Section       12  nrf_sdh_soc.o(.constdata)
+    sdh_soc_observers                        0x0003b43c   Data          12  nrf_sdh_soc.o(.constdata)
+    .constdata                               0x0003b448   Section     8744  aes.o(.constdata)
+    FSb                                      0x0003b448   Data         256  aes.o(.constdata)
+    FT0                                      0x0003b548   Data        1024  aes.o(.constdata)
+    FT1                                      0x0003b948   Data        1024  aes.o(.constdata)
+    FT2                                      0x0003bd48   Data        1024  aes.o(.constdata)
+    FT3                                      0x0003c148   Data        1024  aes.o(.constdata)
+    RSb                                      0x0003c548   Data         256  aes.o(.constdata)
+    RT0                                      0x0003c648   Data        1024  aes.o(.constdata)
+    RT1                                      0x0003ca48   Data        1024  aes.o(.constdata)
+    RT2                                      0x0003ce48   Data        1024  aes.o(.constdata)
+    RT3                                      0x0003d248   Data        1024  aes.o(.constdata)
+    RCON                                     0x0003d648   Data          40  aes.o(.constdata)
+    .constdata                               0x0003d670   Section      523  aes_1.o(.constdata)
+    sbox                                     0x0003d670   Data         256  aes_1.o(.constdata)
+    rsbox                                    0x0003d770   Data         256  aes_1.o(.constdata)
+    Rcon                                     0x0003d870   Data          11  aes_1.o(.constdata)
+    .constdata                               0x0003d87c   Section       40  md_wrap.o(.constdata)
+    .constdata                               0x0003d8a4   Section       40  md_wrap.o(.constdata)
+    .constdata                               0x0003d8cc   Section      320  sha256.o(.constdata)
+    K                                        0x0003d8cc   Data         256  sha256.o(.constdata)
+    sha256_padding                           0x0003d9cc   Data          64  sha256.o(.constdata)
+    .constdata                               0x0003da0c   Section       20  digitalkey.pb.o(.constdata)
+    .constdata                               0x0003da20   Section       40  digitalkey.pb.o(.constdata)
+    .constdata                               0x0003da48   Section      100  digitalkey.pb.o(.constdata)
+    .constdata                               0x0003daac   Section       60  digitalkey.pb.o(.constdata)
+    .constdata                               0x0003dae8   Section       60  digitalkey.pb.o(.constdata)
+    .constdata                               0x0003db24   Section       30  digitalkey.pb.o(.constdata)
+    .constdata                               0x0003db44   Section       40  pb_decode.o(.constdata)
+    PB_DECODERS                              0x0003db44   Data          40  pb_decode.o(.constdata)
+    .constdata                               0x0003db6c   Section       40  pb_encode.o(.constdata)
+    PB_ENCODERS                              0x0003db6c   Data          40  pb_encode.o(.constdata)
+    .constdata                               0x0003db94   Section      129  ctype_o.o(.constdata)
+    .constdata                               0x0003dc18   Section        4  ctype_o.o(.constdata)
+    table                                    0x0003dc18   Data           4  ctype_o.o(.constdata)
+    .conststring                             0x0003dc1c   Section       86  main.o(.conststring)
+    .conststring                             0x0003dc74   Section       65  fstorage_data.o(.conststring)
+    .conststring                             0x0003dcb8   Section       78  auth_status_tracker.o(.conststring)
+    .conststring                             0x0003dd08   Section      420  gatt_cache_manager.o(.conststring)
+    .conststring                             0x0003deac   Section      324  gatts_cache_manager.o(.conststring)
+    .conststring                             0x0003dff0   Section      162  nrf_ble_gatt.o(.conststring)
+    .conststring                             0x0003e094   Section       66  nrf_ble_lesc.o(.conststring)
+    .conststring                             0x0003e0d8   Section      232  peer_data_storage.o(.conststring)
+    .conststring                             0x0003e1c0   Section      384  peer_database.o(.conststring)
+    .conststring                             0x0003e340   Section      144  peer_manager.o(.conststring)
+    .conststring                             0x0003e3d0   Section      714  peer_manager_handler.o(.conststring)
+    .conststring                             0x0003e69c   Section      498  security_dispatcher.o(.conststring)
+    .conststring                             0x0003e890   Section      379  security_manager.o(.conststring)
+    .conststring                             0x0003ea0c   Section       81  ble_hrs.o(.conststring)
+    .conststring                             0x0003ea60   Section       79  nrf_fstorage.o(.conststring)
+    .conststring                             0x0003eab0   Section     1003  nrf_strerror.o(.conststring)
+    .conststring                             0x0003ee9c   Section      102  nrf_log_str_formatter.o(.conststring)
+    .conststring                             0x0003ef04   Section      463  nrf_sdh_ble.o(.conststring)
+    .conststring                             0x0003f0d4   Section        8  digital_key_api.o(.conststring)
+    .conststring                             0x0003f0dc   Section        7  md_wrap.o(.conststring)
+    .conststring                             0x0003f0e4   Section        7  md_wrap.o(.conststring)
+    .conststrlit                             0x0003f0ec   Section       17  auth_status_tracker.o(.conststrlit)
+    .conststrlit                             0x0003f100   Section       17  gatt_cache_manager.o(.conststrlit)
+    .conststrlit                             0x0003f114   Section       18  gatts_cache_manager.o(.conststrlit)
+    .conststrlit                             0x0003f128   Section       16  id_manager.o(.conststrlit)
+    .conststrlit                             0x0003f138   Section       13  nrf_ble_gatt.o(.conststrlit)
+    .conststrlit                             0x0003f148   Section       13  nrf_ble_lesc.o(.conststrlit)
+    .conststrlit                             0x0003f158   Section       17  peer_data_storage.o(.conststrlit)
+    .conststrlit                             0x0003f16c   Section       17  peer_database.o(.conststrlit)
+    .conststrlit                             0x0003f180   Section       13  peer_manager.o(.conststrlit)
+    .conststrlit                             0x0003f190   Section       21  peer_manager_handler.o(.conststrlit)
+    .conststrlit                             0x0003f1a8   Section       17  security_dispatcher.o(.conststrlit)
+    .conststrlit                             0x0003f1bc   Section       16  security_manager.o(.conststrlit)
+    .conststrlit                             0x0003f1cc   Section        8  ble_bas.o(.conststrlit)
+    .conststrlit                             0x0003f1d4   Section        6  nrf_drv_clock.o(.conststrlit)
+    .conststrlit                             0x0003f1dc   Section        4  nrf_drv_rng.o(.conststrlit)
+    .conststrlit                             0x0003f1e0   Section        6  nrfx_clock.o(.conststrlit)
+    .conststrlit                             0x0003f1e8   Section        7  nrfx_gpiote.o(.conststrlit)
+    .conststrlit                             0x0003f1f0   Section        4  nrfx_prs.o(.conststrlit)
+    .conststrlit                             0x0003f1f4   Section        4  nrfx_rng.o(.conststrlit)
+    .conststrlit                             0x0003f1f8   Section        5  nrfx_uart.o(.conststrlit)
+    .conststrlit                             0x0003f200   Section        6  nrfx_uarte.o(.conststrlit)
+    .conststrlit                             0x0003f208   Section       13  nrf_fstorage.o(.conststrlit)
+    .conststrlit                             0x0003f218   Section        9  mem_manager.o(.conststrlit)
+    .conststrlit                             0x0003f224   Section        9  nrf_pwr_mgmt.o(.conststrlit)
+    .conststrlit                             0x0003f230   Section       16  nrf_log_default_backends.o(.conststrlit)
+    .conststrlit                             0x0003f240   Section        4  nrf_log_frontend.o(.conststrlit)
+    .conststrlit                             0x0003f244   Section        8  nrf_sdh.o(.conststrlit)
+    .conststrlit                             0x0003f24c   Section       12  nrf_sdh_ble.o(.conststrlit)
+    .conststrlit                             0x0003f258   Section       12  nrf_sdh_soc.o(.conststrlit)
+    [Anonymous Symbol]                       0x0003f264   Section        0  occ_curve25519.c.obj(.rodata.base)
+    base                                     0x0003f264   Data          32  occ_curve25519.c.obj(.rodata.base)
+    [Anonymous Symbol]                       0x0003f284   Section        0  occ_curve_p256.c.obj(.rodata.base_point)
+    base_point                               0x0003f284   Data          64  occ_curve_p256.c.obj(.rodata.base_point)
+    [Anonymous Symbol]                       0x0003f2c8   Section        0  occ_sha512.c.obj(.rodata.const_table)
+    const_table                              0x0003f2c8   Data         640  occ_sha512.c.obj(.rodata.const_table)
+    [Anonymous Symbol]                       0x0003f548   Section        0  occ_curve_p256.c.obj(.rodata.cq)
+    cq                                       0x0003f548   Data          32  occ_curve_p256.c.obj(.rodata.cq)
+    [Anonymous Symbol]                       0x0003f568   Section        0  occ_sc25519.c.obj(.rodata.m)
+    m                                        0x0003f568   Data          32  occ_sc25519.c.obj(.rodata.m)
+    [Anonymous Symbol]                       0x0003f588   Section        0  occ_ge25519.c.obj(.rodata.occ_ge25519_base_multiples)
+    occ_ge25519_base_multiples               0x0003f588   Data        1600  occ_ge25519.c.obj(.rodata.occ_ge25519_base_multiples)
+    [Anonymous Symbol]                       0x0003fbc8   Section        0  occ_ge25519.c.obj(.rodata.occ_ge25519_ec2d)
+    occ_ge25519_ec2d                         0x0003fbc8   Data          32  occ_ge25519.c.obj(.rodata.occ_ge25519_ec2d)
+    [Anonymous Symbol]                       0x0003fbe8   Section        0  occ_curve_p256.c.obj(.rodata.param_a)
+    param_a                                  0x0003fbe8   Data          32  occ_curve_p256.c.obj(.rodata.param_a)
+    [Anonymous Symbol]                       0x0003fc08   Section        0  occ_curve_p256.c.obj(.rodata.param_b)
+    param_b                                  0x0003fc08   Data          32  occ_curve_p256.c.obj(.rodata.param_b)
+    [Anonymous Symbol]                       0x0003fc28   Section        0  occ_sc_p256.c.obj(.rodata.q)
+    q                                        0x0003fc28   Data          32  occ_sc_p256.c.obj(.rodata.q)
+    [Anonymous Symbol]                       0x0003fc48   Section        0  occ_curve_p256.c.obj(.rodata.qp1)
+    qp1                                      0x0003fc48   Data          32  occ_curve_p256.c.obj(.rodata.qp1)
+    crypto_data                              0x0003fc88   Section        8  nrf_hw_backend_init.o(crypto_data)
+    __tagsym$$used                           0x0003fc88   Number         0  nrf_hw_backend_init.o(crypto_data)
+    log_backends                             0x0003fc90   Section       16  nrf_log_default_backends.o(log_backends)
+    __tagsym$$used                           0x0003fc90   Number         0  nrf_log_default_backends.o(log_backends)
+    rtt_log_backend                          0x0003fc90   Data          16  nrf_log_default_backends.o(log_backends)
+    log_const_data                           0x0003fca0   Section        8  auth_status_tracker.o(log_const_data)
+    __tagsym$$used                           0x0003fca0   Number         0  auth_status_tracker.o(log_const_data)
+    log_const_data                           0x0003fca8   Section        8  gatt_cache_manager.o(log_const_data)
+    __tagsym$$used                           0x0003fca8   Number         0  gatt_cache_manager.o(log_const_data)
+    log_const_data                           0x0003fcb0   Section        8  gatts_cache_manager.o(log_const_data)
+    __tagsym$$used                           0x0003fcb0   Number         0  gatts_cache_manager.o(log_const_data)
+    log_const_data                           0x0003fcb8   Section        8  id_manager.o(log_const_data)
+    __tagsym$$used                           0x0003fcb8   Number         0  id_manager.o(log_const_data)
+    log_const_data                           0x0003fcc0   Section        8  nrf_ble_gatt.o(log_const_data)
+    __tagsym$$used                           0x0003fcc0   Number         0  nrf_ble_gatt.o(log_const_data)
+    log_const_data                           0x0003fcc8   Section        8  nrf_ble_lesc.o(log_const_data)
+    __tagsym$$used                           0x0003fcc8   Number         0  nrf_ble_lesc.o(log_const_data)
+    log_const_data                           0x0003fcd0   Section        8  peer_data_storage.o(log_const_data)
+    __tagsym$$used                           0x0003fcd0   Number         0  peer_data_storage.o(log_const_data)
+    log_const_data                           0x0003fcd8   Section        8  peer_database.o(log_const_data)
+    __tagsym$$used                           0x0003fcd8   Number         0  peer_database.o(log_const_data)
+    log_const_data                           0x0003fce0   Section        8  peer_manager.o(log_const_data)
+    __tagsym$$used                           0x0003fce0   Number         0  peer_manager.o(log_const_data)
+    log_const_data                           0x0003fce8   Section        8  peer_manager_handler.o(log_const_data)
+    __tagsym$$used                           0x0003fce8   Number         0  peer_manager_handler.o(log_const_data)
+    log_const_data                           0x0003fcf0   Section        8  security_dispatcher.o(log_const_data)
+    __tagsym$$used                           0x0003fcf0   Number         0  security_dispatcher.o(log_const_data)
+    log_const_data                           0x0003fcf8   Section        8  security_manager.o(log_const_data)
+    __tagsym$$used                           0x0003fcf8   Number         0  security_manager.o(log_const_data)
+    log_const_data                           0x0003fd00   Section        8  ble_bas.o(log_const_data)
+    __tagsym$$used                           0x0003fd00   Number         0  ble_bas.o(log_const_data)
+    log_const_data                           0x0003fd08   Section        8  nrf_drv_clock.o(log_const_data)
+    __tagsym$$used                           0x0003fd08   Number         0  nrf_drv_clock.o(log_const_data)
+    log_const_data                           0x0003fd10   Section        8  nrf_drv_rng.o(log_const_data)
+    __tagsym$$used                           0x0003fd10   Number         0  nrf_drv_rng.o(log_const_data)
+    log_const_data                           0x0003fd18   Section        8  nrfx_clock.o(log_const_data)
+    __tagsym$$used                           0x0003fd18   Number         0  nrfx_clock.o(log_const_data)
+    log_const_data                           0x0003fd20   Section        8  nrfx_gpiote.o(log_const_data)
+    __tagsym$$used                           0x0003fd20   Number         0  nrfx_gpiote.o(log_const_data)
+    log_const_data                           0x0003fd28   Section        8  nrfx_prs.o(log_const_data)
+    __tagsym$$used                           0x0003fd28   Number         0  nrfx_prs.o(log_const_data)
+    log_const_data                           0x0003fd30   Section        8  nrfx_rng.o(log_const_data)
+    __tagsym$$used                           0x0003fd30   Number         0  nrfx_rng.o(log_const_data)
+    log_const_data                           0x0003fd38   Section        8  nrfx_uart.o(log_const_data)
+    __tagsym$$used                           0x0003fd38   Number         0  nrfx_uart.o(log_const_data)
+    log_const_data                           0x0003fd40   Section        8  nrfx_uarte.o(log_const_data)
+    __tagsym$$used                           0x0003fd40   Number         0  nrfx_uarte.o(log_const_data)
+    log_const_data                           0x0003fd48   Section        8  nrf_fstorage.o(log_const_data)
+    __tagsym$$used                           0x0003fd48   Number         0  nrf_fstorage.o(log_const_data)
+    log_const_data                           0x0003fd50   Section        8  mem_manager.o(log_const_data)
+    __tagsym$$used                           0x0003fd50   Number         0  mem_manager.o(log_const_data)
+    log_const_data                           0x0003fd58   Section        8  nrf_pwr_mgmt.o(log_const_data)
+    __tagsym$$used                           0x0003fd58   Number         0  nrf_pwr_mgmt.o(log_const_data)
+    log_const_data                           0x0003fd60   Section        8  nrf_log_frontend.o(log_const_data)
+    __tagsym$$used                           0x0003fd60   Number         0  nrf_log_frontend.o(log_const_data)
+    log_const_data                           0x0003fd68   Section        8  nrf_sdh.o(log_const_data)
+    __tagsym$$used                           0x0003fd68   Number         0  nrf_sdh.o(log_const_data)
+    log_const_data                           0x0003fd70   Section        8  nrf_sdh_ble.o(log_const_data)
+    __tagsym$$used                           0x0003fd70   Number         0  nrf_sdh_ble.o(log_const_data)
+    log_const_data                           0x0003fd78   Section        8  nrf_sdh_soc.o(log_const_data)
+    __tagsym$$used                           0x0003fd78   Number         0  nrf_sdh_soc.o(log_const_data)
+    nrf_balloc                               0x0003fd80   Section       20  nrf_log_frontend.o(nrf_balloc)
+    __tagsym$$used                           0x0003fd80   Number         0  nrf_log_frontend.o(nrf_balloc)
+    nrf_queue                                0x0003fd94   Section       20  nrf_drv_rng.o(nrf_queue)
+    __tagsym$$used                           0x0003fd94   Number         0  nrf_drv_rng.o(nrf_queue)
+    sdh_ble_observers0                       0x0003fda8   Section        8  ble_conn_state.o(sdh_ble_observers0)
+    __tagsym$$used                           0x0003fda8   Number         0  ble_conn_state.o(sdh_ble_observers0)
+    m_ble_evt_observer                       0x0003fda8   Data           8  ble_conn_state.o(sdh_ble_observers0)
+    sdh_ble_observers1                       0x0003fdb0   Section       16  main.o(sdh_ble_observers1)
+    __tagsym$$used                           0x0003fdb0   Number         0  main.o(sdh_ble_observers1)
+    m_gatt_obs                               0x0003fdb0   Data           8  main.o(sdh_ble_observers1)
+    __tagsym$$used                           0x0003fdb8   Number         0  main.o(sdh_ble_observers1)
+    m_advertising_ble_obs                    0x0003fdb8   Data           8  main.o(sdh_ble_observers1)
+    sdh_ble_observers1                       0x0003fdc0   Section        8  bsp_btn_ble.o(sdh_ble_observers1)
+    __tagsym$$used                           0x0003fdc0   Number         0  bsp_btn_ble.o(sdh_ble_observers1)
+    m_ble_observer                           0x0003fdc0   Data           8  bsp_btn_ble.o(sdh_ble_observers1)
+    sdh_ble_observers1                       0x0003fdc8   Section        8  ble_conn_params.o(sdh_ble_observers1)
+    __tagsym$$used                           0x0003fdc8   Number         0  ble_conn_params.o(sdh_ble_observers1)
+    m_ble_observer                           0x0003fdc8   Data           8  ble_conn_params.o(sdh_ble_observers1)
+    sdh_ble_observers1                       0x0003fdd0   Section        8  peer_manager.o(sdh_ble_observers1)
+    __tagsym$$used                           0x0003fdd0   Number         0  peer_manager.o(sdh_ble_observers1)
+    m_ble_evt_observer                       0x0003fdd0   Data           8  peer_manager.o(sdh_ble_observers1)
+    sdh_ble_observers2                       0x0003fdd8   Section       24  main.o(sdh_ble_observers2)
+    __tagsym$$used                           0x0003fdd8   Number         0  main.o(sdh_ble_observers2)
+    m_hrs_obs                                0x0003fdd8   Data           8  main.o(sdh_ble_observers2)
+    __tagsym$$used                           0x0003fde0   Number         0  main.o(sdh_ble_observers2)
+    m_bas_obs                                0x0003fde0   Data           8  main.o(sdh_ble_observers2)
+    __tagsym$$used                           0x0003fde8   Number         0  main.o(sdh_ble_observers2)
+    m_qwr_obs                                0x0003fde8   Data           8  main.o(sdh_ble_observers2)
+    sdh_ble_observers3                       0x0003fdf0   Section        8  main.o(sdh_ble_observers3)
+    __tagsym$$used                           0x0003fdf0   Number         0  main.o(sdh_ble_observers3)
+    m_ble_observer                           0x0003fdf0   Data           8  main.o(sdh_ble_observers3)
+    sdh_req_observers0                       0x0003fdf8   Section        8  nrf_fstorage_sd.o(sdh_req_observers0)
+    __tagsym$$used                           0x0003fdf8   Number         0  nrf_fstorage_sd.o(sdh_req_observers0)
+    sdh_soc_observers0                       0x0003fe00   Section        8  nrf_drv_clock.o(sdh_soc_observers0)
+    __tagsym$$used                           0x0003fe00   Number         0  nrf_drv_clock.o(sdh_soc_observers0)
+    m_soc_evt_observer                       0x0003fe00   Data           8  nrf_drv_clock.o(sdh_soc_observers0)
+    sdh_soc_observers0                       0x0003fe08   Section        8  nrf_fstorage_sd.o(sdh_soc_observers0)
+    __tagsym$$used                           0x0003fe08   Number         0  nrf_fstorage_sd.o(sdh_soc_observers0)
+    m_sys_obs                                0x0003fe08   Data           8  nrf_fstorage_sd.o(sdh_soc_observers0)
+    sdh_soc_observers1                       0x0003fe10   Section        8  main.o(sdh_soc_observers1)
+    __tagsym$$used                           0x0003fe10   Number         0  main.o(sdh_soc_observers1)
+    m_advertising_soc_obs                    0x0003fe10   Data           8  main.o(sdh_soc_observers1)
+    sdh_stack_observers0                     0x0003fe18   Section        8  nrf_sdh_ble.o(sdh_stack_observers0)
+    __tagsym$$used                           0x0003fe18   Number         0  nrf_sdh_ble.o(sdh_stack_observers0)
+    m_nrf_sdh_ble_evts_poll                  0x0003fe18   Data           8  nrf_sdh_ble.o(sdh_stack_observers0)
+    sdh_stack_observers0                     0x0003fe20   Section        8  nrf_sdh_soc.o(sdh_stack_observers0)
+    __tagsym$$used                           0x0003fe20   Number         0  nrf_sdh_soc.o(sdh_stack_observers0)
+    m_nrf_sdh_soc_evts_poll                  0x0003fe20   Data           8  nrf_sdh_soc.o(sdh_stack_observers0)
+    sdh_state_observers0                     0x0003fe28   Section        8  nrf_drv_clock.o(sdh_state_observers0)
+    __tagsym$$used                           0x0003fe28   Number         0  nrf_drv_clock.o(sdh_state_observers0)
+    m_sd_state_observer                      0x0003fe28   Data           8  nrf_drv_clock.o(sdh_state_observers0)
+    sdh_state_observers0                     0x0003fe30   Section        8  nrf_drv_rng.o(sdh_state_observers0)
+    __tagsym$$used                           0x0003fe30   Number         0  nrf_drv_rng.o(sdh_state_observers0)
+    m_sd_state_observer                      0x0003fe30   Data           8  nrf_drv_rng.o(sdh_state_observers0)
+    sdh_state_observers0                     0x0003fe38   Section        8  nrf_fstorage_sd.o(sdh_state_observers0)
+    __tagsym$$used                           0x0003fe38   Number         0  nrf_fstorage_sd.o(sdh_state_observers0)
+    m_state_obs                              0x0003fe38   Data           8  nrf_fstorage_sd.o(sdh_state_observers0)
     .data                                    0x20002b90   Section       84  main.o(.data)
     m_rr_interval_enabled                    0x20002b90   Data           1  main.o(.data)
     sensor_contact_detected                  0x20002b91   Data           1  main.o(.data)
@@ -7430,79 +7433,79 @@ Image Symbol Table
     storageReadData                          0x00039d41   Thumb Code    72  fstorage_data.o(i.storageReadData)
     storageWriteData                         0x00039db1   Thumb Code    72  fstorage_data.o(i.storageWriteData)
     store_car_value                          0x00039e21   Thumb Code    70  gatt_cache_manager.o(i.store_car_value)
-    uart_event_handle                        0x0003a141   Thumb Code    96  uart_data.o(i.uart_event_handle)
-    uart_init                                0x0003a279   Thumb Code    54  uart_data.o(i.uart_init)
-    write_CB1                                0x0003a859   Thumb Code   148  main.o(i.write_CB1)
-    write_buf_store                          0x0003a995   Thumb Code   202  peer_database.o(i.write_buf_store)
-    g_nrf_crypto_ecc_secp256r1_curve_info    0x0003b088   Data          12  oberon_backend_ecc.o(.constdata)
-    nrf_fstorage_sd                          0x0003b0f4   Data          32  nrf_fstorage_sd.o(.constdata)
-    nrf_log_backend_rtt_api                  0x0003b330   Data          12  nrf_log_backend_rtt.o(.constdata)
-    m_ram_start                              0x0003b3cc   Data           4  nrf_sdh_ble.o(.constdata)
-    ingeek_sha224_info                       0x0003d82c   Data          40  md_wrap.o(.constdata)
-    ingeek_sha256_info                       0x0003d854   Data          40  md_wrap.o(.constdata)
-    ingeek_DK_Time_fields                    0x0003d9bc   Data          20  digitalkey.pb.o(.constdata)
-    ingeek_DK_AuthG_fields                   0x0003d9d0   Data          40  digitalkey.pb.o(.constdata)
-    ingeek_DK_SessionG_fields                0x0003d9f8   Data         100  digitalkey.pb.o(.constdata)
-    ingeek_DK_Cmd_fields                     0x0003da5c   Data          60  digitalkey.pb.o(.constdata)
-    ingeek_DK_InfoW_fields                   0x0003da98   Data          60  digitalkey.pb.o(.constdata)
-    ingeek_DK_InfoR_fields                   0x0003dad4   Data          30  digitalkey.pb.o(.constdata)
-    __ctype_table                            0x0003db44   Data         129  ctype_o.o(.constdata)
-    Region$$Table$$Base                      0x0003fc18   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0003fc38   Number         0  anon$$obj.o(Region$$Table)
-    crypto_data$$Base                        0x0003fc38   Number         0  nrf_hw_backend_init.o(crypto_data)
-    nrf_hw_backend                           0x0003fc38   Data           8  nrf_hw_backend_init.o(crypto_data)
-    crypto_data$$Limit                       0x0003fc40   Number         0  nrf_hw_backend_init.o(crypto_data)
-    log_const_data$$Base                     0x0003fc50   Number         0  auth_status_tracker.o(log_const_data)
-    m_nrf_log_peer_manager_ast_logs_data_const 0x0003fc50   Data           8  auth_status_tracker.o(log_const_data)
-    m_nrf_log_peer_manager_gcm_logs_data_const 0x0003fc58   Data           8  gatt_cache_manager.o(log_const_data)
-    m_nrf_log_peer_manager_gscm_logs_data_const 0x0003fc60   Data           8  gatts_cache_manager.o(log_const_data)
-    m_nrf_log_peer_manager_im_logs_data_const 0x0003fc68   Data           8  id_manager.o(log_const_data)
-    m_nrf_log_nrf_ble_gatt_logs_data_const   0x0003fc70   Data           8  nrf_ble_gatt.o(log_const_data)
-    m_nrf_log_nrf_ble_lesc_logs_data_const   0x0003fc78   Data           8  nrf_ble_lesc.o(log_const_data)
-    m_nrf_log_peer_manager_pds_logs_data_const 0x0003fc80   Data           8  peer_data_storage.o(log_const_data)
-    m_nrf_log_peer_manager_pdb_logs_data_const 0x0003fc88   Data           8  peer_database.o(log_const_data)
-    m_nrf_log_peer_manager_logs_data_const   0x0003fc90   Data           8  peer_manager.o(log_const_data)
-    m_nrf_log_peer_manager_handler_logs_data_const 0x0003fc98   Data           8  peer_manager_handler.o(log_const_data)
-    m_nrf_log_peer_manager_smd_logs_data_const 0x0003fca0   Data           8  security_dispatcher.o(log_const_data)
-    m_nrf_log_peer_manager_sm_logs_data_const 0x0003fca8   Data           8  security_manager.o(log_const_data)
-    m_nrf_log_ble_bas_logs_data_const        0x0003fcb0   Data           8  ble_bas.o(log_const_data)
-    m_nrf_log_clock_logs_data_const          0x0003fcb8   Data           8  nrf_drv_clock.o(log_const_data)
-    m_nrf_log_rng_logs_data_const            0x0003fcc0   Data           8  nrf_drv_rng.o(log_const_data)
-    m_nrf_log_CLOCK_logs_data_const          0x0003fcc8   Data           8  nrfx_clock.o(log_const_data)
-    m_nrf_log_GPIOTE_logs_data_const         0x0003fcd0   Data           8  nrfx_gpiote.o(log_const_data)
-    m_nrf_log_PRS_logs_data_const            0x0003fcd8   Data           8  nrfx_prs.o(log_const_data)
-    m_nrf_log_RNG_logs_data_const            0x0003fce0   Data           8  nrfx_rng.o(log_const_data)
-    m_nrf_log_UART_logs_data_const           0x0003fce8   Data           8  nrfx_uart.o(log_const_data)
-    m_nrf_log_UARTE_logs_data_const          0x0003fcf0   Data           8  nrfx_uarte.o(log_const_data)
-    m_nrf_log_nrf_fstorage_logs_data_const   0x0003fcf8   Data           8  nrf_fstorage.o(log_const_data)
-    m_nrf_log_mem_mngr_logs_data_const       0x0003fd00   Data           8  mem_manager.o(log_const_data)
-    m_nrf_log_pwr_mgmt_logs_data_const       0x0003fd08   Data           8  nrf_pwr_mgmt.o(log_const_data)
-    m_nrf_log_app_logs_data_const            0x0003fd10   Data           8  nrf_log_frontend.o(log_const_data)
-    m_nrf_log_nrf_sdh_logs_data_const        0x0003fd18   Data           8  nrf_sdh.o(log_const_data)
-    m_nrf_log_nrf_sdh_ble_logs_data_const    0x0003fd20   Data           8  nrf_sdh_ble.o(log_const_data)
-    m_nrf_log_nrf_sdh_soc_logs_data_const    0x0003fd28   Data           8  nrf_sdh_soc.o(log_const_data)
-    log_const_data$$Limit                    0x0003fd30   Number         0  nrf_sdh_soc.o(log_const_data)
-    log_mempool                              0x0003fd30   Data          20  nrf_log_frontend.o(nrf_balloc)
-    m_rand_pool                              0x0003fd44   Data          20  nrf_drv_rng.o(nrf_queue)
-    sdh_ble_observers0$$Base                 0x0003fd58   Number         0  ble_conn_state.o(sdh_ble_observers0)
-    sdh_ble_observers0$$Limit                0x0003fd60   Number         0  ble_conn_state.o(sdh_ble_observers0)
-    sdh_ble_observers1$$Base                 0x0003fd60   Number         0  main.o(sdh_ble_observers1)
-    sdh_ble_observers1$$Limit                0x0003fd88   Number         0  peer_manager.o(sdh_ble_observers1)
-    sdh_ble_observers2$$Base                 0x0003fd88   Number         0  main.o(sdh_ble_observers2)
-    sdh_ble_observers2$$Limit                0x0003fda0   Number         0  main.o(sdh_ble_observers2)
-    sdh_ble_observers3$$Base                 0x0003fda0   Number         0  main.o(sdh_ble_observers3)
-    m_req_obs                                0x0003fda8   Data           8  nrf_fstorage_sd.o(sdh_req_observers0)
-    sdh_ble_observers3$$Limit                0x0003fda8   Number         0  main.o(sdh_ble_observers3)
-    sdh_req_observers0$$Base                 0x0003fda8   Number         0  nrf_fstorage_sd.o(sdh_req_observers0)
-    sdh_req_observers0$$Limit                0x0003fdb0   Number         0  nrf_fstorage_sd.o(sdh_req_observers0)
-    sdh_soc_observers0$$Base                 0x0003fdb0   Number         0  nrf_drv_clock.o(sdh_soc_observers0)
-    sdh_soc_observers0$$Limit                0x0003fdc0   Number         0  nrf_fstorage_sd.o(sdh_soc_observers0)
-    sdh_soc_observers1$$Base                 0x0003fdc0   Number         0  main.o(sdh_soc_observers1)
-    sdh_soc_observers1$$Limit                0x0003fdc8   Number         0  main.o(sdh_soc_observers1)
-    sdh_stack_observers0$$Base               0x0003fdc8   Number         0  nrf_sdh_ble.o(sdh_stack_observers0)
-    sdh_stack_observers0$$Limit              0x0003fdd8   Number         0  nrf_sdh_soc.o(sdh_stack_observers0)
-    sdh_state_observers0$$Base               0x0003fdd8   Number         0  nrf_drv_clock.o(sdh_state_observers0)
-    sdh_state_observers0$$Limit              0x0003fdf0   Number         0  nrf_fstorage_sd.o(sdh_state_observers0)
+    uart_event_handle                        0x0003a141   Thumb Code   104  uart_data.o(i.uart_event_handle)
+    uart_init                                0x0003a2c1   Thumb Code    54  uart_data.o(i.uart_init)
+    write_CB1                                0x0003a8a1   Thumb Code   148  main.o(i.write_CB1)
+    write_buf_store                          0x0003a9dd   Thumb Code   202  peer_database.o(i.write_buf_store)
+    g_nrf_crypto_ecc_secp256r1_curve_info    0x0003b0d0   Data          12  oberon_backend_ecc.o(.constdata)
+    nrf_fstorage_sd                          0x0003b13c   Data          32  nrf_fstorage_sd.o(.constdata)
+    nrf_log_backend_rtt_api                  0x0003b380   Data          12  nrf_log_backend_rtt.o(.constdata)
+    m_ram_start                              0x0003b41c   Data           4  nrf_sdh_ble.o(.constdata)
+    ingeek_sha224_info                       0x0003d87c   Data          40  md_wrap.o(.constdata)
+    ingeek_sha256_info                       0x0003d8a4   Data          40  md_wrap.o(.constdata)
+    ingeek_DK_Time_fields                    0x0003da0c   Data          20  digitalkey.pb.o(.constdata)
+    ingeek_DK_AuthG_fields                   0x0003da20   Data          40  digitalkey.pb.o(.constdata)
+    ingeek_DK_SessionG_fields                0x0003da48   Data         100  digitalkey.pb.o(.constdata)
+    ingeek_DK_Cmd_fields                     0x0003daac   Data          60  digitalkey.pb.o(.constdata)
+    ingeek_DK_InfoW_fields                   0x0003dae8   Data          60  digitalkey.pb.o(.constdata)
+    ingeek_DK_InfoR_fields                   0x0003db24   Data          30  digitalkey.pb.o(.constdata)
+    __ctype_table                            0x0003db94   Data         129  ctype_o.o(.constdata)
+    Region$$Table$$Base                      0x0003fc68   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0003fc88   Number         0  anon$$obj.o(Region$$Table)
+    crypto_data$$Base                        0x0003fc88   Number         0  nrf_hw_backend_init.o(crypto_data)
+    nrf_hw_backend                           0x0003fc88   Data           8  nrf_hw_backend_init.o(crypto_data)
+    crypto_data$$Limit                       0x0003fc90   Number         0  nrf_hw_backend_init.o(crypto_data)
+    log_const_data$$Base                     0x0003fca0   Number         0  auth_status_tracker.o(log_const_data)
+    m_nrf_log_peer_manager_ast_logs_data_const 0x0003fca0   Data           8  auth_status_tracker.o(log_const_data)
+    m_nrf_log_peer_manager_gcm_logs_data_const 0x0003fca8   Data           8  gatt_cache_manager.o(log_const_data)
+    m_nrf_log_peer_manager_gscm_logs_data_const 0x0003fcb0   Data           8  gatts_cache_manager.o(log_const_data)
+    m_nrf_log_peer_manager_im_logs_data_const 0x0003fcb8   Data           8  id_manager.o(log_const_data)
+    m_nrf_log_nrf_ble_gatt_logs_data_const   0x0003fcc0   Data           8  nrf_ble_gatt.o(log_const_data)
+    m_nrf_log_nrf_ble_lesc_logs_data_const   0x0003fcc8   Data           8  nrf_ble_lesc.o(log_const_data)
+    m_nrf_log_peer_manager_pds_logs_data_const 0x0003fcd0   Data           8  peer_data_storage.o(log_const_data)
+    m_nrf_log_peer_manager_pdb_logs_data_const 0x0003fcd8   Data           8  peer_database.o(log_const_data)
+    m_nrf_log_peer_manager_logs_data_const   0x0003fce0   Data           8  peer_manager.o(log_const_data)
+    m_nrf_log_peer_manager_handler_logs_data_const 0x0003fce8   Data           8  peer_manager_handler.o(log_const_data)
+    m_nrf_log_peer_manager_smd_logs_data_const 0x0003fcf0   Data           8  security_dispatcher.o(log_const_data)
+    m_nrf_log_peer_manager_sm_logs_data_const 0x0003fcf8   Data           8  security_manager.o(log_const_data)
+    m_nrf_log_ble_bas_logs_data_const        0x0003fd00   Data           8  ble_bas.o(log_const_data)
+    m_nrf_log_clock_logs_data_const          0x0003fd08   Data           8  nrf_drv_clock.o(log_const_data)
+    m_nrf_log_rng_logs_data_const            0x0003fd10   Data           8  nrf_drv_rng.o(log_const_data)
+    m_nrf_log_CLOCK_logs_data_const          0x0003fd18   Data           8  nrfx_clock.o(log_const_data)
+    m_nrf_log_GPIOTE_logs_data_const         0x0003fd20   Data           8  nrfx_gpiote.o(log_const_data)
+    m_nrf_log_PRS_logs_data_const            0x0003fd28   Data           8  nrfx_prs.o(log_const_data)
+    m_nrf_log_RNG_logs_data_const            0x0003fd30   Data           8  nrfx_rng.o(log_const_data)
+    m_nrf_log_UART_logs_data_const           0x0003fd38   Data           8  nrfx_uart.o(log_const_data)
+    m_nrf_log_UARTE_logs_data_const          0x0003fd40   Data           8  nrfx_uarte.o(log_const_data)
+    m_nrf_log_nrf_fstorage_logs_data_const   0x0003fd48   Data           8  nrf_fstorage.o(log_const_data)
+    m_nrf_log_mem_mngr_logs_data_const       0x0003fd50   Data           8  mem_manager.o(log_const_data)
+    m_nrf_log_pwr_mgmt_logs_data_const       0x0003fd58   Data           8  nrf_pwr_mgmt.o(log_const_data)
+    m_nrf_log_app_logs_data_const            0x0003fd60   Data           8  nrf_log_frontend.o(log_const_data)
+    m_nrf_log_nrf_sdh_logs_data_const        0x0003fd68   Data           8  nrf_sdh.o(log_const_data)
+    m_nrf_log_nrf_sdh_ble_logs_data_const    0x0003fd70   Data           8  nrf_sdh_ble.o(log_const_data)
+    m_nrf_log_nrf_sdh_soc_logs_data_const    0x0003fd78   Data           8  nrf_sdh_soc.o(log_const_data)
+    log_const_data$$Limit                    0x0003fd80   Number         0  nrf_sdh_soc.o(log_const_data)
+    log_mempool                              0x0003fd80   Data          20  nrf_log_frontend.o(nrf_balloc)
+    m_rand_pool                              0x0003fd94   Data          20  nrf_drv_rng.o(nrf_queue)
+    sdh_ble_observers0$$Base                 0x0003fda8   Number         0  ble_conn_state.o(sdh_ble_observers0)
+    sdh_ble_observers0$$Limit                0x0003fdb0   Number         0  ble_conn_state.o(sdh_ble_observers0)
+    sdh_ble_observers1$$Base                 0x0003fdb0   Number         0  main.o(sdh_ble_observers1)
+    sdh_ble_observers1$$Limit                0x0003fdd8   Number         0  peer_manager.o(sdh_ble_observers1)
+    sdh_ble_observers2$$Base                 0x0003fdd8   Number         0  main.o(sdh_ble_observers2)
+    sdh_ble_observers2$$Limit                0x0003fdf0   Number         0  main.o(sdh_ble_observers2)
+    sdh_ble_observers3$$Base                 0x0003fdf0   Number         0  main.o(sdh_ble_observers3)
+    m_req_obs                                0x0003fdf8   Data           8  nrf_fstorage_sd.o(sdh_req_observers0)
+    sdh_ble_observers3$$Limit                0x0003fdf8   Number         0  main.o(sdh_ble_observers3)
+    sdh_req_observers0$$Base                 0x0003fdf8   Number         0  nrf_fstorage_sd.o(sdh_req_observers0)
+    sdh_req_observers0$$Limit                0x0003fe00   Number         0  nrf_fstorage_sd.o(sdh_req_observers0)
+    sdh_soc_observers0$$Base                 0x0003fe00   Number         0  nrf_drv_clock.o(sdh_soc_observers0)
+    sdh_soc_observers0$$Limit                0x0003fe10   Number         0  nrf_fstorage_sd.o(sdh_soc_observers0)
+    sdh_soc_observers1$$Base                 0x0003fe10   Number         0  main.o(sdh_soc_observers1)
+    sdh_soc_observers1$$Limit                0x0003fe18   Number         0  main.o(sdh_soc_observers1)
+    sdh_stack_observers0$$Base               0x0003fe18   Number         0  nrf_sdh_ble.o(sdh_stack_observers0)
+    sdh_stack_observers0$$Limit              0x0003fe28   Number         0  nrf_sdh_soc.o(sdh_stack_observers0)
+    sdh_state_observers0$$Base               0x0003fe28   Number         0  nrf_drv_clock.o(sdh_state_observers0)
+    sdh_state_observers0$$Limit              0x0003fe40   Number         0  nrf_fstorage_sd.o(sdh_state_observers0)
     Image$$RW_IRAM1$$Base                    0x20002b90   Number         0  anon$$obj.o ABSOLUTE
     gReturnInfoLen                           0x20002b98   Data           4  main.o(.data)
     gReturnSessionLen                        0x20002b9c   Data           4  main.o(.data)
@@ -7544,9 +7547,9 @@ Memory Map of the image
 
   Image Entry point : 0x00026201
 
-  Load Region LR_IROM1 (Base: 0x00026000, Size: 0x0001a130, Max: 0x0005a000, ABSOLUTE, COMPRESSED[0x00019ec0])
+  Load Region LR_IROM1 (Base: 0x00026000, Size: 0x0001a180, Max: 0x0005a000, ABSOLUTE, COMPRESSED[0x00019f10])
 
-    Execution Region ER_IROM1 (Exec base: 0x00026000, Load base: 0x00026000, Size: 0x00019df0, Max: 0x0005a000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x00026000, Load base: 0x00026000, Size: 0x00019e40, Max: 0x0005a000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -8446,259 +8449,259 @@ Memory Map of the image
     0x0003a104   0x0003a104   0x00000020   Code   RO         6266    i.tx_byte           nrfx_uart.o
     0x0003a124   0x0003a124   0x0000001a   Code   RO         6267    i.tx_done_event     nrfx_uart.o
     0x0003a13e   0x0003a13e   0x00000002   PAD
-    0x0003a140   0x0003a140   0x00000068   Code   RO         1101    i.uart_event_handle  uart_data.o
-    0x0003a1a8   0x0003a1a8   0x000000a0   Code   RO         6860    i.uart_event_handler  app_uart_fifo.o
-    0x0003a248   0x0003a248   0x00000030   Code   RO         5638    i.uart_evt_handler  nrf_drv_uart.o
-    0x0003a278   0x0003a278   0x00000048   Code   RO         1102    i.uart_init         uart_data.o
-    0x0003a2c0   0x0003a2c0   0x00000128   Code   RO         6268    i.uart_irq_handler  nrfx_uart.o
-    0x0003a3e8   0x0003a3e8   0x00000030   Code   RO         5639    i.uarte_evt_handler  nrf_drv_uart.o
-    0x0003a418   0x0003a418   0x000000f4   Code   RO         6451    i.uarte_irq_handler  nrfx_uarte.o
-    0x0003a50c   0x0003a50c   0x0000000a   Code   RO         1595    i.uint16_encode     ble_advdata.o
-    0x0003a516   0x0003a516   0x00000002   PAD
-    0x0003a518   0x0003a518   0x00000020   Code   RO         6598    i.uninit            nrf_fstorage_sd.o
-    0x0003a538   0x0003a538   0x000000b4   Code   RO         7831    i.unsigned_print    nrf_fprintf_format.o
-    0x0003a5ec   0x0003a5ec   0x00000030   Code   RO         2118    i.update_pending_flags_check  gatt_cache_manager.o
-    0x0003a61c   0x0003a61c   0x00000068   Code   RO         1806    i.update_timeout_handler  ble_conn_params.o
-    0x0003a684   0x0003a684   0x00000018   Code   RO         1705    i.use_whitelist     ble_advertising.o
-    0x0003a69c   0x0003a69c   0x0000000c   Code   RO         1900    i.user_flag_is_acquired  ble_conn_state.o
-    0x0003a6a8   0x0003a6a8   0x00000024   Code   RO         2922    i.user_mem_reply    nrf_ble_qwr.o
-    0x0003a6cc   0x0003a6cc   0x00000030   Code   RO         7105    i.user_op_alloc     app_timer.o
-    0x0003a6fc   0x0003a6fc   0x00000030   Code   RO         1596    i.uuid_list_encode  ble_advdata.o
-    0x0003a72c   0x0003a72c   0x0000009e   Code   RO         1597    i.uuid_list_sized_encode  ble_advdata.o
-    0x0003a7ca   0x0003a7ca   0x0000003a   Code   RO         1300    i.wakeup_button_cfg  bsp.o
-    0x0003a804   0x0003a804   0x00000004   Code   RO         6599    i.wmap              nrf_fstorage_sd.o
-    0x0003a808   0x0003a808   0x00000050   Code   RO         6600    i.write             nrf_fstorage_sd.o
-    0x0003a858   0x0003a858   0x0000013c   Code   RO           39    i.write_CB1         main.o
-    0x0003a994   0x0003a994   0x0000014c   Code   RO         3116    i.write_buf_store   peer_database.o
-    0x0003aae0   0x0003aae0   0x00000034   Code   RO         3117    i.write_buffer_record_find  peer_database.o
-    0x0003ab14   0x0003ab14   0x00000030   Code   RO         3118    i.write_buffer_record_find_next  peer_database.o
-    0x0003ab44   0x0003ab44   0x0000001c   Code   RO         3119    i.write_buffer_record_invalidate  peer_database.o
-    0x0003ab60   0x0003ab60   0x0000002c   Code   RO         3120    i.write_buffer_record_release  peer_database.o
-    0x0003ab8c   0x0003ab8c   0x000000e8   Code   RO         8413    i.write_enqueue     fds.o
-    0x0003ac74   0x0003ac74   0x000000f4   Code   RO         8414    i.write_execute     fds.o
-    0x0003ad68   0x0003ad68   0x00000018   Code   RO         8415    i.write_space_free  fds.o
-    0x0003ad80   0x0003ad80   0x0000005c   Code   RO         8416    i.write_space_reserve  fds.o
-    0x0003addc   0x0003addc   0x00000016   Code   RO        10091    i.xorbuf            cmac.o
-    0x0003adf2   0x0003adf2   0x00000012   Code   RO         9955    i.xtime             aes_1.o
-    0x0003ae04   0x0003ae04   0x00000010   Data   RO           46    .constdata          main.o
-    0x0003ae14   0x0003ae14   0x00000018   Data   RO         1104    .constdata          uart_data.o
-    0x0003ae2c   0x0003ae2c   0x00000008   Data   RO         1197    .constdata          boards.o
-    0x0003ae34   0x0003ae34   0x0000002c   Data   RO         1305    .constdata          bsp.o
-    0x0003ae60   0x0003ae60   0x00000004   Data   RO         1513    .constdata          auth_status_tracker.o
-    0x0003ae64   0x0003ae64   0x00000074   Data   RO         2119    .constdata          gatt_cache_manager.o
-    0x0003aed8   0x0003aed8   0x00000004   Data   RO         2262    .constdata          gatts_cache_manager.o
-    0x0003aedc   0x0003aedc   0x00000010   Data   RO         2263    .constdata          gatts_cache_manager.o
-    0x0003aeec   0x0003aeec   0x00000004   Data   RO         2264    .constdata          gatts_cache_manager.o
-    0x0003aef0   0x0003aef0   0x00000008   Data   RO         2361    .constdata          id_manager.o
-    0x0003aef8   0x0003aef8   0x00000016   Data   RO         2514    .constdata          nrf_ble_gatt.o
-    0x0003af0e   0x0003af0e   0x00000002   PAD
-    0x0003af10   0x0003af10   0x0000001c   Data   RO         2982    .constdata          peer_data_storage.o
-    0x0003af2c   0x0003af2c   0x00000010   Data   RO         3122    .constdata          peer_database.o
-    0x0003af3c   0x0003af3c   0x0000002c   Data   RO         3359    .constdata          peer_manager.o
-    0x0003af68   0x0003af68   0x00000018   Data   RO         3622    .constdata          peer_manager_handler.o
-    0x0003af80   0x0003af80   0x0000008c   Data   RO         3774    .constdata          security_dispatcher.o
-    0x0003b00c   0x0003b00c   0x00000004   Data   RO         3914    .constdata          security_manager.o
-    0x0003b010   0x0003b010   0x0000006c   Data   RO         4386    .constdata          nrf_crypto_ecc.o
-    0x0003b07c   0x0003b07c   0x0000000c   Data   RO         4474    .constdata          nrf_crypto_ecdh.o
-    0x0003b088   0x0003b088   0x0000000c   Data   RO         4980    .constdata          oberon_backend_ecc.o
-    0x0003b094   0x0003b094   0x00000040   Data   RO         4983    .constdata          oberon_backend_ecc.o
-    0x0003b0d4   0x0003b0d4   0x00000002   Data   RO         5569    .constdata          nrf_drv_rng.o
-    0x0003b0d6   0x0003b0d6   0x00000002   PAD
-    0x0003b0d8   0x0003b0d8   0x00000004   Data   RO         5864    .constdata          nrfx_gpiote.o
-    0x0003b0dc   0x0003b0dc   0x00000004   Data   RO         6271    .constdata          nrfx_uart.o
-    0x0003b0e0   0x0003b0e0   0x00000004   Data   RO         6454    .constdata          nrfx_uarte.o
-    0x0003b0e4   0x0003b0e4   0x00000010   Data   RO         6603    .constdata          nrf_fstorage_sd.o
-    0x0003b0f4   0x0003b0f4   0x00000020   Data   RO         6604    .constdata          nrf_fstorage_sd.o
-    0x0003b114   0x0003b114   0x0000005e   Data   RO         6711    .constdata          nrf_fstorage.o
-    0x0003b172   0x0003b172   0x00000002   PAD
-    0x0003b174   0x0003b174   0x00000008   Data   RO         6795    .constdata          app_button.o
-    0x0003b17c   0x0003b17c   0x00000020   Data   RO         6862    .constdata          app_uart_fifo.o
-    0x0003b19c   0x0003b19c   0x00000004   PAD
-    0x0003b1a0   0x0003b1a0   0x00000006   Data   RO         7107    .constdata          app_timer.o
-    0x0003b1a6   0x0003b1a6   0x00000010   Data   RO         7832    .constdata          nrf_fprintf_format.o
-    0x0003b1b6   0x0003b1b6   0x00000002   PAD
-    0x0003b1b8   0x0003b1b8   0x00000018   Data   RO         7952    .constdata          nrf_pwr_mgmt.o
-    0x0003b1d0   0x0003b1d0   0x0000000c   Data   RO         7953    .constdata          nrf_pwr_mgmt.o
-    0x0003b1dc   0x0003b1dc   0x0000013c   Data   RO         8232    .constdata          nrf_strerror.o
-    0x0003b318   0x0003b318   0x00000018   Data   RO         8419    .constdata          fds.o
-    0x0003b330   0x0003b330   0x0000000c   Data   RO         8719    .constdata          nrf_log_backend_rtt.o
-    0x0003b33c   0x0003b33c   0x00000004   PAD
-    0x0003b340   0x0003b340   0x00000006   Data   RO         8720    .constdata          nrf_log_backend_rtt.o
-    0x0003b346   0x0003b346   0x00000002   PAD
-    0x0003b348   0x0003b348   0x0000000c   Data   RO         8901    .constdata          nrf_log_frontend.o
-    0x0003b354   0x0003b354   0x00000010   Data   RO         9380    .constdata          nrf_sdh.o
-    0x0003b364   0x0003b364   0x00000028   Data   RO         9381    .constdata          nrf_sdh.o
-    0x0003b38c   0x0003b38c   0x00000010   Data   RO         9382    .constdata          nrf_sdh.o
-    0x0003b39c   0x0003b39c   0x00000010   Data   RO         9383    .constdata          nrf_sdh.o
-    0x0003b3ac   0x0003b3ac   0x00000020   Data   RO         9491    .constdata          nrf_sdh_ble.o
-    0x0003b3cc   0x0003b3cc   0x00000010   Data   RO         9492    .constdata          nrf_sdh_ble.o
-    0x0003b3dc   0x0003b3dc   0x00000010   Data   RO         9542    .constdata          nrf_sdh_soc.o
-    0x0003b3ec   0x0003b3ec   0x0000000c   Data   RO         9543    .constdata          nrf_sdh_soc.o
-    0x0003b3f8   0x0003b3f8   0x00002228   Data   RO         9584    .constdata          aes.o
-    0x0003d620   0x0003d620   0x0000020b   Data   RO         9957    .constdata          aes_1.o
-    0x0003d82b   0x0003d82b   0x00000001   PAD
-    0x0003d82c   0x0003d82c   0x00000028   Data   RO        10252    .constdata          md_wrap.o
-    0x0003d854   0x0003d854   0x00000028   Data   RO        10253    .constdata          md_wrap.o
-    0x0003d87c   0x0003d87c   0x00000140   Data   RO        10313    .constdata          sha256.o
-    0x0003d9bc   0x0003d9bc   0x00000014   Data   RO        10360    .constdata          digitalkey.pb.o
-    0x0003d9d0   0x0003d9d0   0x00000028   Data   RO        10363    .constdata          digitalkey.pb.o
-    0x0003d9f8   0x0003d9f8   0x00000064   Data   RO        10365    .constdata          digitalkey.pb.o
-    0x0003da5c   0x0003da5c   0x0000003c   Data   RO        10366    .constdata          digitalkey.pb.o
-    0x0003da98   0x0003da98   0x0000003c   Data   RO        10367    .constdata          digitalkey.pb.o
-    0x0003dad4   0x0003dad4   0x0000001e   Data   RO        10368    .constdata          digitalkey.pb.o
-    0x0003daf2   0x0003daf2   0x00000002   PAD
-    0x0003daf4   0x0003daf4   0x00000028   Data   RO        10447    .constdata          pb_decode.o
-    0x0003db1c   0x0003db1c   0x00000028   Data   RO        10644    .constdata          pb_encode.o
-    0x0003db44   0x0003db44   0x00000081   Data   RO        11047    .constdata          mc_w.l(ctype_o.o)
-    0x0003dbc5   0x0003dbc5   0x00000003   PAD
-    0x0003dbc8   0x0003dbc8   0x00000004   Data   RO        11048    .constdata          mc_w.l(ctype_o.o)
-    0x0003dbcc   0x0003dbcc   0x00000056   Data   RO           47    .conststring        main.o
-    0x0003dc22   0x0003dc22   0x00000002   PAD
-    0x0003dc24   0x0003dc24   0x00000041   Data   RO          936    .conststring        fstorage_data.o
-    0x0003dc65   0x0003dc65   0x00000003   PAD
-    0x0003dc68   0x0003dc68   0x0000004e   Data   RO         1514    .conststring        auth_status_tracker.o
-    0x0003dcb6   0x0003dcb6   0x00000002   PAD
-    0x0003dcb8   0x0003dcb8   0x000001a4   Data   RO         2120    .conststring        gatt_cache_manager.o
-    0x0003de5c   0x0003de5c   0x00000144   Data   RO         2265    .conststring        gatts_cache_manager.o
-    0x0003dfa0   0x0003dfa0   0x000000a2   Data   RO         2515    .conststring        nrf_ble_gatt.o
-    0x0003e042   0x0003e042   0x00000002   PAD
-    0x0003e044   0x0003e044   0x00000042   Data   RO         2613    .conststring        nrf_ble_lesc.o
-    0x0003e086   0x0003e086   0x00000002   PAD
-    0x0003e088   0x0003e088   0x000000e8   Data   RO         2983    .conststring        peer_data_storage.o
-    0x0003e170   0x0003e170   0x00000180   Data   RO         3123    .conststring        peer_database.o
-    0x0003e2f0   0x0003e2f0   0x00000090   Data   RO         3360    .conststring        peer_manager.o
-    0x0003e380   0x0003e380   0x000002ca   Data   RO         3623    .conststring        peer_manager_handler.o
-    0x0003e64a   0x0003e64a   0x00000002   PAD
-    0x0003e64c   0x0003e64c   0x000001f2   Data   RO         3775    .conststring        security_dispatcher.o
-    0x0003e83e   0x0003e83e   0x00000002   PAD
-    0x0003e840   0x0003e840   0x0000017b   Data   RO         3915    .conststring        security_manager.o
-    0x0003e9bb   0x0003e9bb   0x00000001   PAD
-    0x0003e9bc   0x0003e9bc   0x00000051   Data   RO         4194    .conststring        ble_hrs.o
-    0x0003ea0d   0x0003ea0d   0x00000003   PAD
-    0x0003ea10   0x0003ea10   0x0000004f   Data   RO         6712    .conststring        nrf_fstorage.o
-    0x0003ea5f   0x0003ea5f   0x00000001   PAD
-    0x0003ea60   0x0003ea60   0x000003eb   Data   RO         8233    .conststring        nrf_strerror.o
-    0x0003ee4b   0x0003ee4b   0x00000001   PAD
-    0x0003ee4c   0x0003ee4c   0x00000066   Data   RO         9061    .conststring        nrf_log_str_formatter.o
-    0x0003eeb2   0x0003eeb2   0x00000002   PAD
-    0x0003eeb4   0x0003eeb4   0x000001cf   Data   RO         9493    .conststring        nrf_sdh_ble.o
-    0x0003f083   0x0003f083   0x00000001   PAD
-    0x0003f084   0x0003f084   0x00000008   Data   RO         9768    .conststring        digital_key_api.o
-    0x0003f08c   0x0003f08c   0x00000007   Data   RO        10254    .conststring        md_wrap.o
-    0x0003f093   0x0003f093   0x00000001   PAD
-    0x0003f094   0x0003f094   0x00000007   Data   RO        10255    .conststring        md_wrap.o
-    0x0003f09b   0x0003f09b   0x00000001   PAD
-    0x0003f09c   0x0003f09c   0x00000011   Data   RO         1515    .conststrlit        auth_status_tracker.o
-    0x0003f0ad   0x0003f0ad   0x00000003   PAD
-    0x0003f0b0   0x0003f0b0   0x00000011   Data   RO         2121    .conststrlit        gatt_cache_manager.o
-    0x0003f0c1   0x0003f0c1   0x00000003   PAD
-    0x0003f0c4   0x0003f0c4   0x00000012   Data   RO         2266    .conststrlit        gatts_cache_manager.o
-    0x0003f0d6   0x0003f0d6   0x00000002   PAD
-    0x0003f0d8   0x0003f0d8   0x00000010   Data   RO         2363    .conststrlit        id_manager.o
-    0x0003f0e8   0x0003f0e8   0x0000000d   Data   RO         2516    .conststrlit        nrf_ble_gatt.o
-    0x0003f0f5   0x0003f0f5   0x00000003   PAD
-    0x0003f0f8   0x0003f0f8   0x0000000d   Data   RO         2614    .conststrlit        nrf_ble_lesc.o
-    0x0003f105   0x0003f105   0x00000003   PAD
-    0x0003f108   0x0003f108   0x00000011   Data   RO         2984    .conststrlit        peer_data_storage.o
-    0x0003f119   0x0003f119   0x00000003   PAD
-    0x0003f11c   0x0003f11c   0x00000011   Data   RO         3124    .conststrlit        peer_database.o
-    0x0003f12d   0x0003f12d   0x00000003   PAD
-    0x0003f130   0x0003f130   0x0000000d   Data   RO         3361    .conststrlit        peer_manager.o
-    0x0003f13d   0x0003f13d   0x00000003   PAD
-    0x0003f140   0x0003f140   0x00000015   Data   RO         3625    .conststrlit        peer_manager_handler.o
+    0x0003a140   0x0003a140   0x000000b0   Code   RO         1101    i.uart_event_handle  uart_data.o
+    0x0003a1f0   0x0003a1f0   0x000000a0   Code   RO         6860    i.uart_event_handler  app_uart_fifo.o
+    0x0003a290   0x0003a290   0x00000030   Code   RO         5638    i.uart_evt_handler  nrf_drv_uart.o
+    0x0003a2c0   0x0003a2c0   0x00000048   Code   RO         1102    i.uart_init         uart_data.o
+    0x0003a308   0x0003a308   0x00000128   Code   RO         6268    i.uart_irq_handler  nrfx_uart.o
+    0x0003a430   0x0003a430   0x00000030   Code   RO         5639    i.uarte_evt_handler  nrf_drv_uart.o
+    0x0003a460   0x0003a460   0x000000f4   Code   RO         6451    i.uarte_irq_handler  nrfx_uarte.o
+    0x0003a554   0x0003a554   0x0000000a   Code   RO         1595    i.uint16_encode     ble_advdata.o
+    0x0003a55e   0x0003a55e   0x00000002   PAD
+    0x0003a560   0x0003a560   0x00000020   Code   RO         6598    i.uninit            nrf_fstorage_sd.o
+    0x0003a580   0x0003a580   0x000000b4   Code   RO         7831    i.unsigned_print    nrf_fprintf_format.o
+    0x0003a634   0x0003a634   0x00000030   Code   RO         2118    i.update_pending_flags_check  gatt_cache_manager.o
+    0x0003a664   0x0003a664   0x00000068   Code   RO         1806    i.update_timeout_handler  ble_conn_params.o
+    0x0003a6cc   0x0003a6cc   0x00000018   Code   RO         1705    i.use_whitelist     ble_advertising.o
+    0x0003a6e4   0x0003a6e4   0x0000000c   Code   RO         1900    i.user_flag_is_acquired  ble_conn_state.o
+    0x0003a6f0   0x0003a6f0   0x00000024   Code   RO         2922    i.user_mem_reply    nrf_ble_qwr.o
+    0x0003a714   0x0003a714   0x00000030   Code   RO         7105    i.user_op_alloc     app_timer.o
+    0x0003a744   0x0003a744   0x00000030   Code   RO         1596    i.uuid_list_encode  ble_advdata.o
+    0x0003a774   0x0003a774   0x0000009e   Code   RO         1597    i.uuid_list_sized_encode  ble_advdata.o
+    0x0003a812   0x0003a812   0x0000003a   Code   RO         1300    i.wakeup_button_cfg  bsp.o
+    0x0003a84c   0x0003a84c   0x00000004   Code   RO         6599    i.wmap              nrf_fstorage_sd.o
+    0x0003a850   0x0003a850   0x00000050   Code   RO         6600    i.write             nrf_fstorage_sd.o
+    0x0003a8a0   0x0003a8a0   0x0000013c   Code   RO           39    i.write_CB1         main.o
+    0x0003a9dc   0x0003a9dc   0x0000014c   Code   RO         3116    i.write_buf_store   peer_database.o
+    0x0003ab28   0x0003ab28   0x00000034   Code   RO         3117    i.write_buffer_record_find  peer_database.o
+    0x0003ab5c   0x0003ab5c   0x00000030   Code   RO         3118    i.write_buffer_record_find_next  peer_database.o
+    0x0003ab8c   0x0003ab8c   0x0000001c   Code   RO         3119    i.write_buffer_record_invalidate  peer_database.o
+    0x0003aba8   0x0003aba8   0x0000002c   Code   RO         3120    i.write_buffer_record_release  peer_database.o
+    0x0003abd4   0x0003abd4   0x000000e8   Code   RO         8413    i.write_enqueue     fds.o
+    0x0003acbc   0x0003acbc   0x000000f4   Code   RO         8414    i.write_execute     fds.o
+    0x0003adb0   0x0003adb0   0x00000018   Code   RO         8415    i.write_space_free  fds.o
+    0x0003adc8   0x0003adc8   0x0000005c   Code   RO         8416    i.write_space_reserve  fds.o
+    0x0003ae24   0x0003ae24   0x00000016   Code   RO        10091    i.xorbuf            cmac.o
+    0x0003ae3a   0x0003ae3a   0x00000012   Code   RO         9955    i.xtime             aes_1.o
+    0x0003ae4c   0x0003ae4c   0x00000010   Data   RO           46    .constdata          main.o
+    0x0003ae5c   0x0003ae5c   0x00000018   Data   RO         1104    .constdata          uart_data.o
+    0x0003ae74   0x0003ae74   0x00000008   Data   RO         1197    .constdata          boards.o
+    0x0003ae7c   0x0003ae7c   0x0000002c   Data   RO         1305    .constdata          bsp.o
+    0x0003aea8   0x0003aea8   0x00000004   Data   RO         1513    .constdata          auth_status_tracker.o
+    0x0003aeac   0x0003aeac   0x00000074   Data   RO         2119    .constdata          gatt_cache_manager.o
+    0x0003af20   0x0003af20   0x00000004   Data   RO         2262    .constdata          gatts_cache_manager.o
+    0x0003af24   0x0003af24   0x00000010   Data   RO         2263    .constdata          gatts_cache_manager.o
+    0x0003af34   0x0003af34   0x00000004   Data   RO         2264    .constdata          gatts_cache_manager.o
+    0x0003af38   0x0003af38   0x00000008   Data   RO         2361    .constdata          id_manager.o
+    0x0003af40   0x0003af40   0x00000016   Data   RO         2514    .constdata          nrf_ble_gatt.o
+    0x0003af56   0x0003af56   0x00000002   PAD
+    0x0003af58   0x0003af58   0x0000001c   Data   RO         2982    .constdata          peer_data_storage.o
+    0x0003af74   0x0003af74   0x00000010   Data   RO         3122    .constdata          peer_database.o
+    0x0003af84   0x0003af84   0x0000002c   Data   RO         3359    .constdata          peer_manager.o
+    0x0003afb0   0x0003afb0   0x00000018   Data   RO         3622    .constdata          peer_manager_handler.o
+    0x0003afc8   0x0003afc8   0x0000008c   Data   RO         3774    .constdata          security_dispatcher.o
+    0x0003b054   0x0003b054   0x00000004   Data   RO         3914    .constdata          security_manager.o
+    0x0003b058   0x0003b058   0x0000006c   Data   RO         4386    .constdata          nrf_crypto_ecc.o
+    0x0003b0c4   0x0003b0c4   0x0000000c   Data   RO         4474    .constdata          nrf_crypto_ecdh.o
+    0x0003b0d0   0x0003b0d0   0x0000000c   Data   RO         4980    .constdata          oberon_backend_ecc.o
+    0x0003b0dc   0x0003b0dc   0x00000040   Data   RO         4983    .constdata          oberon_backend_ecc.o
+    0x0003b11c   0x0003b11c   0x00000002   Data   RO         5569    .constdata          nrf_drv_rng.o
+    0x0003b11e   0x0003b11e   0x00000002   PAD
+    0x0003b120   0x0003b120   0x00000004   Data   RO         5864    .constdata          nrfx_gpiote.o
+    0x0003b124   0x0003b124   0x00000004   Data   RO         6271    .constdata          nrfx_uart.o
+    0x0003b128   0x0003b128   0x00000004   Data   RO         6454    .constdata          nrfx_uarte.o
+    0x0003b12c   0x0003b12c   0x00000010   Data   RO         6603    .constdata          nrf_fstorage_sd.o
+    0x0003b13c   0x0003b13c   0x00000020   Data   RO         6604    .constdata          nrf_fstorage_sd.o
+    0x0003b15c   0x0003b15c   0x0000005e   Data   RO         6711    .constdata          nrf_fstorage.o
+    0x0003b1ba   0x0003b1ba   0x00000002   PAD
+    0x0003b1bc   0x0003b1bc   0x00000008   Data   RO         6795    .constdata          app_button.o
+    0x0003b1c4   0x0003b1c4   0x00000020   Data   RO         6862    .constdata          app_uart_fifo.o
+    0x0003b1e4   0x0003b1e4   0x0000000c   PAD
+    0x0003b1f0   0x0003b1f0   0x00000006   Data   RO         7107    .constdata          app_timer.o
+    0x0003b1f6   0x0003b1f6   0x00000010   Data   RO         7832    .constdata          nrf_fprintf_format.o
+    0x0003b206   0x0003b206   0x00000002   PAD
+    0x0003b208   0x0003b208   0x00000018   Data   RO         7952    .constdata          nrf_pwr_mgmt.o
+    0x0003b220   0x0003b220   0x0000000c   Data   RO         7953    .constdata          nrf_pwr_mgmt.o
+    0x0003b22c   0x0003b22c   0x0000013c   Data   RO         8232    .constdata          nrf_strerror.o
+    0x0003b368   0x0003b368   0x00000018   Data   RO         8419    .constdata          fds.o
+    0x0003b380   0x0003b380   0x0000000c   Data   RO         8719    .constdata          nrf_log_backend_rtt.o
+    0x0003b38c   0x0003b38c   0x00000004   PAD
+    0x0003b390   0x0003b390   0x00000006   Data   RO         8720    .constdata          nrf_log_backend_rtt.o
+    0x0003b396   0x0003b396   0x00000002   PAD
+    0x0003b398   0x0003b398   0x0000000c   Data   RO         8901    .constdata          nrf_log_frontend.o
+    0x0003b3a4   0x0003b3a4   0x00000010   Data   RO         9380    .constdata          nrf_sdh.o
+    0x0003b3b4   0x0003b3b4   0x00000028   Data   RO         9381    .constdata          nrf_sdh.o
+    0x0003b3dc   0x0003b3dc   0x00000010   Data   RO         9382    .constdata          nrf_sdh.o
+    0x0003b3ec   0x0003b3ec   0x00000010   Data   RO         9383    .constdata          nrf_sdh.o
+    0x0003b3fc   0x0003b3fc   0x00000020   Data   RO         9491    .constdata          nrf_sdh_ble.o
+    0x0003b41c   0x0003b41c   0x00000010   Data   RO         9492    .constdata          nrf_sdh_ble.o
+    0x0003b42c   0x0003b42c   0x00000010   Data   RO         9542    .constdata          nrf_sdh_soc.o
+    0x0003b43c   0x0003b43c   0x0000000c   Data   RO         9543    .constdata          nrf_sdh_soc.o
+    0x0003b448   0x0003b448   0x00002228   Data   RO         9584    .constdata          aes.o
+    0x0003d670   0x0003d670   0x0000020b   Data   RO         9957    .constdata          aes_1.o
+    0x0003d87b   0x0003d87b   0x00000001   PAD
+    0x0003d87c   0x0003d87c   0x00000028   Data   RO        10252    .constdata          md_wrap.o
+    0x0003d8a4   0x0003d8a4   0x00000028   Data   RO        10253    .constdata          md_wrap.o
+    0x0003d8cc   0x0003d8cc   0x00000140   Data   RO        10313    .constdata          sha256.o
+    0x0003da0c   0x0003da0c   0x00000014   Data   RO        10360    .constdata          digitalkey.pb.o
+    0x0003da20   0x0003da20   0x00000028   Data   RO        10363    .constdata          digitalkey.pb.o
+    0x0003da48   0x0003da48   0x00000064   Data   RO        10365    .constdata          digitalkey.pb.o
+    0x0003daac   0x0003daac   0x0000003c   Data   RO        10366    .constdata          digitalkey.pb.o
+    0x0003dae8   0x0003dae8   0x0000003c   Data   RO        10367    .constdata          digitalkey.pb.o
+    0x0003db24   0x0003db24   0x0000001e   Data   RO        10368    .constdata          digitalkey.pb.o
+    0x0003db42   0x0003db42   0x00000002   PAD
+    0x0003db44   0x0003db44   0x00000028   Data   RO        10447    .constdata          pb_decode.o
+    0x0003db6c   0x0003db6c   0x00000028   Data   RO        10644    .constdata          pb_encode.o
+    0x0003db94   0x0003db94   0x00000081   Data   RO        11047    .constdata          mc_w.l(ctype_o.o)
+    0x0003dc15   0x0003dc15   0x00000003   PAD
+    0x0003dc18   0x0003dc18   0x00000004   Data   RO        11048    .constdata          mc_w.l(ctype_o.o)
+    0x0003dc1c   0x0003dc1c   0x00000056   Data   RO           47    .conststring        main.o
+    0x0003dc72   0x0003dc72   0x00000002   PAD
+    0x0003dc74   0x0003dc74   0x00000041   Data   RO          936    .conststring        fstorage_data.o
+    0x0003dcb5   0x0003dcb5   0x00000003   PAD
+    0x0003dcb8   0x0003dcb8   0x0000004e   Data   RO         1514    .conststring        auth_status_tracker.o
+    0x0003dd06   0x0003dd06   0x00000002   PAD
+    0x0003dd08   0x0003dd08   0x000001a4   Data   RO         2120    .conststring        gatt_cache_manager.o
+    0x0003deac   0x0003deac   0x00000144   Data   RO         2265    .conststring        gatts_cache_manager.o
+    0x0003dff0   0x0003dff0   0x000000a2   Data   RO         2515    .conststring        nrf_ble_gatt.o
+    0x0003e092   0x0003e092   0x00000002   PAD
+    0x0003e094   0x0003e094   0x00000042   Data   RO         2613    .conststring        nrf_ble_lesc.o
+    0x0003e0d6   0x0003e0d6   0x00000002   PAD
+    0x0003e0d8   0x0003e0d8   0x000000e8   Data   RO         2983    .conststring        peer_data_storage.o
+    0x0003e1c0   0x0003e1c0   0x00000180   Data   RO         3123    .conststring        peer_database.o
+    0x0003e340   0x0003e340   0x00000090   Data   RO         3360    .conststring        peer_manager.o
+    0x0003e3d0   0x0003e3d0   0x000002ca   Data   RO         3623    .conststring        peer_manager_handler.o
+    0x0003e69a   0x0003e69a   0x00000002   PAD
+    0x0003e69c   0x0003e69c   0x000001f2   Data   RO         3775    .conststring        security_dispatcher.o
+    0x0003e88e   0x0003e88e   0x00000002   PAD
+    0x0003e890   0x0003e890   0x0000017b   Data   RO         3915    .conststring        security_manager.o
+    0x0003ea0b   0x0003ea0b   0x00000001   PAD
+    0x0003ea0c   0x0003ea0c   0x00000051   Data   RO         4194    .conststring        ble_hrs.o
+    0x0003ea5d   0x0003ea5d   0x00000003   PAD
+    0x0003ea60   0x0003ea60   0x0000004f   Data   RO         6712    .conststring        nrf_fstorage.o
+    0x0003eaaf   0x0003eaaf   0x00000001   PAD
+    0x0003eab0   0x0003eab0   0x000003eb   Data   RO         8233    .conststring        nrf_strerror.o
+    0x0003ee9b   0x0003ee9b   0x00000001   PAD
+    0x0003ee9c   0x0003ee9c   0x00000066   Data   RO         9061    .conststring        nrf_log_str_formatter.o
+    0x0003ef02   0x0003ef02   0x00000002   PAD
+    0x0003ef04   0x0003ef04   0x000001cf   Data   RO         9493    .conststring        nrf_sdh_ble.o
+    0x0003f0d3   0x0003f0d3   0x00000001   PAD
+    0x0003f0d4   0x0003f0d4   0x00000008   Data   RO         9768    .conststring        digital_key_api.o
+    0x0003f0dc   0x0003f0dc   0x00000007   Data   RO        10254    .conststring        md_wrap.o
+    0x0003f0e3   0x0003f0e3   0x00000001   PAD
+    0x0003f0e4   0x0003f0e4   0x00000007   Data   RO        10255    .conststring        md_wrap.o
+    0x0003f0eb   0x0003f0eb   0x00000001   PAD
+    0x0003f0ec   0x0003f0ec   0x00000011   Data   RO         1515    .conststrlit        auth_status_tracker.o
+    0x0003f0fd   0x0003f0fd   0x00000003   PAD
+    0x0003f100   0x0003f100   0x00000011   Data   RO         2121    .conststrlit        gatt_cache_manager.o
+    0x0003f111   0x0003f111   0x00000003   PAD
+    0x0003f114   0x0003f114   0x00000012   Data   RO         2266    .conststrlit        gatts_cache_manager.o
+    0x0003f126   0x0003f126   0x00000002   PAD
+    0x0003f128   0x0003f128   0x00000010   Data   RO         2363    .conststrlit        id_manager.o
+    0x0003f138   0x0003f138   0x0000000d   Data   RO         2516    .conststrlit        nrf_ble_gatt.o
+    0x0003f145   0x0003f145   0x00000003   PAD
+    0x0003f148   0x0003f148   0x0000000d   Data   RO         2614    .conststrlit        nrf_ble_lesc.o
     0x0003f155   0x0003f155   0x00000003   PAD
-    0x0003f158   0x0003f158   0x00000011   Data   RO         3776    .conststrlit        security_dispatcher.o
+    0x0003f158   0x0003f158   0x00000011   Data   RO         2984    .conststrlit        peer_data_storage.o
     0x0003f169   0x0003f169   0x00000003   PAD
-    0x0003f16c   0x0003f16c   0x00000010   Data   RO         3916    .conststrlit        security_manager.o
-    0x0003f17c   0x0003f17c   0x00000008   Data   RO         4080    .conststrlit        ble_bas.o
-    0x0003f184   0x0003f184   0x00000006   Data   RO         5439    .conststrlit        nrf_drv_clock.o
-    0x0003f18a   0x0003f18a   0x00000002   PAD
-    0x0003f18c   0x0003f18c   0x00000004   Data   RO         5572    .conststrlit        nrf_drv_rng.o
-    0x0003f190   0x0003f190   0x00000006   Data   RO         5706    .conststrlit        nrfx_clock.o
-    0x0003f196   0x0003f196   0x00000002   PAD
-    0x0003f198   0x0003f198   0x00000007   Data   RO         5868    .conststrlit        nrfx_gpiote.o
-    0x0003f19f   0x0003f19f   0x00000001   PAD
-    0x0003f1a0   0x0003f1a0   0x00000004   Data   RO         6128    .conststrlit        nrfx_prs.o
-    0x0003f1a4   0x0003f1a4   0x00000004   Data   RO         6182    .conststrlit        nrfx_rng.o
-    0x0003f1a8   0x0003f1a8   0x00000005   Data   RO         6274    .conststrlit        nrfx_uart.o
-    0x0003f1ad   0x0003f1ad   0x00000003   PAD
-    0x0003f1b0   0x0003f1b0   0x00000006   Data   RO         6457    .conststrlit        nrfx_uarte.o
-    0x0003f1b6   0x0003f1b6   0x00000002   PAD
-    0x0003f1b8   0x0003f1b8   0x0000000d   Data   RO         6713    .conststrlit        nrf_fstorage.o
-    0x0003f1c5   0x0003f1c5   0x00000003   PAD
-    0x0003f1c8   0x0003f1c8   0x00000009   Data   RO         7381    .conststrlit        mem_manager.o
-    0x0003f1d1   0x0003f1d1   0x00000003   PAD
-    0x0003f1d4   0x0003f1d4   0x00000009   Data   RO         7954    .conststrlit        nrf_pwr_mgmt.o
-    0x0003f1dd   0x0003f1dd   0x00000003   PAD
-    0x0003f1e0   0x0003f1e0   0x00000010   Data   RO         8835    .conststrlit        nrf_log_default_backends.o
-    0x0003f1f0   0x0003f1f0   0x00000004   Data   RO         8902    .conststrlit        nrf_log_frontend.o
-    0x0003f1f4   0x0003f1f4   0x00000008   Data   RO         9384    .conststrlit        nrf_sdh.o
-    0x0003f1fc   0x0003f1fc   0x0000000c   Data   RO         9494    .conststrlit        nrf_sdh_ble.o
-    0x0003f208   0x0003f208   0x0000000c   Data   RO         9544    .conststrlit        nrf_sdh_soc.o
-    0x0003f214   0x0003f214   0x00000020   Data   RO        10890    .rodata.base        oberon_short_wchar_2.0.5.lib(occ_curve25519.c.obj)
-    0x0003f234   0x0003f234   0x00000040   Data   RO        10994    .rodata.base_point  oberon_short_wchar_2.0.5.lib(occ_curve_p256.c.obj)
-    0x0003f274   0x0003f274   0x00000004   PAD
-    0x0003f278   0x0003f278   0x00000280   Data   RO        10918    .rodata.const_table  oberon_short_wchar_2.0.5.lib(occ_sha512.c.obj)
-    0x0003f4f8   0x0003f4f8   0x00000020   Data   RO        10995    .rodata.cq          oberon_short_wchar_2.0.5.lib(occ_curve_p256.c.obj)
-    0x0003f518   0x0003f518   0x00000020   Data   RO        10970    .rodata.m           oberon_short_wchar_2.0.5.lib(occ_sc25519.c.obj)
-    0x0003f538   0x0003f538   0x00000640   Data   RO        10939    .rodata.occ_ge25519_base_multiples  oberon_short_wchar_2.0.5.lib(occ_ge25519.c.obj)
-    0x0003fb78   0x0003fb78   0x00000020   Data   RO        10940    .rodata.occ_ge25519_ec2d  oberon_short_wchar_2.0.5.lib(occ_ge25519.c.obj)
-    0x0003fb98   0x0003fb98   0x00000020   Data   RO        10996    .rodata.param_a     oberon_short_wchar_2.0.5.lib(occ_curve_p256.c.obj)
-    0x0003fbb8   0x0003fbb8   0x00000020   Data   RO        10997    .rodata.param_b     oberon_short_wchar_2.0.5.lib(occ_curve_p256.c.obj)
-    0x0003fbd8   0x0003fbd8   0x00000020   Data   RO        11020    .rodata.q           oberon_short_wchar_2.0.5.lib(occ_sc_p256.c.obj)
-    0x0003fbf8   0x0003fbf8   0x00000020   Data   RO        10998    .rodata.qp1         oberon_short_wchar_2.0.5.lib(occ_curve_p256.c.obj)
-    0x0003fc18   0x0003fc18   0x00000020   Data   RO        11425    Region$$Table       anon$$obj.o
-    0x0003fc38   0x0003fc38   0x00000008   Data   RO         5291    crypto_data         nrf_hw_backend_init.o
-    0x0003fc40   0x0003fc40   0x00000010   Data   RO         8837    log_backends        nrf_log_default_backends.o
-    0x0003fc50   0x0003fc50   0x00000008   Data   RO         1517    log_const_data      auth_status_tracker.o
-    0x0003fc58   0x0003fc58   0x00000008   Data   RO         2123    log_const_data      gatt_cache_manager.o
-    0x0003fc60   0x0003fc60   0x00000008   Data   RO         2268    log_const_data      gatts_cache_manager.o
-    0x0003fc68   0x0003fc68   0x00000008   Data   RO         2365    log_const_data      id_manager.o
-    0x0003fc70   0x0003fc70   0x00000008   Data   RO         2517    log_const_data      nrf_ble_gatt.o
-    0x0003fc78   0x0003fc78   0x00000008   Data   RO         2616    log_const_data      nrf_ble_lesc.o
-    0x0003fc80   0x0003fc80   0x00000008   Data   RO         2986    log_const_data      peer_data_storage.o
-    0x0003fc88   0x0003fc88   0x00000008   Data   RO         3126    log_const_data      peer_database.o
-    0x0003fc90   0x0003fc90   0x00000008   Data   RO         3363    log_const_data      peer_manager.o
-    0x0003fc98   0x0003fc98   0x00000008   Data   RO         3628    log_const_data      peer_manager_handler.o
-    0x0003fca0   0x0003fca0   0x00000008   Data   RO         3778    log_const_data      security_dispatcher.o
-    0x0003fca8   0x0003fca8   0x00000008   Data   RO         3918    log_const_data      security_manager.o
-    0x0003fcb0   0x0003fcb0   0x00000008   Data   RO         4081    log_const_data      ble_bas.o
-    0x0003fcb8   0x0003fcb8   0x00000008   Data   RO         5440    log_const_data      nrf_drv_clock.o
-    0x0003fcc0   0x0003fcc0   0x00000008   Data   RO         5574    log_const_data      nrf_drv_rng.o
-    0x0003fcc8   0x0003fcc8   0x00000008   Data   RO         5708    log_const_data      nrfx_clock.o
-    0x0003fcd0   0x0003fcd0   0x00000008   Data   RO         5869    log_const_data      nrfx_gpiote.o
-    0x0003fcd8   0x0003fcd8   0x00000008   Data   RO         6130    log_const_data      nrfx_prs.o
-    0x0003fce0   0x0003fce0   0x00000008   Data   RO         6184    log_const_data      nrfx_rng.o
-    0x0003fce8   0x0003fce8   0x00000008   Data   RO         6275    log_const_data      nrfx_uart.o
-    0x0003fcf0   0x0003fcf0   0x00000008   Data   RO         6458    log_const_data      nrfx_uarte.o
-    0x0003fcf8   0x0003fcf8   0x00000008   Data   RO         6714    log_const_data      nrf_fstorage.o
-    0x0003fd00   0x0003fd00   0x00000008   Data   RO         7383    log_const_data      mem_manager.o
-    0x0003fd08   0x0003fd08   0x00000008   Data   RO         7956    log_const_data      nrf_pwr_mgmt.o
-    0x0003fd10   0x0003fd10   0x00000008   Data   RO         8904    log_const_data      nrf_log_frontend.o
-    0x0003fd18   0x0003fd18   0x00000008   Data   RO         9386    log_const_data      nrf_sdh.o
-    0x0003fd20   0x0003fd20   0x00000008   Data   RO         9496    log_const_data      nrf_sdh_ble.o
-    0x0003fd28   0x0003fd28   0x00000008   Data   RO         9545    log_const_data      nrf_sdh_soc.o
-    0x0003fd30   0x0003fd30   0x00000014   Data   RO         8905    nrf_balloc          nrf_log_frontend.o
-    0x0003fd44   0x0003fd44   0x00000014   Data   RO         5575    nrf_queue           nrf_drv_rng.o
-    0x0003fd58   0x0003fd58   0x00000008   Data   RO         1902    sdh_ble_observers0  ble_conn_state.o
-    0x0003fd60   0x0003fd60   0x00000010   Data   RO           50    sdh_ble_observers1  main.o
-    0x0003fd70   0x0003fd70   0x00000008   Data   RO         1411    sdh_ble_observers1  bsp_btn_ble.o
-    0x0003fd78   0x0003fd78   0x00000008   Data   RO         1809    sdh_ble_observers1  ble_conn_params.o
-    0x0003fd80   0x0003fd80   0x00000008   Data   RO         3364    sdh_ble_observers1  peer_manager.o
-    0x0003fd88   0x0003fd88   0x00000018   Data   RO           51    sdh_ble_observers2  main.o
-    0x0003fda0   0x0003fda0   0x00000008   Data   RO           52    sdh_ble_observers3  main.o
-    0x0003fda8   0x0003fda8   0x00000008   Data   RO         6606    sdh_req_observers0  nrf_fstorage_sd.o
-    0x0003fdb0   0x0003fdb0   0x00000008   Data   RO         5441    sdh_soc_observers0  nrf_drv_clock.o
-    0x0003fdb8   0x0003fdb8   0x00000008   Data   RO         6607    sdh_soc_observers0  nrf_fstorage_sd.o
-    0x0003fdc0   0x0003fdc0   0x00000008   Data   RO           53    sdh_soc_observers1  main.o
-    0x0003fdc8   0x0003fdc8   0x00000008   Data   RO         9497    sdh_stack_observers0  nrf_sdh_ble.o
-    0x0003fdd0   0x0003fdd0   0x00000008   Data   RO         9546    sdh_stack_observers0  nrf_sdh_soc.o
-    0x0003fdd8   0x0003fdd8   0x00000008   Data   RO         5442    sdh_state_observers0  nrf_drv_clock.o
-    0x0003fde0   0x0003fde0   0x00000008   Data   RO         5576    sdh_state_observers0  nrf_drv_rng.o
-    0x0003fde8   0x0003fde8   0x00000008   Data   RO         6608    sdh_state_observers0  nrf_fstorage_sd.o
+    0x0003f16c   0x0003f16c   0x00000011   Data   RO         3124    .conststrlit        peer_database.o
+    0x0003f17d   0x0003f17d   0x00000003   PAD
+    0x0003f180   0x0003f180   0x0000000d   Data   RO         3361    .conststrlit        peer_manager.o
+    0x0003f18d   0x0003f18d   0x00000003   PAD
+    0x0003f190   0x0003f190   0x00000015   Data   RO         3625    .conststrlit        peer_manager_handler.o
+    0x0003f1a5   0x0003f1a5   0x00000003   PAD
+    0x0003f1a8   0x0003f1a8   0x00000011   Data   RO         3776    .conststrlit        security_dispatcher.o
+    0x0003f1b9   0x0003f1b9   0x00000003   PAD
+    0x0003f1bc   0x0003f1bc   0x00000010   Data   RO         3916    .conststrlit        security_manager.o
+    0x0003f1cc   0x0003f1cc   0x00000008   Data   RO         4080    .conststrlit        ble_bas.o
+    0x0003f1d4   0x0003f1d4   0x00000006   Data   RO         5439    .conststrlit        nrf_drv_clock.o
+    0x0003f1da   0x0003f1da   0x00000002   PAD
+    0x0003f1dc   0x0003f1dc   0x00000004   Data   RO         5572    .conststrlit        nrf_drv_rng.o
+    0x0003f1e0   0x0003f1e0   0x00000006   Data   RO         5706    .conststrlit        nrfx_clock.o
+    0x0003f1e6   0x0003f1e6   0x00000002   PAD
+    0x0003f1e8   0x0003f1e8   0x00000007   Data   RO         5868    .conststrlit        nrfx_gpiote.o
+    0x0003f1ef   0x0003f1ef   0x00000001   PAD
+    0x0003f1f0   0x0003f1f0   0x00000004   Data   RO         6128    .conststrlit        nrfx_prs.o
+    0x0003f1f4   0x0003f1f4   0x00000004   Data   RO         6182    .conststrlit        nrfx_rng.o
+    0x0003f1f8   0x0003f1f8   0x00000005   Data   RO         6274    .conststrlit        nrfx_uart.o
+    0x0003f1fd   0x0003f1fd   0x00000003   PAD
+    0x0003f200   0x0003f200   0x00000006   Data   RO         6457    .conststrlit        nrfx_uarte.o
+    0x0003f206   0x0003f206   0x00000002   PAD
+    0x0003f208   0x0003f208   0x0000000d   Data   RO         6713    .conststrlit        nrf_fstorage.o
+    0x0003f215   0x0003f215   0x00000003   PAD
+    0x0003f218   0x0003f218   0x00000009   Data   RO         7381    .conststrlit        mem_manager.o
+    0x0003f221   0x0003f221   0x00000003   PAD
+    0x0003f224   0x0003f224   0x00000009   Data   RO         7954    .conststrlit        nrf_pwr_mgmt.o
+    0x0003f22d   0x0003f22d   0x00000003   PAD
+    0x0003f230   0x0003f230   0x00000010   Data   RO         8835    .conststrlit        nrf_log_default_backends.o
+    0x0003f240   0x0003f240   0x00000004   Data   RO         8902    .conststrlit        nrf_log_frontend.o
+    0x0003f244   0x0003f244   0x00000008   Data   RO         9384    .conststrlit        nrf_sdh.o
+    0x0003f24c   0x0003f24c   0x0000000c   Data   RO         9494    .conststrlit        nrf_sdh_ble.o
+    0x0003f258   0x0003f258   0x0000000c   Data   RO         9544    .conststrlit        nrf_sdh_soc.o
+    0x0003f264   0x0003f264   0x00000020   Data   RO        10890    .rodata.base        oberon_short_wchar_2.0.5.lib(occ_curve25519.c.obj)
+    0x0003f284   0x0003f284   0x00000040   Data   RO        10994    .rodata.base_point  oberon_short_wchar_2.0.5.lib(occ_curve_p256.c.obj)
+    0x0003f2c4   0x0003f2c4   0x00000004   PAD
+    0x0003f2c8   0x0003f2c8   0x00000280   Data   RO        10918    .rodata.const_table  oberon_short_wchar_2.0.5.lib(occ_sha512.c.obj)
+    0x0003f548   0x0003f548   0x00000020   Data   RO        10995    .rodata.cq          oberon_short_wchar_2.0.5.lib(occ_curve_p256.c.obj)
+    0x0003f568   0x0003f568   0x00000020   Data   RO        10970    .rodata.m           oberon_short_wchar_2.0.5.lib(occ_sc25519.c.obj)
+    0x0003f588   0x0003f588   0x00000640   Data   RO        10939    .rodata.occ_ge25519_base_multiples  oberon_short_wchar_2.0.5.lib(occ_ge25519.c.obj)
+    0x0003fbc8   0x0003fbc8   0x00000020   Data   RO        10940    .rodata.occ_ge25519_ec2d  oberon_short_wchar_2.0.5.lib(occ_ge25519.c.obj)
+    0x0003fbe8   0x0003fbe8   0x00000020   Data   RO        10996    .rodata.param_a     oberon_short_wchar_2.0.5.lib(occ_curve_p256.c.obj)
+    0x0003fc08   0x0003fc08   0x00000020   Data   RO        10997    .rodata.param_b     oberon_short_wchar_2.0.5.lib(occ_curve_p256.c.obj)
+    0x0003fc28   0x0003fc28   0x00000020   Data   RO        11020    .rodata.q           oberon_short_wchar_2.0.5.lib(occ_sc_p256.c.obj)
+    0x0003fc48   0x0003fc48   0x00000020   Data   RO        10998    .rodata.qp1         oberon_short_wchar_2.0.5.lib(occ_curve_p256.c.obj)
+    0x0003fc68   0x0003fc68   0x00000020   Data   RO        11425    Region$$Table       anon$$obj.o
+    0x0003fc88   0x0003fc88   0x00000008   Data   RO         5291    crypto_data         nrf_hw_backend_init.o
+    0x0003fc90   0x0003fc90   0x00000010   Data   RO         8837    log_backends        nrf_log_default_backends.o
+    0x0003fca0   0x0003fca0   0x00000008   Data   RO         1517    log_const_data      auth_status_tracker.o
+    0x0003fca8   0x0003fca8   0x00000008   Data   RO         2123    log_const_data      gatt_cache_manager.o
+    0x0003fcb0   0x0003fcb0   0x00000008   Data   RO         2268    log_const_data      gatts_cache_manager.o
+    0x0003fcb8   0x0003fcb8   0x00000008   Data   RO         2365    log_const_data      id_manager.o
+    0x0003fcc0   0x0003fcc0   0x00000008   Data   RO         2517    log_const_data      nrf_ble_gatt.o
+    0x0003fcc8   0x0003fcc8   0x00000008   Data   RO         2616    log_const_data      nrf_ble_lesc.o
+    0x0003fcd0   0x0003fcd0   0x00000008   Data   RO         2986    log_const_data      peer_data_storage.o
+    0x0003fcd8   0x0003fcd8   0x00000008   Data   RO         3126    log_const_data      peer_database.o
+    0x0003fce0   0x0003fce0   0x00000008   Data   RO         3363    log_const_data      peer_manager.o
+    0x0003fce8   0x0003fce8   0x00000008   Data   RO         3628    log_const_data      peer_manager_handler.o
+    0x0003fcf0   0x0003fcf0   0x00000008   Data   RO         3778    log_const_data      security_dispatcher.o
+    0x0003fcf8   0x0003fcf8   0x00000008   Data   RO         3918    log_const_data      security_manager.o
+    0x0003fd00   0x0003fd00   0x00000008   Data   RO         4081    log_const_data      ble_bas.o
+    0x0003fd08   0x0003fd08   0x00000008   Data   RO         5440    log_const_data      nrf_drv_clock.o
+    0x0003fd10   0x0003fd10   0x00000008   Data   RO         5574    log_const_data      nrf_drv_rng.o
+    0x0003fd18   0x0003fd18   0x00000008   Data   RO         5708    log_const_data      nrfx_clock.o
+    0x0003fd20   0x0003fd20   0x00000008   Data   RO         5869    log_const_data      nrfx_gpiote.o
+    0x0003fd28   0x0003fd28   0x00000008   Data   RO         6130    log_const_data      nrfx_prs.o
+    0x0003fd30   0x0003fd30   0x00000008   Data   RO         6184    log_const_data      nrfx_rng.o
+    0x0003fd38   0x0003fd38   0x00000008   Data   RO         6275    log_const_data      nrfx_uart.o
+    0x0003fd40   0x0003fd40   0x00000008   Data   RO         6458    log_const_data      nrfx_uarte.o
+    0x0003fd48   0x0003fd48   0x00000008   Data   RO         6714    log_const_data      nrf_fstorage.o
+    0x0003fd50   0x0003fd50   0x00000008   Data   RO         7383    log_const_data      mem_manager.o
+    0x0003fd58   0x0003fd58   0x00000008   Data   RO         7956    log_const_data      nrf_pwr_mgmt.o
+    0x0003fd60   0x0003fd60   0x00000008   Data   RO         8904    log_const_data      nrf_log_frontend.o
+    0x0003fd68   0x0003fd68   0x00000008   Data   RO         9386    log_const_data      nrf_sdh.o
+    0x0003fd70   0x0003fd70   0x00000008   Data   RO         9496    log_const_data      nrf_sdh_ble.o
+    0x0003fd78   0x0003fd78   0x00000008   Data   RO         9545    log_const_data      nrf_sdh_soc.o
+    0x0003fd80   0x0003fd80   0x00000014   Data   RO         8905    nrf_balloc          nrf_log_frontend.o
+    0x0003fd94   0x0003fd94   0x00000014   Data   RO         5575    nrf_queue           nrf_drv_rng.o
+    0x0003fda8   0x0003fda8   0x00000008   Data   RO         1902    sdh_ble_observers0  ble_conn_state.o
+    0x0003fdb0   0x0003fdb0   0x00000010   Data   RO           50    sdh_ble_observers1  main.o
+    0x0003fdc0   0x0003fdc0   0x00000008   Data   RO         1411    sdh_ble_observers1  bsp_btn_ble.o
+    0x0003fdc8   0x0003fdc8   0x00000008   Data   RO         1809    sdh_ble_observers1  ble_conn_params.o
+    0x0003fdd0   0x0003fdd0   0x00000008   Data   RO         3364    sdh_ble_observers1  peer_manager.o
+    0x0003fdd8   0x0003fdd8   0x00000018   Data   RO           51    sdh_ble_observers2  main.o
+    0x0003fdf0   0x0003fdf0   0x00000008   Data   RO           52    sdh_ble_observers3  main.o
+    0x0003fdf8   0x0003fdf8   0x00000008   Data   RO         6606    sdh_req_observers0  nrf_fstorage_sd.o
+    0x0003fe00   0x0003fe00   0x00000008   Data   RO         5441    sdh_soc_observers0  nrf_drv_clock.o
+    0x0003fe08   0x0003fe08   0x00000008   Data   RO         6607    sdh_soc_observers0  nrf_fstorage_sd.o
+    0x0003fe10   0x0003fe10   0x00000008   Data   RO           53    sdh_soc_observers1  main.o
+    0x0003fe18   0x0003fe18   0x00000008   Data   RO         9497    sdh_stack_observers0  nrf_sdh_ble.o
+    0x0003fe20   0x0003fe20   0x00000008   Data   RO         9546    sdh_stack_observers0  nrf_sdh_soc.o
+    0x0003fe28   0x0003fe28   0x00000008   Data   RO         5442    sdh_state_observers0  nrf_drv_clock.o
+    0x0003fe30   0x0003fe30   0x00000008   Data   RO         5576    sdh_state_observers0  nrf_drv_rng.o
+    0x0003fe38   0x0003fe38   0x00000008   Data   RO         6608    sdh_state_observers0  nrf_fstorage_sd.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20002b90, Load base: 0x0003fdf0, Size: 0x00006480, Max: 0x0000d470, ABSOLUTE, COMPRESSED[0x000000d0])
+    Execution Region RW_IRAM1 (Exec base: 0x20002b90, Load base: 0x0003fe40, Size: 0x00006480, Max: 0x0000d470, ABSOLUTE, COMPRESSED[0x000000d0])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -8915,12 +8918,12 @@ Image component sizes
         82          0          0          0          0       3550   sensorsim.o
        914         72        320          0          0       7769   sha256.o
        796         70          0          4          0       3055   system_nrf52.o
-       176         26         24          4        756      41348   uart_data.o
+       248         90         24          4        756      41260   uart_data.o
 
     ----------------------------------------------------------------------
-     71522      11170      18272        792      24896    1867175   Object Totals
+     71594      11234      18280        792      24896    1867087   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-       122          0         95         12         10          0   (incl. Padding)
+       122          0        103         12         10          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -8987,15 +8990,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     84996      11362      20972        832      24896    1789291   Grand Totals
-     84996      11362      20972        208      24896    1789291   ELF Image Totals (compressed)
-     84996      11362      20972        208          0          0   ROM Totals
+     85068      11426      20980        832      24896    1789203   Grand Totals
+     85068      11426      20980        208      24896    1789203   ELF Image Totals (compressed)
+     85068      11426      20980        208          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)               105968 ( 103.48kB)
+    Total RO  Size (Code + RO Data)               106048 ( 103.56kB)
     Total RW  Size (RW Data + ZI Data)             25728 (  25.13kB)
-    Total ROM Size (Code + RO Data + RW Data)     106176 ( 103.69kB)
+    Total ROM Size (Code + RO Data + RW Data)     106256 ( 103.77kB)
 
 ==============================================================================
 

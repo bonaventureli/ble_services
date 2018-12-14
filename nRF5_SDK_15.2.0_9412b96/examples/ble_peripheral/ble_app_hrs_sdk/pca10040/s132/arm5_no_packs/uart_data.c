@@ -27,28 +27,32 @@ void uart_event_handle(app_uart_evt_t * p_event)
         case APP_UART_DATA_READY:
             UNUSED_VARIABLE(app_uart_get(&data_array[index]));
             index++;
-
+						printf("\r\nAPP_UART_DATA_READY.\r\n");
+						//NRF_LOG_HEXDUMP_DEBUG(data_array, index);
             if ((data_array[index - 1] == '\n') ||
                 (data_array[index - 1] == '\r') ||
                 (index >= m_ble_nus_max_data_len))
             {
-                if (index > 1)
-                {
-                    NRF_LOG_DEBUG("Ready to send data over BLE NUS");
-                    NRF_LOG_HEXDUMP_DEBUG(data_array, index);
+							printf("\r\nNRF_LOG_HEXDUMP_DEBUG.\r\n");
+							NRF_LOG_HEXDUMP_INFO(data_array, index);
+							break;
+//                if (index > 1)
+//                {
+//                    NRF_LOG_DEBUG("Ready to send data over BLE NUS");
+//                    NRF_LOG_HEXDUMP_DEBUG(data_array, index);
 
-                    do
-                    {
-                        uint16_t length = (uint16_t)index;
-                        //err_code = ble_nus_data_send(&m_nus, data_array, &length, m_conn_handle);
-                        if ((err_code != NRF_ERROR_INVALID_STATE) &&
-                            (err_code != NRF_ERROR_RESOURCES) &&
-                            (err_code != NRF_ERROR_NOT_FOUND))
-                        {
-                            APP_ERROR_CHECK(err_code);
-                        }
-                    } while (err_code == NRF_ERROR_RESOURCES);
-                }
+//                    do
+//                    {
+//                        uint16_t length = (uint16_t)index;
+//                        //err_code = ble_nus_data_send(&m_nus, data_array, &length, m_conn_handle);
+//                        if ((err_code != NRF_ERROR_INVALID_STATE) &&
+//                            (err_code != NRF_ERROR_RESOURCES) &&
+//                            (err_code != NRF_ERROR_NOT_FOUND))
+//                        {
+//                            APP_ERROR_CHECK(err_code);
+//                        }
+//                    } while (err_code == NRF_ERROR_RESOURCES);
+//                }
 
                 index = 0;
             }

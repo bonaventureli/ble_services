@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\_build\nrf52832_xxaa.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\_build\nrf52832_xxaa.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Dec 14 16:56:29 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Dec 14 17:20:00 2018
 <BR><P>
 <H3>Maximum Stack Usage =       1640 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1322,7 +1322,8 @@ Global Symbols
 <P><STRONG><a name="[3b4]"></a>__1printf$bare</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, printfb.o(i.__0printf$bare), UNUSED)
 
 <P><STRONG><a name="[2a8]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, printfb.o(i.__0printf$bare))
-<BR><BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR><BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_event_handle
+<LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[3b5]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
@@ -3781,7 +3782,8 @@ Global Symbols
 <LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buf_prealloc
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[240]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fstorage_data_write
+<BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_event_handle
+<LI><a href="#[240]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fstorage_data_write
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MslUartTx
 <LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_send
 <LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_CB1
@@ -5329,11 +5331,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gcm_ble_evt_handler
 </UL>
 
-<P><STRONG><a name="[5b]"></a>uart_event_handle</STRONG> (Thumb, 96 bytes, Stack size 16 bytes, uart_data.o(i.uart_event_handle))
+<P><STRONG><a name="[5b]"></a>uart_event_handle</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, uart_data.o(i.uart_event_handle))
 <BR><BR>[Stack]<UL><LI>Max Depth = 252<LI>Call Chain = uart_event_handle &rArr; app_uart_get &rArr; app_error_handler_bare &rArr; app_error_fault_handler &rArr; nrf_log_frontend_std_0 &rArr; std_n &rArr; nrf_log_frontend_dequeue &rArr;  nrf_log_frontend_std_0 (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_uart_get
+<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_hexdump
 <LI><a href="#[146]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_error_handler_bare
+<LI><a href="#[2a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> uart_data.o(i.uart_init)
 </UL>
