@@ -109,3 +109,5 @@
 .\_build\main.o: ..\..\..\..\..\..\modules\nrfx\drivers\include\nrfx_rng.h
 .\_build\main.o: ..\..\..\..\..\..\modules\nrfx\hal/nrf_rng.h
 .\_build\main.o: ..\..\..\fstorage_data.h
+.\_build\main.o: ..\arm5_no_packs\uart_data.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\uart\app_uart.h

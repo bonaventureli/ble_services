@@ -87,6 +87,8 @@
 #include "fstorage_data.h"
 //#include "fstorage_data.h"
 
+#include "uart_data.h"
+
 #define DEVICE_NAME                         "GACVK" 
 //#define DEVICE_NAME                         "xxx"                            /**< Name of device. Will be included in the advertising data. */
 //#define DEVICE_NAME                         "Nordic_HRM"                            /**< Name of device. Will be included in the advertising data. */
@@ -1609,6 +1611,7 @@ int main(void)
 {
     bool erase_bonds;
 
+		uart_init();
     log_init();
     timers_init();
     buttons_leds_init(&erase_bonds);
@@ -1646,6 +1649,8 @@ int main(void)
 		uint8_t status;
 		status = ingeek_get_sec_status();
 		NRF_LOG_INFO("started %x",status);
+		
+		printf("\r\nUART started.\r\n");
     // Enter main loop.
     for (;;)
     {	
