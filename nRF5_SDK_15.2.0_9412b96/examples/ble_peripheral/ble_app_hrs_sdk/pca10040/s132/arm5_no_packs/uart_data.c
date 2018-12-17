@@ -21,6 +21,7 @@ void uart_event_handle(app_uart_evt_t * p_event)
     static uint8_t data_array[BLE_NUS_MAX_DATA_LEN];
     static uint8_t index = 0;
     uint32_t       err_code;
+	  uint8_t status;
 
     switch (p_event->evt_type)
     {
@@ -33,25 +34,16 @@ void uart_event_handle(app_uart_evt_t * p_event)
                 (data_array[index - 1] == '\r') ||
                 (index >= m_ble_nus_max_data_len))
             {
-							NRF_LOG_HEXDUMP_INFO(data_array, index);
-							break;
-//                if (index > 1)
-//                {
-//                    NRF_LOG_DEBUG("Ready to send data over BLE NUS");
-//                    NRF_LOG_HEXDUMP_DEBUG(data_array, index);
-
-//                    do
-//                    {
-//                        uint16_t length = (uint16_t)index;
-//                        //err_code = ble_nus_data_send(&m_nus, data_array, &length, m_conn_handle);
-//                        if ((err_code != NRF_ERROR_INVALID_STATE) &&
-//                            (err_code != NRF_ERROR_RESOURCES) &&
-//                            (err_code != NRF_ERROR_NOT_FOUND))
-//                        {
-//                            APP_ERROR_CHECK(err_code);
-//                        }
-//                    } while (err_code == NRF_ERROR_RESOURCES);
-//                }
+							
+                if (index > 1)
+                {
+									status = ingeek_get_sec_status();
+									if (status == 0x03){
+										Receive_Task(data_array);
+									}
+									
+									//break;
+                }
 
                 index = 0;
             }

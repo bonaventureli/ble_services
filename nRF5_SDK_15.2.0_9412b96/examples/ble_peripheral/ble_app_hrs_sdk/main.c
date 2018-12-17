@@ -772,14 +772,15 @@ void Handle_session(uint8_t *data, uint32_t data_len)
 
 }
 extern T_CarCMD CarCMD;
+	DK_Cmd_Meg struct_cmd;
+	uint8_t cmd;
 void Handle_cmd(uint8_t *data, uint32_t data_len)
 {
 	uint8_t *preply_data;
 	unsigned int outlen;
 	
 
-	DK_Cmd_Meg struct_cmd;
-	uint8_t cmd;
+
 
 	#if 0
 	NRF_LOG_HEXDUMP_INFO(data, data_len);
@@ -805,12 +806,10 @@ void Handle_cmd(uint8_t *data, uint32_t data_len)
 	
 	#endif
 	
-	#if 1
+	#if 0
 	ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-	#endif
-	
 	ble_send_notify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-
+	#endif
 }
 #define SESSIONMAXBIT 112
 #define INFOCHARMAXBIT 29
@@ -1649,6 +1648,7 @@ int main(void)
 		uint8_t status;
 		status = ingeek_get_sec_status();
 		NRF_LOG_INFO("started %x",status);
+		NotifyCallBack(ble_send_notify);
 		
 		printf("\r\nUART started.\r\n");
     // Enter main loop.

@@ -768,6 +768,9 @@ uint32_t ble_send(ble_hrs_t * p_hrs, uint16_t uuid, uint8_t * data, uint16_t len
 
     return err_code;
 }
+
+
+
 void ble_hrs_rr_interval_add(ble_hrs_t * p_hrs, uint16_t rr_interval)
 {
     if (p_hrs->rr_interval_count == BLE_HRS_MAX_BUFFERED_RR_INTERVALS)

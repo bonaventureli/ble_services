@@ -129,7 +129,7 @@ void One_Key_Start(void)
 
 
 BleNotify_CallBack gBleNotify;
-DK_Cmd_Meg struct_cmd;
+extern DK_Cmd_Meg struct_cmd;
 uint8_t *preply_data;
 unsigned int outlen;
 #define BLE_UUID_DIGITALKET_CMD_CHAR                     			 	 0xFFF5     /**< CMD characteristic UUID. */
@@ -151,7 +151,87 @@ void Receive_Task(const uint8_t * data)
   }
   default: break;
  }
-} 
+}
+ 
+ 
+#define BLE_UUID_DIGITALKET_CMD_CHAR                     			 	 0xFFF5     /**< CMD characteristic UUID. */
+int ret;
+  if(data[0] == 0x02){
+	 switch(data[4]){
+		 case 0x00:{
+			 struct_cmd.result = 0x00;
+		 break;
+		 }
+		 case 0x01:{
+			 struct_cmd.result = 0x01;
+		 break;
+		 }
+		 case 0x02:{
+			 struct_cmd.result = 0x02;
+		 break;
+		 }
+		 case 0x03:{
+			 struct_cmd.result = 0x03;
+		 break;
+		 }
+		 case 0x04:{
+			 struct_cmd.result = 0x04;
+		 break;
+		 }
+		 case 0x05:{
+			 struct_cmd.result = 0x05;
+		 break;
+		 }
+		 case 0x06:{
+			 struct_cmd.result = 0x06;
+		 break;
+		 }
+		 case 0x07:{
+			 struct_cmd.result = 0x07;
+		 break;
+		 }
+		 case 0x08:{
+			 struct_cmd.result = 0x08;
+		 break;
+		 }
+		 case 0x09:{
+			 struct_cmd.result = 0x09;
+		 break;
+		 }
+		 case 0x0A:{//10
+			 struct_cmd.result = 0x0A;
+		 break;
+		 }
+		 case 0x0B:{//12
+			 struct_cmd.result = 0x0B;
+		 break;
+		 }
+	 }
+	 #if 0
+	 for(int i=0;i<13;i++){
+	 struct_cmd.result = i;
+	 for(int j=0;j<1000;j++){}
+		 
+		 if((ret = ingeek_command_output_action(&struct_cmd,preply_data, &outlen)) != INGEEK_OK \
+		|| outlen != 16){
+		 //ikLogPrintf(IK_LOG_WARNING,"ingeek_command_output_action error is %d ",ret);
+			NRF_LOG_INFO("error return ret = %d ",ret);
+		// break;
+	}
+     
+		//ikLogPrintf(IK_LOG_INFO,"cmd =%d ",cmd);
+		NRF_LOG_INFO("struct_cmd.result %x",struct_cmd.result);
+		NRF_LOG_HEXDUMP_INFO((uint8_t *)preply_data, (uint16_t)outlen);
+		
+		gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
+	 }
+	 #endif
+		 if((ret = ingeek_command_output_action(&struct_cmd,preply_data, &outlen)) != INGEEK_OK || outlen != 16){
+	}
+		NRF_LOG_HEXDUMP_INFO((uint8_t *)preply_data, (uint16_t)outlen);
+		gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
+}
+	#if 0
  else if(data[ee_Type]== MONITOR_TYPE){
 	 switch(data[ee_Cmd]){
 		 case MONITOR_CMD_CENTRAL_CONTROLLOCK:{
@@ -372,7 +452,7 @@ void Receive_Task(const uint8_t * data)
 	 }
 
  }
- 
+ #endif
 }
 
 /** 

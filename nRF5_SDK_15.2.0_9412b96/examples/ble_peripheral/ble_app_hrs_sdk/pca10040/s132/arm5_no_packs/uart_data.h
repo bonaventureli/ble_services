@@ -3,6 +3,7 @@
 #include "bsp_btn_ble.h"
 #include "sdk_config.h"
 #include "nrf_log.h"
+#include "ikcmdif.h"
 
 #define OPCODE_LENGTH        1
 #define HANDLE_LENGTH        2

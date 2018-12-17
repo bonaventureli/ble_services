@@ -69,5 +69,8 @@
 .\_build\uart_data.o: ..\..\..\..\..\..\components\libraries\log\src\nrf_log_internal.h
 .\_build\uart_data.o: ..\..\..\..\..\..\components\libraries\log\nrf_log_instance.h
 .\_build\uart_data.o: ..\..\..\..\..\..\components\libraries\log\nrf_log_types.h
+.\_build\uart_data.o: ..\..\..\ikcmd\inc\ikcmdif.h
+.\_build\uart_data.o: ..\..\..\ikcmd\src\ikcmdhandle.h
+.\_build\uart_data.o: ..\..\..\sdk\app\digital_key_api.h
 .\_build\uart_data.o: ..\..\..\..\..\..\modules\nrfx\hal\nrf_uart.h
 .\_build\uart_data.o: ..\..\..\..\..\..\modules\nrfx\hal\nrf_uarte.h
