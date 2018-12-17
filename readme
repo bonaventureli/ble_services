@@ -4,3 +4,9 @@
 flash ok
 uart tx,rx ok
 cmd ok
+
+1.0release
+flash ok
+uart ok
+cmd ok
+cmd return ok
