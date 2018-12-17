@@ -241,7 +241,7 @@ static void on_write(ble_hrs_t * p_hrs, ble_evt_t const * p_ble_evt)
     ble_gatts_evt_write_t const * p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
 		ble_hrs_evt_t                 evt;
 
-		NRF_LOG_INFO("This is on_write function.");
+//		NRF_LOG_INFO("This is on_write function.");
 
 	#if 0
     if (p_evt_write->handle == p_hrs->hrm_handles.cccd_handle)
@@ -313,7 +313,7 @@ static void on_write(ble_hrs_t * p_hrs, ble_evt_t const * p_ble_evt)
 		else if ((p_evt_write->handle == p_hrs->cmd_handles.value_handle) &&
              (p_hrs->evt_handler != NULL))
     {
-			NRF_LOG_INFO("This is cmd_handles .");
+			//NRF_LOG_INFO("This is cmd_handles .");
         evt.evt_type                  = BLE_DIGITAKKEY_EVT_CMD;
         evt.params.rx_data.p_data = p_evt_write->data;
         evt.params.rx_data.length = p_evt_write->len;
@@ -347,7 +347,7 @@ static void on_write(ble_hrs_t * p_hrs, ble_evt_t const * p_ble_evt)
 		else
     {
         // Do Nothing. This event is not relevant for this service.
-			NRF_LOG_INFO("Do Nothing. This event is not relevant for this service. p_hrs->evt_handler = %x", *p_hrs->evt_handler);
+//			NRF_LOG_INFO("Do Nothing. This event is not relevant for this service. p_hrs->evt_handler = %x", *p_hrs->evt_handler);
     }
 		
 }
@@ -722,7 +722,7 @@ uint32_t ble_send(ble_hrs_t * p_hrs, uint16_t uuid, uint8_t * data, uint16_t len
 					
 					case BLE_UUID_DIGITALKET_STATUS_CHAR:{
 							hvx_params.handle = p_hrs->status_handles.value_handle;
-						NRF_LOG_INFO("BLE_UUID_DIGITALKET_STATUS_CHAR");
+//						NRF_LOG_INFO("BLE_UUID_DIGITALKET_STATUS_CHAR");
 					break;
 					}
 					case BLE_UUID_DIGITALKET_INFO_CHAR:{
@@ -744,7 +744,7 @@ uint32_t ble_send(ble_hrs_t * p_hrs, uint16_t uuid, uint8_t * data, uint16_t len
 					
 					case BLE_UUID_DIGITALKET_CMD_CHAR:{
 							hvx_params.handle = p_hrs->cmd_handles.value_handle;			
-					NRF_LOG_INFO("BLE_UUID_DIGITALKET_CMD_CHAR");						
+//					NRF_LOG_INFO("BLE_UUID_DIGITALKET_CMD_CHAR");						
 					break;
 					}
 				}
@@ -753,7 +753,7 @@ uint32_t ble_send(ble_hrs_t * p_hrs, uint16_t uuid, uint8_t * data, uint16_t len
         hvx_params.offset = 0;
         hvx_params.p_len  = &length;
         hvx_params.p_data = data;
-				NRF_LOG_HEXDUMP_INFO(hvx_params.p_data, length);
+				//NRF_LOG_HEXDUMP_INFO(hvx_params.p_data, length);
 
         err_code = sd_ble_gatts_hvx(p_hrs->conn_handle, &hvx_params);
         if ((err_code == NRF_SUCCESS) && (hvx_len != len))

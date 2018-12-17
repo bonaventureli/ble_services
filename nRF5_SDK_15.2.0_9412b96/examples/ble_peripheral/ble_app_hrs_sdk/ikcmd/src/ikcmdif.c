@@ -23,11 +23,12 @@
 
 
 #include "ikcmdif.h"
+#include "ble_hrs.h"
+BLE_HRS_DEF(m_hrs);                                                 /**< Heart rate service instance. */
 
 extern void MslCarcmd(uint8_t cmd,uint8_t param);
-
-//pfnWritePortCB_t   g_uartTxCB = 0;
-
+extern uint32_t ble_send_notify(uint16_t uuid, uint8_t * data, uint16_t length);
+//pfnWritePortCB_t   g_uartTxCB = 0;                                              /**< Heart rate service instance. */;d
 
 //int ikcmdUartSend(uint8_t *inBuf ,uint32_t size)
 //{
@@ -129,16 +130,19 @@ void One_Key_Start(void)
 
 
 BleNotify_CallBack gBleNotify;
-extern DK_Cmd_Meg struct_cmd;
-uint8_t *preply_data;
+
+extern DK_Cmd_Meg gstruct_cmd;
+uint8_t Cmdpreply_data[16];
 unsigned int outlen;
-#define BLE_UUID_DIGITALKET_CMD_CHAR                     			 	 0xFFF5     /**< CMD characteristic UUID. */
+
 
 void NotifyCallBack(BleNotify_CallBack bcb){
 	gBleNotify = bcb;
 }
 void Receive_Task(const uint8_t * data)
 {
+int ret;
+uint8_t status;
  if((data[ee_Type]== MONITOR_TYPE_POSION)&&(data[ee_Cmd] == MONITOR_CMD_CAR_POSION)&&(data[ee_Length]==0x01)){
  switch(data[ee_Param]){
   case CARCMD_CMD_REQUSE:{ //03FF0001F0
@@ -152,309 +156,72 @@ void Receive_Task(const uint8_t * data)
   default: break;
  }
 }
- 
- 
 #define BLE_UUID_DIGITALKET_CMD_CHAR                     			 	 0xFFF5     /**< CMD characteristic UUID. */
-int ret;
   if(data[0] == 0x02){
 	 switch(data[4]){
 		 case 0x00:{
-			 struct_cmd.result = 0x00;
+			 gstruct_cmd.result = 0x00;
 		 break;
 		 }
 		 case 0x01:{
-			 struct_cmd.result = 0x01;
+			 gstruct_cmd.result = 0x01;
 		 break;
 		 }
 		 case 0x02:{
-			 struct_cmd.result = 0x02;
+			 gstruct_cmd.result = 0x02;
 		 break;
 		 }
 		 case 0x03:{
-			 struct_cmd.result = 0x03;
+			 gstruct_cmd.result = 0x03;
 		 break;
 		 }
 		 case 0x04:{
-			 struct_cmd.result = 0x04;
+			 gstruct_cmd.result = 0x04;
 		 break;
 		 }
 		 case 0x05:{
-			 struct_cmd.result = 0x05;
+			 gstruct_cmd.result = 0x05;
 		 break;
 		 }
 		 case 0x06:{
-			 struct_cmd.result = 0x06;
+			 gstruct_cmd.result = 0x06;
 		 break;
 		 }
 		 case 0x07:{
-			 struct_cmd.result = 0x07;
+			 gstruct_cmd.result = 0x07;
 		 break;
 		 }
 		 case 0x08:{
-			 struct_cmd.result = 0x08;
+			 gstruct_cmd.result = 0x08;
 		 break;
 		 }
 		 case 0x09:{
-			 struct_cmd.result = 0x09;
+			 gstruct_cmd.result = 0x09;
 		 break;
 		 }
 		 case 0x0A:{//10
-			 struct_cmd.result = 0x0A;
+			 gstruct_cmd.result = 0x0A;
 		 break;
 		 }
 		 case 0x0B:{//12
-			 struct_cmd.result = 0x0B;
+			 gstruct_cmd.result = 0x0B;
 		 break;
 		 }
 	 }
-	 #if 0
-	 for(int i=0;i<13;i++){
-	 struct_cmd.result = i;
-	 for(int j=0;j<1000;j++){}
-		 
-		 if((ret = ingeek_command_output_action(&struct_cmd,preply_data, &outlen)) != INGEEK_OK \
-		|| outlen != 16){
-		 //ikLogPrintf(IK_LOG_WARNING,"ingeek_command_output_action error is %d ",ret);
-			NRF_LOG_INFO("error return ret = %d ",ret);
-		// break;
-	}
-     
-		//ikLogPrintf(IK_LOG_INFO,"cmd =%d ",cmd);
-		NRF_LOG_INFO("struct_cmd.result %x",struct_cmd.result);
-		NRF_LOG_HEXDUMP_INFO((uint8_t *)preply_data, (uint16_t)outlen);
-		
-		gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-	 }
-	 #endif
-		 if((ret = ingeek_command_output_action(&struct_cmd,preply_data, &outlen)) != INGEEK_OK || outlen != 16){
-	}
-		NRF_LOG_HEXDUMP_INFO((uint8_t *)preply_data, (uint16_t)outlen);
-		gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
+		 if((ret = ingeek_command_output_action(&gstruct_cmd,Cmdpreply_data, &outlen)) != INGEEK_OK || outlen != 16){
+				NRF_LOG_INFO("error return ret = %d ",ret);
+		}
+				NRF_LOG_INFO("struct_cmd.result %x",gstruct_cmd.result);
+				NRF_LOG_HEXDUMP_INFO(Cmdpreply_data, outlen);
+				ble_send(&m_hrs, BLE_UUID_DIGITALKET_CMD_CHAR, Cmdpreply_data, outlen);
 }
-	#if 0
- else if(data[ee_Type]== MONITOR_TYPE){
-	 switch(data[ee_Cmd]){
-		 case MONITOR_CMD_CENTRAL_CONTROLLOCK:{
-			 if(data[ee_Index]==0x00){
-				 	 switch(data[ee_Param]){
-							 case 0x00:{
-								  struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 0;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-							 case 0x01:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 1;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-						 }
-			 }
-			 else if(data[ee_Index]==0x01){
-				 	 switch(data[ee_Param]){
-							 case 0x00:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 0;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-							 case 0x01:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 1;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-						 }
-			 }
-		 break;
-		 }
-		 case MONITOR_CMD_WINDOW_CONTROL:{
-			 if(data[ee_Index]==0x00){
-				 	 switch(data[ee_Param]){
-							 case 0x00:{
-								  struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 0;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-							 case 0x01:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 1;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-						 }
-			 }
-			 else if(data[ee_Index]==0x01){
-				 	 switch(data[ee_Param]){
-							 case 0x00:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 0;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-							 case 0x01:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 1;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-						 }
-			 }
-		 break;
-		 }
-		 case MONITOR_CMD_SKYLIGHT_CONTROL:{
-			 if(data[ee_Index]==0x00){
-				 	 switch(data[ee_Param]){
-							 case 0x00:{
-								  struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 0;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-							 case 0x01:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 1;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-						 }
-			 }
-			 else if(data[ee_Index]==0x01){
-				 	 switch(data[ee_Param]){
-							 case 0x00:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 0;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-							 case 0x01:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 1;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-						 }
-			 }
-		 break;
-		 }
-		 case MONITOR_CMD_HATCHBACK_CONTROL:{
-			 if(data[ee_Index]==0x00){
-				 	 switch(data[ee_Param]){
-							 case 0x00:{
-								  struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 0;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-							 case 0x01:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 1;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-						 }
-			 }
-			 else if(data[ee_Index]==0x01){
-				 	 switch(data[ee_Param]){
-							 case 0x00:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 0;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-							 case 0x01:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 1;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-						 }
-			 }
-		 break;
-		 }
-		 case MONITOR_CMD_ENGINE_CONTROL:{
-			 if(data[ee_Index]==0x00){
-				 	 switch(data[ee_Param]){
-							 case 0x00:{
-								  struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 0;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-							 case 0x01:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 1;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-						 }
-			 }
-			 else if(data[ee_Index]==0x01){
-				 	 switch(data[ee_Param]){
-							 case 0x00:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 0;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-							 case 0x01:{
-									struct_cmd.command = data[ee_Cmd];
-									struct_cmd.index = data[ee_Index];
-									struct_cmd.result = 1;
-									ingeek_command_output_action(&struct_cmd,preply_data, &outlen);
-									gBleNotify(BLE_UUID_DIGITALKET_CMD_CHAR, preply_data, outlen);
-							 break;
-							 }
-						 }
-			 }
-		 break;
-		 }
-	 }
-
- }
- #endif
 }
 
 /** 
  * @}
  */
+/*
+03 FF 00 01 F0 0A
+03 FF 00 01 F1 0A
+02 01 00 01 00 0A
+*/

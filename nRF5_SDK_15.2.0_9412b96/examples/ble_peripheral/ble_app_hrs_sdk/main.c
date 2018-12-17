@@ -772,15 +772,12 @@ void Handle_session(uint8_t *data, uint32_t data_len)
 
 }
 extern T_CarCMD CarCMD;
-	DK_Cmd_Meg struct_cmd;
-	uint8_t cmd;
+DK_Cmd_Meg gstruct_cmd;
+uint8_t cmd;
 void Handle_cmd(uint8_t *data, uint32_t data_len)
 {
 	uint8_t *preply_data;
 	unsigned int outlen;
-	
-
-
 
 	#if 0
 	NRF_LOG_HEXDUMP_INFO(data, data_len);
@@ -789,11 +786,11 @@ void Handle_cmd(uint8_t *data, uint32_t data_len)
 	NRF_LOG_INFO("\nHandle_cmd_function:[After] ingeek_command_input_action:status:ingeek_get_sec_status is %x. if 3,it is right\n",ingeek_get_sec_status());
 	#endif
 	int i ;
-	for(i=0;i<1000;i++);
-	ingeek_command_input_action(data, data_len, &struct_cmd);
-	for(i=0;i<1000;i++);
-	NRF_LOG_INFO("\nHandle_cmd_command: %d \n",(uint8_t)(struct_cmd.command));
-	ikcmdSendUart(struct_cmd.command);
+	//for(i=0;i<1000;i++);
+	ingeek_command_input_action(data, data_len, &gstruct_cmd);
+	//for(i=0;i<1000;i++);
+	NRF_LOG_INFO("Handle_cmd_command: %d",(uint8_t)(gstruct_cmd.command));
+	ikcmdSendUart(gstruct_cmd.command);
 	
 	
 	#if 0
@@ -817,7 +814,7 @@ void Handle_cmd(uint8_t *data, uint32_t data_len)
 void ble_hrs_evt_handler (ble_hrs_t * p_hrs, ble_hrs_evt_t * p_evt){
 
 	uint8_t status = 0;
-	NRF_LOG_INFO("ble_hrs_evt_handler function==========");
+//	NRF_LOG_INFO("ble_hrs_evt_handler function==========");
 	switch(p_evt->evt_type)
 	{
 		case BLE_HRS_EVT_NOTIFICATION_ENABLED:
@@ -900,7 +897,7 @@ void ble_hrs_evt_handler (ble_hrs_t * p_hrs, ble_hrs_evt_t * p_evt){
 		}
 		case BLE_DIGITAKKEY_EVT_CMD:
 		{
-			NRF_LOG_INFO("case BLE_DIGITAKKEY_EVT_CMD");
+			//NRF_LOG_INFO("case BLE_DIGITAKKEY_EVT_CMD");
 			Handle_cmd((uint8_t *)p_evt->params.rx_data.p_data, (uint32_t) p_evt->params.rx_data.length);
 			break;
 		}
