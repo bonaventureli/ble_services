@@ -10,3 +10,6 @@ flash ok
 uart ok
 cmd ok
 cmd return ok
+
+1.1Debug
+加入配对代码，但是没有相应的APP测试
