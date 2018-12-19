@@ -1217,7 +1217,27 @@ void Handle_disconnect()
 	
 	return;
 }
+#define IO_CAPS      BLE_GAP_IO_CAPS_DISPLAY_ONLY  
+#define BOND         0                              
+#define OOB          0                          
+#define MITM         1
 
+void resp_pair_request(){
+  ble_gap_sec_params_t sec_params;
+	uint32_t err_code;
+	memset(&sec_params,0,sizeof(ble_gap_sec_params_t));
+
+	sec_params.bond = BOND;
+	sec_params.oob = BOND;
+	sec_params.mitm = MITM;
+	sec_params.io_caps = IO_CAPS;
+		
+	sec_params.max_key_size = 16;
+	sec_params.min_key_size = 7;
+		
+	err_code=sd_ble_gap_sec_params_reply(m_conn_handle,BLE_GAP_SEC_STATUS_SUCCESS,&sec_params,NULL);
+	APP_ERROR_CHECK(err_code);
+}
 
 /**@brief Function for handling BLE events.
  *
@@ -1277,7 +1297,8 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             break;
     
         case BLE_GAP_EVT_SEC_PARAMS_REQUEST:
-            NRF_LOG_DEBUG("BLE_GAP_EVT_SEC_PARAMS_REQUEST");
+            NRF_LOG_INFO("BLE_GAP_EVT_SEC_PARAMS_REQUEST");
+						resp_pair_request();
             break;
         
         case BLE_GAP_EVT_AUTH_KEY_REQUEST:

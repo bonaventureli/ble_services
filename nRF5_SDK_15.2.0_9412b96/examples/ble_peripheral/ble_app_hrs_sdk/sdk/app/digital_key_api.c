@@ -192,16 +192,16 @@ static int Handle_write_data(unsigned char *input,unsigned int ilen)
     ret=PBDecode_client_data(input,ilen,&info_message,ingeek_DK_InfoW_fields);  
     if(ret != INGEEK_OK || (info_message.KEY.size) != LENGTH_48 )
     {
-        return INGEEK_FAILED_PBDECODE;
+       return INGEEK_FAILED_PBDECODE;
     }
 
     if(1)
     {
-	ret=Handle_write_Info(&info_message);
-	if(ret != INGEEK_OK)
-	{
-		return ret;
-	}
+			ret=Handle_write_Info(&info_message);
+			if(ret != INGEEK_OK)
+			{
+				return ret;
+			}
     }
 #if 0
     else
@@ -446,19 +446,17 @@ int ingeek_push_info(unsigned char *input, int ilen)
     {
     	return INGEEK_FAILED_PARAM;
     }
-	
     ret = Handle_write_data(input, ilen);
     if(ret == INGEEK_OK)
     {
-	set_sec_status(CARINFO_VALID);
+			set_sec_status(CARINFO_VALID);
     }
     else
     {
-        memset(statem.vin,0x00,sizeof(statem.vin));//clear vin
-        memset(statem.Keyinfo.CMPK,0x00,LENGTH_32);//clear CMPK
-	set_sec_status(CARINFO_INVALID);
+			memset(statem.vin,0x00,sizeof(statem.vin));//clear vin
+			memset(statem.Keyinfo.CMPK,0x00,LENGTH_32);//clear CMPK
+			set_sec_status(CARINFO_INVALID);
     }
-
     return ret;
 }
 
@@ -469,14 +467,14 @@ int ingeek_push_auth(unsigned char *input, unsigned int ilen, unsigned char* out
     
     if(input == NULL || ilen <= 0 || output == NULL || olen == NULL)
     {
-	set_sec_status(CARINFO_VALID);
+			set_sec_status(CARINFO_VALID);
     	return INGEEK_FAILED_PARAM;
     }
 	
     if(ingeek_get_sec_status() != READ_INFO)
     {
         set_sec_status(CARINFO_VALID);
-	return INGEEK_FAILED_STATUS;      
+				return INGEEK_FAILED_STATUS;      
     }
 	
     ret=PBDecode_client_data(input,ilen,&auth_message_g,ingeek_DK_AuthG_fields);
@@ -484,8 +482,8 @@ int ingeek_push_auth(unsigned char *input, unsigned int ilen, unsigned char* out
        auth_message_g.df.size != LENGTH_32 || 
        auth_message_g.s_cmac.size != LENGTH_16)
     {
-	set_sec_status(CARINFO_VALID);
-	memset(statem.Keyinfo.SK, 0x00, LENGTH_16);//clear SK
+				set_sec_status(CARINFO_VALID);
+				memset(statem.Keyinfo.SK, 0x00, LENGTH_16);//clear SK
         return INGEEK_FAILED_PBDECODE;
     }
 
@@ -507,7 +505,7 @@ int ingeek_push_session(unsigned char *input,unsigned int ilen,unsigned char* ou
 	if(input == NULL || ilen <= 0 || output == NULL || olen == NULL)
 	{
 		set_sec_status(CARINFO_VALID);
-    		return INGEEK_FAILED_PARAM;
+    return INGEEK_FAILED_PARAM;
 	}
 	
 	if(ingeek_get_sec_status() != WRITE_AUTH)
