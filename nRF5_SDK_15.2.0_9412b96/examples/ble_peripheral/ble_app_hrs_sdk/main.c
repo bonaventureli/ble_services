@@ -216,14 +216,14 @@ int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 	if(rlen == 17){
 		//NRF_LOG_INFO("VIN");
 		memcpy(out,VIN_data,rlen);
-		storageReadData(out,rlen,offset);
+		//storageReadData(out,rlen,offset);//change lifei 2018/12/24
 		NRF_LOG_INFO("read_CB1 VIN  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
 		NRF_LOG_HEXDUMP_INFO(out, rlen);	
 	}
 	if(rlen == 48){
 		//NRF_LOG_INFO("CMPK");
 		memcpy(out,CMPK_data,rlen);
-		storageReadData(out,rlen,offset);
+		//storageReadData(out,rlen,offset); //change lifei 2018/12/24
 		NRF_LOG_INFO("read_CB1 CMPK  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
 		NRF_LOG_HEXDUMP_INFO(out, rlen);	
 		NRF_LOG_INFO("read_CB1 flash  FSTORAGE_DATA_ADDR_START:  0x%x",(addr));
@@ -256,7 +256,7 @@ int write_CB1(unsigned char *in, unsigned int wlen, unsigned int offset){
 	if(wlen == 17){
 	//NRF_LOG_INFO("VIN-17");
 	memcpy(VIN_data,in,wlen);
-	storageWriteData(in,wlen,offset);
+	//storageWriteData(in,wlen,offset); //change lifei 2018/12/24
 	NRF_LOG_INFO("write_CB1 VIN-17  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
 	NRF_LOG_HEXDUMP_INFO(in, wlen);	
 	}
@@ -264,7 +264,7 @@ int write_CB1(unsigned char *in, unsigned int wlen, unsigned int offset){
 	if(wlen == 48){
 	//NRF_LOG_INFO("CMPK-48");
 	memcpy(CMPK_data,in,wlen);
-	storageWriteData(in,wlen,offset);
+	//storageWriteData(in,wlen,offset); //change lifei 2018/12/24
 	NRF_LOG_INFO("write_CB1 CMPK-48  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
 	NRF_LOG_HEXDUMP_INFO(in, wlen);	
 	NRF_LOG_INFO("write_CB1 flash  FSTORAGE_DATA_ADDR_START:  0x%x",(addr));
@@ -989,18 +989,45 @@ void ble_hrs_evt_handler (ble_hrs_t * p_hrs, ble_hrs_evt_t * p_evt){
 }
 
 
-static bool app_shutdown_handler(nrf_pwr_mgmt_evt_t event){
-switch(event)
+static bool app_shutdown_handler(nrf_pwr_mgmt_evt_t event)
 {
-	case NRF_PWR_MGMT_EVT_PREPARE_DFU:
-		NRF_LOG_INFO("Power management wants to reset to DFU mode.");
-	break;
-	default:
-		return true;
-	NRF_LOG_INFO("Power management allowed to reset to DFU mode.");
-	
-	return true;
-}
+switch (event)
+    {
+        case NRF_PWR_MGMT_EVT_PREPARE_DFU:
+            NRF_LOG_INFO("Power management wants to reset to DFU mode.");
+            // YOUR_JOB: Get ready to reset into DFU mode
+            //
+            // If you aren't finished with any ongoing tasks, return "false" to
+            // signal to the system that reset is impossible at this stage.
+            //
+            // Here is an example using a variable to delay resetting the device.
+            //
+            // if (!m_ready_for_reset)
+            // {
+            //      return false;
+            // }
+            // else
+            //{
+            //
+            //    // Device ready to enter
+            //    uint32_t err_code;
+            //    err_code = sd_softdevice_disable();
+            //    APP_ERROR_CHECK(err_code);
+            //    err_code = app_timer_stop_all();
+            //    APP_ERROR_CHECK(err_code);
+            //}
+            break;
+
+        default:
+            // YOUR_JOB: Implement any of the other events available from the power management module:
+            //      -NRF_PWR_MGMT_EVT_PREPARE_SYSOFF
+            //      -NRF_PWR_MGMT_EVT_PREPARE_WAKEUP
+            //      -NRF_PWR_MGMT_EVT_PREPARE_RESET
+            return true;
+    }
+
+    NRF_LOG_INFO("Power management allowed to reset to DFU mode.");
+    return true;
 }
 //lint -esym(528,m_app_shutdown_handler)
 /*@brief Register application shutdown handler with priority 0. */
@@ -1787,7 +1814,7 @@ int main(void)
     buttons_leds_init(&erase_bonds);
     power_management_init();
 	
-		fstorage_data_init();
+		//fstorage_data_init(); //change 2018/12/24 lifei
 	
     ble_stack_init();
     gap_params_init();

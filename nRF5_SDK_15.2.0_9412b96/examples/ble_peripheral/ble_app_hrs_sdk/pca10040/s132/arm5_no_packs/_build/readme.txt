@@ -1,0 +1,1 @@
+nrfutil pkg generate --hw-version 52 --application-version 1 --application nrf52832_xxaa.hex --sd-req 0xaf --key-file private.key DFUnrf52832.zip
