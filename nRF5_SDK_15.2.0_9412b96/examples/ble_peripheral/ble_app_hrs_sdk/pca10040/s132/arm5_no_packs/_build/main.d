@@ -111,3 +111,11 @@
 .\_build\main.o: ..\..\..\fstorage_data.h
 .\_build\main.o: ..\arm5_no_packs\uart_data.h
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\uart\app_uart.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\bootloader\ble_dfu\nrf_dfu_ble_svci_bond_sharing.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\svc\nrf_svci.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\svc\nrf_svci_async_function.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\svc\nrf_svci_async_handler.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\svc\nrf_svc_function.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\bootloader\dfu\nrf_dfu_types.h
+.\_build\main.o: ..\..\..\..\..\..\components\softdevice\s132\headers\nrf52\nrf_mbr.h
+.\_build\main.o: ..\..\..\..\..\..\components\ble\ble_services\ble_dfu\ble_dfu.h

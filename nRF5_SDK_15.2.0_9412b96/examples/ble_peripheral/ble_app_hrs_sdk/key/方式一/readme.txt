@@ -1,0 +1,1 @@
+nrfutil pkg generate --hw-version 52 --application-version 1 --application app.hex --sd-req 0xaf --key-file private.key test_Dfu15.zip

@@ -89,6 +89,16 @@
 
 #include "uart_data.h"
 
+#include "ble_srv_common.h"
+#include "nrf_dfu_ble_svci_bond_sharing.h"
+#include "nrf_svci_async_function.h"
+#include "nrf_svci_async_handler.h"
+#include "ble_dfu.h"
+#include "peer_manager.h"
+#include "fds.h"
+#include "ble_conn_state.h"
+#include "ble.h"
+
 #define DEVICE_NAME                         "GACVK" 
 //#define DEVICE_NAME                         "xxx"                            /**< Name of device. Will be included in the advertising data. */
 //#define DEVICE_NAME                         "Nordic_HRM"                            /**< Name of device. Will be included in the advertising data. */
@@ -391,14 +401,67 @@ void advertising_start(bool erase_bonds)
  */
 static void pm_evt_handler(pm_evt_t const * p_evt)
 {
+	ret_code_t err_code;
     pm_handler_on_pm_evt(p_evt);
     pm_handler_flash_clean(p_evt);
 
     switch (p_evt->evt_id)
     {
+			case PM_EVT_BONDED_PEER_CONNECTED:
+			{
+				NRF_LOG_INFO("Connected to a previously bonded device.");
+				break;
+			}
+			case PM_EVT_CONN_SEC_SUCCEEDED:
+			{
+				NRF_LOG_INFO("Connection secured:role:%d, conn_handle:0x%x, procedure:%d.",ble_conn_state_role(p_evt->conn_handle),p_evt->conn_handle,p_evt->params.conn_sec_succeeded.procedure);
+				break;
+			}
+			case PM_EVT_CONN_SEC_FAILED:
+			{
+				break;
+			}
+			case PM_EVT_CONN_SEC_CONFIG_REQ:
+			{
+				pm_conn_sec_config_t conn_sec_config = {.allow_repairing = false};
+				pm_conn_sec_config_reply(p_evt->conn_handle,&conn_sec_config);
+				break;
+			}
+			case PM_EVT_STORAGE_FULL:
+			{
+				err_code = fds_gc();
+				if(err_code == FDS_ERR_NO_SPACE_IN_QUEUES)
+				{
+					
+				}
+				else{
+					APP_ERROR_CHECK(err_code);
+				}
+				break;
+			}
         case PM_EVT_PEERS_DELETE_SUCCEEDED:
             advertising_start(false);
             break;
+				case PM_EVT_PEER_DATA_UPDATE_FAILED:
+			{
+				APP_ERROR_CHECK(p_evt->params.peer_data_update_failed.error);
+				break;
+			}
+			case PM_EVT_PEER_DELETE_FAILED:
+			{
+				APP_ERROR_CHECK(p_evt->params.peer_delete_failed.error);
+				break;
+			}
+			case PM_EVT_PEERS_DELETE_FAILED:
+			{
+				APP_ERROR_CHECK(p_evt->params.peers_delete_failed_evt.error);
+				break;
+			}
+			case PM_EVT_ERROR_UNEXPECTED:
+			{
+				APP_ERROR_CHECK(p_evt->params.error_unexpected.error);
+				break;
+			}
 
         default:
             break;
@@ -924,6 +987,86 @@ void ble_hrs_evt_handler (ble_hrs_t * p_hrs, ble_hrs_evt_t * p_evt){
 	}
 	
 }
+
+
+static bool app_shutdown_handler(nrf_pwr_mgmt_evt_t event){
+switch(event)
+{
+	case NRF_PWR_MGMT_EVT_PREPARE_DFU:
+		NRF_LOG_INFO("Power management wants to reset to DFU mode.");
+	break;
+	default:
+		return true;
+	NRF_LOG_INFO("Power management allowed to reset to DFU mode.");
+	
+	return true;
+}
+}
+//lint -esym(528,m_app_shutdown_handler)
+/*@brief Register application shutdown handler with priority 0. */
+NRF_PWR_MGMT_HANDLER_REGISTER(app_shutdown_handler,0);
+#include "ble_advertising.h"
+static void advertising_config_get(ble_adv_modes_config_t * p_config)
+{
+    memset(p_config, 0, sizeof(ble_adv_modes_config_t));
+
+    p_config->ble_adv_fast_enabled  = true;
+    p_config->ble_adv_fast_interval = APP_ADV_INTERVAL;
+    p_config->ble_adv_fast_timeout  = APP_ADV_DURATION;
+}
+static void disconnect(uint16_t conn_handle, void * p_context)
+{
+    UNUSED_PARAMETER(p_context);
+
+    ret_code_t err_code = sd_ble_gap_disconnect(conn_handle, BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
+    if (err_code != NRF_SUCCESS)
+    {
+        NRF_LOG_WARNING("Failed to disconnect connection. Connection handle: %d Error: %d", conn_handle, err_code);
+    }
+    else
+    {
+        NRF_LOG_DEBUG("Disconnected connection handle %d", conn_handle);
+    }
+}
+// YOUR_JOB: Update this code if you want to do anything given a DFU event (optional).
+/**@brief Function for handling dfu events from the Buttonless Secure DFU service
+ *
+ * @param[in]   event   Event from the Buttonless Secure DFU service.
+ */
+static void ble_dfu_evt_handler(ble_dfu_buttonless_evt_type_t event)
+{
+	switch(event)
+	{
+		case BLE_DFU_EVT_BOOTLOADER_ENTER_PREPARE:
+			NRF_LOG_INFO("Device is preparing to enter bootloader mode.");
+		
+			// Prevent device from advertising on disconnect.
+			ble_adv_modes_config_t config;
+			advertising_config_get(&config);
+			config.ble_adv_on_disconnect_disabled = true;
+			ble_advertising_modes_config_set(&m_advertising, &config);
+
+			// Disconnect all other bonded devices that currently are connected.
+			// This is required to receive a service changed indication
+			// on bootup after a successful (or aborted) Device Firmware Update.
+			uint32_t conn_count = ble_conn_state_for_each_connected(disconnect, NULL);
+			NRF_LOG_INFO("Disconnected %d links.", conn_count);
+		break;
+		case BLE_DFU_EVT_BOOTLOADER_ENTER:
+			NRF_LOG_INFO("Device will enter bootloader mode.");
+		break;
+		case BLE_DFU_EVT_BOOTLOADER_ENTER_FAILED:
+			NRF_LOG_INFO("Request to enter bootloader mode failed asynchroneously.");
+		break;
+		case BLE_DFU_EVT_RESPONSE_SEND_ERROR:
+			NRF_LOG_INFO("Request to send a response to client failed.");
+		break;
+		default:
+			NRF_LOG_INFO("Unknown event from ble_dfu_buttonless.");
+			break;
+		
+	}
+}
 /**@brief Function for initializing services that will be used by the application.
  *
  * @details Initialize the Heart Rate, Battery and Device Information services.
@@ -988,6 +1131,14 @@ static void services_init(void)
 
     err_code = ble_dis_init(&dis_init);
     APP_ERROR_CHECK(err_code);
+		
+		ble_dfu_buttonless_init_t dfus_init = {0};
+		err_code = ble_dfu_buttonless_async_svci_init();
+		APP_ERROR_CHECK(err_code);
+		dfus_init.evt_handler = ble_dfu_evt_handler;
+		err_code = ble_dfu_buttonless_init(&dfus_init);
+		APP_ERROR_CHECK(err_code);
+		
 		
 }
 
@@ -1443,6 +1594,8 @@ static void advertising_init(void)
     init.config.ble_adv_fast_enabled  = true;
     init.config.ble_adv_fast_interval = APP_ADV_INTERVAL;
     init.config.ble_adv_fast_timeout  = APP_ADV_DURATION;
+		
+		advertising_config_get(&init.config);//add lifei 2018/1224
 
     init.evt_handler = on_adv_evt;
 
