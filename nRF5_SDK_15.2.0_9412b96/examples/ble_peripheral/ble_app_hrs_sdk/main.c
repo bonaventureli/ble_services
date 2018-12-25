@@ -205,7 +205,8 @@ int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 	
 	//NRF_LOG_INFO("  read_CB1  ");
 	uint32_t * addr;
-	addr = (uint32_t *)0x79000;
+	//addr = (uint32_t *)0x79000;
+	addr = (uint32_t *)FSTORAGE_DATA_ADDR_START;
 	
 	
 	#if USE_DATA_FLASH
@@ -216,14 +217,14 @@ int read_CB1(unsigned char *out, unsigned int rlen, unsigned int offset)
 	if(rlen == 17){
 		//NRF_LOG_INFO("VIN");
 		memcpy(out,VIN_data,rlen);
-		//storageReadData(out,rlen,offset);//change lifei 2018/12/24
+		storageReadData(out,rlen,offset);//change lifei 2018/12/24
 		NRF_LOG_INFO("read_CB1 VIN  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
 		NRF_LOG_HEXDUMP_INFO(out, rlen);	
 	}
 	if(rlen == 48){
 		//NRF_LOG_INFO("CMPK");
 		memcpy(out,CMPK_data,rlen);
-		//storageReadData(out,rlen,offset); //change lifei 2018/12/24
+		storageReadData(out,rlen,offset); //change lifei 2018/12/24
 		NRF_LOG_INFO("read_CB1 CMPK  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
 		NRF_LOG_HEXDUMP_INFO(out, rlen);	
 		NRF_LOG_INFO("read_CB1 flash  FSTORAGE_DATA_ADDR_START:  0x%x",(addr));
@@ -250,13 +251,13 @@ int write_CB1(unsigned char *in, unsigned int wlen, unsigned int offset){
 		//memcpy(Callback_data+offset,in,wlen);
 	#endif
 	uint32_t * addr;
-	addr = (uint32_t *)0x79000;
-	
-	
+	//addr = (uint32_t *)0x79000;
+	addr = (uint32_t *)FSTORAGE_DATA_ADDR_START;
+
 	if(wlen == 17){
 	//NRF_LOG_INFO("VIN-17");
 	memcpy(VIN_data,in,wlen);
-	//storageWriteData(in,wlen,offset); //change lifei 2018/12/24
+	storageWriteData(in,wlen,offset); //change lifei 2018/12/24
 	NRF_LOG_INFO("write_CB1 VIN-17  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
 	NRF_LOG_HEXDUMP_INFO(in, wlen);	
 	}
@@ -264,7 +265,7 @@ int write_CB1(unsigned char *in, unsigned int wlen, unsigned int offset){
 	if(wlen == 48){
 	//NRF_LOG_INFO("CMPK-48");
 	memcpy(CMPK_data,in,wlen);
-	//storageWriteData(in,wlen,offset); //change lifei 2018/12/24
+	storageWriteData(in,wlen,offset); //change lifei 2018/12/24
 	NRF_LOG_INFO("write_CB1 CMPK-48  FSTORAGE_DATA_ADDR_START:  0x%x",(addr+offset));
 	NRF_LOG_HEXDUMP_INFO(in, wlen);	
 	NRF_LOG_INFO("write_CB1 flash  FSTORAGE_DATA_ADDR_START:  0x%x",(addr));
@@ -1814,7 +1815,7 @@ int main(void)
     buttons_leds_init(&erase_bonds);
     power_management_init();
 	
-		//fstorage_data_init(); //change 2018/12/24 lifei
+		fstorage_data_init(); //change 2018/12/24 lifei
 	
     ble_stack_init();
     gap_params_init();

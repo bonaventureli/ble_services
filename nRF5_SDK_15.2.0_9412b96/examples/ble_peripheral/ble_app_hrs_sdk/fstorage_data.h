@@ -45,6 +45,10 @@
  * This example showcases fstorage usage.
  */
 #include <stdint.h>
+#define FSTORAGE_PAGE_SIZES         (4096)
+#define FSTORAGE_DATA_ADDR_START    (0x70000)
+//#define FSTORAGE_DATA_ADDR_START    (0x79000)
+
 uint32_t fstorage_data_init(void);
 uint32_t fstorage_data_uinit(void);
 uint32_t fstorage_data_write(uint32_t offset, void const * p_src, uint32_t len);
