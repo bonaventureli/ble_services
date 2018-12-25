@@ -23,3 +23,6 @@ cmd return ok
 
 1.3Debug
 取消flash，OTA DFU正常
+
+1.4Debug
+修改flash地址0x70000之后，OTA DFU正常工作
