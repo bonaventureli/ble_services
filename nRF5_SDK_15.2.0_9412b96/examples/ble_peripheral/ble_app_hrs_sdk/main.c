@@ -162,6 +162,8 @@ APP_TIMER_DEF(m_battery_timer_id);                                  /**< Battery
 APP_TIMER_DEF(m_heart_rate_timer_id);                               /**< Heart rate measurement timer. */
 APP_TIMER_DEF(m_rr_interval_timer_id);                              /**< RR interval timer. */
 APP_TIMER_DEF(m_sensor_contact_timer_id);                           /**< Sensor contact detected timer. */
+APP_TIMER_DEF(rssi_timer);                             /**< Timer used to feed wdt. */
+
 
 static uint16_t m_conn_handle         = BLE_CONN_HANDLE_INVALID;    /**< Handle of the current connection. */
 static bool     m_rr_interval_enabled = true;                       /**< Flag for enabling and disabling the registration of new RR interval measurements (the purpose of disabling this is just to test sending HRM without RR interval data. */
@@ -1095,6 +1097,126 @@ static void ble_dfu_evt_handler(ble_dfu_buttonless_evt_type_t event)
 		
 	}
 }
+/*rssi*/
+static double Q = 0.001f;        // ????,???????????
+static double R = 0.1f;         // ????,??????????
+
+static double xhatminus;     // ????????,?k-1??,?k?????????
+static double rssi_pre = 0;      // k-1??????
+static double rssi_deal_end;
+static double Pminus;        // ???????
+static double P_pre;         // ???????????????
+static double K;             // ?????,??????????????(???????????????????)?????
+static double PP;            // ????
+static uint8_t rssi_data[10] = {0};
+static int b = 0;
+static uint8_t rssi;
+static int in_car = 0;
+void bubblesort(uint8_t a[], uint8_t n)
+{
+    int i;
+    int j;//?????????
+    int maxer;
+    /*????“??”???,????????*/
+    for(i=n-2;i>=0;i--){
+        for(j=0;j<=i;j++){
+            maxer=a[j];
+            if(maxer>=a[j+1]){
+                /*????????????,????*/
+                a[j]=a[j+1];
+                a[j+1]=maxer;
+            }
+        }
+    }
+}
+
+int meansDoRssi(uint8_t *bleNodeInfo, uint8_t len)
+{
+    int rssiTmp = 0, dealEndRssi = 0;
+    int i = 0, actualCollectNumber = 0;
+
+    bubblesort(bleNodeInfo, len);
+
+    for(i = 0; i < (len-3); i++)
+    {
+        rssiTmp += bleNodeInfo[i];
+        //actualCollectNumber++;
+        //bleNodeInfo[i] = 0;
+    }
+    //rssiTmp = bleNodeInfo[1]+bleNodeInfo[2]+bleNodeInfo[3]+bleNodeInfo[4]+bleNodeInfo[5]+bleNodeInfo[6]+bleNodeInfo[7]+bleNodeInfo[8];
+    dealEndRssi = rssiTmp/(len-3);
+    rssiTmp = 0;
+    return dealEndRssi;
+}
+double kalmanFilteringDoRssi(double rssi)
+{
+    rssi_deal_end = rssi;
+    xhatminus = rssi_pre;
+    // ????????????????????????????
+    Pminus = P_pre + Q;
+    //?????,??????????????(???????????????????)?????
+    K = Pminus / (Pminus + R);
+    //????????,????????????,??????????,??????????
+    rssi_deal_end = xhatminus + K * (rssi_deal_end - xhatminus);
+    //??????????
+    PP = (1 - K) * Pminus;
+    rssi_pre = rssi_deal_end;
+    //DBG_LOG("rssi_deal_end = %.3f rssi_pre = %.3f" , rssi_deal_end, rssi_pre);
+    P_pre = PP;
+
+    return rssi_deal_end;
+
+}
+void Handle_Rssi(uint8_t rssi){
+
+
+    //uint8_t rssi = meansDoRssi(rssi_data+4, ahead_num);
+
+    //DEBUG("rssi:");DEBUG((uint8_t*)convInt32ToText(rssi)); DEBUG("\r\n");
+
+    double rssivalue = kalmanFilteringDoRssi((double)rssi);
+    uint8_t temp_rssi = (uint8_t)rssivalue;
+		rssi_data[b] = temp_rssi;
+		b++;
+		//DEBUG("RSSI:"); DEBUG((uint8_t*)convInt32ToText((int)rssi)); DEBUG_NEWLINE();
+		if(b ==10){
+				rssi = meansDoRssi(rssi_data, 10);
+				memset(rssi_data, 0, 10);
+			    NRF_LOG_INFO("rssi = %d ",rssi);
+				if((rssi > 0 )&&(rssi <= 53 )){
+					in_car = 2;//PS
+				    NRF_LOG_INFO("in_car.%d ", rssi);
+				}else if((rssi > (53) )&&(rssi <= 75)){
+					in_car = 3;//PE
+					  NRF_LOG_INFO("out_car %d .",rssi);
+				} 
+				else
+				{
+					 in_car = 0;
+					 NRF_LOG_INFO("nk car status %d.",rssi);
+
+				}
+				
+				b = 0;
+		}	
+
+}
+
+void rssi_timeout_handler(void *p_context)
+{
+  uint32_t err_code;
+    int8_t rssi;
+   uint8_t ch_index;
+   uint8_t * p_ch_index = &ch_index;
+	uint8_t * p_rssi;
+	sd_ble_gap_rssi_start(m_conn_handle,BLE_GAP_RSSI_THRESHOLD_INVALID,0);//add lifei
+  sd_ble_gap_rssi_get(m_conn_handle, &rssi, p_ch_index);
+	
+  rssi = 0-rssi;
+  //NRF_LOG_INFO("rssi = %d ",rssi);
+  Handle_Rssi((uint8_t)rssi);
+ }
+
 /**@brief Function for initializing services that will be used by the application.
  *
  * @details Initialize the Heart Rate, Battery and Device Information services.
@@ -1108,6 +1230,11 @@ static void services_init(void)
     nrf_ble_qwr_init_t qwr_init = {0};
     uint8_t            body_sensor_location;
 		
+		/*rssi*/
+		err_code = app_timer_create(&rssi_timer,
+                                APP_TIMER_MODE_REPEATED,
+                                rssi_timeout_handler);
+    APP_ERROR_CHECK(err_code); 
 		
 
     // Initialize Queued Write Module.
@@ -1432,6 +1559,11 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
     {
         case BLE_GAP_EVT_CONNECTED:
             NRF_LOG_INFO("Connected.");
+				/*rssi*/
+						sd_ble_gap_rssi_start(m_conn_handle,0,0);
+						err_code = app_timer_start(rssi_timer, 1000, NULL);
+						APP_ERROR_CHECK(err_code);
+				
 						Handle_broadcast();
             err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);
             APP_ERROR_CHECK(err_code);
@@ -1444,6 +1576,11 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             NRF_LOG_INFO("Disconnected, reason %d.",
                           p_ble_evt->evt.gap_evt.params.disconnected.reason);
             m_conn_handle = BLE_CONN_HANDLE_INVALID;
+				/*rssi*/
+						sd_ble_gap_rssi_stop(m_conn_handle);
+						err_code = app_timer_stop(rssi_timer);
+						APP_ERROR_CHECK(err_code);
+				
 						Handle_disconnect();
             break;
 
