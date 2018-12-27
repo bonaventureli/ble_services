@@ -22,4 +22,4 @@ cmd return ok
 加入OTA DFU部分，但是不能回复到bootloader部分，目前分析，可能是存储密钥的flash地址和dfu的地址0x78000冲突了。
 
 1.3Debug
-取消flash，OTA DFU正常
+取消flash，OTA DFU正常 增加UART-DFU.zip包，代码没有修改 
