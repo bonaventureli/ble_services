@@ -8,7 +8,7 @@
 
 static uint8_t gData[100];
 //static uint8_t gFrame[100+5];
-static uint8_t gUartRxDatazta[200];
+uint8_t gUartRxDatazta[200];
 //static uint8_t gUartTxDatazta[200];
 
 T_Car_Status gztaCarStatus;

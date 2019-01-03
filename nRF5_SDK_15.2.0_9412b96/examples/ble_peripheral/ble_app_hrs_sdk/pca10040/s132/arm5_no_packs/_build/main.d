@@ -119,3 +119,4 @@
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\bootloader\dfu\nrf_dfu_types.h
 .\_build\main.o: ..\..\..\..\..\..\components\softdevice\s132\headers\nrf52\nrf_mbr.h
 .\_build\main.o: ..\..\..\..\..\..\components\ble\ble_services\ble_dfu\ble_dfu.h
+.\_build\main.o: ..\..\..\..\..\..\components\libraries\crc16\crc16.h

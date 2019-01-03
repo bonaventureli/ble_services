@@ -449,7 +449,7 @@ uint32_t ble_hrs_init(ble_hrs_t * p_hrs, const ble_hrs_init_t * p_hrs_init)
     ble_uuid_t            ble_uuid;
     ble_add_char_params_t add_char_params;
     uint8_t               encoded_initial_hrm[MAX_HRM_LEN];
-	  //ble_uuid128_t         sdk_base_uuid = SDK_UUID_BASE; // add lifei 2018/11/2
+	  ble_uuid128_t         sdk_base_uuid = SDK_UUID_BASE; // add lifei 2018/11/2
 	
 	  //p_hrs->sdk_uuid_type = BLE_UUID_TYPE_VENDOR_BEGIN;
 
@@ -475,8 +475,8 @@ uint32_t ble_hrs_init(ble_hrs_t * p_hrs, const ble_hrs_init_t * p_hrs_init)
     }
 
 		// add lifei 2018/11/2 Add a custom base UUID. 
-//    err_code = sd_ble_uuid_vs_add(&sdk_base_uuid, &p_hrs->sdk_uuid_type);
-//		VERIFY_SUCCESS(err_code);
+    err_code = sd_ble_uuid_vs_add(&sdk_base_uuid, &p_hrs->sdk_uuid_type);
+		VERIFY_SUCCESS(err_code);
 		// end lifei
 		
 

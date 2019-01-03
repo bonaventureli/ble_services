@@ -79,7 +79,7 @@
 ".\_build\app_scheduler.o"
 ".\_build\app_timer.o"
 ".\_build\app_util_platform.o"
-".\_build\crc16.o"
+".\_build\crc16_1.o"
 ".\_build\hardfault_implementation.o"
 ".\_build\mem_manager.o"
 ".\_build\nrf_assert.o"

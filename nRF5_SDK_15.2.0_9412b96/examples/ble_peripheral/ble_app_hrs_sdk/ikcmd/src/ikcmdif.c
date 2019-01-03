@@ -24,6 +24,7 @@
 
 #include "ikcmdif.h"
 #include "ble_hrs.h"
+//#include "crc16.h"
 BLE_HRS_DEF(m_hrs);                                                 /**< Heart rate service instance. */
 
 extern void MslCarcmd(uint8_t cmd,uint8_t param);
@@ -215,7 +216,94 @@ uint8_t status;
 				NRF_LOG_HEXDUMP_INFO(Cmdpreply_data, outlen);
 				ble_send(&m_hrs, BLE_UUID_DIGITALKET_CMD_CHAR, Cmdpreply_data, outlen);
 }
+	 /*car monitor*/
+typedef enum {
+    em_Type,
+    em_Cmd,
+		em_Index,
+    em_Length,
+	  em_Data,
+}em_Frame;
+
+#define MTYPE 0x03
+#define MSTATUS 0xFE
+#define MINDEX 0x00
+#define MLENGTH 0x39
+uint8_t Monitorpreply_data[MLENGTH];
+
+if(data[em_Type] == MTYPE){
+	if(data[em_Cmd] == MSTATUS){
+		if(data[em_Index] == MINDEX){
+			if(data[em_Length] == MLENGTH){
+				memcpy(Monitorpreply_data,data+4,0x39);
+				ble_send(&m_hrs, BLE_UUID_DIGITALKET_CMD_CHAR, Monitorpreply_data, 0x39);
+			}
+		}
+	}
 }
+}
+
+typedef struct SignalPosition{
+	 uint8_t  BitLength;
+	 uint8_t  ByteOffset;
+	 uint8_t  BitStart;
+}T_MASK_MATRIX;  
+
+const T_MASK_MATRIX MaskMatrix[] = {
+/*NUM   BitLength  ByteOffset  BitStart*/
+/*0*/  {2,      		44,     6}, //KeyPosition
+/*1*/  {1,     	 		33,     4}, //EngineRunnin gStatus
+/*2*/  {1,      		33,     6}, //ACRequest
+/*3*/  {1,      		25,     5}, //leftdoor
+/*4*/  {1,      		25,     6}, //rightdoor
+/*5*/  {32,      		45,     0}, //TotalOdometer_km
+};
+uint8_t DataMask[] = {0x00,0x01,0x03,0x07,0x0F,0x1F,0x3F,0x7F,0xFF};
+
+uint8_t *gRMoData;
+
+uint8_t *MonitData(uint8_t *Data,uint8_t Select){
+	//uint8_t *MonitorData(T_MCARDATA *RData,uint8_t Select){
+	uint8_t Retval,Retval2,Retval3,Retval4,ByteStart,BitStart,BitLength,Scase;
+	
+	ByteStart = MaskMatrix[Select].ByteOffset;
+	BitStart = MaskMatrix[Select].BitStart;
+	
+	Scase = MaskMatrix[Select].BitLength/8;
+	if(Scase == 0){
+		BitLength  = MaskMatrix[Select].BitLength;
+		//Retval = (RData->Data[ByteStart]>>BitStart)&DataMask[BitLength];
+		Retval = (Data[ByteStart]>>BitStart)&DataMask[BitLength];
+		gRMoData = &Retval;
+	}
+	else if (Scase == 1){
+		//Retval = RData->Data[ByteStart];
+		Retval = Data[ByteStart];
+		gRMoData = &Retval;
+	}
+	else if(Scase == 2){
+		Retval = Data[ByteStart];
+//		Retval = RData->Data[ByteStart];
+//		Retval2 = RData->Data[ByteStart+1];
+		gRMoData = &Retval;
+	}
+	else if(Scase == 4){
+		Retval = Data[ByteStart];
+//		Retval = RData->Data[ByteStart];
+//		Retval2 = RData->Data[ByteStart+1];
+//		Retval3 = RData->Data[ByteStart+2];
+//		Retval4 = RData->Data[ByteStart+3];
+		gRMoData = &Retval;
+	}
+}
+extern uint8_t gUartRxDatazta[200];
+
+void TotalOdometer_km(){
+	uint8_t data[4];
+	MonitData(gUartRxDatazta+4,5);
+	memcpy(data,gRMoData,4);
+}
+
 
 /** 
  * @}

@@ -29,3 +29,7 @@ cmd return ok
 
 1.5Debug
 增加rssi
+
+1.6Debug
+增加CRC16校验
+

@@ -171,6 +171,14 @@ typedef struct{
 	uint32_t SendTime;
 	uint8_t  ReSentCount;
 }T_CARDATA;
+typedef struct{
+	uint8_t	 Type;
+	uint8_t	 Cmd;
+	uint8_t Index;
+	uint8_t  Length;
+	uint8_t	 Data[57];
+}T_MCARDATA;
+
 typedef struct {
 	uint8_t total_mileage[4];
 	uint8_t continuout_mileage[2];

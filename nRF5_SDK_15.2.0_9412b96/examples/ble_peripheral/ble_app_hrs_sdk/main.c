@@ -177,7 +177,7 @@ static sensorsim_state_t m_rr_interval_sim_state;                   /**< RR Inte
 
 static ble_uuid_t m_adv_uuids[] =                                   /**< Universally unique service identifiers. */
 {
-    {BLE_UUID_HEART_RATE_SERVICE,           BLE_UUID_TYPE_BLE},
+    {BLE_UUID_HEART_RATE_SERVICE,           BLE_UUID_TYPE_BLE},  //  BLE_UUID_TYPE_VENDOR_BEGIN
     {BLE_UUID_BATTERY_SERVICE,              BLE_UUID_TYPE_BLE},
     {BLE_UUID_DEVICE_INFORMATION_SERVICE,   BLE_UUID_TYPE_BLE},
 		//{SDK_UUID_SERVICE, NUS_SERVICE_UUID_TYPE},//add lifei 2018/11/2
@@ -1940,6 +1940,40 @@ static int ikif_uart_txcb( const uint8_t *msg, uint32_t wlen, uint32_t offset )
     return ret;
 }
 #endif
+
+#include <stdlib.h>
+
+uint16_t lcrc16_compute(uint8_t const * p_data, uint32_t size, uint16_t const * p_crc)
+{
+    uint16_t crc = (p_crc == NULL) ? 0xFFFF : *p_crc;
+
+    for (uint32_t i = 0; i < size; i++)
+    {
+        crc  = (uint8_t)(crc >> 8) | (crc << 8);
+        crc ^= p_data[i];
+        crc ^= (uint8_t)(crc & 0xFF) >> 4;
+        crc ^= (crc << 8) << 4;
+        crc ^= ((crc & 0xFF) << 4) << 1;
+    }
+
+    return crc;
+}
+
+static bool lcrc_verify_success(uint16_t crc, uint16_t len_words, uint8_t const * const p_data)
+{
+    uint16_t computed_crc;
+
+    // The CRC is computed on the entire record, except the CRC field itself.
+    // The record header is 12 bytes, out of these we have to skip bytes 6 to 8 where the
+    // CRC itself is stored. Then we compute the CRC for the rest of the record, from byte 8 of
+    // the header (where the record ID begins) to the end of the record data.
+    computed_crc = lcrc16_compute((uint8_t const *)p_data, len_words, NULL);
+		//computed_crc = lcrc16_compute((uint8_t const *)p_data,  6, NULL);
+    //computed_crc = lcrc16_compute((uint8_t const *)p_data + 8, (len_words) * sizeof(uint8_t),&computed_crc);
+
+    return (computed_crc == crc);
+}
+
 /**@brief Function for application main entry.
  */
 int main(void)
@@ -1961,14 +1995,27 @@ int main(void)
     services_init();
     //sensor_simulator_init();
     conn_params_init();
-	
     peer_manager_init();
 
     // Start execution.
     NRF_LOG_INFO("started %s",DEVICE_NAME);
     application_timers_start();
     advertising_start(erase_bonds);
-
+		
+		#if 1/*crc*/
+		#include "crc16.h"
+		
+		uint8_t data[20]={0x12,0x22,0x44,0x55,0x23,0x77,0x88,0x66,0x77,0x89,0x76,0x55,0x44,0x34,0x57,0x66,0x78,0x23,0x34,0x45};
+		uint16_t gcrc16;
+			
+		gcrc16 = lcrc16_compute((uint8_t const *)data, sizeof(data), NULL);
+		
+		if (!lcrc_verify_success(gcrc16,sizeof(data),data)){
+		NRF_LOG_INFO("lcrc_verify_unsuccess");
+		}
+		NRF_LOG_INFO("lcrc_verify_success %x",gcrc16);
+		
+		#endif
 		
 		#if 0
 		fstorage_data_erase(0);
@@ -1987,9 +2034,10 @@ int main(void)
 		NotifyCallBack(ble_send_notify);
 		
 		printf("\r\nUART started.\r\n");
+
     // Enter main loop.
     for (;;)
-    {	
+    {
         idle_state_handle();
     }
 }
