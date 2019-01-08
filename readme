@@ -41,3 +41,7 @@ resp_pair_request()
 
 1.8Debug
 增加了转义
+
+1.81Debug
+验证crc
+
