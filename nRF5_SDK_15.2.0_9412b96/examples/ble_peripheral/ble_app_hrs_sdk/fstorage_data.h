@@ -46,6 +46,7 @@
  */
 #include <stdint.h>
 #define FSTORAGE_PAGE_SIZES         (4096)
+//#define FSTORAGE_DATA_ADDR_START    (0x77000)
 #define FSTORAGE_DATA_ADDR_START    (0x70000)
 //#define FSTORAGE_DATA_ADDR_START    (0x79000)
 

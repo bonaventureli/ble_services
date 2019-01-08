@@ -77,6 +77,19 @@ extern int  ikcmdStart(void);
  
 extern void ikcmdSendUart(uint8_t cmd);
 extern void Receive_Task(const uint8_t * data);
+void BleRequireMonitorData(uint8_t counter,uint8_t interval_time);
+void HandleFrameData(const uint8_t * data);
+void motor(void);
+void trunk(void);
+void behindrightdoor(void);
+void behindleftdoor(void);
+void frontrightdoor(void);
+void frontleftdoor(void);
+void scuttle(void);
+void behindrightCarwindow(void);
+void behindleftCarwindow(void);
+void frontrightCarwindow(void);
+void frontleftCarwindow(void);
 
 #ifdef __cplusplus
 }

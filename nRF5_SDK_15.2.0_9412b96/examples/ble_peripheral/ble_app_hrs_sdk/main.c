@@ -1214,7 +1214,7 @@ void rssi_timeout_handler(void *p_context)
 	
   rssi = 0-rssi;
   //NRF_LOG_INFO("rssi = %d ",rssi);
-  Handle_Rssi((uint8_t)rssi);
+  //Handle_Rssi((uint8_t)rssi);
  }
 
 /**@brief Function for initializing services that will be used by the application.
@@ -1293,8 +1293,6 @@ static void services_init(void)
 		dfus_init.evt_handler = ble_dfu_evt_handler;
 		err_code = ble_dfu_buttonless_init(&dfus_init);
 		APP_ERROR_CHECK(err_code);
-		
-		
 }
 
 
@@ -1614,7 +1612,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
     
         case BLE_GAP_EVT_SEC_PARAMS_REQUEST:
             NRF_LOG_INFO("BLE_GAP_EVT_SEC_PARAMS_REQUEST");
-						resp_pair_request();
+						//resp_pair_request();
             break;
         
         case BLE_GAP_EVT_AUTH_KEY_REQUEST:

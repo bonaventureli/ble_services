@@ -1,0 +1,405 @@
+2019-Jan-07 17:38:43  --------------------------------------------------------------------------------
+2019-Jan-07 17:38:43  nrfjprog -f NRF52 --program s132_nrf52_6.1.0_softdevice.hex --chiperase --log
+2019-Jan-07 17:38:43  nrfjprog version 9.8.1
+2019-Jan-07 17:38:43  --------------------------------------------------------------------------------
+2019-Jan-07 17:38:44  nRF_open_dll
+2019-Jan-07 17:38:44  . nRF52_open_dll
+2019-Jan-07 17:38:44  . . nRF52_dll_version
+2019-Jan-07 17:38:44  nRF_enum_emu_snr
+2019-Jan-07 17:38:44  . nRF52_enum_emu_snr
+2019-Jan-07 17:38:44  . . nRF52_enum_emu_snr
+2019-Jan-07 17:38:44  nRF_enum_emu_snr
+2019-Jan-07 17:38:44  . nRF52_enum_emu_snr
+2019-Jan-07 17:38:44  . . nRF52_enum_emu_snr
+2019-Jan-07 17:38:44  nRF_connect_to_emu_with_snr
+2019-Jan-07 17:38:44  . nRF52_connect_to_emu_with_snr
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_emu
+2019-Jan-07 17:38:44  . . nRF52_enum_emu_snr
+2019-Jan-07 17:38:44  . . nRF52_connect_to_emu_with_snr
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 Hardware: V7.00
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 S/N: 20090928
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 Feature(s): RDI,FlashDL,FlashBP,JFlash,GDBFull
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 TELNET listener socket opened on port 19021
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	WEBSRV  Starting webserver
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0041ms, 0054ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	WEBSRV Webserver running on local port 19080
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0043ms, 0056ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	  returns O.K.
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0045ms, 0058ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	JLINK_GetHWStatus(...)
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0002ms, 0061ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	There is no generic nRF52 device in J-Link, so we select NRF52832_xxAA.
+
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	JLINK_ExecCommand("Device = NRF52832_xxAA", ...). 
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	XML file found at: C:\Program Files (x86)\SEGGER\JLink_V640\JLinkDevices.xml
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0002ms, 0064ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	C:\Program Files (x86)\SEGGER\JLink_V640\JLinkDevices.xml evaluated successfully.
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	Device "NRF52832_XXAA" selected.
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	Device "NRF52832_XXAA" selected.
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0330ms, 0392ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	JLINK_ExecCommand("SetRestartOnClose = 0", ...). 
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	  returns 0x01
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0000ms, 0394ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	JLINK_ExecCommand("DisableFlashDL", ...). 
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0000ms, 0396ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	JLINK_ExecCommand("SetDbgPowerDownOnClose = 1", ...). 
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	  returns 0x01
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0000ms, 0398ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	JLINK_ExecCommand("ExcludeFlashCacheRange 0x0-0xFFFFFFFF", ...). 
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0001ms, 0401ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	JLINK_TIF_Select(JLINKARM_TIF_SWD)
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0002ms, 0404ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	JLINK_SetSpeed(2000)
+2019-Jan-07 17:38:44  . . . nRF52_connect_to_emu_without_snr:	JLink:	 (0001ms, 0406ms total)  
+2019-Jan-07 17:38:44  nRF_read_device_version
+2019-Jan-07 17:38:44  . nRF52_read_device_version
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_emu
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_emu:	JLink:	JLINK_IsOpen()
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_emu:	JLink:	  returns 0x01
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_emu:	JLink:	 (0002ms, 0408ms total)  
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_device
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_device:	JLink:	JLINK_IsConnected()
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_device:	JLink:	  returns FALSE
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_device:	JLink:	 (0001ms, 0409ms total)  
+2019-Jan-07 17:38:44  . . nRF52_readback_status
+2019-Jan-07 17:38:44  . . . nRF52_is_ctrl_ap_available
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register
+2019-Jan-07 17:38:44  . . . . . nRF52_coresight_configure
+2019-Jan-07 17:38:44  . . . . . nRF52_coresight_configure:	JLink:	JLINK_CORESIGHT_Configure()
+2019-Jan-07 17:38:44  . . . . . nRF52_coresight_configure:	JLink:	 >0x10B TIF>
+2019-Jan-07 17:38:44  . . . . . nRF52_coresight_configure:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . . . nRF52_coresight_configure:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . . . nRF52_coresight_configure:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . . . nRF52_coresight_configure:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . . . nRF52_coresight_configure:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . . . nRF52_coresight_configure:	JLink:	 (0008ms, 0418ms total)  
+2019-Jan-07 17:38:44  . . . . . nRF52_power_debug_and_system_regions
+2019-Jan-07 17:38:44  . . . . . . nRF52_write_debug_port_register
+2019-Jan-07 17:38:44  . . . . . . nRF52_write_debug_port_register:	JLink:	JLINK_CORESIGHT_WriteAPDPReg(DP reg 0x02, 0x00000000)
+2019-Jan-07 17:38:44  . . . . . . nRF52_write_debug_port_register:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . . . . nRF52_write_debug_port_register:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . . . . nRF52_write_debug_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . . . . nRF52_write_debug_port_register:	JLink:	 (0004ms, 0422ms total)  
+2019-Jan-07 17:38:44  . . . . . . nRF52_write_debug_port_register:	JLink:	JLINK_CORESIGHT_WriteAPDPReg(DP reg 0x01, 0x50000000)
+2019-Jan-07 17:38:44  . . . . . . nRF52_write_debug_port_register:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . . . . nRF52_write_debug_port_register:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . . . . nRF52_write_debug_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . . . . nRF52_write_debug_port_register:	JLink:	 (0003ms, 0426ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_WriteAPDPReg(DP reg 0x02, 0x010000F0)
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 (0004ms, 0431ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_ReadAPDPReg(AP reg 0x03)
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 -- Value=0x02880000
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 (0004ms, 0436ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_WriteAPDPReg(DP reg 0x02, 0x010000F0)
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 (0004ms, 0441ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_ReadAPDPReg(AP reg 0x03)
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 -- Value=0x02880000
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 (0005ms, 0446ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_WriteAPDPReg(DP reg 0x02, 0x010000F0)
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 (0003ms, 0450ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_ReadAPDPReg(AP reg 0x03)
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 -- Value=0x02880000
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 (0004ms, 0455ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_WriteAPDPReg(DP reg 0x02, 0x010000F0)
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 (0004ms, 0460ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_ReadAPDPReg(AP reg 0x03)
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 -- Value=0x02880000
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . . nRF52_read_access_port_register:	JLink:	 (0005ms, 0465ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_WriteAPDPReg(DP reg 0x02, 0x01000000)
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 (0003ms, 0468ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_ReadAPDPReg(AP reg 0x03)
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 -- Value=0x00000001
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 (0004ms, 0473ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_WriteAPDPReg(DP reg 0x02, 0x01000000)
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 (0004ms, 0478ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_ReadAPDPReg(AP reg 0x03)
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 -- Value=0x00000001
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 (0004ms, 0483ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_WriteAPDPReg(DP reg 0x02, 0x01000000)
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 (0005ms, 0489ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_ReadAPDPReg(AP reg 0x03)
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 -- Value=0x00000001
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 (0005ms, 0495ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_WriteAPDPReg(DP reg 0x02, 0x01000000)
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 (0004ms, 0500ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	JLINK_CORESIGHT_ReadAPDPReg(AP reg 0x03)
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 -- Value=0x00000001
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . nRF52_read_access_port_register:	JLink:	 (0005ms, 0506ms total)  
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	JLINK_Connect()
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x10B TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	Found SW-DP with ID 0x2BA01477
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	Found SW-DP with ID 0x2BA01477
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x10B TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	Found SW-DP with ID 0x2BA01477
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	Found SW-DP with ID 0x2BA01477
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	Scanning AP map to find all available APs
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	Scanning AP map to find all available APs
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	AP[2]: Stopped AP scan as end of AP map has been reached
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	AP[2]: Stopped AP scan as end of AP map has been reached
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	AP[0]: AHB-AP (IDR: 0x24770011)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	AP[0]: AHB-AP (IDR: 0x24770011)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	AP[1]: JTAG-AP (IDR: 0x02880000)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	AP[1]: JTAG-AP (IDR: 0x02880000)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	Iterating through AP map to find AHB-AP to use
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	Iterating through AP map to find AHB-AP to use
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x42 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x42 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	AP[0]: Core found
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	AP[0]: Core found
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	AP[0]: AHB-AP ROM base: 0xE00FF000
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	AP[0]: AHB-AP ROM base: 0xE00FF000
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x0D TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x28 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 >0x35 TIF>
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	CPUID register: 0x410FC241. Implementer code: 0x41 (ARM)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	CPUID register: 0x410FC241. Implementer code: 0x41 (ARM)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	Found Cortex-M4 r0p1, Little endian.
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	Found Cortex-M4 r0p1, Little endian.
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- Max. mem block: 0x00002C18
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(4 bytes @ 0xE000EDF0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_WriteMem(4 bytes @ 0xE000EDF0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(4 bytes @ 0xE0002000)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	FPUnit: 6 code (BP) slots and 2 literal slots
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	FPUnit: 6 code (BP) slots and 2 literal slots
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(4 bytes @ 0xE000EDFC)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_WriteMem(4 bytes @ 0xE000EDFC)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(4 bytes @ 0xE0001000)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_WriteMem(4 bytes @ 0xE0001000)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(4 bytes @ 0xE000ED88)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_WriteMem(4 bytes @ 0xE000ED88)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(4 bytes @ 0xE000ED88)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_WriteMem(4 bytes @ 0xE000ED88)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	CoreSight components:
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	CoreSight components:
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0] @ E00FF000
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0] @ E00FF000
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE00FF000)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE000EFF0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE000EFE0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][0]: E000E000, CID: B105E00D, PID: 000BB00C SCS-M7
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][0]: E000E000, CID: B105E00D, PID: 000BB00C SCS-M7
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE0001FF0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE0001FE0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][1]: E0001000, CID: B105E00D, PID: 003BB002 DWT
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][1]: E0001000, CID: B105E00D, PID: 003BB002 DWT
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE0002FF0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE0002FE0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][2]: E0002000, CID: B105E00D, PID: 002BB003 FPB
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][2]: E0002000, CID: B105E00D, PID: 002BB003 FPB
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE0000FF0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE0000FE0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][3]: E0000000, CID: B105E00D, PID: 003BB001 ITM
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][3]: E0000000, CID: B105E00D, PID: 003BB001 ITM
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE00FF010)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE0040FF0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE0040FE0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][4]: E0040000, CID: B105900D, PID: 000BB9A1 TPIU
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][4]: E0040000, CID: B105900D, PID: 000BB9A1 TPIU
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE0041FF0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 -- CPU_ReadMem(16 bytes @ 0xE0041FE0)
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][5]: E0041000, CID: B105900D, PID: 000BB925 ETM
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	ROMTbl[0][5]: E0041000, CID: B105900D, PID: 000BB925 ETM
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	JLink:	 (0258ms, 0765ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_device_version
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	JLINK_ExecCommand("InvalidateCache", ...). 
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 (0001ms, 0767ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	JLINK_ReadMemU32(0x10000130, 0x0001 Items, ...)
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 -- CPU_ReadMem(4 bytes @ 0x10000130)
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 - Data: 06 00 00 00
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	  returns 1
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 (0004ms, 0772ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	JLINK_ExecCommand("InvalidateCache", ...). 
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 (0001ms, 0775ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	JLINK_ReadMemU32(0x10000134, 0x0001 Items, ...)
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 -- CPU_ReadMem(4 bytes @ 0x10000134)
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 - Data: 05 00 00 00
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	  returns 1
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 (0003ms, 0778ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_decode_device_version
+2019-Jan-07 17:38:44  . . . . . nRF52_read_u32
+2019-Jan-07 17:38:44  . . . . . nRF52_read_u32:	JLink:	JLINK_ExecCommand("InvalidateCache", ...). 
+2019-Jan-07 17:38:44  . . . . . nRF52_read_u32:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . . . . nRF52_read_u32:	JLink:	 (0000ms, 0780ms total)  
+2019-Jan-07 17:38:44  . . . . . nRF52_read_u32:	JLink:	JLINK_ReadMemU32(0x10000110, 0x0001 Items, ...)
+2019-Jan-07 17:38:44  . . . . . nRF52_read_u32:	JLink:	 -- CPU_ReadMem(4 bytes @ 0x10000110)
+2019-Jan-07 17:38:44  . . . . . nRF52_read_u32:	JLink:	 - Data: 00 02 00 00
+2019-Jan-07 17:38:44  . . . . . nRF52_read_u32:	JLink:	  returns 1
+2019-Jan-07 17:38:44  . . . . . nRF52_read_u32:	JLink:	 (0004ms, 0785ms total)  
+2019-Jan-07 17:38:44  . . nRF52_connect_to_device:	Device version is NRF52832_xxAA_REV1.
+
+2019-Jan-07 17:38:44  . . nRF52_halt
+2019-Jan-07 17:38:44  . . nRF52_halt:	JLink:	JLINK_Halt()
+2019-Jan-07 17:38:44  . . nRF52_halt:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . nRF52_halt:	JLink:	 (0004ms, 0790ms total)  
+2019-Jan-07 17:38:44  . . nRF52_read_device_version
+2019-Jan-07 17:38:44  . . . nRF52_read_u32
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	JLINK_ExecCommand("InvalidateCache", ...). 
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	 (0001ms, 0792ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	JLINK_ReadMemU32(0x10000130, 0x0001 Items, ...)
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	 -- CPU_ReadMem(4 bytes @ 0x10000130)
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	 - Data: 06 00 00 00
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	  returns 1
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	 (0004ms, 0797ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_u32
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	JLINK_ExecCommand("InvalidateCache", ...). 
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	 (0001ms, 0798ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	JLINK_ReadMemU32(0x10000134, 0x0001 Items, ...)
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	 -- CPU_ReadMem(4 bytes @ 0x10000134)
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	 - Data: 05 00 00 00
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	  returns 1
+2019-Jan-07 17:38:44  . . . nRF52_read_u32:	JLink:	 (0003ms, 0802ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_decode_device_version
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	JLINK_ExecCommand("InvalidateCache", ...). 
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	  returns 0x00
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 (0001ms, 0805ms total)  
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	JLINK_ReadMemU32(0x10000110, 0x0001 Items, ...)
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 -- CPU_ReadMem(4 bytes @ 0x10000110)
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 - Data: 00 02 00 00
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	  returns 1
+2019-Jan-07 17:38:44  . . . . nRF52_read_u32:	JLink:	 (0004ms, 0809ms total)  
+2019-Jan-07 17:38:44  nRF_close_dll
+2019-Jan-07 17:38:44  . nRF52_close_dll
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_emu
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_emu:	JLink:	JLINK_IsOpen()
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_emu:	JLink:	  returns 0x01
+2019-Jan-07 17:38:44  . . nRF52_is_connected_to_emu:	JLink:	 (0001ms, 0810ms total)  
+2019-Jan-07 17:38:44  . . nRF52_disconnect_from_emu
+2019-Jan-07 17:38:44  . . . nRF52_is_connected_to_device
+2019-Jan-07 17:38:44  . . . nRF52_is_connected_to_device:	JLink:	JLINK_IsConnected()
+2019-Jan-07 17:38:44  . . . nRF52_is_connected_to_device:	JLink:	  returns TRUE
+2019-Jan-07 17:38:44  . . . nRF52_is_connected_to_device:	JLink:	 (0001ms, 0812ms total)  
+2019-Jan-07 17:38:44  . . . nRF52_write_u32
+2019-Jan-07 17:38:44  . . . nRF52_write_u32:	JLink:	JLINK_WriteU32(0xE000EDFC, 0x00000000)
+2019-Jan-07 17:38:44  . . . nRF52_write_u32:	JLink:	 -- CPU_WriteMem(4 bytes @ 0xE000EDFC)
+2019-Jan-07 17:38:44  . . . nRF52_write_u32:	JLink:	  returns 0
+2019-Jan-07 17:38:44  . . . nRF52_write_u32:	JLink:	 (0003ms, 0816ms total)  
+2019-Jan-07 17:38:44  . . nRF52_disconnect_from_emu:	JLink:	JLINK_Close()

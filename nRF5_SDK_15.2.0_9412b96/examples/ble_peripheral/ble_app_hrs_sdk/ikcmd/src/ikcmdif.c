@@ -65,6 +65,7 @@ void ikcmdSendUart(uint8_t cmd)
   }
   case 1:{
    MslCarcmd(CARCMD_CMD_CENTRAL_CONTROLLOCK,CARCMD_PARAM_1);
+		BleRequireMonitorData(100,5);
   break;
   }
   case 2:{
@@ -215,8 +216,9 @@ uint8_t status;
 				NRF_LOG_INFO("struct_cmd.result %x",gstruct_cmd.result);
 				NRF_LOG_HEXDUMP_INFO(Cmdpreply_data, outlen);
 				ble_send(&m_hrs, BLE_UUID_DIGITALKET_CMD_CHAR, Cmdpreply_data, outlen);
+	}
+HandleFrameData(data);
 }
-	 /*car monitor*/
 typedef enum {
     em_Type,
     em_Cmd,
@@ -231,18 +233,72 @@ typedef enum {
 #define MLENGTH 0x39
 uint8_t Monitorpreply_data[MLENGTH];
 
+void HandleFrameData(const uint8_t * data){
+	 /*car monitor*/
+
 if(data[em_Type] == MTYPE){
 	if(data[em_Cmd] == MSTATUS){
 		if(data[em_Index] == MINDEX){
-			if(data[em_Length] == MLENGTH){
+			//if(data[em_Length] == MLENGTH){
 				memcpy(Monitorpreply_data,data+4,0x39);
-				ble_send(&m_hrs, BLE_UUID_DIGITALKET_CMD_CHAR, Monitorpreply_data, 0x39);
-			}
+				NRF_LOG_HEXDUMP_INFO(Monitorpreply_data,sizeof(Monitorpreply_data));
+				//ble_send(&m_hrs, BLE_UUID_DIGITALKET_CMD_CHAR, Monitorpreply_data, 0x39);
+			//}
+
+		}
+	}
+}
+if(data[0]== 0xAA){
+if(data[1]== 0xBB){
+	switch(data[2]){
+		case 0x01:{
+			frontleftCarwindow();
+		break;
+		}
+		case 0x02:{
+			frontrightCarwindow();
+		break;
+		}
+		case 0x03:{
+			behindleftCarwindow();
+		break;
+		}
+		case 0x04:{
+			behindrightCarwindow();
+		break;
+		}
+		case 0x05:{
+			scuttle();
+		break;
+		}
+		case 0x06:{
+			frontleftdoor();
+		break;
+		}
+		case 0x07:{
+			frontrightdoor();
+		break;
+		}
+		case 0x08:{
+			behindleftdoor();
+		break;
+		}
+		case 0x09:{
+			behindrightdoor();
+		break;
+		}
+		case 0x0A:{
+			trunk();
+		break;
+		}
+		case 0x0B:{
+			motor();
+		break;
 		}
 	}
 }
 }
-
+}
 typedef struct SignalPosition{
 	 uint8_t  BitLength;
 	 uint8_t  ByteOffset;
@@ -251,18 +307,23 @@ typedef struct SignalPosition{
 
 const T_MASK_MATRIX MaskMatrix[] = {
 /*NUM   BitLength  ByteOffset  BitStart*/
-/*0*/  {2,      		44,     6}, //KeyPosition
-/*1*/  {1,     	 		33,     4}, //EngineRunnin gStatus
-/*2*/  {1,      		33,     6}, //ACRequest
-/*3*/  {1,      		25,     5}, //leftdoor
-/*4*/  {1,      		25,     6}, //rightdoor
-/*5*/  {32,      		45,     0}, //TotalOdometer_km
+/* 0*/  {1,      		24,     1}, //frontleftCarwindow
+/* 1*/  {1,     	 	24,     2}, //frontrightCarwindow
+/* 2*/  {1,      		24,     3}, //behindleftCarwindow
+/* 3*/  {1,      		24,     4}, //behindrightCarwindow
+/* 4*/  {1,      		24,     5}, //scuttle
+/* 5*/  {1,      		25,     3}, //frontleftdoor
+/* 6*/  {1,      		25,     4}, //frontrightdoor
+/* 7*/  {1,      		25,     5}, //behindleftdoor
+/* 8*/  {1,      		25,     6}, //behindrightdoor
+/* 9*/  {1,      		26,     0}, //trunk
+/*10*/  {1,      		21,     5}, //motor
 };
+uint8_t *gRMoData;
 uint8_t DataMask[] = {0x00,0x01,0x03,0x07,0x0F,0x1F,0x3F,0x7F,0xFF};
 
-uint8_t *gRMoData;
 
-uint8_t *MonitData(uint8_t *Data,uint8_t Select){
+uint8_t *HandleMonitData(uint8_t *Data,uint8_t Select){
 	//uint8_t *MonitorData(T_MCARDATA *RData,uint8_t Select){
 	uint8_t Retval,Retval2,Retval3,Retval4,ByteStart,BitStart,BitLength,Scase;
 	
@@ -271,10 +332,14 @@ uint8_t *MonitData(uint8_t *Data,uint8_t Select){
 	
 	Scase = MaskMatrix[Select].BitLength/8;
 	if(Scase == 0){
+		NRF_LOG_INFO("ByteStart %d",ByteStart);
+		NRF_LOG_INFO("Data[ByteStart] %x",Data[ByteStart]);
+		
 		BitLength  = MaskMatrix[Select].BitLength;
 		//Retval = (RData->Data[ByteStart]>>BitStart)&DataMask[BitLength];
 		Retval = (Data[ByteStart]>>BitStart)&DataMask[BitLength];
 		gRMoData = &Retval;
+		//NRF_LOG_INFO("Retval %x",Retval);
 	}
 	else if (Scase == 1){
 		//Retval = RData->Data[ByteStart];
@@ -295,21 +360,130 @@ uint8_t *MonitData(uint8_t *Data,uint8_t Select){
 //		Retval4 = RData->Data[ByteStart+3];
 		gRMoData = &Retval;
 	}
+	return gRMoData;
 }
 extern uint8_t gUartRxDatazta[200];
 
+#define FRONT_LEFT_CARWINDOW 0
+#define FRONT_RIGHT_CARWINDOW 1
+#define BEHIND_LEFT_CARWINDOW 2
+#define BEHIND_RIGHT_CARWINDOW 3
+#define DSCUTTLE 4
+#define FRONT_LEFT_DOOR 5
+#define FRONT_RIGHT_DOOR 6
+#define BEHIND_LEFT_DOOR 7
+#define BEHIND_RIGHT_DOOR 8
+#define DTRUNK 9
+#define DMOTOR 10
+
 void TotalOdometer_km(){
 	uint8_t data[4];
-	MonitData(gUartRxDatazta+4,5);
+	HandleMonitData(Monitorpreply_data,5);
 	memcpy(data,gRMoData,4);
 }
 
+void frontleftCarwindow(void){
+	uint8_t data[1];
+	HandleMonitData(Monitorpreply_data,FRONT_LEFT_CARWINDOW);
+	memcpy(data,gRMoData,1);
+	NRF_LOG_INFO("frontleftCarwindow %x",data[0]);
+}
+
+void frontrightCarwindow(void){
+	uint8_t data[1];
+	HandleMonitData(Monitorpreply_data,FRONT_RIGHT_CARWINDOW);
+	memcpy(data,gRMoData,1);
+	NRF_LOG_INFO("frontrightCarwindow %x",data[0]);
+}
+
+void behindleftCarwindow(void){
+	uint8_t data[1];
+	HandleMonitData(Monitorpreply_data,BEHIND_LEFT_CARWINDOW);
+	memcpy(data,gRMoData,1);
+	NRF_LOG_INFO("behindleftCarwindow %x",data[0]);
+}
+
+void behindrightCarwindow(void){
+	uint8_t data[1];
+	HandleMonitData(Monitorpreply_data,BEHIND_RIGHT_CARWINDOW);
+	memcpy(data,gRMoData,1);
+	NRF_LOG_INFO("behindrightCarwindow %x",data[0]);
+}
+
+void scuttle(void){
+	uint8_t data[1];
+	HandleMonitData(Monitorpreply_data,DSCUTTLE);
+	memcpy(data,gRMoData,1);
+	NRF_LOG_INFO("scuttle %x",data[0]);
+}
+
+void frontleftdoor(void){
+	uint8_t data[1];
+	HandleMonitData(Monitorpreply_data,FRONT_LEFT_DOOR);
+	memcpy(data,gRMoData,1);
+	NRF_LOG_INFO("frontleftdoor %x",data[0]);
+}
+
+void frontrightdoor(void){
+	uint8_t data[1];
+	HandleMonitData(Monitorpreply_data,FRONT_RIGHT_DOOR);
+	memcpy(data,gRMoData,1);
+	NRF_LOG_INFO("frontrightdoor %x",data[0]);
+}
+void behindleftdoor(void){
+	uint8_t data[1];
+	HandleMonitData(Monitorpreply_data,BEHIND_LEFT_DOOR);
+	memcpy(data,gRMoData,1);
+	NRF_LOG_INFO("behindleftdoor %x",data[0]);
+}
+void behindrightdoor(void){
+	uint8_t data[1];
+	HandleMonitData(Monitorpreply_data,BEHIND_RIGHT_DOOR);
+	memcpy(data,gRMoData,1);
+	NRF_LOG_INFO("behindrightdoor %x",data[0]);
+}
+
+void trunk(void){
+	uint8_t data[1];
+	HandleMonitData(Monitorpreply_data,DTRUNK);
+	memcpy(data,gRMoData,1);
+	NRF_LOG_INFO("trunk %x",data[0]);
+}
+void motor(void){
+	uint8_t data[1];
+	data[0] = *HandleMonitData(Monitorpreply_data,DMOTOR);
+	NRF_LOG_INFO("motor %x",data[0]);
+}
+
+
+typedef struct{
+	uint8_t Type;
+	uint8_t Cmd;
+	uint8_t Index;
+	uint8_t Length;
+	uint8_t Counter;
+	uint8_t IntervalTime;
+}T_MonitorData;
+
+#define CARMOTOR_TYPE 0x07
+#define CARREQUIRE_MONITOR 0x01
+
+void SendMonitorDataQ(uint8_t cmd,uint8_t counter,uint8_t interval_time)
+{
+	T_MonitorData MonitorData;
+	MonitorData.Type = CARMOTOR_TYPE;
+	MonitorData.Cmd = cmd;
+	MonitorData.Index = 0x00;
+	MonitorData.Length = 0x02;
+	MonitorData.Counter = counter;
+	MonitorData.IntervalTime = interval_time;
+	NRF_LOG_HEXDUMP_INFO((uint8_t*)&MonitorData,sizeof(T_MonitorData));
+}
+
+void BleRequireMonitorData(uint8_t counter,uint8_t interval_time){
+	SendMonitorDataQ(CARREQUIRE_MONITOR,100,5);
+}
 
 /** 
  * @}
  */
-/*
-03 FF 00 01 F0 0A
-03 FF 00 01 F1 0A
-02 01 00 01 00 0A
-*/

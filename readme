@@ -33,3 +33,8 @@ cmd return ok
 1.6Debug
 增加CRC16校验
 
+1.7Debug
+修改flash地址
+size:0x5A00->0x5200
+注释：Handle_Rssi()
+resp_pair_request()
