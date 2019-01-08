@@ -1939,38 +1939,8 @@ static int ikif_uart_txcb( const uint8_t *msg, uint32_t wlen, uint32_t offset )
 }
 #endif
 
-#include <stdlib.h>
 
-uint16_t lcrc16_compute(uint8_t const * p_data, uint32_t size, uint16_t const * p_crc)
-{
-    uint16_t crc = (p_crc == NULL) ? 0xFFFF : *p_crc;
 
-    for (uint32_t i = 0; i < size; i++)
-    {
-        crc  = (uint8_t)(crc >> 8) | (crc << 8);
-        crc ^= p_data[i];
-        crc ^= (uint8_t)(crc & 0xFF) >> 4;
-        crc ^= (crc << 8) << 4;
-        crc ^= ((crc & 0xFF) << 4) << 1;
-    }
-
-    return crc;
-}
-
-static bool lcrc_verify_success(uint16_t crc, uint16_t len_words, uint8_t const * const p_data)
-{
-    uint16_t computed_crc;
-
-    // The CRC is computed on the entire record, except the CRC field itself.
-    // The record header is 12 bytes, out of these we have to skip bytes 6 to 8 where the
-    // CRC itself is stored. Then we compute the CRC for the rest of the record, from byte 8 of
-    // the header (where the record ID begins) to the end of the record data.
-    computed_crc = lcrc16_compute((uint8_t const *)p_data, len_words, NULL);
-		//computed_crc = lcrc16_compute((uint8_t const *)p_data,  6, NULL);
-    //computed_crc = lcrc16_compute((uint8_t const *)p_data + 8, (len_words) * sizeof(uint8_t),&computed_crc);
-
-    return (computed_crc == crc);
-}
 
 /**@brief Function for application main entry.
  */
@@ -2005,7 +1975,8 @@ int main(void)
 		
 		uint8_t data[20]={0x12,0x22,0x44,0x55,0x23,0x7E,0x7F,0x7D,0x77,0x89,0x76,0x55,0x44,0x34,0x57,0x66,0x78,0x23,0x34,0x45};
 		uint16_t gcrc16;
-		//uint8_t *data2;
+		
+		#if 0
 		uint8_t data2[25];
 		uint8_t data3[25];
 		uint32_t data2_len;
@@ -2018,6 +1989,21 @@ int main(void)
 		Reduction_frame_data(data2, data2_len, data3, &data3_len);
 		NRF_LOG_INFO("data3_len: %d",data3_len);
 		NRF_LOG_HEXDUMP_INFO(data3, data3_len);	
+		#endif
+			
+		#include "crc.h"
+		uint16_t result_crc;
+//		result_crc = crc16_cal_ccitt_table(data, (uint32_t)sizeof(data));
+//		NRF_LOG_INFO("crc16_cal_ccitt_table result_crc: %x",result_crc);
+//			
+//		result_crc = crc16_cal_ibm_table(data, (uint32_t)sizeof(data));
+//		NRF_LOG_INFO("crc16_cal_ibm_table result_crc: %x",result_crc);
+		
+		result_crc = crc16_cal_ccitt(data, (uint32_t)sizeof(data));
+		NRF_LOG_INFO("crc16_cal_ccitt result_crc: %x",result_crc);
+		
+		result_crc = crc16_cal_ibm(data, (uint32_t)sizeof(data));
+		NRF_LOG_INFO("crc16_cal_ibm result_crc: %x",result_crc);
 			
 		gcrc16 = lcrc16_compute((uint8_t const *)data, sizeof(data), NULL);
 

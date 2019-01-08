@@ -417,6 +417,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\convert.c</FilePath>
             </File>
+            <File>
+              <FileName>crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\crc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -6891,6 +6896,11 @@
               <FileName>convert.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\convert.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\crc.c</FilePath>
             </File>
           </Files>
         </Group>
