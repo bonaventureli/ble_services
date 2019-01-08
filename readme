@@ -38,3 +38,6 @@ cmd return ok
 size:0x5A00->0x5200
 注释：Handle_Rssi()
 resp_pair_request()
+
+1.8Debug
+增加了转义

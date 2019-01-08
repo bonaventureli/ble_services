@@ -4,6 +4,7 @@
 ".\_build\ikcmdif.o"
 ".\_build\fstorage_data.o"
 ".\_build\uart_data.o"
+".\_build\convert.o"
 ".\_build\boards.o"
 ".\_build\bsp.o"
 ".\_build\bsp_btn_ble.o"

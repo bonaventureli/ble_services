@@ -2003,11 +2003,24 @@ int main(void)
 		#if 1/*crc*/
 		#include "crc16.h"
 		
-		uint8_t data[20]={0x12,0x22,0x44,0x55,0x23,0x77,0x88,0x66,0x77,0x89,0x76,0x55,0x44,0x34,0x57,0x66,0x78,0x23,0x34,0x45};
+		uint8_t data[20]={0x12,0x22,0x44,0x55,0x23,0x7E,0x7F,0x7D,0x77,0x89,0x76,0x55,0x44,0x34,0x57,0x66,0x78,0x23,0x34,0x45};
 		uint16_t gcrc16;
+		//uint8_t *data2;
+		uint8_t data2[25];
+		uint8_t data3[25];
+		uint32_t data2_len;
+		uint32_t data3_len;
+		#include "convert.h"
+		Escape_frame_data(data, sizeof(data), data2, &data2_len);
+		//NRF_LOG_INFO("data2_len: %d",data2_len);
+		//NRF_LOG_HEXDUMP_INFO(data2, data2_len);	
+			
+		Reduction_frame_data(data2, data2_len, data3, &data3_len);
+		NRF_LOG_INFO("data3_len: %d",data3_len);
+		NRF_LOG_HEXDUMP_INFO(data3, data3_len);	
 			
 		gcrc16 = lcrc16_compute((uint8_t const *)data, sizeof(data), NULL);
-		
+
 		if (!lcrc_verify_success(gcrc16,sizeof(data),data)){
 		NRF_LOG_INFO("lcrc_verify_unsuccess");
 		}

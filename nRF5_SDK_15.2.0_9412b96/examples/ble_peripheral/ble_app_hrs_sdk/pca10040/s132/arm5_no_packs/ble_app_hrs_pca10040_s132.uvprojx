@@ -412,6 +412,11 @@
               <FileType>1</FileType>
               <FilePath>.\uart_data.c</FilePath>
             </File>
+            <File>
+              <FileName>convert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\convert.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -6881,6 +6886,11 @@
               <FileName>uart_data.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\uart_data.c</FilePath>
+            </File>
+            <File>
+              <FileName>convert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\convert.c</FilePath>
             </File>
           </Files>
         </Group>
