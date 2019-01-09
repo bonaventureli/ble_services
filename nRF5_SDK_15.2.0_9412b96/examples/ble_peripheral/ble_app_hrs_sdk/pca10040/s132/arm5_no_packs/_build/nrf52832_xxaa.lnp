@@ -141,6 +141,7 @@
 ".\_build\ble_dfu_unbonded.o"
 ".\_build\nrf_svc_handler.o"
 ".\_build\nrf_dfu_svci.o"
+".\_build\simple.pb.o"
 ".\_build\arm_startup_nrf52.o"
 ".\_build\system_nrf52.o"
 --library_type=microlib --strict --scatter ".\_build\nrf52832_xxaa.sct"

@@ -46,7 +46,7 @@
 
 /* Version of the nanopb library. Just in case you want to check it in
  * your own program. */
-#define NANOPB_VERSION nanopb-0.3.9
+#define NANOPB_VERSION nanopb-0.3.9.2
 
 /* Include all the system headers needed by nanopb. You will need the
  * definitions of the following:
@@ -60,26 +60,17 @@
  * define PB_SYSTEM_HEADER to the path of this file.
  */
 #ifdef PB_SYSTEM_HEADER
-#include PB_SYSTEM_HEADER 
-
+#include PB_SYSTEM_HEADER
 #else
-//#include <stdint.h>
+#include <stdint.h>
 #include <stddef.h>
-//#include <stdbool.h>
+#include <stdbool.h>
 #include <string.h>
-#include "util_int.h"
 
 #ifdef PB_ENABLE_MALLOC
 #include <stdlib.h>
 #endif
 #endif
-
-
-#if !defined(BOOL)
-typedef char bool;
-#define true  1
-#define false 0
-#endif 
 
 /* Macro for defining packed structures (compiler dependent).
  * This just reduces memory requirements, but is not required.
@@ -535,6 +526,14 @@ struct pb_extension_s {
         PB_ ## rules ## _ ## allocation(tag, message, field, \
         PB_DATAOFFSET_ ## placement(message, field, prevfield), \
         PB_LTYPE_MAP_ ## type, ptr)
+
+/* Field description for repeated static fixed count fields.*/
+#define PB_REPEATED_FIXED_COUNT(tag, type, placement, message, field, prevfield, ptr) \
+    {tag, PB_ATYPE_STATIC | PB_HTYPE_REPEATED | PB_LTYPE_MAP_ ## type, \
+    PB_DATAOFFSET_ ## placement(message, field, prevfield), \
+    0, \
+    pb_membersize(message, field[0]), \
+    pb_arraysize(message, field), ptr}
 
 /* Field description for oneof fields. This requires taking into account the
  * union name also, that's why a separate set of macros is needed.

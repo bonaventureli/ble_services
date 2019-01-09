@@ -2011,7 +2011,49 @@ int main(void)
 		NRF_LOG_INFO("lcrc_verify_unsuccess");
 		}
 		NRF_LOG_INFO("lcrc_verify_success %x",gcrc16);
+		#endif
 		
+		#if 1 //simple.proto
+		
+		#include <stdio.h>
+		#include <pb_encode.h>
+		#include <pb_decode.h>
+		#include "simple.pb.h"
+		
+		uint8_t buffer[128];
+		uint8_t buff[128];
+    size_t message_length;
+    bool status2;
+		
+    {
+        SimpleMessage message = SimpleMessage_init_zero;
+        pb_ostream_t stream = pb_ostream_from_buffer(buffer, sizeof(buffer));
+        message.lucky_number = 13;
+        status2 = pb_encode(&stream, SimpleMessage_fields, &message);
+        message_length = stream.bytes_written;
+        if (!status2)
+        {
+            printf("Encoding failed: %s\n", PB_GET_ERROR(&stream));
+            //return 1;
+        }
+    }
+		
+		NRF_LOG_INFO("message_length %d",message_length);
+	  memcpy(buff,buffer,message_length);
+		NRF_LOG_HEXDUMP_INFO(buff, message_length);	
+		
+    {
+        SimpleMessage message = SimpleMessage_init_zero;
+        pb_istream_t stream = pb_istream_from_buffer(buffer, message_length);
+        status2 = pb_decode(&stream, SimpleMessage_fields, &message);
+        if (!status2)
+        {
+            printf("Decoding failed: %s\n", PB_GET_ERROR(&stream));
+            //return 1;
+        }
+        printf("Your lucky number was %d!\n", (int)message.lucky_number);
+    }
+
 		#endif
 		
 		#if 0

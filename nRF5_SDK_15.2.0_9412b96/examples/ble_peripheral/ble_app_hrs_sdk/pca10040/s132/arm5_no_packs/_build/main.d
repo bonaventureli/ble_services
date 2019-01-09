@@ -121,3 +121,7 @@
 .\_build\main.o: ..\..\..\..\..\..\components\ble\ble_services\ble_dfu\ble_dfu.h
 .\_build\main.o: ..\..\..\..\..\..\components\libraries\crc16\crc16.h
 .\_build\main.o: ..\..\..\crc.h
+.\_build\main.o: ..\..\..\sdk\nanopb\pb_encode.h
+.\_build\main.o: ..\..\..\sdk\nanopb\pb.h
+.\_build\main.o: ..\..\..\sdk\nanopb\pb_decode.h
+.\_build\main.o: ..\..\..\simple\simple.pb.h
