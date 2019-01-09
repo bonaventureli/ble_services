@@ -45,3 +45,5 @@ resp_pair_request()
 1.81Debug
 验证crc
 
+1.9Debug
+加入simple.proto
