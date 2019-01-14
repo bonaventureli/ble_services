@@ -47,3 +47,6 @@ resp_pair_request()
 
 1.9Debug
 加入simple.proto
+
+增加bootloader文件
+
