@@ -1,9 +1,0 @@
-.\_build\md_wrap.o: ..\..\..\sdk\cypto\md_wrap.c
-.\_build\md_wrap.o: ..\..\..\sdk\cypto\config.h
-.\_build\md_wrap.o: ..\..\..\sdk\public\util_int.h
-.\_build\md_wrap.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\_build\md_wrap.o: ..\..\..\sdk\cypto\md_wrap.h
-.\_build\md_wrap.o: ..\..\..\sdk\cypto\md_export.h
-.\_build\md_wrap.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\_build\md_wrap.o: ..\..\..\sdk\cypto\sha256.h
-.\_build\md_wrap.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
